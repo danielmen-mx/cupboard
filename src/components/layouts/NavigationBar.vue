@@ -5,7 +5,7 @@
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
     
-    <v-toolbar-title>Shadai Shop</v-toolbar-title>
+    <v-toolbar-title>Shaddai Shop</v-toolbar-title>
 
     <v-spacer></v-spacer>
 

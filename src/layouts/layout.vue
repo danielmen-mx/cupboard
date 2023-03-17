@@ -1,24 +1,27 @@
 <template>
-  <main>
+  <v-card>
     <v-layout>
       <Navigation />
+      <v-main class="mt-16 pt-6">
+        <Dialog />
+        <Snackbar />
+        <!-- <Background /> -->
+        <div class="pa-2" style="min-height: auto">
+          <v-container>
+            <router-view/>
+          </v-container>
+        </div>
+        <Footer />
+      </v-main>
     </v-layout>
-    <v-divider class="my-5"></v-divider>
-    <div class="mt-16 pa-2">
-      <Dialog />
-      <Snackbar />
-      <Button />
-      <!-- <Background /> -->
-    </div>
-  </main>
-  <!-- <Navigation /> -->
-  <!-- <Background /> -->
+  </v-card>
 </template>
 <script>
 import Navigation from '@/components/layouts/NavigationBar.vue'
 import Background from '@/components/layouts/Background.vue'
 import Snackbar from '@/components/layouts/Snackbar.vue'
 import Dialog from '@/components/layouts/Dialog.vue'
+import Footer from '@/components/layouts/Footer.vue'
 import Button from '@/components/layouts/Button.vue'
 
 export default {
@@ -27,6 +30,7 @@ export default {
     Background,
     Snackbar,
     Dialog,
+    Footer,
     Button
   }
 }
