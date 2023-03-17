@@ -13,7 +13,7 @@
           <v-img
             :src="post.img"
             lazy-src="/logo/shadai-main.jpeg"
-            @click="redirect()"
+            @click="redirect(post.id)"
             height="300"
             cover
             class="cursor-pointer"
@@ -50,7 +50,7 @@
           <v-img
             :src="post.img"
             lazy-src="/logo/shadai-main.jpeg"
-            @click="redirect()"
+            @click="redirect(post.id)"
             height="300"
             cover
             class="cursor-pointer"
@@ -122,8 +122,8 @@ export default {
       if (Number.isInteger(i / 2)) return true
       return false
     },
-    redirect() {
-      console.log('redirecting...')
+    redirect(id) {
+      console.log('redirecting to id...' + id)
     }
   }
 }
