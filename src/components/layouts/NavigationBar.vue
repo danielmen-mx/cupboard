@@ -1,7 +1,5 @@
 <template>
-  <v-app-bar
-    color="amber-lighten-1"
-  >
+  <v-app-bar>
     <v-app-bar-nav-icon variant="text"></v-app-bar-nav-icon>
     
     <v-spacer></v-spacer>

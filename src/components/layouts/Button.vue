@@ -12,15 +12,20 @@
 export default {
   data() {
     return {
-      data: {
+      snackbar: {
         message: 'This event is dispatched success',
         color: 'success'
+      },
+      dialog: {
+        title: 'Event dispatched',
+        text: 'The event has been dispatched success'
       }
     }
   },
   methods: {
     openSnackbar() {
-      this.emitter.emit('snackbarNotify', this.data)
+      this.emitter.emit('snackbarNotify', this.snackbar)
+      this.emitter.emit('openDialog', this.dialog)
     }
   },
 }
