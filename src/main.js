@@ -18,10 +18,12 @@ const vuetify = createVuetify({
   components,
   directives,
 })
+
 const app = createApp(App)
 
 app.config.globalProperties.emitter = emitter
+
 app
-  .use(vuetify)
   .use(router)
+  .use(vuetify)
   .mount('#app')
