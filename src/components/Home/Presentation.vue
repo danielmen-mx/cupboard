@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-teal-darken-1 title-container rounded py-2">
+  <div class="bg-pink-lighten-1 title-container rounded py-2">
     <span class="text-h2 text-center main-title">See whats news</span>
   </div>
 </template>

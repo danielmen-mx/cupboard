@@ -1,6 +1,6 @@
 <template>
   <v-footer
-    class="bg-blue-lighten-1 text-center d-flex flex-column"
+    class="bg-orange-darken-4 text-center d-flex flex-column"
   >
     <div>
       <v-btn
@@ -22,7 +22,7 @@
     <v-divider></v-divider>
 
     <div>
-      ©2016-{{ new Date().getFullYear() }} — <strong>Shadai Shop</strong> | Todos los derechos reservados
+      ©2016-{{ new Date().getFullYear() }} — <strong>Shaddai Shop</strong> | Todos los derechos reservados
     </div>
   </v-footer>
 </template>
