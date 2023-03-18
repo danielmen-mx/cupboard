@@ -22,7 +22,7 @@
     <v-divider></v-divider>
 
     <div>
-      ©2016-{{ new Date().getFullYear() }} — <strong>Shadai Shop</strong> Todos los derechos reservados
+      ©2016-{{ new Date().getFullYear() }} — <strong>Shadai Shop</strong> | Todos los derechos reservados
     </div>
   </v-footer>
 </template>
