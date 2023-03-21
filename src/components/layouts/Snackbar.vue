@@ -30,8 +30,8 @@ export default {
   mounted() {
     this.emitter.on('snackbarNotify', (data) => {
       this.visible = false
-      this.message = data.message
       this.color = data.color
+      this.message = data.message
       this.$nextTick(() => {
         this.visible = true
       })

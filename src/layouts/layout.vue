@@ -2,6 +2,7 @@
   <v-card>
     <v-layout>
       <Navigation />
+      <NavigationDrawer />
       <v-main class="mt-16 pt-6">
         <Dialog />
         <Snackbar />
@@ -18,6 +19,7 @@
 </template>
 <script>
 import Navigation from '@/components/layouts/NavigationBar.vue'
+import NavigationDrawer from '@/components/layouts/NavigationDrawer.vue'
 import Background from '@/components/layouts/Background.vue'
 import Snackbar from '@/components/layouts/Snackbar.vue'
 import Dialog from '@/components/layouts/Dialog.vue'
@@ -27,6 +29,7 @@ import Button from '@/components/layouts/Button.vue'
 export default {
   components: {
     Navigation,
+    NavigationDrawer,
     Background,
     Snackbar,
     Dialog,
