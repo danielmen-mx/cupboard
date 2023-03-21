@@ -10,9 +10,19 @@ const routes = [
         path: '/',
         name: 'home',
         component: () => import('../views/Home.vue')
-      }
+      },
+      {
+        path: '/admin',
+        name: 'admin',
+        component: () => import('../views/Admin.vue')
+      },
     ]
   },
+  {
+    path: '/error',
+    name: 'NotFound',
+    component: () => import('../views/Error.vue')
+  }
 
   // route level code-splitting
   // this generates a separate chunk (About.[hash].js) for this route
