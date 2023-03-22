@@ -29,7 +29,7 @@
           </v-img>
         </v-card>
       </v-col>
-      <v-col class="text-left">
+      <v-col>
         <v-hover>
           <template v-slot:default="{ isHovering, props }">
             <v-card
@@ -39,7 +39,7 @@
               height="320"
             >
               <v-card-title>
-                <p class="text-h3 pb-3">{{ post.title }}</p>
+                <p class="text-h3 pb-3">{{ post.name }}</p>
                 <v-row
                   align="center"
                   class="mx-0 pb-2"
@@ -54,7 +54,7 @@
                   ></v-rating>
   
                   <div class="text-grey ms-4">
-                    4.5 (413)
+                    {{ post.rating }} ({{ post.reaction }})
                   </div>
                 </v-row>
               </v-card-title>
@@ -65,19 +65,26 @@
               <v-divider></v-divider>
               <v-card-actions>
                 <v-list-item class="w-100">
+                  <template v-slot:prepend>
+                    <v-avatar
+                      color="grey-darken-3"
+                    >
+                      <span class="text-h5">{{ autorInitials(post.autor) }}</span>
+                    </v-avatar>
+                  </template>
+
+                  <v-list-item-title>{{ post.autor }}</v-list-item-title>
+
+                  <v-list-item-subtitle>Autor</v-list-item-subtitle>
+
                   <template v-slot:append>
                     <div class="justify-self-end">
-                      <v-btn icon>
-                        <v-badge :content="post.reaction" color="blue-lighten-5">
-                          <v-icon size="large" icon="mdi-heart" color="red" @click="addReaction(post)"></v-icon>
-                        </v-badge>
-                      </v-btn>
+                      <v-icon class="me-1" icon="mdi-heart" color="red" @click="addReaction(post)"></v-icon>
+                      <span class="subheading me-2">{{ post.reaction }}</span>
+                      <span class="me-1">·</span>
+                      <v-icon class="me-1" icon="mdi-comment" color="blue" @click="redirect(post.id)"></v-icon>
+                      <span class="subheading">{{ post.comments }}</span>
                     </div>
-                    <v-btn icon>
-                      <v-badge :content="post.comments" color="blue-lighten-5">
-                        <v-icon size="large" icon="mdi-comment" color="blue" @click="redirect(post.id)"></v-icon>
-                      </v-badge>
-                    </v-btn>
                   </template>
                 </v-list-item>
               </v-card-actions>
@@ -88,7 +95,7 @@
     </v-row>
 
     <v-row no-gutters v-else>
-      <v-col class="text-right">
+      <v-col>
         <v-hover>
           <template v-slot:default="{ isHovering, props }">
             <v-card
@@ -98,7 +105,7 @@
               height="320"
             >
               <v-card-title>
-                <p class="text-h3 pb-3">{{ post.title }}</p>
+                <p class="text-right text-h3 pb-3">{{ post.name }}</p>
                 <v-row
                   class="mx-0 pb-2 d-flex flex-row-reverse"
                 >
@@ -112,30 +119,37 @@
                   ></v-rating>
   
                   <div class="text-grey ms-4">
-                    4.5 (413)
+                    {{ post.rating }} ({{ post.reaction }})
                   </div>
                 </v-row>
               </v-card-title>
               <v-divider></v-divider>
               <v-card-text>
-                <p class="text-subtitle-1">{{ limitText(post.description) }}</p>
+                <p class="text-subtitle-1 text-right">{{ limitText(post.description) }}</p>
               </v-card-text>
               <v-divider></v-divider>
               <v-card-actions>
                 <v-list-item class="w-100">
+                  <template v-slot:prepend>
+                    <v-avatar
+                      color="grey-darken-3"
+                    >
+                      <span class="text-h5">{{ autorInitials(post.autor) }}</span>
+                    </v-avatar>
+                  </template>
+
+                  <v-list-item-title>{{ post.autor }}</v-list-item-title>
+
+                  <v-list-item-subtitle>Autor</v-list-item-subtitle>
+
                   <template v-slot:append>
                     <div class="justify-self-end">
-                      <v-btn icon>
-                        <v-badge :content="post.reaction" color="blue-lighten-5">
-                          <v-icon size="large" icon="mdi-heart" color="red" @click="addReaction(post)"></v-icon>
-                        </v-badge>
-                      </v-btn>
+                      <v-icon class="me-1" icon="mdi-heart" color="red" @click="addReaction(post)"></v-icon>
+                      <span class="subheading me-2">{{ post.reaction }}</span>
+                      <span class="me-1">·</span>
+                      <v-icon class="me-1" icon="mdi-comment" color="blue" @click="redirect(post.id)"></v-icon>
+                      <span class="subheading">{{ post.comments }}</span>
                     </div>
-                    <v-btn icon>
-                      <v-badge :content="post.comments" color="blue-lighten-5">
-                        <v-icon size="large" icon="mdi-comment" color="blue" @click="redirect(post.id)"></v-icon>
-                      </v-badge>
-                    </v-btn>
                   </template>
                 </v-list-item>
               </v-card-actions>
@@ -190,8 +204,9 @@ export default {
       posts: [
         {
           id: 1,
+          name: "tree of the life",
+          autor: "Daniel Mendez Castillo",
           img: "/images/example.jpg",
-          title: "tree of the life",
           description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
           rating: 3.5,
           reaction: 1,
@@ -199,8 +214,9 @@ export default {
         },
         {
           id: 2,
+          name: "tree of the wather",
+          autor: "Dinosaurio Mendez",
           img: "/images/example-1.jpg",
-          title: "tree of the wather",
           description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
           rating: 4,
           reaction: 3,
@@ -208,8 +224,9 @@ export default {
         },
         {
           id: 3,
+          name: "someone lossing",
+          autor: "Fili Mendez",
           img: "/images/example-2.jpeg",
-          title: "someone lossing",
           description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
           rating: 1,
           reaction: 5,
@@ -217,8 +234,9 @@ export default {
         },
         {
           id: 4,
+          name: "no image",
+          autor: "anonimous",
           img: null,
-          title: "no image",
           description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
           rating: 3.5,
           reaction: 0,
@@ -226,8 +244,9 @@ export default {
         },
         {
           id: 5,
+          name: "no image in other side",
+          autor: "anonimous moreee",
           img: null,
-          title: "no image in other side",
           description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
           rating: 4.5,
           reaction: 10,
@@ -257,6 +276,17 @@ export default {
     },
     limitText(text) {
       return this.strLimit(text, 270)
+    },
+    autorInitials(name) {
+      let i = 1
+      let array = name.split(" ")
+      const initials = array.map(fragment => {
+        if (i > 2) return
+        i++
+        return fragment.charAt(0).toUpperCase()
+      })
+
+      return initials.join("")
     }
   }
 }
