@@ -15,7 +15,7 @@
     <v-table
       height="50vh"
       fixed-header
-      class="py-2"
+      class="py-1"
     >
       <thead>
         <tr class="text-subtitle-1">
@@ -53,18 +53,18 @@
           <td>
             {{ formatDate(item.created_at) }}
           </td>
-          <td class="text-center">
+          <td>
             <v-menu>
               <template v-slot:activator="{ props }">
                 <v-btn icon="mdi-dots-vertical" v-bind="props" variant="flat"></v-btn>
               </template>
               <v-list>
-                <v-list-item
-                  v-for="(action, index) in actions"
-                  :key="index"
-                >
-                  <v-list-item-title class="cursor-pointer">
-                    {{ action.title }}
+                <v-list-item>
+                  <v-list-item-title class="cursor-pointer pb-2" @click="edit(item)">
+                    Editar
+                  </v-list-item-title>
+                  <v-list-item-title class="cursor-pointer pt-2" @click="remove(item.id)">
+                    Eliminar
                   </v-list-item-title>
                 </v-list-item>
               </v-list>
@@ -79,6 +79,7 @@
 import PostService from '@/services/PostService.js'
 import PostForm from '@/components/Admin/Posts/Form.vue'
 import { formatDate } from '../../utils/helpers'
+import { remove } from '@vue/shared'
 
 export default {
   mixins: [formatDate],
@@ -91,10 +92,6 @@ export default {
       apiService: PostService,
       itemsPerPage: 5,
       items: [],
-      actions: [
-        { title: 'Editar' },
-        { title: 'Eliminar' },
-      ],
     }
   },
   methods: {
@@ -113,7 +110,7 @@ export default {
       }
     },
     openDialog() {
-      this.emitter.emit('openPostForm')
+      this.$nextTick(() => { this.emitter.emit('openPostForm') })
     },
     // separateTags(array) {
     //   let json = JSON.stringify(array)
@@ -126,6 +123,12 @@ export default {
       if (count > 1) return ` + ${count} tags`
 
       return false
+    },
+    edit(item) {
+      this.$nextTick(() => { this.emitter.emit('openPostForm', item) })
+    },
+    async remove(id) {
+      console.log(id)
     }
   },
   mounted() {

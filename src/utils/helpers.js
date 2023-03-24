@@ -48,3 +48,9 @@ export const ucFirst = {
     }
   }
 }
+
+// export const prevent = {
+//   methods: {
+//     prevent(action)
+//   },
+// }

@@ -14,6 +14,8 @@ import moment from 'moment';
 // Event handling
 import mitt from 'mitt'
 
+import('./utils/helpers')
+
 window.moment = moment
 const emitter = mitt()
 const vuetify = createVuetify({
