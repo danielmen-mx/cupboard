@@ -9,11 +9,13 @@
       Crear Post
     </v-btn>
   </div>
-  <v-divider class="my-2"></v-divider>
-  <v-card>
+  <v-divider class="my-2 py-2"></v-divider>
+  <PostForm />
+  <v-card variant="outlined">
     <v-table
-      height="300px"
+      height="50vh"
       fixed-header
+      class="py-2"
     >
       <thead>
         <tr class="text-subtitle-1">
@@ -39,15 +41,12 @@
             </a>
           </td>
           <td>
-            <div class="d-flex justify-space-between">
+            <div>
               <v-chip
-                v-for="(tag, i) in item.tags"
-                variant="outlined"
-                color="success"
-                label
+                v-if="countTags(item.tags)"
+                prepend-icon="mdi-label"
               >
-                <v-icon start icon="mdi-label"></v-icon>
-                {{ tag }}
+                {{ countTags(item.tags) }}
               </v-chip>
             </div>
           </td>
@@ -75,7 +74,6 @@
       </tbody>
     </v-table>
   </v-card>
-  <PostForm />
 </template>
 <script>
 import PostService from '@/services/PostService.js'
@@ -117,13 +115,22 @@ export default {
     openDialog() {
       this.emitter.emit('openPostForm')
     },
-    separateTags(array) {
-      let json = JSON.stringify(array)
-      console.log(json)
+    // separateTags(array) {
+    //   let json = JSON.stringify(array)
+    //   console.log(json)
+    // },
+    countTags(tags) {
+      let count = Object.values(tags).length
+
+      if (count == 1) return tags[0]
+      if (count > 1) return ` + ${count} tags`
+
+      return false
     }
   },
   mounted() {
     this.getItems()
+    this.emitter.on('updateTable', this.getItems)
   },
 }
 </script>
