@@ -49,6 +49,7 @@
               <v-col cols="12" sm="6">
                 <v-file-input
                   v-if="!form.image"
+                  v-model="form.image"
                   :disabled="waitResponse"
                   label="Subir imagen"
                   prepend-icon="mdi-camera"
@@ -63,13 +64,26 @@
                 ></v-file-input>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-text-field
-                  :disabled="waitResponse"
+                <v-combobox
                   v-model="form.tags"
-                  label="Tags"
-                  hint="Escribe el nombre del autor de la publicación"
-                  clearable
-                ></v-text-field>
+                  v-model:search="search"
+                  :hide-no-data="false"
+                  :items="tags"
+                  hide-selected
+                  hint="Añade etiquetas que concuerden con el post"
+                  label="Añadir etiquetas"
+                  multiple
+                  persistent-hint
+                  chips
+                >
+                  <template v-slot:no-data>
+                    <v-list-item>
+                      <v-list-item-title>
+                        No results matching "<strong>{{ search }}</strong>". Press <kbd>enter</kbd> to create a new one
+                      </v-list-item-title>
+                    </v-list-item>
+                  </template>
+                </v-combobox>
               </v-col>
             </v-row>
 
@@ -110,7 +124,13 @@ export default {
         autor: null,
         image: null,
         tags: [],
-      }
+      },
+      tags: [
+        'New release',
+        'Update post',
+        'Overwrite post'
+      ],
+      search: null
     }
   },
   methods: {
@@ -154,6 +174,13 @@ export default {
   },
   mounted() {
     this.emitter.on('openPostForm', this.openForm)
+  },
+  watch: {
+    model (val) {
+      if (val.length > 5) {
+        this.$nextTick(() => this.model.pop())
+      }
+    },
   },
 }
 </script>

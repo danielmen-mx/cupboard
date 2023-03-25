@@ -2,6 +2,7 @@
   <!-- Table -->
   <div class="d-flex justify-space-between mx-2">
     <span class="text-h5">Publicaciones</span>
+    <!--  -->
     <v-btn
       color="light-green"
       @click="openDialog()"
@@ -11,9 +12,10 @@
   </div>
   <v-divider class="my-2 py-2"></v-divider>
   <PostForm />
+  
   <v-card variant="outlined">
     <v-table
-      height="50vh"
+      height="64vh"
       fixed-header
       class="py-1"
     >
@@ -45,6 +47,8 @@
               <v-chip
                 v-if="countTags(item.tags)"
                 prepend-icon="mdi-label"
+                color="light-green"
+                variant="outlined"
               >
                 {{ countTags(item.tags) }}
               </v-chip>
