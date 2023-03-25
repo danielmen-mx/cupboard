@@ -38,12 +38,14 @@
             {{ item.autor }}
           </td>
           <td>
-            <a :href="item.image" class="text-blue-darken-4" target="_blank">
+            <!-- TODO: improve the redirection to the image path -->
+            <a href="/NotFound" class="text-blue-darken-4" target="_blank">
               {{ item.image }}
             </a>
           </td>
           <td>
             <div>
+              <!-- TODO: improve add tooltip to show all the tags in lists(if contain more than 1 tag) -->
               <v-chip
                 v-if="countTags(item.tags)"
                 prepend-icon="mdi-label"
