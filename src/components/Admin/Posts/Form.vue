@@ -28,9 +28,9 @@
                 <v-text-field
                   :disabled="waitResponse"
                   v-model="form.name"
+                  :rules="[required]"
                   label="Titulo*"
                   hint="Escribe el nombre de tu publicación"
-                  :rules="[required]"
                   clearable
                 ></v-text-field>
               </v-col>
@@ -38,13 +38,21 @@
                 <v-text-field
                   :disabled="waitResponse"
                   v-model="form.autor"
+                  :rules="[required]"
                   label="Autor*"
                   hint="Escribe el nombre del autor de la publicación"
-                  :rules="[required]"
                   clearable
                 ></v-text-field>
               </v-col>
             </v-row>
+            <v-textarea
+              :disabled="waitResponse"
+              v-model="form.description"
+              :rules="[required]"
+              label="Contenido"
+              hint="Escribe un poco sobre el tema de la publicación"
+              clearable
+            ></v-textarea>
             <v-row>
               <v-col cols="12" sm="6">
                 <v-file-input
@@ -122,6 +130,7 @@ export default {
       form: {
         name: null,
         autor: null,
+        description: null,
         image: null,
         tags: [],
       },
@@ -135,6 +144,7 @@ export default {
   },
   methods: {
     async submit() {
+      console.log(this.form)
       try {
         this.waitResponse = true
 
@@ -151,6 +161,7 @@ export default {
         console.log(error)
         this.waitResponse = false
         this.emitter.emit('snackbarNotify', { color: 'error', message: error.response.data.message})
+        this.emitter.emit('snackbarNotify', { color: 'error', message: error.message})
       }
     },
     openForm(data) {
@@ -163,6 +174,7 @@ export default {
       this.form = {
         name: null,
         autor: null,
+        content: null,
         image: null,
         tags: [],
       }
