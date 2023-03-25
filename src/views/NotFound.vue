@@ -1,7 +1,28 @@
 <template>
-  <v-container fill-height fluid pa-0 ma-0 class="col-back">
+  <!-- <div class="col-back">
+    <v-container> -->
+      <!-- src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg" -->
+      <v-parallax
+        height="100vh"
+        src="../../public/logo/shadai-main.jpeg"
+      >
+        <div class="d-flex flex-column fill-height justify-center align-center text-white ">
+          <div class="bg-black ma-2 pa-2 d-flex flex-column justify-center align-center rounded">
+            <h1 class="text-h4 font-weight-thin mb-4">
+              Sorry
+            </h1>
+            <h4 class="subheading">
+              We don't found the page you're looking for!
+            </h4>
+
+          </div>
+        </div>
+      </v-parallax>
+    <!-- </v-container>
+  </div> -->
+  <!-- <v-container fill-height fluid pa-0 ma-0 class="col-back">
     <v-layout align-center justify-center>
-      <!-- <v-flex> -->
+      <v-flex>
         <v-row>
           <v-col class="d-flex flex-column justify-space-between align-center col-lg-12 col-md-12">
             <img src="https://webassets.io/img/webforceio_white_320.png" alt="WebForce" class="my-16">
@@ -21,9 +42,9 @@
             </div>
           </v-col>
         </v-row>
-      <!-- </v-flex> -->
+      </v-flex>
     </v-layout>
-  </v-container>
+  </v-container> -->
 </template>
 <script>
   export default {
@@ -32,11 +53,12 @@
 </script>
 <style scoped>
   .col-back {
-    background-image: url('https://webassets.io/img/home-bg-x2.png');
-    background-color: #005BEA;
+    background-image: "/public/logo/shadai-main.jpeg";
+    background-color: #ca5009;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    overflow: hidden;
     height: 100vh;
   }
   .container {

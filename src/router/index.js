@@ -27,9 +27,9 @@ const routes = [
     ]
   },
   {
-    path: '/error',
+    path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    component: () => import('../views/Error.vue')
+    component: () => import('../views/NotFound.vue')
   }
 
   // route level code-splitting
