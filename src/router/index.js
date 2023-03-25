@@ -22,11 +22,6 @@ const routes = [
             component: () => import('../views/Admin.vue'),
             props: true
           },
-          // {
-          //   path: ':products',
-          //   component: () => import('@/components/Admin/Products.vue'),
-          //   props: true
-          // },
         ]
       },
     ]
