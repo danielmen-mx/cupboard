@@ -3,9 +3,9 @@
     v-model="tab"
     bg-color="light-green"
   >
-    <v-tab value="setting">Personal settings</v-tab>
-    <v-tab value="posts">Posts</v-tab>
-    <v-tab value="catalogue">Catalogue</v-tab>
+    <v-tab value="setting" @click="pushRoute({path: '/admin'})">Personal settings</v-tab>
+    <v-tab value="posts" @click="pushRoute({path: '/admin/posts'})">Posts</v-tab>
+    <v-tab value="catalogue" @click="pushRoute({path: '/admin/products'})">Products</v-tab>
   </v-tabs>
 
   <v-card-text>
@@ -29,12 +29,28 @@ import Products from '@/components/Admin/Products.vue'
 
 export default {
   components: {
-      Settings,
-      Posts,
-      Products
-    },
-    data: () => ({
-      tab: null,
-    }),
-  }
+    Settings,
+    Posts,
+    Products
+  },
+  data: () => ({
+    tab: null,
+  }),
+  methods: {
+    pushRoute(route) {
+      this.$router.push(route)
+    }
+  },
+  watch: {
+    '$route.params': {
+        handler: function(params) {
+          if (params.admin == undefined) this.tab = 'setting'
+          if (params.admin == 'posts') this.tab = 'posts'
+          if (params.admin == 'products') this.tab = 'catalogue'
+        },
+        deep: true,
+        immediate: true
+      }
+  },
+}
 </script>
