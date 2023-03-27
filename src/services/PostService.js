@@ -7,5 +7,8 @@ export default {
   },
   store(data) {
     return axios.post(url + 'api/posts', data)
+  },
+  update(id, data) {
+    return axios.put(url + 'api/posts/' + id, data)
   }
 }

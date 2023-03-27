@@ -18,8 +18,9 @@
           </v-card-actions>
         </div>
 
-        <v-form 
+        <v-form
           v-model="formComplete"
+          ref="form"
           @submit.prevent
         >
           <v-card-text>
@@ -56,17 +57,8 @@
             <v-row>
               <v-col cols="12" sm="6">
                 <v-file-input
-                  v-if="!form.image"
                   v-model="form.image"
                   :disabled="waitResponse"
-                  label="Subir imagen"
-                  prepend-icon="mdi-camera"
-                ></v-file-input>
-                <!-- different if the posts contain a file updated previously -->
-                <v-file-input
-                  v-else
-                  :disabled="waitResponse"
-                  
                   label="Subir imagen"
                   prepend-icon="mdi-camera"
                 ></v-file-input>
@@ -87,7 +79,7 @@
                   <template v-slot:no-data>
                     <v-list-item>
                       <v-list-item-title>
-                        No results matching "<strong>{{ search }}</strong>". Press <kbd>enter</kbd> to create a new one
+                        Escriba su etiqueta y presione <kbd>enter</kbd> para crear una nueva
                       </v-list-item-title>
                     </v-list-item>
                   </template>
@@ -97,18 +89,18 @@
 
             <small>*Campos requeridos</small>
           </v-card-text>
-            
+
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-              :disabled="!formComplete"
+              :disabled="!unlock"
               :loading="waitResponse"
               color="success"
               size="large"
               variant="text"
               @click="submit()"
             >
-              Crear
+              {{ btn_text }}
             </v-btn>
           </v-card-actions>
         </v-form>
@@ -120,13 +112,22 @@
 import PostService from '@/services/PostService'
 
 export default {
+  props: {
+    item: {
+      type: Object,
+      required: false
+    }
+  },
   data() {
     return {
       apiService: PostService,
       formComplete: false,
+      unlock: false,
       waitResponse: false,
       dialog: false,
       title: "Añadir nueva publicación",
+      btn_text: "Crear",
+      item_id: null,
       form: {
         name: null,
         autor: null,
@@ -144,45 +145,56 @@ export default {
   },
   methods: {
     async submit() {
-      console.log(this.form)
       try {
         this.waitResponse = true
 
-        const resp = await this.apiService.store(this.form)
+        let resp = null
+        if (!this.item_id) {
+          resp = await this.apiService.store(this.form)
+        } else {
+          resp = await this.apiService.update(this.item_id, this.form)
+        }
 
-        this.emitter.emit('snackbarNotify', { color: 'success', message: resp.data.message})
         this.waitResponse = false
 
         this.$nextTick(() => {
           this.closeForm()
+          this.emitter.emit('snackbarNotify', { color: 'success', message: resp.data.message})
           this.emitter.emit('updateTable')
         })
       } catch (error) {
         console.log(error)
         this.waitResponse = false
-        this.emitter.emit('snackbarNotify', { color: 'error', message: error.response.data.message})
-        this.emitter.emit('snackbarNotify', { color: 'error', message: error.message})
+        this.$nextTick(() => {
+          this.emitter.emit('snackbarNotify', { color: 'error', message: error.response.data.message})
+          this.emitter.emit('snackbarNotify', { color: 'error', message: error.message})
+        })
       }
     },
     openForm(data) {
       this.dialog = true
       if (data == null) return
+      this.title = "Editar publicación"
+      this.btn_text = "Actualizar"
+      this.item_id = data.id
       this.form = data
-      console.log()
     },
     closeForm() {
       this.form = {
         name: null,
         autor: null,
-        content: null,
+        description: null,
         image: null,
         tags: [],
       }
+      this.title = "Añadir nueva publicación"
+      this.btn_text = "Crear"
+      this.item_id = null
       this.dialog = false
     },
     required (v) {
       return !!v || 'Campo requerido'
-    },
+    }
   },
   mounted() {
     this.emitter.on('openPostForm', this.openForm)
@@ -193,6 +205,13 @@ export default {
         this.$nextTick(() => this.model.pop())
       }
     },
+    'formComplete': {
+      handler: function () {
+        if (this.form.name && this.form.autor && this.form.description) {
+          this.unlock = true
+        }
+      }
+    }
   },
 }
 </script>
