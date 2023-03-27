@@ -85,7 +85,6 @@
 import PostService from '@/services/PostService.js'
 import PostForm from '@/components/Admin/Posts/Form.vue'
 import { formatDate } from '../../utils/helpers'
-import { remove } from '@vue/shared'
 
 export default {
   mixins: [formatDate],
@@ -118,15 +117,11 @@ export default {
     openDialog() {
       this.$nextTick(() => { this.emitter.emit('openPostForm') })
     },
-    // separateTags(array) {
-    //   let json = JSON.stringify(array)
-    //   console.log(json)
-    // },
     countTags(tags) {
       let count = Object.values(tags).length
 
       if (count == 1) return tags[0]
-      if (count > 1) return ` + ${count} tags`
+      if (count > 1) return ` +${count} tags`
 
       return false
     },
@@ -134,7 +129,20 @@ export default {
       this.$nextTick(() => { this.emitter.emit('openPostForm', item) })
     },
     async remove(id) {
-      console.log(id)
+      try {
+        this.loading = true
+
+        const resp = await this.apiService.remove(id)
+
+        this.$nextTick(() => {
+          this.emitter.emit('snackbarNotify', {color: 'success', message: resp.data.message})
+          this.getItems()
+          this.loading = false
+        })
+      } catch (error) {
+        console.log(error)
+        this.emitter.emit('snackbarNotify', {color: 'error', message: resp.data.error})
+      }
     }
   },
   mounted() {

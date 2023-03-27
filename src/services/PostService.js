@@ -10,5 +10,8 @@ export default {
   },
   update(id, data) {
     return axios.put(url + 'api/posts/' + id, data)
+  },
+  remove(id) {
+    return axios.delete(url + 'api/posts/' + id)
   }
 }
