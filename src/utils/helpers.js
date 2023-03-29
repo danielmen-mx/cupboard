@@ -58,8 +58,28 @@ export const ucFirst = {
 export const copyData = {
   methods: {
     copyData(data) {
-      let newObject = Object.assign({}, data);
-      return newObject
+      return Object.assign({}, data);
+    }
+  },
+}
+
+export const slugify = {
+  methods: {
+    slugify(str) {
+       return str
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/[\s_-]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+  },
+}
+
+export const countArray = {
+  methods: {
+    countArray(arr) {
+      return Object.values(arr).length
     }
   },
 }

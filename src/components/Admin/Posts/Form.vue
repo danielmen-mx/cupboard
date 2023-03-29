@@ -158,6 +158,7 @@ export default {
         this.waitResponse = true
 
         let resp = null
+        console.log(this.form)
         if (!this.item_id) {
           resp = await this.apiService.store(this.form)
         } else {
@@ -190,6 +191,9 @@ export default {
       this.form = updateItem
     },
     closeForm() {
+      this.$nextTick(() => { this.dialog = false })
+      // this.dialog = false
+
       this.form = {
         name: null,
         autor: null,
@@ -198,13 +202,10 @@ export default {
         tags: null
       }
 
-      if (this.item_id) {
-        this.title = "Añadir nueva publicación"
-        this.btn_text = "Crear"
-        this.item_id = null 
-      }
-
-      this.$nextTick(() => { this.dialog = false })
+      if (!this.item_id) return
+      this.title = "Añadir nueva publicación"
+      this.btn_text = "Crear"
+      this.item_id = null 
     },
     required (v) {
       return !!v || 'Campo requerido'

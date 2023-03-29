@@ -40,7 +40,7 @@
           <td>
             <!-- TODO: improve the redirection to the image path -->
             <a href="/NotFound" class="text-blue-darken-4" target="_blank">
-              {{ item.image }}
+              {{ getImageName(item.image, item.name) }}
             </a>
           </td>
           <td>
@@ -84,10 +84,10 @@
 <script>
 import PostService from '@/services/PostService.js'
 import PostForm from '@/components/Admin/Posts/Form.vue'
-import { formatDate } from '../../utils/helpers'
+import { formatDate, slugify, countArray } from '../../utils/helpers'
 
 export default {
-  mixins: [formatDate],
+  mixins: [formatDate, slugify, countArray],
   components: {
     PostForm
   },
@@ -119,17 +119,21 @@ export default {
       this.$nextTick(() => { this.emitter.emit('openPostForm') })
     },
     countTags(tags) {
-      let count = Object.values(tags).length
+      let count = this.countArray(tags)
 
       if (count == 1) return tags[0]
       if (count > 1) return ` +${count} tags`
 
       return false
     },
+    getImageName(imageName, postName) {
+      if (!imageName) return
+
+      let slugName = this.slugify(postName) + '-'
+      return imageName.split(slugName).pop()
+    },
     edit(item) {
-      // this.post = item
       this.$nextTick(() => { this.emitter.emit('openPostForm', item) })
-      // this.$nextTick(() => { this.emitter.emit('openPostForm') })
     },
     async remove(id) {
       try {
