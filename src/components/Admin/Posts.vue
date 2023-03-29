@@ -47,7 +47,7 @@
             <div>
               <!-- TODO: improve add tooltip to show all the tags in lists(if contain more than 1 tag) -->
               <v-chip
-                v-if="countTags(item.tags)"
+                v-if="item.tags"
                 prepend-icon="mdi-label"
                 color="light-green"
                 variant="outlined"

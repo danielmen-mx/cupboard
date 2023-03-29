@@ -150,6 +150,7 @@ export default {
   },
   methods: {
     onChange(e) {
+      console.log('Selected file:', e.target.files[0])
       this.form.image = e.target.files[0]
     },
     async submit() {
