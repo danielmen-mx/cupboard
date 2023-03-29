@@ -11,7 +11,7 @@
     </v-btn>
   </div>
   <v-divider class="my-2 py-2"></v-divider>
-  <PostForm />
+  <PostForm :item="post" />
   
   <v-card variant="outlined">
     <v-table
@@ -26,7 +26,7 @@
           <th>Imagen</th>
           <th>Tags</th>
           <th>Creado el</th>
-          <th>Opciones</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -97,6 +97,7 @@ export default {
       apiService: PostService,
       itemsPerPage: 5,
       items: [],
+      post: null
     }
   },
   methods: {
@@ -126,7 +127,9 @@ export default {
       return false
     },
     edit(item) {
+      // this.post = item
       this.$nextTick(() => { this.emitter.emit('openPostForm', item) })
+      // this.$nextTick(() => { this.emitter.emit('openPostForm') })
     },
     async remove(id) {
       try {

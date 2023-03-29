@@ -19,7 +19,7 @@ export const moneyFormat = {
         minimumFractionDigits: 2,
       });
 
-      return formatter.format(total);
+      return formatter.format(total)
     }
   }
 }
@@ -27,7 +27,7 @@ export const moneyFormat = {
 export const numberFormat = {
   methods: {
     numberFormat(number, decimal = 0) {
-      return new Intl.NumberFormat('en-US', { maximumFractionDigits: decimal, minimumFractionDigits: decimal }).format(number);
+      return new Intl.NumberFormat('en-US', { maximumFractionDigits: decimal, minimumFractionDigits: decimal }).format(number)
     }
   }
 }
@@ -44,7 +44,7 @@ export const ucFirst = {
   methods: {
     ucFirst(text) {
       if (typeof text !== 'string') return ''
-      return text.charAt(0).toUpperCase() + text.slice(1);
+      return text.charAt(0).toUpperCase() + text.slice(1)
     }
   }
 }
@@ -54,3 +54,12 @@ export const ucFirst = {
 //     prevent(action)
 //   },
 // }
+
+export const copyData = {
+  methods: {
+    copyData(data) {
+      let newObject = Object.assign({}, data);
+      return newObject
+    }
+  },
+}

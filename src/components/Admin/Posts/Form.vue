@@ -57,8 +57,9 @@
             <v-row>
               <v-col cols="12" sm="6">
                 <v-file-input
-                  v-model="form.image"
+                  
                   :disabled="waitResponse"
+                  @change="onChange"
                   label="Subir imagen"
                   prepend-icon="mdi-camera"
                 ></v-file-input>
@@ -110,8 +111,10 @@
 </template>
 <script>
 import PostService from '@/services/PostService'
+import { copyData } from '../../../utils/helpers'
 
 export default {
+  mixins: [copyData],
   props: {
     item: {
       type: Object,
@@ -128,6 +131,7 @@ export default {
       title: "Añadir nueva publicación",
       btn_text: "Crear",
       item_id: null,
+      backup: {},
       form: {
         name: null,
         autor: null,
@@ -135,6 +139,7 @@ export default {
         image: null,
         tags: [],
       },
+      image: null,
       tags: [
         'New release',
         'Update post',
@@ -144,6 +149,9 @@ export default {
     }
   },
   methods: {
+    onChange(e) {
+      this.form.image = e.target.files[0]
+    },
     async submit() {
       try {
         this.waitResponse = true
@@ -167,17 +175,18 @@ export default {
         this.waitResponse = false
         this.$nextTick(() => {
           this.emitter.emit('snackbarNotify', { color: 'error', message: error.response.data.message})
-          this.emitter.emit('snackbarNotify', { color: 'error', message: error.message})
+          // this.emitter.emit('snackbarNotify', { color: 'error', message: error.message})
         })
       }
     },
     openForm(data) {
       this.dialog = true
-      if (data == null) return
+      if (!data) return
+      let updateItem = this.copyData(data)
       this.title = "Editar publicación"
       this.btn_text = "Actualizar"
-      this.item_id = data.id
-      this.form = data
+      this.item_id = updateItem.id
+      this.form = updateItem
     },
     closeForm() {
       this.form = {
@@ -185,12 +194,16 @@ export default {
         autor: null,
         description: null,
         image: null,
-        tags: [],
+        tags: null
       }
-      this.title = "Añadir nueva publicación"
-      this.btn_text = "Crear"
-      this.item_id = null
-      this.dialog = false
+
+      if (this.item_id) {
+        this.title = "Añadir nueva publicación"
+        this.btn_text = "Crear"
+        this.item_id = null 
+      }
+
+      this.$nextTick(() => { this.dialog = false })
     },
     required (v) {
       return !!v || 'Campo requerido'
