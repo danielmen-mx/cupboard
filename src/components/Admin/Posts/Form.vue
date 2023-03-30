@@ -17,7 +17,6 @@
             ></v-btn>
           </v-card-actions>
         </div>
-
         <v-form
           v-model="formComplete"
           ref="form"
@@ -57,6 +56,19 @@
             <v-row>
               <v-col cols="12" sm="6">
                 <v-file-input
+                  prepend-icon="mdi-camera"
+                  accept="image/*"
+                  show-size
+                  counter
+                  @change="addFile"
+                  :loading="waitResponse"
+                  :label="getFileInputLabel()"
+                >
+                  <template v-if="image_stored" #prepend-inner>
+                    {{ image_stored }}
+                  </template>
+                </v-file-input>
+                <!-- <v-file-input
                   accept="image/*"
                   show-size
                   counter
@@ -68,14 +80,14 @@
                   <template v-if="image_stored" #prepend-inner>
                     {{ image_stored }}
                   </template>
-                </v-file-input>
+                </v-file-input> -->
               </v-col>
               <v-col cols="12" sm="6">
                 <v-combobox
                   v-model="form.tags"
                   v-model:search="search"
                   :hide-no-data="false"
-                  :items="tags"
+                  :items="base_tags"
                   hide-selected
                   hint="Añade etiquetas que concuerden con el post"
                   label="Añadir etiquetas"
@@ -149,9 +161,8 @@ export default {
         image: null,
         tags: [],
       },
-      image: null,
       image_stored: null,
-      tags: [
+      base_tags: [
         'New release',
         'Update post',
         'Overwrite post'
@@ -160,9 +171,11 @@ export default {
     }
   },
   methods: {
-    onChange(e) {
-      console.log('Selected file:', e.target.files[0])
+    addFile(e) {
+      // console.log('Selected file:', e.target.files[0])
       this.form.image = e.target.files[0]
+
+      console.log(this.form.image)
       if (!this.image_stored) return
       this.image_stored = null
     },
@@ -174,12 +187,21 @@ export default {
       try {
         this.waitResponse = true
 
-        let resp = null
         console.log(this.form)
+        console.log(this.form.image)
+
+        // let data = new FormData()
+        // data.append("name", this.form.name)
+        // data.append("autor", this.form.autor)
+        // data.append("description", this.form.description)
+        // data.append("tags", this.form.tags)
+        // data.append("image", this.form.image)
+
+        let resp = null
         if (!this.item_id) {
           resp = await this.apiService.store(this.form)
         } else {
-          resp = await this.apiService.update(this.item_id, this.form)
+          resp = await this.apiService.update(this.item_id, data)
         }
 
         this.waitResponse = false
