@@ -27,7 +27,7 @@
             <v-row>
               <v-col cols="12" sm="6">
                 <v-text-field
-                  :disabled="waitResponse"
+                  :loading="waitResponse"
                   v-model="form.name"
                   :rules="[required]"
                   label="Titulo*"
@@ -37,7 +37,7 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-text-field
-                  :disabled="waitResponse"
+                  :loading="waitResponse"
                   v-model="form.autor"
                   :rules="[required]"
                   label="Autor*"
@@ -47,7 +47,7 @@
               </v-col>
             </v-row>
             <v-textarea
-              :disabled="waitResponse"
+              :loading="waitResponse"
               v-model="form.description"
               :rules="[required]"
               label="Contenido"
@@ -57,12 +57,18 @@
             <v-row>
               <v-col cols="12" sm="6">
                 <v-file-input
-                  
-                  :disabled="waitResponse"
+                  accept="image/*"
+                  show-size
+                  counter
+                  :loading="waitResponse"
                   @change="onChange"
-                  label="Subir imagen"
+                  :label="getFileInputLabel()"
                   prepend-icon="mdi-camera"
-                ></v-file-input>
+                >
+                  <template v-if="image_stored" #prepend-inner>
+                    {{ image_stored }}
+                  </template>
+                </v-file-input>
               </v-col>
               <v-col cols="12" sm="6">
                 <v-combobox
@@ -111,14 +117,18 @@
 </template>
 <script>
 import PostService from '@/services/PostService'
-import { copyData } from '../../../utils/helpers'
+import { copyData, slugify } from '../../../utils/helpers'
 
 export default {
-  mixins: [copyData],
+  mixins: [copyData, slugify],
   props: {
     item: {
       type: Object,
       required: false
+    },
+    functionFileName: {
+      type: Function,
+      required: true
     }
   },
   data() {
@@ -140,6 +150,7 @@ export default {
         tags: [],
       },
       image: null,
+      image_stored: null,
       tags: [
         'New release',
         'Update post',
@@ -152,6 +163,12 @@ export default {
     onChange(e) {
       console.log('Selected file:', e.target.files[0])
       this.form.image = e.target.files[0]
+      if (!this.image_stored) return
+      this.image_stored = null
+    },
+    getFileInputLabel() {
+      if (!this.image_stored) return "Subir imagen"
+      return ''
     },
     async submit() {
       try {
@@ -185,9 +202,9 @@ export default {
       this.dialog = true
       if (!data) return
       let updateItem = this.copyData(data)
-      this.title = "Editar publicación"
-      this.btn_text = "Actualizar"
+      this.updateTitles('edition')
       this.item_id = updateItem.id
+      this.image_stored = !updateItem.image ? updateItem.image : this.functionFileName(updateItem.image, updateItem.name)
       this.form = updateItem
     },
     closeForm() {
@@ -203,9 +220,18 @@ export default {
       }
 
       if (!this.item_id) return
-      this.title = "Añadir nueva publicación"
-      this.btn_text = "Crear"
-      this.item_id = null 
+      this.updateTitles('close')
+    },
+    updateTitles(action) {
+      if (action == 'edition') {
+        this.title = "Editar publicación"
+        this.btn_text = "Actualizar"
+      } else {
+        this.title = "Añadir nueva publicación"
+        this.btn_text = "Crear"
+        this.item_id = null
+        this.image_stored = null
+      }
     },
     required (v) {
       return !!v || 'Campo requerido'

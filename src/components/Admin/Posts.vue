@@ -11,7 +11,7 @@
     </v-btn>
   </div>
   <v-divider class="my-2 py-2"></v-divider>
-  <PostForm :item="post" />
+  <PostForm :function-file-name="getImageName" :item="post" />
   
   <v-card variant="outlined">
     <v-table
