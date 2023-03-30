@@ -39,7 +39,7 @@
           </td>
           <td>
             <!-- TODO: improve the redirection to the image path -->
-            <a href="/NotFound" class="text-blue-darken-4" target="_blank">
+            <a :href="item.image" class="text-blue-darken-4" target="_blank">
               {{ getImageName(item.image, item.name) }}
             </a>
           </td>
