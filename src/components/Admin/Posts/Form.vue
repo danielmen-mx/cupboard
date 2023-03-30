@@ -172,10 +172,8 @@ export default {
   },
   methods: {
     addFile(e) {
-      // console.log('Selected file:', e.target.files[0])
       this.form.image = e.target.files[0]
 
-      console.log(this.form.image)
       if (!this.image_stored) return
       this.image_stored = null
     },
@@ -187,21 +185,12 @@ export default {
       try {
         this.waitResponse = true
 
-        console.log(this.form)
-        console.log(this.form.image)
-
-        // let data = new FormData()
-        // data.append("name", this.form.name)
-        // data.append("autor", this.form.autor)
-        // data.append("description", this.form.description)
-        // data.append("tags", this.form.tags)
-        // data.append("image", this.form.image)
-
         let resp = null
         if (!this.item_id) {
           resp = await this.apiService.store(this.form)
         } else {
-          resp = await this.apiService.update(this.item_id, data)
+          console.log(this.form)
+          resp = await this.apiService.update(this.item_id, this.form)
         }
 
         this.waitResponse = false
