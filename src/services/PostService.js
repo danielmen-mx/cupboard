@@ -12,12 +12,8 @@ export default {
       },
     })
   },
-  update(id, data) {
-    return axios.put(url + 'api/posts/' + id, data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    })
+  update(id, data, headers = null) {
+    return axios.post(url + 'api/posts/' + id, data, headers)
   },
   remove(id) {
     return axios.delete(url + 'api/posts/' + id)

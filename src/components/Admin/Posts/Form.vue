@@ -130,9 +130,10 @@
 <script>
 import PostService from '@/services/PostService'
 import { copyData, slugify } from '../../../utils/helpers'
+import { imageHeaders } from '../../../services/ContentTypes'
 
 export default {
-  mixins: [copyData, slugify],
+  mixins: [copyData, slugify, imageHeaders],
   props: {
     item: {
       type: Object,
@@ -181,6 +182,10 @@ export default {
       if (!this.image_stored) return "Subir imagen"
       return ''
     },
+    getHeaders() {
+      if (this.form.image instanceof File) return this.imageHeaders()
+      return null
+    },
     async submit() {
       try {
         this.waitResponse = true
@@ -189,8 +194,9 @@ export default {
         if (!this.item_id) {
           resp = await this.apiService.store(this.form)
         } else {
-          console.log(this.form)
-          resp = await this.apiService.update(this.item_id, this.form)
+          let headers = this.getHeaders()
+          this.form._method = "PUT"
+          resp = await this.apiService.update(this.item_id, this.form, headers)
         }
 
         this.waitResponse = false
