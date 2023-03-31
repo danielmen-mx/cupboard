@@ -101,7 +101,7 @@
                   <v-list-item class="w-100">
                     <template v-slot:prepend>
                       <v-avatar
-                        color="grey-darken-3"
+                        color="pink-lighten-1"
                       >
                         <span class="text-h5">{{ autorInitials(post.autor) }}</span>
                       </v-avatar>
@@ -176,7 +176,7 @@
                   <v-list-item class="w-100">
                     <template v-slot:prepend>
                       <v-avatar
-                        color="grey-darken-3"
+                        color="orange-darken-4"
                       >
                         <span class="text-h5">{{ autorInitials(post.autor) }}</span>
                       </v-avatar>
