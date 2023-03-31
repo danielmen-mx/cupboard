@@ -35,7 +35,7 @@
       :key="post.id"
       v-resize="onResize"
     >
-      <v-row no-gutters v-if="indexPair(i) == true" class="py-6">
+      <v-row no-gutters v-if="indexPair(i) == true" class="py-2">
         <v-col
           class="mr-2"
           sm="5"
@@ -73,7 +73,7 @@
                     :class="titleText"
                     class="text-left pb-3"
                   >
-                    {{ post.name }}
+                    {{ strLimit(post.name, postNameText) }}
                   </p>
                   <v-row
                     class="mx-0 pb-2"
@@ -128,7 +128,7 @@
         </v-col>
       </v-row>
   
-      <v-row no-gutters v-else class="py-6">
+      <v-row no-gutters v-else class="py-2">
         <v-col>
           <v-hover>
             <template v-slot:default="{ isHovering, props }">
@@ -144,7 +144,7 @@
                     :class="titleText"
                     class="text-right pb-3"
                   >
-                    {{ post.name }}
+                    {{ strLimit(post.name, postNameText) }}
                   </p>
                   <v-row
                     class="mx-0 pb-2 d-flex flex-row-reverse"
