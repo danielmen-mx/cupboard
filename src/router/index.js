@@ -9,17 +9,17 @@ const routes = [
       {
         path: '/',
         name: 'home',
-        component: () => import('../views/Home.vue')
+        component: () => import('../pages/Home.vue')
       },
       {
         path: '/admin',
         name: 'admin',
-        component: () => import('../views/Admin.vue'),
+        component: () => import('../pages/Admin.vue'),
         children: [
           {
             path: ':admin',
             // component: () => import('@/components/Admin/Posts.vue'),
-            component: () => import('../views/Admin.vue'),
+            component: () => import('../pages/Admin.vue'),
             props: true
           },
         ]
@@ -29,7 +29,7 @@ const routes = [
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    component: () => import('../views/NotFound.vue')
+    component: () => import('../pages/NotFound.vue')
   }
 
   // route level code-splitting
