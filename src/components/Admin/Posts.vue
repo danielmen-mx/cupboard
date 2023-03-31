@@ -32,7 +32,7 @@
       <tbody>
         <tr v-for="item in items" :key="item.name">
           <td>
-            <p class="text-subtitle-1">{{ item.name }}</p>
+            <p class="text-subtitle-1">{{ strLimit(item.name, 25) }}</p>
           </td>
           <td>
             {{ item.autor }}
@@ -88,6 +88,7 @@ import { formatDate, slugify, countArray } from '../../utils/helpers'
 
 export default {
   mixins: [formatDate, slugify, countArray],
+  inject:['strLimit'],
   components: {
     PostForm
   },
