@@ -1,8 +1,20 @@
 <template>
   <div class="bg-pink-lighten-1 title-container rounded py-2">
-    <span class="text-h2 text-center main-title">See whats news</span>
+    <span
+     class="text-center main-title"
+     :class="presentationText"
+    >
+      See whats news
+    </span>
   </div>
 </template>
+<script>
+import ResponsivePosts from '@/components/Common/ResponsivePosts.vue'
+
+export default {
+  extends: ResponsivePosts
+}
+</script>
 <style>
 .title-container {
   display: flex;
@@ -12,7 +24,7 @@
 
 .main-title {
   color: white;
-  font-size: xx-large;
+  
   text-align: center;
   float: initial;
 

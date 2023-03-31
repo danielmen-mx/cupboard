@@ -8,8 +8,8 @@
         <v-progress-circular
           color="pink-lighten-1"
           indeterminate
-          :size="109"
-          :width="11"
+          size="109"
+          width="11"
         ></v-progress-circular>
       </div>
       <div 
@@ -33,6 +33,7 @@
     <div
       v-for="(post, i) in items"
       :key="post.id"
+      v-resize="onResize"
     >
       <v-row no-gutters v-if="indexPair(i) == true" class="py-6">
         <v-col
@@ -40,14 +41,14 @@
           sm="5"
           md="6"
         >
-          <v-card>
+          <v-card width="auto">
             <v-img
               :src="post.image"
               lazy-src="/logo/shadai-main.jpeg"
               @click="redirect(post.id)"
               height="320"
               cover
-              class="cursor-pointer"
+              class="cursor-pointer w-auto"
             >
               <template v-slot:placeholder>
                 <div 
@@ -65,11 +66,16 @@
                 v-bind="props"
                 :color="isHovering ? 'light-green' : undefined"
                 height="320"
+                width="auto"
               >
                 <v-card-title>
-                  <p class="text-h3 pb-3">{{ post.name }}</p>
+                  <p
+                    :class="titleText"
+                    class="text-left pb-3"
+                  >
+                    {{ post.name }}
+                  </p>
                   <v-row
-                    align="center"
                     class="mx-0 pb-2"
                   >
                     <v-rating
@@ -87,11 +93,11 @@
                   </v-row>
                 </v-card-title>
                 <v-divider></v-divider>
-                <v-card-text>
-                  <p class="text-subtitle-1">{{ limitText(post.description) }}</p>
+                <v-card-text >
+                  <p class="text-subtitle-1 fill-card">{{ limitText(post.description) }}</p>
                 </v-card-text>
                 <v-divider></v-divider>
-                <v-card-actions>
+                <v-card-actions :style="{height: actionHeight}">
                   <v-list-item class="w-100">
                     <template v-slot:prepend>
                       <v-avatar
@@ -106,7 +112,7 @@
                     <v-list-item-subtitle>Autor</v-list-item-subtitle>
   
                     <template v-slot:append>
-                      <div class="justify-self-end">
+                      <div class="justify-self-end fix-height">
                         <v-icon class="me-1" icon="mdi-heart" color="red" @click="addReaction(post)"></v-icon>
                         <span class="subheading me-2">{{ post.reaction }}</span>
                         <span class="me-1">·</span>
@@ -122,7 +128,7 @@
         </v-col>
       </v-row>
   
-      <v-row no-gutters v-else>
+      <v-row no-gutters v-else class="py-6">
         <v-col>
           <v-hover>
             <template v-slot:default="{ isHovering, props }">
@@ -131,9 +137,15 @@
                 v-bind="props"
                 :color="isHovering ? 'light-green' : undefined"
                 height="320"
+                width="auto"
               >
                 <v-card-title>
-                  <p class="text-right text-h3 pb-3">{{ post.name }}</p>
+                  <p
+                    :class="titleText"
+                    class="text-right pb-3"
+                  >
+                    {{ post.name }}
+                  </p>
                   <v-row
                     class="mx-0 pb-2 d-flex flex-row-reverse"
                   >
@@ -153,10 +165,14 @@
                 </v-card-title>
                 <v-divider></v-divider>
                 <v-card-text>
-                  <p class="text-subtitle-1 text-right">{{ limitText(post.description) }}</p>
+                  <p
+                    class="text-subtitle-1 text-right fill-card"
+                  >
+                    {{ limitText(post.description) }}
+                  </p>
                 </v-card-text>
                 <v-divider></v-divider>
-                <v-card-actions>
+                <v-card-actions :style="{height: actionHeight}">
                   <v-list-item class="w-100">
                     <template v-slot:prepend>
                       <v-avatar
@@ -190,14 +206,14 @@
           sm="5"
           md="6"
         >
-          <v-card>
+          <v-card width="auto">
             <v-img
               :src="post.image"
               lazy-src="/logo/shadai-main.jpeg"
               @click="redirect(post.id)"
               height="320"
               cover
-              class="cursor-pointer"
+              class="cursor-pointer w-auto"
             >
               <template v-slot:placeholder>
                 <div 
@@ -223,8 +239,10 @@
 </template>
 <script>
 import PostService from '@/services/PostService.js'
+import ResponsivePosts from '@/components/Common/ResponsivePosts.vue'
 
 export default {
+  extends: ResponsivePosts,
   inject:['strLimit'],
   data() {
     return {
@@ -232,7 +250,7 @@ export default {
       apiService: PostService,
       chance: 1,
       page: 1,
-      items: []
+      items: [],
     }
   },
   methods: {
@@ -248,8 +266,6 @@ export default {
         this.loading = true
 
         const resp = await this.apiService.index()
-        // setTimeout(() => {
-        // }, 5000);
 
         this.items = resp.data.data
         this.loading = false
@@ -269,7 +285,7 @@ export default {
       return post.reaction = post.reaction - 1
     },
     limitText(text) {
-      return this.strLimit(text, 270)
+      return this.strLimit(text, this.words)
     },
     autorInitials(name) {
       let i = 1
@@ -288,3 +304,8 @@ export default {
   },
 }
 </script>
+<style>
+ .fill-card {
+  height: 112px;
+ }
+</style>
