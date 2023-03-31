@@ -1,258 +1,238 @@
 <template>
-  <div
-    v-for="(post, i) in posts"
-    :key="post.id"
-  >
-    <v-row no-gutters v-if="indexPair(i) == true" class="py-6">
-      <v-col
-        class="mr-2"
-        sm="5"
-        md="6"
+  <div v-if="items.length == 0" >
+    <v-parallax
+      height="600"
+      lazy-src="/logo/shadai-main.jpeg"
+    >
+      <div v-if="loading" class="d-flex align-center justify-center fill-height">
+        <v-progress-circular
+          color="pink-lighten-1"
+          indeterminate
+          :size="109"
+          :width="11"
+        ></v-progress-circular>
+      </div>
+      <div 
+        v-else
+        class="d-flex flex-column fill-height justify-center align-left"
       >
-        <v-card>
-          <v-img
-            :src="post.img"
-            lazy-src="/logo/shadai-main.jpeg"
-            @click="redirect(post.id)"
-            height="320"
-            cover
-            class="cursor-pointer"
-          >
-            <template v-slot:placeholder>
-              <div class="d-flex align-center justify-center fill-height">
-                <v-progress-circular
-                  color="grey-lighten-4"
-                  indeterminate
-                ></v-progress-circular>
-              </div>
-            </template>
-          </v-img>
-        </v-card>
-      </v-col>
-      <v-col>
-        <v-hover>
-          <template v-slot:default="{ isHovering, props }">
-            <v-card
-              class="elevation-2 pa-3"
-              v-bind="props"
-              :color="isHovering ? 'light-green' : undefined"
-              height="320"
-            >
-              <v-card-title>
-                <p class="text-h3 pb-3">{{ post.name }}</p>
-                <v-row
-                  align="center"
-                  class="mx-0 pb-2"
-                >
-                  <v-rating
-                    :model-value="post.rating"
-                    color="amber"
-                    density="compact"
-                    half-increments
-                    readonly
-                    size="small"
-                  ></v-rating>
-  
-                  <div class="text-grey ms-4">
-                    {{ post.rating }} ({{ post.reaction }})
-                  </div>
-                </v-row>
-              </v-card-title>
-              <v-divider></v-divider>
-              <v-card-text>
-                <p class="text-subtitle-1">{{ limitText(post.description) }}</p>
-              </v-card-text>
-              <v-divider></v-divider>
-              <v-card-actions>
-                <v-list-item class="w-100">
-                  <template v-slot:prepend>
-                    <v-avatar
-                      color="grey-darken-3"
-                    >
-                      <span class="text-h5">{{ autorInitials(post.autor) }}</span>
-                    </v-avatar>
-                  </template>
-
-                  <v-list-item-title>{{ post.autor }}</v-list-item-title>
-
-                  <v-list-item-subtitle>Autor</v-list-item-subtitle>
-
-                  <template v-slot:append>
-                    <div class="justify-self-end">
-                      <v-icon class="me-1" icon="mdi-heart" color="red" @click="addReaction(post)"></v-icon>
-                      <span class="subheading me-2">{{ post.reaction }}</span>
-                      <span class="me-1">·</span>
-                      <v-icon class="me-1" icon="mdi-comment" color="blue" @click="redirect(post.id)"></v-icon>
-                      <span class="subheading">{{ post.comments }}</span>
-                    </div>
-                  </template>
-                </v-list-item>
-              </v-card-actions>
-            </v-card>
-          </template>
-        </v-hover>
-      </v-col>
-    </v-row>
-
-    <v-row no-gutters v-else>
-      <v-col>
-        <v-hover>
-          <template v-slot:default="{ isHovering, props }">
-            <v-card
-              class="elevation-2 pa-3"
-              v-bind="props"
-              :color="isHovering ? 'light-green' : undefined"
-              height="320"
-            >
-              <v-card-title>
-                <p class="text-right text-h3 pb-3">{{ post.name }}</p>
-                <v-row
-                  class="mx-0 pb-2 d-flex flex-row-reverse"
-                >
-                  <v-rating
-                    :model-value="post.rating"
-                    color="amber"
-                    density="compact"
-                    half-increments
-                    readonly
-                    size="small"
-                  ></v-rating>
-  
-                  <div class="text-grey ms-4">
-                    {{ post.rating }} ({{ post.reaction }})
-                  </div>
-                </v-row>
-              </v-card-title>
-              <v-divider></v-divider>
-              <v-card-text>
-                <p class="text-subtitle-1 text-right">{{ limitText(post.description) }}</p>
-              </v-card-text>
-              <v-divider></v-divider>
-              <v-card-actions>
-                <v-list-item class="w-100">
-                  <template v-slot:prepend>
-                    <v-avatar
-                      color="grey-darken-3"
-                    >
-                      <span class="text-h5">{{ autorInitials(post.autor) }}</span>
-                    </v-avatar>
-                  </template>
-
-                  <v-list-item-title>{{ post.autor }}</v-list-item-title>
-
-                  <v-list-item-subtitle>Autor</v-list-item-subtitle>
-
-                  <template v-slot:append>
-                    <div class="justify-self-end">
-                      <v-icon class="me-1" icon="mdi-heart" color="red" @click="addReaction(post)"></v-icon>
-                      <span class="subheading me-2">{{ post.reaction }}</span>
-                      <span class="me-1">·</span>
-                      <v-icon class="me-1" icon="mdi-comment" color="blue" @click="redirect(post.id)"></v-icon>
-                      <span class="subheading">{{ post.comments }}</span>
-                    </div>
-                  </template>
-                </v-list-item>
-              </v-card-actions>
-            </v-card>
-          </template>
-        </v-hover>
-      </v-col>
-      <v-col
-        class="ml-2"
-        sm="5"
-        md="6"
-      >
-        <v-card>
-          <v-img
-            :src="post.img"
-            lazy-src="/logo/shadai-main.jpeg"
-            @click="redirect(post.id)"
-            height="320"
-            cover
-            class="cursor-pointer"
-          >
-            <template v-slot:placeholder>
-              <div class="d-flex align-center justify-center fill-height">
-                <v-progress-circular
-                  color="grey-lighten-4"
-                  indeterminate
-                ></v-progress-circular>
-              </div>
-            </template>
-          </v-img>
-        </v-card>
-      </v-col>
-    </v-row>
+        <div class="text-pink-lighten-1 rounded px-8">
+          <!-- <p>🐶🐶🐶</p> -->
+          <br>
+          <h1 class="text-h4 font-weight-thin mb-4">
+            Seguimos trabajando
+          </h1>
+          <h4 class="subheading">
+            Hoy no tenemos publicaciones recientes!
+          </h4>
+        </div>
+      </div>
+    </v-parallax>
   </div>
-  <v-divider></v-divider>
-  <div class="text-center">
-    <v-pagination
-      v-model="page"
-      :length="4"
-      prev-icon="mdi-menu-left"
-      next-icon="mdi-menu-right"
-    ></v-pagination>
+  <div v-else>
+    <div
+      v-for="(post, i) in items"
+      :key="post.id"
+    >
+      <v-row no-gutters v-if="indexPair(i) == true" class="py-6">
+        <v-col
+          class="mr-2"
+          sm="5"
+          md="6"
+        >
+          <v-card>
+            <v-img
+              :src="post.image"
+              lazy-src="/logo/shadai-main.jpeg"
+              @click="redirect(post.id)"
+              height="320"
+              cover
+              class="cursor-pointer"
+            >
+              <template v-slot:placeholder>
+                <div 
+                  class="d-flex align-center justify-center fill-height"
+                ></div>
+              </template>
+            </v-img>
+          </v-card>
+        </v-col>
+        <v-col>
+          <v-hover>
+            <template v-slot:default="{ isHovering, props }">
+              <v-card
+                class="elevation-2 pa-3"
+                v-bind="props"
+                :color="isHovering ? 'light-green' : undefined"
+                height="320"
+              >
+                <v-card-title>
+                  <p class="text-h3 pb-3">{{ post.name }}</p>
+                  <v-row
+                    align="center"
+                    class="mx-0 pb-2"
+                  >
+                    <v-rating
+                      :model-value="post.rating"
+                      color="amber"
+                      density="compact"
+                      half-increments
+                      readonly
+                      size="small"
+                    ></v-rating>
+    
+                    <div class="text-grey ms-4">
+                      {{ post.rating }} ({{ post.reaction }})
+                    </div>
+                  </v-row>
+                </v-card-title>
+                <v-divider></v-divider>
+                <v-card-text>
+                  <p class="text-subtitle-1">{{ limitText(post.description) }}</p>
+                </v-card-text>
+                <v-divider></v-divider>
+                <v-card-actions>
+                  <v-list-item class="w-100">
+                    <template v-slot:prepend>
+                      <v-avatar
+                        color="grey-darken-3"
+                      >
+                        <span class="text-h5">{{ autorInitials(post.autor) }}</span>
+                      </v-avatar>
+                    </template>
+  
+                    <v-list-item-title>{{ post.autor }}</v-list-item-title>
+  
+                    <v-list-item-subtitle>Autor</v-list-item-subtitle>
+  
+                    <template v-slot:append>
+                      <div class="justify-self-end">
+                        <v-icon class="me-1" icon="mdi-heart" color="red" @click="addReaction(post)"></v-icon>
+                        <span class="subheading me-2">{{ post.reaction }}</span>
+                        <span class="me-1">·</span>
+                        <v-icon class="me-1" icon="mdi-comment" color="blue" @click="redirect(post.id)"></v-icon>
+                        <span class="subheading">{{ post.comments }}</span>
+                      </div>
+                    </template>
+                  </v-list-item>
+                </v-card-actions>
+              </v-card>
+            </template>
+          </v-hover>
+        </v-col>
+      </v-row>
+  
+      <v-row no-gutters v-else>
+        <v-col>
+          <v-hover>
+            <template v-slot:default="{ isHovering, props }">
+              <v-card
+                class="elevation-2 pa-3"
+                v-bind="props"
+                :color="isHovering ? 'light-green' : undefined"
+                height="320"
+              >
+                <v-card-title>
+                  <p class="text-right text-h3 pb-3">{{ post.name }}</p>
+                  <v-row
+                    class="mx-0 pb-2 d-flex flex-row-reverse"
+                  >
+                    <v-rating
+                      :model-value="post.rating"
+                      color="amber"
+                      density="compact"
+                      half-increments
+                      readonly
+                      size="small"
+                    ></v-rating>
+    
+                    <div class="text-grey ms-4">
+                      {{ post.rating }} ({{ post.reaction }})
+                    </div>
+                  </v-row>
+                </v-card-title>
+                <v-divider></v-divider>
+                <v-card-text>
+                  <p class="text-subtitle-1 text-right">{{ limitText(post.description) }}</p>
+                </v-card-text>
+                <v-divider></v-divider>
+                <v-card-actions>
+                  <v-list-item class="w-100">
+                    <template v-slot:prepend>
+                      <v-avatar
+                        color="grey-darken-3"
+                      >
+                        <span class="text-h5">{{ autorInitials(post.autor) }}</span>
+                      </v-avatar>
+                    </template>
+  
+                    <v-list-item-title>{{ post.autor }}</v-list-item-title>
+  
+                    <v-list-item-subtitle>Autor</v-list-item-subtitle>
+  
+                    <template v-slot:append>
+                      <div class="justify-self-end">
+                        <v-icon class="me-1" icon="mdi-heart" color="red" @click="addReaction(post)"></v-icon>
+                        <span class="subheading me-2">{{ post.reaction }}</span>
+                        <span class="me-1">·</span>
+                        <v-icon class="me-1" icon="mdi-comment" color="blue" @click="redirect(post.id)"></v-icon>
+                        <span class="subheading">{{ post.comments }}</span>
+                      </div>
+                    </template>
+                  </v-list-item>
+                </v-card-actions>
+              </v-card>
+            </template>
+          </v-hover>
+        </v-col>
+        <v-col
+          class="ml-2"
+          sm="5"
+          md="6"
+        >
+          <v-card>
+            <v-img
+              :src="post.image"
+              lazy-src="/logo/shadai-main.jpeg"
+              @click="redirect(post.id)"
+              height="320"
+              cover
+              class="cursor-pointer"
+            >
+              <template v-slot:placeholder>
+                <div 
+                  class="d-flex align-center justify-center fill-height"
+                ></div>
+              </template>
+            </v-img>
+          </v-card>
+        </v-col>
+      </v-row>
+    </div>
+    <v-divider></v-divider>
+    <!-- TODO: connect pagination with API -->
+    <div class="text-center">
+      <v-pagination
+        v-model="page"
+        :length="4"
+        prev-icon="mdi-menu-left"
+        next-icon="mdi-menu-right"
+      ></v-pagination>
+    </div>
   </div>
 </template>
 <script>
+import PostService from '@/services/PostService.js'
+
 export default {
   inject:['strLimit'],
   data() {
     return {
+      loading: false,
+      apiService: PostService,
       chance: 1,
       page: 1,
-      posts: [
-        {
-          id: 1,
-          name: "tree of the life",
-          autor: "Daniel Mendez Castillo",
-          img: "/images/example.jpg",
-          description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-          rating: 3.5,
-          reaction: 1,
-          comments: 0
-        },
-        {
-          id: 2,
-          name: "tree of the wather",
-          autor: "Dinosaurio Mendez",
-          img: "/images/example-1.jpg",
-          description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-          rating: 4,
-          reaction: 3,
-          comments: 10
-        },
-        {
-          id: 3,
-          name: "someone lossing",
-          autor: "Fili Mendez",
-          img: "/images/example-2.jpeg",
-          description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-          rating: 1,
-          reaction: 5,
-          comments: 74
-        },
-        {
-          id: 4,
-          name: "no image",
-          autor: "anonimous",
-          img: null,
-          description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-          rating: 3.5,
-          reaction: 0,
-          comments: 6
-        },
-        {
-          id: 5,
-          name: "no image in other side",
-          autor: "anonimous moreee",
-          img: null,
-          description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-          rating: 4.5,
-          reaction: 10,
-          comments: 23
-        },
-      ]
+      items: []
     }
   },
   methods: {
@@ -262,6 +242,20 @@ export default {
     },
     redirect(id) {
       console.log('redirecting to id...' + id)
+    },
+    async getItems() {
+      try {
+        this.loading = true
+
+        const resp = await this.apiService.index()
+        // setTimeout(() => {
+        // }, 5000);
+
+        this.items = resp.data.data
+        this.loading = false
+      } catch (error) {
+        console.log(error)
+      }
     },
     async addReaction(post) {
       // let react = await axios.post()
@@ -288,6 +282,9 @@ export default {
 
       return initials.join("")
     }
-  }
+  },
+  mounted() {
+    this.getItems()
+  },
 }
 </script>

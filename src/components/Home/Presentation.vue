@@ -17,7 +17,7 @@
   float: initial;
 
   display: block;
-  font-family: system-ui cursive;
+  font-family: Alex Brush;
   white-space: nowrap;
   border-right: 4px solid;
   width: 13ch;
