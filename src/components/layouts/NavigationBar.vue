@@ -7,18 +7,27 @@
 
     <v-spacer></v-spacer>
 
-    <v-btn variant="text" icon="mdi-magnify"></v-btn>
-    <v-btn variant="text" icon="mdi-filter"></v-btn>
-    <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
+    <!-- <v-btn variant="text" icon="mdi-magnify"></v-btn>
+    <v-btn variant="text" icon="mdi-filter"></v-btn> -->
+    <v-btn @click="toogleTheme()" text rounded :icon="night ? 'mdi-weather-sunny' : 'mdi-weather-night'"></v-btn>
   </v-app-bar>
 </template>
 <script>
 export default {
+  data() {
+    return {
+      night: false
+    }
+  },
   methods: {
     openNavigationDrawer() {
       this.$nextTick(() => {
         this.emitter.emit('openNavigationDrawer')
       })
+    },
+    toogleTheme() {
+      this.night = !this.night
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
     }
   },
 }

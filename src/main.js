@@ -9,6 +9,7 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import * as assets from './plugins/vuetify'
 import moment from 'moment';
 
 // Event handling
@@ -21,6 +22,7 @@ const emitter = mitt()
 const vuetify = createVuetify({
   components,
   directives,
+  assets
 })
 
 const app = createApp(App)
