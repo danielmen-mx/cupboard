@@ -259,7 +259,7 @@ export default {
       return false
     },
     redirect(id) {
-      console.log('redirecting to id...' + id)
+      this.$router.push({path: '/post/' + id})
     },
     async getItems() {
       try {
@@ -305,7 +305,7 @@ export default {
 }
 </script>
 <style>
- .fill-card {
-  height: 112px;
- }
+  .fill-card {
+    height: 112px;
+  }
 </style>
