@@ -15,25 +15,28 @@
       class="custom-image"
     ></v-img>
     
-    <v-card class="elevation-0 mt-1">
-      <p class="text-h3 ma-2">
-        {{ post.name }}
-      </p>
-      <div class="d-flex">
+    <div class="elevation-0 mt-1">
+      <div>
+        <p class="text-h3 ma-2">
+          {{ post.name }}
+        </p>
+        <!-- add like dislike to leave a review of the post -->
+      </div>
+      <div class="d-flex align-center">
         <v-rating
           :model-value="post.rating"
           readonly
           color="amber"
         ></v-rating>
-        <p class="text-grey">
-          {{ post.rating }} ({{ post.reaction }})
+        <p class="text-grey text-h6">
+          {{ post.rating }} stars | ({{ post.reaction }} comments)
         </p>
       </div>
       <v-divider></v-divider>
       <p class="text-h6 ma-2">
         {{ post.description }}
       </p>
-    </v-card>
+    </div>
   </v-card>
 </template>
 <script>
