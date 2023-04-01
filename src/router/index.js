@@ -15,14 +15,6 @@ const routes = [
         path: '/post/:id',
         name: 'post',
         component: () => import('../pages/Post.vue'),
-        // children: [
-        //   {
-        //     path: ':id',
-        //     // component: () => import('@/components/Admin/Posts.vue'),
-        //     component: () => import('../pages/Post.vue'),
-        //     props: true
-        //   },
-        // ]
       },
       {
         path: '/admin',
@@ -31,11 +23,20 @@ const routes = [
         children: [
           {
             path: ':admin',
-            // component: () => import('@/components/Admin/Posts.vue'),
             component: () => import('../pages/Admin.vue'),
             props: true
           },
         ]
+      },
+      {
+        path: '/store',
+        name: 'store',
+        component: () => import('../pages/Store.vue')
+      },
+      {
+        path: '/review',
+        name: 'review',
+        component: () => import('../pages/Review.vue')
       },
     ]
   },
