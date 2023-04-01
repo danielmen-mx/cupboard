@@ -4,7 +4,7 @@
     location="left"
     temporary
     color="grey-lighten-3"
-    width="250"
+    width="300"
   >
     <v-list
       :lines="false"
