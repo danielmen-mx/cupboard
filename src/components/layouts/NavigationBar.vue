@@ -1,7 +1,6 @@
 <template>
   <v-app-bar>
-    <!-- <v-app-bar-nav-icon variant="text" @click="openNavigationDrawer()"></v-app-bar-nav-icon> -->
-    <div>
+    <div class="buttons-group ml-2">
       <v-btn
         v-for="nav in navs"
         :key="nav.title"
@@ -13,12 +12,15 @@
         {{ nav.title }}
       </v-btn>
     </div>
+    <v-spacer></v-spacer>
 
-    <v-toolbar-title
-      class="text-center ml-13 cursor-pointer custom-main-title"
+    <v-toolbar-title class="custom-main-title">
+      <strong
+      class="cursor-pointer"
       @click="$router.push('/')"
-    >
-      Shaddai Shop
+      >
+        Shaddai Shop
+      </strong>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>
@@ -83,10 +85,15 @@ export default {
 </script>
 <style>
   .custom-main-title {
-    position: fixed;
+    position: absolute;
     width: 100%;
     text-align: center;
     font-size: 18px;
-    padding-right: 80px;
+    padding-right: 30px;
+    z-index: 0;
+  }
+
+  .buttons-group {
+    z-index: 1;
   }
 </style>
