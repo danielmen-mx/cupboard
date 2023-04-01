@@ -17,7 +17,6 @@ export default {
   methods: {
     onResize() {
       this.windowSize = { height: window.innerHeight, width: window.innerWidth }
-      console.log(this.windowSize)
       this.responsiveInformation()
     },
     responsiveInformation() {
