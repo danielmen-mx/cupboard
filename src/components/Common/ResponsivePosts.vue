@@ -11,12 +11,14 @@ export default {
       presentationText: 'text-h2',
       imageWidth: 'auto',
       dataWidth: 'auto',
-      actionHeight: 'auto'
+      actionHeight: 'auto',
+      showPostTitle: '35vh'
     }
   },
   methods: {
     onResize() {
       this.windowSize = { height: window.innerHeight, width: window.innerWidth }
+      console.log(this.windowSize)
       this.responsiveInformation()
     },
     responsiveInformation() {
