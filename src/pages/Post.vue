@@ -1,5 +1,5 @@
 <template>
-  <v-card v-if="!loading" class="elevation-1 pa-2">
+  <v-card v-if="!loading" class="elevation-0 pa-2">
     <v-btn
       icon="mdi-keyboard-backspace"
       color="orange-darken-4"
