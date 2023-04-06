@@ -1,12 +1,14 @@
 <template>
   <div v-if="items.length == 0" >
+    <!-- <v-skeleton-loader color="info" type="card"></v-skeleton-loader> -->
     <v-parallax
       height="600"
       lazy-src="/logo/shadai-main.jpeg"
+      class="grayscale"
     >
       <div v-if="loading" class="d-flex align-center justify-center fill-height">
         <v-progress-circular
-          color="pink-lighten-1"
+          color="grey-lighten-4"
           indeterminate
           size="109"
           width="11"
@@ -103,7 +105,7 @@
                       <v-avatar
                         color="pink-lighten-1"
                       >
-                        <span class="text-h5">{{ autorInitials(post.autor) }}</span>
+                        <span class="text-h5">{{ initials(post.autor) }}</span>
                       </v-avatar>
                     </template>
   
@@ -178,7 +180,7 @@
                       <v-avatar
                         color="orange-darken-4"
                       >
-                        <span class="text-h5">{{ autorInitials(post.autor) }}</span>
+                        <span class="text-h5">{{ initials(post.autor) }}</span>
                       </v-avatar>
                     </template>
   
@@ -240,8 +242,10 @@
 <script>
 import PostService from '@/services/PostService.js'
 import ResponsivePosts from '@/components/Common/ResponsivePosts.vue'
+import { initials } from '../../utils/helpers'
 
 export default {
+  mixins: [initials],
   extends: ResponsivePosts,
   inject:['strLimit'],
   data() {
@@ -286,17 +290,6 @@ export default {
     },
     limitText(text) {
       return this.strLimit(text, this.words)
-    },
-    autorInitials(name) {
-      let i = 1
-      let array = name.split(" ")
-      const initials = array.map(fragment => {
-        if (i > 2) return
-        i++
-        return fragment.charAt(0).toUpperCase()
-      })
-
-      return initials.join("")
     }
   },
   mounted() {
