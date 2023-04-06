@@ -22,7 +22,7 @@
     <v-divider></v-divider>
 
     <div>
-      ©2016-{{ new Date().getFullYear() }} — <strong>Shaddai Shop</strong> | Todos los derechos reservados
+      Copyright © 2016-{{ new Date().getFullYear() }} <strong>Shaddai Shop</strong>
     </div>
   </v-footer>
 </template>
