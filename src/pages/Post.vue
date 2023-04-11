@@ -1,12 +1,13 @@
 <template>
   <v-card v-if="!loading" class="elevation-1 pa-2">
-    <!-- <v-btn
+    <v-btn
+      v-if="post.image"
       icon="mdi-keyboard-backspace"
       color="orange-darken-4"
       @click="$router.push('/')"
       class="back-button"
     >
-    </v-btn> -->
+    </v-btn>
     <v-img
       v-show="post.image"
       :src="post.image"
@@ -45,53 +46,32 @@
         </v-btn>
       </v-card-actions>
       <v-divider></v-divider>
-      <!-- <Comments /> -->
+      <Comments :comments_arr="comments" />
       <v-divider></v-divider>
-      <div class="my-2 ml-1 mr-3">
-        <v-form>
-          <v-text-field
-            v-model="comment"
-            :disabled="sendingMessage"
-            append-icon="mdi-send"
-            clear-icon="mdi-close-circle"
-            clearable
-            label="Message"
-            type="text"
-            @click:append="sendComment"
-            
-          >
-            <template v-slot:append-inner>
-              <v-fade-transition leave-absolute>
-                <v-progress-circular
-                  v-if="sendingMessage"
-                  color="info"
-                  indeterminate
-                  size="24"
-                ></v-progress-circular>
-              </v-fade-transition>
-            </template>
-          </v-text-field>
-        </v-form>
-      </div>
+      <CommentsForm />
     </div>
   </v-card>
 </template>
 <script>
 import ResponsivePosts from '../components/Common/ResponsivePosts.vue';
 import PostService from '@/services/PostService.js'
+import Comments from '../components/Post/Comments.vue';
+import CommentsForm from '../components/Post/CommentsForm.vue';
 import { initials, formatDate } from '../utils/helpers';
 
 export default {
   mixins: [initials, formatDate],
   extends: ResponsivePosts,
+  components: {
+    Comments,
+    CommentsForm
+  },
   data() {
     return {
       loading: false,
-      sendingMessage: false,
       apiService: PostService,
       postId: null,
       post: {},
-      comment: '',
       comments: [
         {
           id: 1,
@@ -129,14 +109,6 @@ export default {
         this.loading = false
         console.log(error)
       }
-    },
-    sendComment() {
-      console.log('sending comment...')
-      this.sendingMessage = true
-      setTimeout(() => {
-        this.sendingMessage = false
-        console.log('finishing sending...')
-      }, 5000);
     }
   },
   computed: {

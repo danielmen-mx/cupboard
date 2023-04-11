@@ -30,20 +30,25 @@
   </div>
 </template>
 <script>
+import { initials } from '../../utils/helpers'
+
 export default {
+  mixins: [initials],
   props: {
-    commments: {
+    comments_arr: {
       type: Array,
       required: true
     }
   },
   data() {
     return {
-      
+      comments: []
     }
   },
   mounted() {
-    
+    if (!this.comments_arr) return
+
+    this.comments = this.comments_arr
   },
 }
 </script>
