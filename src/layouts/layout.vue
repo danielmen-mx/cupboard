@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-layout>
-      <Navigation />
+      <Navigation :key="reload" />
       <NavigationDrawer />
       <v-main class="mt-16 pt-6">
         <Dialog />
@@ -35,6 +35,16 @@ export default {
     Dialog,
     Footer,
     Button
-  }
+  },
+  data() {
+    return {
+      reload: false
+    }
+  },
+  mounted() {
+    this.emitter.on('reloadComponent', () => {
+      this.reload = !this.reload
+    })
+  },
 }
 </script>

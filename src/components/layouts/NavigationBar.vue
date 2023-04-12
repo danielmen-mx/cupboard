@@ -1,7 +1,9 @@
 <template>
   <v-app-bar>
     <div class="buttons-group ml-2">
+      <v-app-bar-nav-icon v-if="navIcon" variant="text" @click="openNavigationDrawer()"></v-app-bar-nav-icon>
       <v-btn
+        v-else
         v-for="nav in navs"
         :key="nav.title"
         variant="text"
@@ -29,7 +31,10 @@
   </v-app-bar>
 </template>
 <script>
+import Layout from '../Common/Responsives/layout.vue'
+
 export default {
+  extends: Layout,
   data() {
     return {
       admin: true,

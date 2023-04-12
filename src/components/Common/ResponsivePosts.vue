@@ -1,10 +1,12 @@
 <template></template>
 <style scoped></style>
 <script>
+import Responsive from './Responsive.vue'
+
 export default {
+  extends: Responsive,
   data() {
     return {
-      windowSize: {},
       words: 270,
       titleText: 'text-h3',
       postNameText: 20,
@@ -16,11 +18,6 @@ export default {
     }
   },
   methods: {
-    onResize() {
-      this.windowSize = { height: window.innerHeight, width: window.innerWidth }
-      console.log(this.windowSize)
-      this.responsiveInformation()
-    },
     responsiveInformation() {
       // height resizes
       if (this.windowSize.height < 700) {
@@ -67,7 +64,10 @@ export default {
     },
   },
   mounted() {
-    this.onResize()
+    this.emitter.on('responsiveFit', () => {
+      this.responsiveInformation()
+      console.log('Responsive posts is working fine!')
+    })
   },
 }
 </script>
