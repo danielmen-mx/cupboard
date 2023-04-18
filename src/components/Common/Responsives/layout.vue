@@ -11,19 +11,13 @@ export default {
   },
   methods: {
     responsiveConfiguration() {
-      // si navIcon es false se debe verificar el window size para convertirlo en true
-      if (this.navIcon) {
-        if (this.windowSize.width > 850) this.navIcon = false
-        if (this.windowSize.height > 450) this.navIcon = false
-        this.adviceReload()
-      }
+      // if (this.windowSize.height < 450 && this.windowSize.width < 840) this.navIcon = true
+      // if (this.windowSize.height > 450) this.navIcon = false
 
-      if (!this.navIcon) {
-        if (this.windowSize.width < 850) this.navIcon = true
-        if (this.windowSize.height < 450) this.navIcon = true
-        this.adviceReload()
-      }
+      // if (this.windowSize.width < 850) this.navIcon = true
+      // if (this.windowSize.width > 850) this.navIcon = false
 
+      this.adviceReload()
       console.log('navIcon is: ', this.navIcon)
     },
     adviceReload() {
