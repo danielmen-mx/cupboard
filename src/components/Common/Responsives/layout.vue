@@ -6,32 +6,40 @@ export default {
   extends: Responsive,
   data() {
     return {
-      navIcon: false, // modify for tests purposes
+      responsiveNavIcon: false,
+      navIcon: false,
       localResponsive: {}
     }
   },
   methods: {
     responsiveConfiguration() {
-      // if (this.windowSize.height < 450 && this.windowSize.width < 840) this.navIcon = true
-      // if (this.windowSize.height > 450) this.navIcon = false
 
-      // if (this.windowSize.width < 850) this.navIcon = true
-      // if (this.windowSize.width > 850) this.navIcon = false
+      if (this.windowSize.height < 515) {
+        this.navIcon = true
+      }
 
-      this.adviceReload()
-      console.log('navIcon is: ', this.navIcon)
+      if (this.windowSize.height > 515) {
+        this.navIcon = false
+      }
+
+      if (this.windowSize.width < 900) {
+        this.navIcon = true
+      }
+
+      if (this.windowSize.width > 900) {
+        this.navIcon = false
+      }
+
+      // this.$nextTick(() => {
+      //   this.adviceReload('layoutNavBar', this.responsiveNavIcon)
+      // })
     },
-    adviceReload() {
-      this.emitter.emit('reloadComponent')
-    }
   },
   mounted() {
     this.emitter.on('responsiveFit', () => {
-      if (this.localResponsive == this.windowSize) return
-      this.localResponsive = this.windowSize
       this.$nextTick(() => {
         this.responsiveConfiguration()
-        console.log('Responsive layout is working fine!')
+        // console.log('Responsive layout is working fine!')
       })
     })
   },

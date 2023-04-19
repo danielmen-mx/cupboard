@@ -255,6 +255,7 @@ export default {
       chance: 1,
       page: 1,
       items: [],
+      configuration: {}
     }
   },
   methods: {

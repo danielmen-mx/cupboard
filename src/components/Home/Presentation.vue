@@ -1,8 +1,7 @@
 <template>
   <div class="bg-pink-lighten-1 title-container rounded py-2">
     <span
-     class="text-center main-title"
-     :class="presentationText"
+     class="text-center main-title text-h2"
     >
       See whats news
     </span>
@@ -12,7 +11,7 @@
 import ResponsivePosts from '@/components/Common/Responsives/posts.vue'
 
 export default {
-  extends: ResponsivePosts
+  // extends: ResponsivePosts
 }
 </script>
 <style>

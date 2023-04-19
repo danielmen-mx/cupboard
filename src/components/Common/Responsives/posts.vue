@@ -6,7 +6,7 @@ import Responsive from '../Responsive.vue'
 export default {
   extends: Responsive,
   data() {
-    return {
+  return {
       words: 270,
       titleText: 'text-h3',
       postNameText: 20,
@@ -21,56 +21,59 @@ export default {
   methods: {
     responsiveInformation() {
       // height resizes
-      if (this.localResponsive.height < 700) {
+      if (this.windowSize.height < 700) {
         this.words = 170
         this.postNameText = 15
         this.titleText = 'text-h4'
       }
-      if (this.localResponsive.height < 450) {
+      if (this.windowSize.height < 450) {
         this.postNameText = 10
       }
-      if (this.localResponsive.height < 360) {
+      if (this.windowSize.height < 360) {
         this.words = 70
         this.titleText = 'text-h6'
       }
-      if (this.localResponsive.height > 700) {
+      if (this.windowSize.height > 700) {
         this.words = 270
         this.postNameText = 20
         this.titleText = 'text-h3'
       }
 
       // width resizes
-      if (this.localResponsive.width < 1280) {
+      if (this.windowSize.width < 1280) {
         this.words = 170
         this.titleText = 'text-h4'
         this.actionHeight = '80px'
       }
-      if (this.localResponsive.width < 700) {
+      if (this.windowSize.width < 700) {
         this.titleText = 'text-h6'
       }
-      if (this.localResponsive.width < 665) {
+      if (this.windowSize.width < 665) {
         this.words = 70
       }
-      if (this.localResponsive.width < 560) {
+      if (this.windowSize.width < 560) {
         this.presentationText = 'text-h4'
       }
-      if (this.localResponsive.width > 560) {
+      if (this.windowSize.width > 560) {
         this.presentationText = 'text-h2'
       }
-      if (this.localResponsive.width > 1280) {
+      if (this.windowSize.width > 1280) {
         this.words = 270
         this.titleText = 'text-h3'
         this.actionHeight = 'auto'
       }
+
+      // this.adviceReload('postsComponent', this.configuration)
     },
   },
   mounted() {
     this.emitter.on('responsiveFit', () => {
-      if (this.localResponsive == this.windowSize) return
-      this.localResponsive = this.windowSize
+      // if (this.localResponsive == this.windowSize) return
+      // this.localResponsive = this.windowSize
+
       this.$nextTick(() => {
         this.responsiveInformation()
-        console.log('Responsive posts is working fine!')
+        // console.log('Responsive posts is working fine!')
       })
     })
   },

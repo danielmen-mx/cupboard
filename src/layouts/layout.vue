@@ -40,12 +40,14 @@ export default {
   },
   data() {
     return {
-      reload: false
+      reload: false,
+      navIcon: false
     }
   },
   mounted() {
-    this.emitter.on('reloadComponent', () => {
+    this.emitter.on('reloadComponent', (navBool) => {
       this.reload = !this.reload
+      this.navIcon = navBool
     })
   },
 }

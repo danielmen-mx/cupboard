@@ -1,46 +1,50 @@
 <template>
-  <v-app-bar>
-    <div class="buttons-group ml-2">
-      <v-app-bar-nav-icon v-if="navIcon" variant="text" @click="openNavigationDrawer()"></v-app-bar-nav-icon>
-      <v-btn
-        v-else
-        v-for="nav in navs"
-        :key="nav.title"
-        variant="text"
-        v-show="requireAdmin(nav.require_admin)"
-        active-color="info"
-        @click="redirect(nav.path)"
-      >
-        {{ nav.title }}
-      </v-btn>
-    </div>
+  <div v-resize="onResize" >
+    <v-app-bar>
+      <div class="buttons-group ml-2" >
+        <v-app-bar-nav-icon v-if="navIcon" variant="text" @click="openNavigationDrawer()"></v-app-bar-nav-icon>
+        <v-btn
+          v-if="!navIcon"
+          v-for="nav in navs"
+          :key="nav.title"
+          variant="text"
+          v-show="requireAdmin(nav.require_admin)"
+          active-color="info"
+          @click="redirect(nav.path)"
+        >
+          {{ nav.title }}
+        </v-btn>
+      </div>
 
-    <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
 
-    <v-toolbar-title class="custom-main-title">
-      <strong
-      class="cursor-pointer"
-      @click="$router.push('/')"
-      >
-        Shaddai Shop
-      </strong>
-    </v-toolbar-title>
+      <v-toolbar-title class="custom-main-title">
+        <strong
+        class="cursor-pointer"
+        @click="$router.push('/')"
+        >
+          Shaddai Shop
+        </strong>
+      </v-toolbar-title>
 
-    <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
 
-    <v-btn
-      v-if="navIcon"
-      icon="mdi-account-key"
-      @click="login()"
-    ></v-btn>
-    <v-btn
-      v-else
-      @click="login()"
-    >
-      Registrarse | Iniciar sesión
-    </v-btn>
-    <v-btn @click="toogleTheme()" text rounded :icon="night ? 'mdi-weather-sunny' : 'mdi-weather-night'"></v-btn>
-  </v-app-bar>
+      <div class="buttons-group mr-2" >
+        <v-btn
+          v-if="navIcon"
+          icon="mdi-account-key"
+          @click="login()"
+        ></v-btn>
+        <v-btn
+          v-else
+          @click="login()"
+        >
+          Registrarse | Iniciar sesión
+        </v-btn>
+        <v-btn @click="toogleTheme()" text rounded :icon="night ? 'mdi-weather-sunny' : 'mdi-weather-night'"></v-btn>
+      </div>
+    </v-app-bar>
+  </div>z
 </template>
 <script>
 import responsiveLayout from '../Common/Responsives/layout.vue'

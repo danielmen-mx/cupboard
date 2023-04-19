@@ -31,8 +31,10 @@
 </template>
 <script>
 import { initials } from '../../utils/helpers'
+import Responsive from '../Common/Responsive.vue'
 
 export default {
+  extends: Responsive,
   mixins: [initials],
   props: {
     comments_arr: {
