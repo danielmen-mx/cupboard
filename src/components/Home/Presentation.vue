@@ -9,6 +9,7 @@
     >
       See whats new
     </span>
+    <!-- TODO: add something awesome -->
   </div>
 </template>
 <script>

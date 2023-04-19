@@ -1,6 +1,6 @@
 <template>
-  <Presentation />
-  <v-divider class="my-2"></v-divider>
+  <!-- <Presentation /> -->
+  <!-- <v-divider class="my-2"></v-divider> -->
   <Posts />
 </template>
 <script>

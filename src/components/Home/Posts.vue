@@ -32,6 +32,8 @@
     </v-parallax>
   </div>
   <div v-else>
+    <Presentation />
+    <v-divider class="my-2"></v-divider>
     <div
       v-for="(post, i) in items"
       :key="post.id"
@@ -242,12 +244,16 @@
 <script>
 import PostService from '@/services/PostService.js'
 import ResponsivePosts from '@/components/Common/Responsives/posts.vue'
+import Presentation from './Presentation.vue'
 import { initials } from '../../utils/helpers'
 
 export default {
   mixins: [initials],
   extends: ResponsivePosts,
-  inject:['strLimit'],
+  inject: ['strLimit'],
+  components: {
+    Presentation
+  },
   data() {
     return {
       loading: false,
