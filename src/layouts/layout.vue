@@ -25,10 +25,10 @@ import Snackbar from '@/components/layouts/Snackbar.vue'
 import Dialog from '@/components/layouts/Dialog.vue'
 import Footer from '@/components/layouts/Footer.vue'
 import Button from '@/components/layouts/Button.vue'
-import layout from '../components/Common/Responsives/layout.vue'
+import responsiveLayout from '../components/Common/Responsives/layout.vue'
 
 export default {
-  // extends: layout,
+  // extends: responsiveLayout,
   components: {
     Navigation,
     NavigationDrawer,
