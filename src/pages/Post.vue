@@ -53,7 +53,7 @@
   </v-card>
 </template>
 <script>
-import ResponsivePosts from '../components/Common/ResponsivePosts.vue';
+import ResponsivePosts from '../components/Common/posts.vue';
 import PostService from '@/services/PostService.js'
 import Comments from '../components/Post/Comments.vue';
 import CommentsForm from '../components/Post/CommentsForm.vue';

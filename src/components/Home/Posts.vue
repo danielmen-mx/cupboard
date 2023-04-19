@@ -241,7 +241,7 @@
 </template>
 <script>
 import PostService from '@/services/PostService.js'
-import ResponsivePosts from '@/components/Common/ResponsivePosts.vue'
+import ResponsivePosts from '@/components/Common/posts.vue'
 import { initials } from '../../utils/helpers'
 
 export default {
