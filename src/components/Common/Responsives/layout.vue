@@ -7,6 +7,7 @@ export default {
   data() {
     return {
       navIcon: false, // modify for tests purposes
+      localResponsive: {}
     }
   },
   methods: {
@@ -26,8 +27,12 @@ export default {
   },
   mounted() {
     this.emitter.on('responsiveFit', () => {
-      this.responsiveConfiguration()
-      console.log('Responsive layout is working fine!')
+      if (this.localResponsive == this.windowSize) return
+      this.localResponsive = this.windowSize
+      this.$nextTick(() => {
+        this.responsiveConfiguration()
+        console.log('Responsive layout is working fine!')
+      })
     })
   },
 }

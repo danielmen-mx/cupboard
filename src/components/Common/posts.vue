@@ -14,49 +14,50 @@ export default {
       imageWidth: 'auto',
       dataWidth: 'auto',
       actionHeight: 'auto',
-      showPostTitle: '35vh'
+      showPostTitle: '35vh',
+      localResponsive: {}
     }
   },
   methods: {
     responsiveInformation() {
       // height resizes
-      if (this.windowSize.height < 700) {
+      if (this.localResponsive.height < 700) {
         this.words = 170
         this.postNameText = 15
         this.titleText = 'text-h4'
       }
-      if (this.windowSize.height < 450) {
+      if (this.localResponsive.height < 450) {
         this.postNameText = 10
       }
-      if (this.windowSize.height < 360) {
+      if (this.localResponsive.height < 360) {
         this.words = 70
         this.titleText = 'text-h6'
       }
-      if (this.windowSize.height > 700) {
+      if (this.localResponsive.height > 700) {
         this.words = 270
         this.postNameText = 20
         this.titleText = 'text-h3'
       }
 
       // width resizes
-      if (this.windowSize.width < 1280) {
+      if (this.localResponsive.width < 1280) {
         this.words = 170
         this.titleText = 'text-h4'
         this.actionHeight = '80px'
       }
-      if (this.windowSize.width < 700) {
+      if (this.localResponsive.width < 700) {
         this.titleText = 'text-h6'
       }
-      if (this.windowSize.width < 665) {
+      if (this.localResponsive.width < 665) {
         this.words = 70
       }
-      if (this.windowSize.width < 560) {
+      if (this.localResponsive.width < 560) {
         this.presentationText = 'text-h4'
       }
-      if (this.windowSize.width > 560) {
+      if (this.localResponsive.width > 560) {
         this.presentationText = 'text-h2'
       }
-      if (this.windowSize.width > 1280) {
+      if (this.localResponsive.width > 1280) {
         this.words = 270
         this.titleText = 'text-h3'
         this.actionHeight = 'auto'
@@ -65,8 +66,12 @@ export default {
   },
   mounted() {
     this.emitter.on('responsiveFit', () => {
-      this.responsiveInformation()
-      console.log('Responsive posts is working fine!')
+      if (this.localResponsive == this.windowSize) return
+      this.localResponsive = this.windowSize
+      this.$nextTick(() => {
+        this.responsiveInformation()
+        console.log('Responsive posts is working fine!')
+      })
     })
   },
 }
