@@ -1,9 +1,13 @@
 <template>
-  <div class="bg-pink-lighten-1 title-container rounded py-2">
+  <div
+    class="bg-pink-lighten-1 title-container rounded py-2"
+    v-resize="onResize"
+  >
     <span
-     class="text-center main-title text-h2"
+     class="text-center main-title"
+     :class="presentationText"
     >
-      See whats news
+      See whats new
     </span>
   </div>
 </template>
@@ -11,7 +15,7 @@
 import ResponsivePosts from '@/components/Common/Responsives/posts.vue'
 
 export default {
-  // extends: ResponsivePosts
+  extends: ResponsivePosts
 }
 </script>
 <style>
