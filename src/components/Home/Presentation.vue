@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import ResponsivePosts from '@/components/Common/posts.vue'
+import ResponsivePosts from '@/components/Common/Responsives/posts.vue'
 
 export default {
   extends: ResponsivePosts

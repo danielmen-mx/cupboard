@@ -6,8 +6,10 @@
 <script>
 import Presentation from '@/components/Home/Presentation.vue'
 import Posts from '@/components/Home/Posts.vue'
+import ResponsivePosts from '@/components/Common/posts.vue'
 
 export default {
+  // extends: ResponsivePosts,
   components: {
     Presentation,
     Posts

@@ -53,7 +53,7 @@
   </v-card>
 </template>
 <script>
-import ResponsivePosts from '../components/Common/posts.vue';
+import ResponsivePosts from '@/components/Common/Responsives/posts.vue'
 import PostService from '@/services/PostService.js'
 import Comments from '../components/Post/Comments.vue';
 import CommentsForm from '../components/Post/CommentsForm.vue';
@@ -61,7 +61,6 @@ import { initials, formatDate } from '../utils/helpers';
 
 export default {
   mixins: [initials, formatDate],
-  extends: ResponsivePosts,
   components: {
     Comments,
     CommentsForm
