@@ -43,10 +43,10 @@
   </v-app-bar>
 </template>
 <script>
-import layout from '../Common/Responsives/layout.vue'
+import responsiveLayout from '../Common/Responsives/layout.vue'
 
 export default {
-  extends: layout,
+  extends: responsiveLayout,
   data() {
     return {
       admin: false,

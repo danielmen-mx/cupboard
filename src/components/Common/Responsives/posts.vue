@@ -1,7 +1,7 @@
 <template></template>
 <style scoped></style>
 <script>
-import Responsive from './Responsive.vue'
+import Responsive from '../Responsive.vue'
 
 export default {
   extends: Responsive,
