@@ -6,8 +6,8 @@ export default {
   extends: Responsive,
   data() {
     return {
-      responsiveNavIcon: false,
       navIcon: false,
+      footerText: 'text-subtitle-1',
       localResponsive: {}
     }
   },
@@ -16,18 +16,24 @@ export default {
 
       if (this.windowSize.height < 515) {
         this.navIcon = true
+        // this.footerText = 'text-subtitle-2'
+        this.footerText = 'text-caption'
       }
 
       if (this.windowSize.height > 515) {
         this.navIcon = false
+        this.footerText = 'text-subtitle-1'
       }
 
       if (this.windowSize.width < 900) {
         this.navIcon = true
+        // this.footerText = 'text-subtitle-2'
+        this.footerText = 'text-caption'
       }
 
       if (this.windowSize.width > 900) {
         this.navIcon = false
+        this.footerText = 'text-subtitle-1'
       }
 
       // this.$nextTick(() => {

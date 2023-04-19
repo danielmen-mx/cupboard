@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-layout>
-      <Navigation :key="reload" />
+      <Navigation />
       <NavigationDrawer />
       <v-main class="mt-16 pt-6">
         <Dialog />
