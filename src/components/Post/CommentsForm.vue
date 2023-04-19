@@ -7,7 +7,7 @@
         append-icon="mdi-send"
         clear-icon="mdi-close-circle"
         clearable
-        label="Message"
+        label="Añadir comentario"
         type="text"
         @click:append="sendComment"
         

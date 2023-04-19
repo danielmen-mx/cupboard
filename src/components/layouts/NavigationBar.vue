@@ -14,6 +14,7 @@
         {{ nav.title }}
       </v-btn>
     </div>
+
     <v-spacer></v-spacer>
 
     <v-toolbar-title class="custom-main-title">
@@ -27,6 +28,17 @@
 
     <v-spacer></v-spacer>
 
+    <v-btn
+      v-if="navIcon"
+      icon="mdi-account-key"
+      @click="login()"
+    ></v-btn>
+    <v-btn
+      v-else
+      @click="login()"
+    >
+      Registrarse | Iniciar sesión
+    </v-btn>
     <v-btn @click="toogleTheme()" text rounded :icon="night ? 'mdi-weather-sunny' : 'mdi-weather-night'"></v-btn>
   </v-app-bar>
 </template>
@@ -37,7 +49,7 @@ export default {
   extends: Layout,
   data() {
     return {
-      admin: true,
+      admin: false,
       night: false,
       navs: [
         {
@@ -64,6 +76,12 @@ export default {
           require_admin: false,
           path: '/review'
         },
+        {
+          title: 'Contact',
+          icon: 'mdi-account',
+          require_admin: false,
+          path: '/contact'
+        },
       ],
     }
   },
@@ -79,6 +97,9 @@ export default {
     },
     redirect(path) {
       this.$router.push({ path: path})
+    },
+    login() {
+      console.log('login in...')
     },
     requireAdmin(require) {
       if (!require) return true

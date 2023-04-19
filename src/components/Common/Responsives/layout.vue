@@ -6,7 +6,7 @@ export default {
   extends: Responsive,
   data() {
     return {
-      navIcon: false,
+      navIcon: false, // modify for tests purposes
     }
   },
   methods: {
