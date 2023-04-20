@@ -19,7 +19,7 @@ export default {
     }
   },
   methods: {
-    responsiveInformation() {
+    responsiveConfiguration() {
       // height resizes
       if (this.windowSize.height < 700) {
         this.words = 170
@@ -72,7 +72,7 @@ export default {
       // this.localResponsive = this.windowSize
 
       this.$nextTick(() => {
-        this.responsiveInformation()
+        this.responsiveConfiguration()
         // console.log('Responsive posts is working fine!')
       })
     })

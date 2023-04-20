@@ -1,65 +1,68 @@
 <template>
-  <v-card v-if="!loading" class="elevation-1 pa-2">
-    <v-btn
-      v-if="post.image"
-      icon="mdi-keyboard-backspace"
-      color="orange-darken-4"
-      @click="$router.push('/')"
-      class="back-button"
-    >
-    </v-btn>
-    <v-img
-      v-show="post.image"
-      :src="post.image"
-      lazy-src="/logo/shadai-main.jpeg"
-      height="300"
-      cover
-      class="custom-image"
-    ></v-img>
-    <div class="elevation-0 mt-1">
-      <div>
-        <div class="text-h3 ma-2">
-          {{ post.name }}
+  <div v-resize="onResize">
+    <v-card v-if="!loading" class="elevation-1 pa-2">
+      <v-btn
+        v-if="post.image"
+        icon="mdi-keyboard-backspace"
+        color="orange-darken-4"
+        @click="$router.push('/')"
+        class="back-button"
+      >
+      </v-btn>
+      <v-img
+        v-show="post.image"
+        :src="post.image"
+        lazy-src="/logo/shadai-main.jpeg"
+        height="300"
+        cover
+        class="custom-image"
+      ></v-img>
+      <div class="elevation-0 mt-1">
+        <div>
+          <div class="text-h3 ma-2">
+            {{ post.name }}
+          </div>
         </div>
+        <div class="d-flex align-center">
+          <v-rating
+            :model-value="post.rating"
+            readonly
+            color="amber"
+          ></v-rating>
+          <p class="text-grey" :class="fontInfoText">
+            {{ post.rating }} stars | ({{ comments.length }} comentarios) | {{ formatDate(post.created_at) }}
+          </p>
+        </div>
+        <v-divider></v-divider>
+        <div class="text-h6 ma-2">
+          {{ post.description }}
+        </div>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-btn color="orange">
+            Me gusta
+          </v-btn>
+          <v-btn color="orange">
+            Comentar
+          </v-btn>
+        </v-card-actions>
+        <v-divider></v-divider>
+        <Comments :comments_arr="comments" />
+        <v-divider></v-divider>
+        <CommentsForm />
       </div>
-      <div class="d-flex align-center">
-        <v-rating
-          :model-value="post.rating"
-          readonly
-          color="amber"
-        ></v-rating>
-        <p class="text-grey text-h6">
-          {{ post.rating }} stars | ({{ comments.length }} comentarios) | {{ formatDate(post.created_at) }}
-        </p>
-      </div>
-      <v-divider></v-divider>
-      <div class="text-h6 ma-2">
-        {{ post.description }}
-      </div>
-      <v-divider></v-divider>
-      <v-card-actions>
-        <v-btn color="orange">
-          Me gusta
-        </v-btn>
-        <v-btn color="orange">
-          Comentar
-        </v-btn>
-      </v-card-actions>
-      <v-divider></v-divider>
-      <Comments :comments_arr="comments" />
-      <v-divider></v-divider>
-      <CommentsForm />
-    </div>
-  </v-card>
+    </v-card>
+  </div>
 </template>
 <script>
-import ResponsivePosts from '@/components/Common/Responsives/posts.vue'
+import ResponsivePost from '../components/Common/Responsives/post.vue';
 import PostService from '@/services/PostService.js'
 import Comments from '../components/Post/Comments.vue';
 import CommentsForm from '../components/Post/CommentsForm.vue';
 import { initials, formatDate } from '../utils/helpers';
 
 export default {
+  extends: ResponsivePost,
   mixins: [initials, formatDate],
   components: {
     Comments,
