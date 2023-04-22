@@ -30,7 +30,7 @@
 <script>
 export default {
   data: () => ({
-    admin: true,
+    admin: false,
     drawer: false,
     group: null,
     items: [
@@ -50,13 +50,19 @@ export default {
         title: 'Store',
         icon: 'mdi-store',
         require_admin: false,
-        path: '/'
+        path: '/store'
       },
       {
         title: 'Reviews',
         icon: 'mdi-star-circle',
         require_admin: false,
-        path: '/'
+        path: '/review'
+      },
+      {
+        title: 'Contact',
+        icon: 'mdi-account',
+        require_admin: false,
+        path: '/contact'
       },
     ],
   }),

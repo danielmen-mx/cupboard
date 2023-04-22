@@ -1,13 +1,15 @@
 <template>
-  <Presentation />
-  <v-divider class="my-2"></v-divider>
+  <!-- <Presentation /> -->
+  <!-- <v-divider class="my-2"></v-divider> -->
   <Posts />
 </template>
 <script>
 import Presentation from '@/components/Home/Presentation.vue'
 import Posts from '@/components/Home/Posts.vue'
+import ResponsivePosts from '@/components/Common/Responsives/posts.vue'
 
 export default {
+  // extends: ResponsivePosts,
   components: {
     Presentation,
     Posts

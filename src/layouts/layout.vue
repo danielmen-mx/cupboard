@@ -25,8 +25,10 @@ import Snackbar from '@/components/layouts/Snackbar.vue'
 import Dialog from '@/components/layouts/Dialog.vue'
 import Footer from '@/components/layouts/Footer.vue'
 import Button from '@/components/layouts/Button.vue'
+import responsiveLayout from '../components/Common/Responsives/layout.vue'
 
 export default {
+  // extends: responsiveLayout,
   components: {
     Navigation,
     NavigationDrawer,
@@ -35,6 +37,18 @@ export default {
     Dialog,
     Footer,
     Button
-  }
+  },
+  data() {
+    return {
+      reload: false,
+      navIcon: false
+    }
+  },
+  mounted() {
+    this.emitter.on('reloadComponent', (navBool) => {
+      this.reload = !this.reload
+      this.navIcon = navBool
+    })
+  },
 }
 </script>

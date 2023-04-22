@@ -1,6 +1,6 @@
 <template>
   <div>
-    Review page
+    Contact page
   </div>
 </template>
 <script>

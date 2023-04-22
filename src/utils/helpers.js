@@ -83,3 +83,19 @@ export const countArray = {
     }
   },
 }
+
+export const initials = {
+  methods: {
+    initials(sentence) {
+      let i = 1
+      let array = sentence.split(" ")
+      const initials = array.map(fragment => {
+        if (i > 2) return
+        i++
+        return fragment.charAt(0).toUpperCase()
+      })
+
+      return initials.join("")
+    }
+  },
+}

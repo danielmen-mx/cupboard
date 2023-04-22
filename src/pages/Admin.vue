@@ -9,10 +9,10 @@
         <div class="d-flex flex-column fill-height justify-center align-center">
           <div class="bg-black text-orange-darken-4 rounded text-center pa-4" style="opacity: 0.8;">
             <h1 class="text-h4 font-weight-thin mb-4">
-              Shaddai
+              Shaddai Shop
             </h1>
             <h4 class="subheading">
-              Vamos a contruir algo increible!
+              Lo que es moda no incomoda xd
             </h4>
           </div>
         </div>
