@@ -4,7 +4,7 @@
       <!-- src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg" -->
       <v-parallax
         height="100vh"
-        src="../../public/logo/shadai-main.jpeg"
+        lazy-src="../../public/logo/shadai-main.jpeg"
       >
         <div class="d-flex flex-column fill-height justify-center align-center text-white ">
           <div class="bg-black ma-2 pa-2 d-flex flex-column justify-center align-center rounded">
