@@ -1,0 +1,72 @@
+<template>
+  <v-form
+    v-model="formComplete"
+    @submit.prevent="submit"
+  >
+    <v-text-field
+      v-model="form.email"
+      :readonly="loading"
+      :rules="[required]"
+      class="mb-2"
+      clearable
+      label="Usuario ó Email"
+    ></v-text-field>
+
+    <v-text-field
+      v-model="form.password"
+      :readonly="loading"
+      :rules="[required]"
+      :append-inner-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+      :type="show ? 'text' : 'password'"
+      @click:append-inner="show = !show"
+      clearable
+      label="Contraseña"
+      placeholder="Introduce tu contraseña"
+    ></v-text-field>
+
+    <br>
+
+    <v-btn
+      :disabled="!formComplete"
+      :loading="loading"
+      block
+      color="success"
+      size="large"
+      type="submit"
+      variant="elevated"
+    >
+      Iniciar Sesión
+    </v-btn>
+    <div class="d-flex justify-space-between">
+      <p
+        class="cursor-pointer text-grey mt-2 text-decoration-underline"
+        @click="redirect('/')"
+      >
+        Home
+      </p>
+      <p
+        class="cursor-pointer text-grey mt-2 text-decoration-underline"
+        @click="redirect('/login/register')"
+      >
+        No tienes una cuenta?
+      </p>
+    </div>
+  </v-form>
+</template>
+<script>
+import Form from '../Common/Form.vue'
+
+export default {
+  extends: Form,
+  data() {
+    return {
+      form: {},
+    }
+  },
+  methods: {
+    redirect(path) {
+      this.$router.push({path: path})
+    }
+  },
+}
+</script>
