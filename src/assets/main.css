@@ -1,11 +1,38 @@
 @import './base.css';
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+
+.satisfy-font {
+  font-family: 'Satisfy', cursive;
+}
 
 .cursor-pointer {
   cursor: pointer !important;
+}
+
+.center {
+  margin: auto;
+  display: flex;
+  align-items: center;
 }
 
 .grayscale {
   filter: gray;
   -webkit-filter: grayscale(1);
   filter: grayscale(1);
+}
+
+.font-size-main-title {
+  font-size: 25px;
+}
+
+.font-size-sm {
+  font-size: 20px;
+}
+
+.font-size-md {
+  font-size: 28px;
+}
+
+.font-size-lg {
+  font-size: 36px;
 }
