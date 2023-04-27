@@ -20,7 +20,7 @@
 
       <v-toolbar-title class="custom-main-title">
         <strong
-        class="cursor-pointer"
+        class="cursor-pointer satisfy-font font-size-main-title"
         @click="$router.push('/')"
         >
           Shaddai Shop
@@ -103,7 +103,7 @@ export default {
       this.$router.push({ path: path})
     },
     login() {
-      console.log('login in...')
+      this.$router.push({ path: '/login'})
     },
     requireAdmin(require) {
       if (!require) return true
