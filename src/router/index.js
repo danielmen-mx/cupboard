@@ -49,6 +49,18 @@ const routes = [
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('../pages/NotFound.vue')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../pages/Login.vue'),
+    children: [
+      {
+        path: ':register',
+        component: () => import('../pages/Login.vue'),
+        props: true
+      },
+    ]
   }
 
   // route level code-splitting
