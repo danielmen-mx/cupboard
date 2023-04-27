@@ -24,6 +24,11 @@
       placeholder="Introduce tu contraseña"
     ></v-text-field>
 
+    <v-checkbox
+      v-model="form.remember"
+      label="Recuerdame"
+    ></v-checkbox>
+
     <br>
 
     <v-btn
@@ -60,7 +65,9 @@ export default {
   extends: Form,
   data() {
     return {
-      form: {},
+      form: {
+        remember: false
+      },
     }
   },
   methods: {
