@@ -32,18 +32,22 @@
       return {
         visible: false,
         title: '',
-        text: ''
+        text: '',
+        event: 'openDialog'
+      }
+    },
+    methods: {
+      handle() {
+        this.visible = false
+        this.title = data.title
+        this.text = data.text
+        this.$nextTick(() => {
+          this.visible = true
+        })
       }
     },
     mounted() {
-    this.emitter.on('openDialog', (data) => {
-      this.visible = false
-      this.title = data.title
-      this.text = data.text
-      this.$nextTick(() => {
-        this.visible = true
-      })
-    })
-  },
+      this.listenEvent(this.event, this.handle)
+    },
   }
 </script>

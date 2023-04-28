@@ -168,7 +168,8 @@ export default {
         'Update post',
         'Overwrite post'
       ],
-      search: null
+      search: null,
+      event: 'updateTable'
     }
   },
   methods: {
@@ -203,15 +204,14 @@ export default {
 
         this.$nextTick(() => {
           this.closeForm()
-          this.emitter.emit('snackbarNotify', { color: 'success', message: resp.data.message})
-          this.emitter.emit('updateTable')
+          this.successSnackbar(resp.data.message)
+          this.fireEvent(this.event)
         })
       } catch (error) {
         console.log(error)
         this.waitResponse = false
         this.$nextTick(() => {
-          this.emitter.emit('snackbarNotify', { color: 'error', message: error.response.data.message})
-          // this.emitter.emit('snackbarNotify', { color: 'error', message: error.message})
+          this.errorSnackbar(error.response.data.message)
         })
       }
     },
@@ -255,7 +255,7 @@ export default {
     }
   },
   mounted() {
-    this.emitter.on('openPostForm', this.openForm)
+    this.fireEvent('openPostForm', this.openForm)
   },
   watch: {
     model (val) {

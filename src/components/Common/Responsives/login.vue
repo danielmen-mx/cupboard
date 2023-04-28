@@ -7,30 +7,29 @@ export default {
   extends: Responsive,
   data() {
   return {
-      width: ''
+      width: '',
     }
   },
   methods: {
-    responsiveConfiguration() {
-      if (this.windowSize.width < 800) {
-        this.width = ''
-      }
-
-      if (this.windowSize.width > 800) {
-        this.width = '25%'
-      }
+    handle() {
+      this.$nextTick(() => {
+        if (this.windowSize.width < 800) {
+          this.width = ''
+          this.adviceNewClass()
+        }
+  
+        if (this.windowSize.width > 800) {
+          this.width = '25%'
+          this.adviceNewClass('d-flex justify-space-between')
+        }
+      })
     },
+    adviceNewClass(newClass = '') {
+      this.fireEvent('login-resized', {loginClass: newClass})
+    }
   },
   mounted() {
-    this.emitter.on('responsiveFit', () => {
-      // if (this.localResponsive == this.windowSize) return
-      // this.localResponsive = this.windowSize
-
-      this.$nextTick(() => {
-        this.responsiveConfiguration()
-        // console.log('Responsive login is working fine!')
-      })
-    })
+    this.listenEvent(this.event, this.handle)
   },
 }
 </script>

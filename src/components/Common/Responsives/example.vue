@@ -6,25 +6,21 @@ import Responsive from '../Responsive.vue'
 export default {
   extends: Responsive,
   data() {
-  return {
-      
+    return {
+      //
     }
   },
   methods: {
-    responsiveConfiguration() {
-      
+    handle() {
+      // if (this.localResponsive == this.windowSize) return
+      // this.localResponsive = this.windowSize
+      this.$nextTick(() => {
+        //
+      })
     },
   },
   mounted() {
-    this.emitter.on('responsiveFit', () => {
-      // if (this.localResponsive == this.windowSize) return
-      // this.localResponsive = this.windowSize
-
-      this.$nextTick(() => {
-        this.responsiveConfiguration()
-        // console.log('Responsive comments is working fine!')
-      })
-    })
+    this.listenEvent(this.event, this.handle)
   },
 }
 </script>

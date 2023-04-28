@@ -41,7 +41,7 @@
         >
           Registrarse | Iniciar sesión
         </v-btn>
-        <v-btn @click="toogleTheme()" text rounded :icon="night ? 'mdi-weather-sunny' : 'mdi-weather-night'"></v-btn>
+        <!-- <v-btn @click="toogleTheme()" text rounded :icon="night ? 'mdi-weather-sunny' : 'mdi-weather-night'"></v-btn> -->
       </div>
     </v-app-bar>
   </div>z
@@ -92,7 +92,7 @@ export default {
   methods: {
     openNavigationDrawer() {
       this.$nextTick(() => {
-        this.emitter.emit('openNavigationDrawer')
+        this.fireEvent('openNavigationDrawer')
       })
     },
     toogleTheme() {

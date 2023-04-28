@@ -45,7 +45,7 @@ export default {
     }
   },
   mounted() {
-    this.emitter.on('reloadComponent', (navBool) => {
+    this.listenEvent('reloadComponent', (navBool) => {
       this.reload = !this.reload
       this.navIcon = navBool
     })

@@ -26,16 +26,20 @@ export default {
     color: 'success',
     message: '',
     timeout: 5000,
+    event: 'snackbarNotify'
   }),
-  mounted() {
-    this.emitter.on('snackbarNotify', (data) => {
+  methods: {
+    handle(data) {
       this.visible = false
       this.color = data.color
       this.message = data.message
       this.$nextTick(() => {
         this.visible = true
       })
-    })
+    }
+  },
+  mounted() {
+    this.listenEvent(this.event, this.handle)
   },
 }
 </script>

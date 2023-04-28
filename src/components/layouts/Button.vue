@@ -24,8 +24,8 @@ export default {
   },
   methods: {
     openSnackbar() {
-      this.emitter.emit('snackbarNotify', this.snackbar)
-      this.emitter.emit('openDialog', this.dialog)
+      this.successSnackbar(this.snackbar)
+      this.fireEvent('openDialog', this.dialog)
     }
   },
 }

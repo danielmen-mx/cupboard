@@ -12,42 +12,38 @@ export default {
     }
   },
   methods: {
-    responsiveConfiguration() {
-
-      if (this.windowSize.height < 515) {
-        this.navIcon = true
-        // this.footerText = 'text-subtitle-2'
-        this.footerText = 'text-caption'
-      }
-
-      if (this.windowSize.height > 515) {
-        this.navIcon = false
-        this.footerText = 'text-subtitle-1'
-      }
-
-      if (this.windowSize.width < 900) {
-        this.navIcon = true
-        // this.footerText = 'text-subtitle-2'
-        this.footerText = 'text-caption'
-      }
-
-      if (this.windowSize.width > 900) {
-        this.navIcon = false
-        this.footerText = 'text-subtitle-1'
-      }
-
-      // this.$nextTick(() => {
-      //   this.adviceReload('layoutNavBar', this.responsiveNavIcon)
-      // })
+    handle() {
+      this.$nextTick(() => {
+        if (this.windowSize.height < 515) {
+          this.navIcon = true
+          // this.footerText = 'text-subtitle-2'
+          this.footerText = 'text-caption'
+        }
+  
+        if (this.windowSize.height > 515) {
+          this.navIcon = false
+          this.footerText = 'text-subtitle-1'
+        }
+  
+        if (this.windowSize.width < 900) {
+          this.navIcon = true
+          // this.footerText = 'text-subtitle-2'
+          this.footerText = 'text-caption'
+        }
+  
+        if (this.windowSize.width > 900) {
+          this.navIcon = false
+          this.footerText = 'text-subtitle-1'
+        }
+  
+        // this.$nextTick(() => {
+        //   this.adviceReload('layoutNavBar', this.responsiveNavIcon)
+        // })
+      })
     },
   },
   mounted() {
-    this.emitter.on('responsiveFit', () => {
-      this.$nextTick(() => {
-        this.responsiveConfiguration()
-        // console.log('Responsive layout is working fine!')
-      })
-    })
+    this.listenEvent(this.event, this.handle)
   },
 }
 </script>

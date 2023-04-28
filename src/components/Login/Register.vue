@@ -102,7 +102,7 @@ export default {
     }
   },
   mounted() {
-    this.emitter.on('onSubmit', (data) => {
+    this.listenEvent(this.event, () => {
       this.confirmation = ''
     })
   },

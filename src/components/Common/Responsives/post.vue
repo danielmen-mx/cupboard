@@ -11,34 +11,28 @@ export default {
     }
   },
   methods: {
-    responsiveConfiguration() {
-      if (this.windowSize.height < 360) {
-        this.fontInfoText = 'text-subtitle-1'
-      }
-
-      if (this.windowSize.height < 299) {
-        this.fontInfoText = 'text-caption'
-      }
-
-      if (this.windowSize.height > 299) {
-        this.fontInfoText = 'text-subtitle-1'
-      }
-
-      if (this.windowSize.height > 360) {
-        this.fontInfoText = 'text-h6'
-      }
+    handle() {
+      this.$nextTick(() => {
+        if (this.windowSize.height < 360) {
+          this.fontInfoText = 'text-subtitle-1'
+        }
+  
+        if (this.windowSize.height < 299) {
+          this.fontInfoText = 'text-caption'
+        }
+  
+        if (this.windowSize.height > 299) {
+          this.fontInfoText = 'text-subtitle-1'
+        }
+  
+        if (this.windowSize.height > 360) {
+          this.fontInfoText = 'text-h6'
+        }
+      })
     },
   },
   mounted() {
-    this.emitter.on('responsiveFit', () => {
-      // if (this.localResponsive == this.windowSize) return
-      // this.localResponsive = this.windowSize
-
-      this.$nextTick(() => {
-        this.responsiveConfiguration()
-        // console.log('Responsive post is working fine!')
-      })
-    })
+    this.listenEvent(this.event, this.handle)
   },
 }
 </script>

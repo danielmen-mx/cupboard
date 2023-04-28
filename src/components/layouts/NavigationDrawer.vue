@@ -24,6 +24,12 @@
 
         <v-list-item-title v-text="item.title"></v-list-item-title>
       </v-list-item>
+      <v-divider></v-divider>
+      <div
+       class="text-subtitle-2 ml-1"
+      >
+        Made with love ❤️
+      </div>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -33,6 +39,7 @@ export default {
     admin: false,
     drawer: false,
     group: null,
+    event: 'openNavigationDrawer',
     items: [
       {
         title: 'Admin',
@@ -81,13 +88,14 @@ export default {
       if (!require) return true
       if (this.admin == true && require == true) return true
       return false
+    },
+    handle() {
+      this.drawer = !this.drawer
     }
   },
   mounted() {
     // add login to see admin option in list items
-    this.emitter.on('openNavigationDrawer', () => {
-      this.drawer = !this.drawer
-    })
+    this.listenEvent(this.event, this.handle)
   },
 }
 </script>

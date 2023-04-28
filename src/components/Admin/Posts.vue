@@ -5,7 +5,7 @@
     <!--  -->
     <v-btn
       color="light-green"
-      @click="openDialog()"
+      @click="openForm()"
     >
       Crear Post
     </v-btn>
@@ -66,7 +66,7 @@
               </template>
               <v-list>
                 <v-list-item>
-                  <v-list-item-title class="cursor-pointer pb-2" @click="edit(item)">
+                  <v-list-item-title class="cursor-pointer pb-2" @click="openForm(item)">
                     Editar
                   </v-list-item-title>
                   <v-list-item-title class="cursor-pointer pt-2" @click="remove(item.id)">
@@ -98,7 +98,8 @@ export default {
       apiService: PostService,
       itemsPerPage: 5,
       items: [],
-      post: null
+      post: null,
+      event: 'updateTable'
     }
   },
   methods: {
@@ -109,15 +110,15 @@ export default {
         const resp = await this.apiService.index()
 
         this.items = resp.data.data
-        this.emitter.emit('snackbarNotify', {color: 'success', message: resp.data.message})
+        this.successSnackbar(resp.data.message)
         this.loading = false
       } catch (error) {
         console.log(error)
-        this.emitter.emit('snackbarNotify', {color: 'error', message: resp.data.error})
+        this.errorSnackbar(resp.data.error)
       }
     },
-    openDialog() {
-      this.$nextTick(() => { this.emitter.emit('openPostForm') })
+    openForm(item = null) {
+      this.$nextTick(() => { this.fireEvent('openPostForm', item) })
     },
     countTags(tags) {
       let count = this.countArray(tags)
@@ -133,9 +134,6 @@ export default {
       let slugName = this.slugify(postName) + '-'
       return imageName.split(slugName).pop()
     },
-    edit(item) {
-      this.$nextTick(() => { this.emitter.emit('openPostForm', item) })
-    },
     async remove(id) {
       try {
         this.loading = true
@@ -143,19 +141,19 @@ export default {
         const resp = await this.apiService.remove(id)
 
         this.$nextTick(() => {
-          this.emitter.emit('snackbarNotify', {color: 'success', message: resp.data.message})
+          this.successSnackbar(resp.data.message)
           this.getItems()
           this.loading = false
         })
       } catch (error) {
         console.log(error)
-        this.emitter.emit('snackbarNotify', {color: 'error', message: resp.data.error})
+        this.errorSnackbar(resp.data.error)
       }
     }
   },
   mounted() {
     this.getItems()
-    this.emitter.on('updateTable', this.getItems)
+    this.listenEvent(this.event, this.getItems)
   },
 }
 </script>
