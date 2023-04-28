@@ -42,7 +42,7 @@
     >
       Iniciar Sesión
     </v-btn>
-    <div class="d-flex justify-space-between">
+    <div :class="loginClass">
       <p
         class="cursor-pointer text-grey mt-2 text-decoration-underline"
         @click="redirect('/')"
@@ -60,11 +60,15 @@
 </template>
 <script>
 import Form from '../Common/Form.vue'
+import login from '../Common/Responsives/login.vue'
+import AuthService from '../../services/AuthService'
 
 export default {
   extends: Form,
   data() {
     return {
+      loginClass: '',
+      apiService: AuthService,
       form: {
         remember: false
       },
@@ -72,8 +76,33 @@ export default {
   },
   methods: {
     redirect(path) {
-      this.$router.push({path: path})
-    }
+      this.pushRoute(path)
+    },
+    async submit() {
+      if (!this.form) return
+
+      try {
+        this.loading = true
+        const resp = await this.apiService.login(this.form)
+        // add logic to set as auth user in our vue page
+
+        this.$nextTick(() => {
+          this.successSnackbar(resp.data.message)
+          this.formComplete = false
+          this.loading = false
+          this.redirect('/')
+        })
+      } catch (error) {
+        console.log(error)
+        this.errorSnackbar(error.response.data.exception)
+        this.loading = false
+      }
+    },
+  },
+  mounted() {
+    this.listenEvent('login-resized', (data) => {
+      this.loginClass = data.loginClass
+    })
   },
 }
 </script>

@@ -4,9 +4,11 @@ export default {
   data() {
     return {
       formComplete: false,
+      apiService: null,
       // form: {},
       loading: false,
       show: false,
+      event: 'onSubmit'
     }
   },
   methods: {
@@ -14,11 +16,13 @@ export default {
       if (!this.form) return
 
       this.loading = true
-      console.log('Form contain: ', this.form)
+      // console.log('Form contain: ', this.form)
+      // const resp = this.apiService.store()
 
       setTimeout(() => {
         this.form = {}
-        this.emitter.emit('onSubmit')
+        this.fireEvent(this.event)
+        this.formComplete = false
         this.loading = false
       }, 2500);
     },
