@@ -255,7 +255,7 @@ export default {
     }
   },
   mounted() {
-    this.fireEvent('openPostForm', this.openForm)
+    this.listenEvent('openPostForm', this.openForm)
   },
   watch: {
     model (val) {
