@@ -11,6 +11,7 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import * as assets from './plugins/vuetify'
 import moment from 'moment';
+import BaseFunctionsMixins from './mixins/BaseFunctionsMixins'
 
 // Event handling
 import mitt from 'mitt'
@@ -30,6 +31,7 @@ const app = createApp(App)
 app.config.globalProperties.emitter = emitter
 
 app
+  .mixin(BaseFunctionsMixins)
   .use(router)
   .use(vuetify)
   .mount('#app')
