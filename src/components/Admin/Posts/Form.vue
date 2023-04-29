@@ -130,7 +130,7 @@
 <script>
 import PostService from '@/services/PostService'
 import { copyData, slugify } from '../../../utils/helpers'
-import { imageHeaders } from '../../../services/ContentTypes'
+import { imageHeaders } from '../../../services/api'
 
 export default {
   mixins: [copyData, slugify, imageHeaders],
