@@ -24,6 +24,9 @@ export default {
     listenEvent(event, callBack) {
       this.emitter.on(event, callBack)
     },
+    unlistenEvent(event, callBack) {
+      this.emitter.off(event, callBack)
+    },
     pushRoute(path) {
       this.$router.push({ path: path })
     }
