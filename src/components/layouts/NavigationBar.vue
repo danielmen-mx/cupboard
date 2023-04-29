@@ -68,7 +68,7 @@ export default {
     },
     openDrawer() {
       this.$nextTick(() => {
-        this.fireEvent("openNavigationDrawer")
+        this.fireEvent("turnNavigationDrawer")
       })
     },
   },

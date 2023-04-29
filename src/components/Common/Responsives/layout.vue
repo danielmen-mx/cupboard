@@ -33,6 +33,7 @@ export default {
   
         if (this.windowSize.width > 1090) {
           this.navIcon = false
+          this.fireEvent("closeNavigationDrawer")
           this.footerText = 'text-subtitle-1'
         }
   
