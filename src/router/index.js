@@ -15,15 +15,18 @@ const routes = [
         path: '/post/:id',
         name: 'post',
         component: () => import('../pages/Post.vue'),
+        meta: { requiresAuth: true },
       },
       {
         path: '/admin',
         name: 'admin',
         component: () => import('../pages/Admin.vue'),
+        meta: { requiresAuth: true },
         children: [
           {
             path: ':admin',
             component: () => import('../pages/Admin.vue'),
+            meta: { requiresAuth: true },
             props: true
           },
         ]
@@ -36,7 +39,8 @@ const routes = [
       {
         path: '/review',
         name: 'review',
-        component: () => import('../pages/Review.vue')
+        component: () => import('../pages/Review.vue'),
+        meta: { requiresAuth: true },
       },
       {
         path: '/contact',
@@ -57,6 +61,7 @@ const routes = [
     children: [
       {
         path: ':register',
+        name: 'register',
         component: () => import('../pages/Login.vue'),
         props: true
       },
