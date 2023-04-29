@@ -28,7 +28,7 @@
       <div
        class="text-subtitle-2 ml-1"
       >
-        Made with love ❤️ by Daniel Mendez
+        Made with <span class="satisfy-font font-size-xsm">love</span> ❤️ by <strong>Daniel Mendez</strong>
       </div>
     </v-list>
   </v-navigation-drawer>
@@ -48,7 +48,10 @@ export default {
     }
   },
   mounted() {
-    this.listenEvent("openNavigationDrawer", this.handle)
+    this.listenEvent("turnNavigationDrawer", this.handle)
+    this.listenEvent("closeNavigationDrawer", () => {
+      this.drawer = false
+    })
   }
 }
 </script>
