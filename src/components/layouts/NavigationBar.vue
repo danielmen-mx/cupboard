@@ -2,17 +2,17 @@
   <div v-resize="onResize" >
     <v-app-bar>
       <div class="buttons-group ml-2" >
-        <v-app-bar-nav-icon v-if="navIcon" variant="text" @click="openNavigationDrawer()"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon v-if="navIcon" variant="text" @click="openDrawer()"></v-app-bar-nav-icon>
         <v-btn
           v-if="!navIcon"
-          v-for="nav in navs"
-          :key="nav.title"
+          v-for="item in items"
+          :key="item.title"
           variant="text"
-          v-show="requireAdmin(nav.require_admin)"
+          v-show="requireAdmin(item.require_admin)"
           active-color="info"
-          @click="redirect(nav.path)"
+          @click="redirect(item.path)"
         >
-          {{ nav.title }}
+          {{ item.title }}
         </v-btn>
       </div>
 
@@ -47,69 +47,30 @@
   </div>z
 </template>
 <script>
-import responsiveLayout from '../Common/Responsives/layout.vue'
+import NavigationMixins from '../../mixins/NavigationMixins';
+import layout from '../Common/Responsives/layout.vue';
 
 export default {
-  extends: responsiveLayout,
+  extends: layout,
+  mixins: [NavigationMixins],
   data() {
     return {
-      admin: true,
-      night: false,
-      navs: [
-        {
-          title: 'Admin',
-          icon: 'mdi-account-circle',
-          require_admin: true,
-          path: '/admin'
-        },
-        {
-          title: 'Home',
-          icon: 'mdi-home',
-          require_admin: false,
-          path: '/'
-        },
-        {
-          title: 'Store',
-          icon: 'mdi-store',
-          require_admin: false,
-          path: '/store'
-        },
-        {
-          title: 'Reviews',
-          icon: 'mdi-star-circle',
-          require_admin: false,
-          path: '/review'
-        },
-        {
-          title: 'Contact',
-          icon: 'mdi-account',
-          require_admin: false,
-          path: '/contact'
-        },
-      ],
+      //
     }
   },
   methods: {
-    openNavigationDrawer() {
-      this.$nextTick(() => {
-        this.fireEvent('openNavigationDrawer')
-      })
-    },
     toogleTheme() {
       this.night = !this.night
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
     },
-    redirect(path) {
-      this.$router.push({ path: path})
-    },
     login() {
       this.$router.push({ path: '/login'})
     },
-    requireAdmin(require) {
-      if (!require) return true
-      if (this.admin == true && require == true) return true
-      return false
-    }
+    openDrawer() {
+      this.$nextTick(() => {
+        this.fireEvent("openNavigationDrawer")
+      })
+    },
   },
 }
 </script>

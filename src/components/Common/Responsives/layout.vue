@@ -8,7 +8,7 @@ export default {
     return {
       navIcon: false,
       footerText: 'text-subtitle-1',
-      localResponsive: {}
+      localResponsive: {},
     }
   },
   methods: {
@@ -25,13 +25,13 @@ export default {
           this.footerText = 'text-subtitle-1'
         }
   
-        if (this.windowSize.width < 900) {
+        if (this.windowSize.width < 1090) {
           this.navIcon = true
           // this.footerText = 'text-subtitle-2'
           this.footerText = 'text-caption'
         }
   
-        if (this.windowSize.width > 900) {
+        if (this.windowSize.width > 1090) {
           this.navIcon = false
           this.footerText = 'text-subtitle-1'
         }
@@ -43,7 +43,7 @@ export default {
     },
   },
   mounted() {
-    this.listenEvent(this.event, this.handle)
+    this.listenEvent('responsiveFit', this.handle)
   },
 }
 </script>

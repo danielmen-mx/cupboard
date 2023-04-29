@@ -28,74 +28,27 @@
       <div
        class="text-subtitle-2 ml-1"
       >
-        Made with love ❤️
+        Made with love ❤️ by Daniel Mendez
       </div>
     </v-list>
   </v-navigation-drawer>
 </template>
 <script>
+// import Navigation from '../Common/Navigation.vue'
+import NavigationMixins from '../../mixins/NavigationMixins';
+
 export default {
+  mixins: [NavigationMixins],
   data: () => ({
-    admin: false,
     drawer: false,
-    group: null,
-    event: 'openNavigationDrawer',
-    items: [
-      {
-        title: 'Admin',
-        icon: 'mdi-account-circle',
-        require_admin: true,
-        path: '/admin'
-      },
-      {
-        title: 'Home',
-        icon: 'mdi-home',
-        require_admin: false,
-        path: '/'
-      },
-      {
-        title: 'Store',
-        icon: 'mdi-store',
-        require_admin: false,
-        path: '/store'
-      },
-      {
-        title: 'Reviews',
-        icon: 'mdi-star-circle',
-        require_admin: false,
-        path: '/review'
-      },
-      {
-        title: 'Contact',
-        icon: 'mdi-account',
-        require_admin: false,
-        path: '/contact'
-      },
-    ],
   }),
-
-  watch: {
-    group () {
-      this.drawer = false
-    },
-  },
-
   methods: {
-    redirect(path) {
-      this.$router.push({ path: path})
-    },
-    requireAdmin(require) {
-      if (!require) return true
-      if (this.admin == true && require == true) return true
-      return false
-    },
     handle() {
       this.drawer = !this.drawer
     }
   },
   mounted() {
-    // add login to see admin option in list items
-    this.listenEvent(this.event, this.handle)
-  },
+    this.listenEvent("openNavigationDrawer", this.handle)
+  }
 }
 </script>
