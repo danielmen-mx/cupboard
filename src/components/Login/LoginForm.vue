@@ -87,14 +87,14 @@ export default {
         // add logic to set as auth user in our vue page
 
         this.$nextTick(() => {
-          this.successSnackbar(resp.data.message)
+          this.successSnackbar(resp.message)
           this.formComplete = false
           this.loading = false
           this.redirect('/')
         })
       } catch (error) {
         console.log(error)
-        this.errorSnackbar(error.response.data.exception)
+        this.errorSnackbar(error.exception)
         this.loading = false
       }
     },
