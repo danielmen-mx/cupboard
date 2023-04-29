@@ -12,7 +12,7 @@ export default {
     }
   },
   methods: {
-    submit() {
+    submit() { // store() - update()
       if (!this.form) return
 
       this.loading = true
