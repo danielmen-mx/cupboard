@@ -53,7 +53,7 @@ export default {
   extends: responsiveLayout,
   data() {
     return {
-      admin: false,
+      admin: true,
       night: false,
       navs: [
         {
