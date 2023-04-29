@@ -244,11 +244,12 @@
 <script>
 import PostService from '@/services/PostService.js'
 import ResponsivePosts from '@/components/Common/Responsives/posts.vue'
+import Table from '../Common/Table.vue'
 import Presentation from './Presentation.vue'
 import { initials } from '../../utils/helpers'
 
 export default {
-  mixins: [initials],
+  mixins: [initials, Table],
   extends: ResponsivePosts,
   inject: ['strLimit'],
   components: {
@@ -261,7 +262,8 @@ export default {
       chance: 1,
       page: 1,
       items: [],
-      configuration: {}
+      configuration: {},
+      preventSnackbar: true
     }
   },
   methods: {
@@ -271,18 +273,6 @@ export default {
     },
     redirect(id) {
       this.$router.push({path: '/post/' + id})
-    },
-    async getItems() {
-      try {
-        this.loading = true
-
-        const resp = await this.apiService.index()
-
-        this.items = resp.data.data
-        this.loading = false
-      } catch (error) {
-        console.log(error)
-      }
     },
     async addReaction(post) {
       // let react = await axios.post()

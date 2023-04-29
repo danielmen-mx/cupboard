@@ -85,8 +85,10 @@
 import PostService from '@/services/PostService.js'
 import PostForm from '@/components/Admin/Posts/Form.vue'
 import { formatDate, slugify, countArray } from '../../utils/helpers'
+import Table from '@/components/Common/Table.vue'
 
 export default {
+  extends: Table,
   mixins: [formatDate, slugify, countArray],
   inject:['strLimit'],
   components: {
@@ -103,20 +105,6 @@ export default {
     }
   },
   methods: {
-    async getItems() {
-      try {
-        this.loading = true
-
-        const resp = await this.apiService.index()
-
-        this.items = resp.data.data
-        this.successSnackbar(resp.data.message)
-        this.loading = false
-      } catch (error) {
-        console.log(error)
-        this.errorSnackbar(resp.data.error)
-      }
-    },
     openForm(item = null) {
       this.$nextTick(() => { this.fireEvent('openPostForm', item) })
     },
@@ -133,22 +121,6 @@ export default {
 
       let slugName = this.slugify(postName) + '-'
       return imageName.split(slugName).pop()
-    },
-    async remove(id) {
-      try {
-        this.loading = true
-
-        const resp = await this.apiService.remove(id)
-
-        this.$nextTick(() => {
-          this.successSnackbar(resp.data.message)
-          this.getItems()
-          this.loading = false
-        })
-      } catch (error) {
-        console.log(error)
-        this.errorSnackbar(resp.data.error)
-      }
     }
   },
   mounted() {
