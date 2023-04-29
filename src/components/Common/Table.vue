@@ -4,12 +4,13 @@ export default {
   data() {
     return {
       items: [],
+      item: null,
       preventSnackbar: false,
       apiService: null
     }
   },
   methods: {
-    async getItems() {
+    async getItems() { // index()
       if (this.breakRequest()) return
 
       try {
@@ -27,7 +28,26 @@ export default {
         console.log(error)
       }
     },
-    async remove(id) {
+    async getItem(id) { // show()
+      if (this.breakRequest()) return
+
+      try {
+        this.loading = true
+
+        const resp = await this.apiService.show(id)
+        // console.log(resp)
+
+        this.item = resp.data
+        if (!this.preventSnackbar) {
+          this.successSnackbar(resp.message)
+        }
+        this.loading = false
+      } catch (error) {
+        console.log(error)
+        this.loading = false
+      }
+    },
+    async remove(id) { // remove()
       if (this.breakRequest()) return
 
       try {

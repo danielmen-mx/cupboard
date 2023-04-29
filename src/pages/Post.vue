@@ -1,8 +1,8 @@
 <template>
-  <div v-resize="onResize">
+  <div v-if="item" v-resize="onResize">
     <v-card v-if="!loading" class="elevation-1 pa-2">
       <v-btn
-        v-if="post.image"
+        v-if="item.image"
         icon="mdi-keyboard-backspace"
         color="orange-darken-4"
         @click="$router.push('/')"
@@ -10,8 +10,8 @@
       >
       </v-btn>
       <v-img
-        v-show="post.image"
-        :src="post.image"
+        v-show="item.image"
+        :src="item.image"
         lazy-src="/logo/shadai-main.jpeg"
         height="300"
         cover
@@ -20,22 +20,22 @@
       <div class="elevation-0 mt-1">
         <div>
           <div class="text-h3 ma-2">
-            {{ post.name }}
+            {{ item.name }}
           </div>
         </div>
         <div class="d-flex align-center">
           <v-rating
-            :model-value="post.rating"
+            :model-value="item.rating"
             readonly
             color="amber"
           ></v-rating>
           <p class="text-grey" :class="fontInfoText">
-            {{ post.rating }} stars | ({{ comments.length }} comentarios) | {{ formatDate(post.created_at) }}
+            {{ item.rating }} stars | ({{ comments.length }} comentarios) | {{ formatDate(item.created_at) }}
           </p>
         </div>
         <v-divider></v-divider>
         <div class="text-h6 ma-2">
-          {{ post.description }}
+          {{ item.description }}
         </div>
         <v-divider></v-divider>
         <v-card-actions>
@@ -57,13 +57,14 @@
 <script>
 import ResponsivePost from '../components/Common/Responsives/post.vue';
 import PostService from '@/services/PostService.js'
+import Table from '../components/Common/Table.vue';
 import Comments from '../components/Post/Comments.vue';
 import CommentsForm from '../components/Post/CommentsForm.vue';
 import { initials, formatDate } from '../utils/helpers';
 
 export default {
   extends: ResponsivePost,
-  mixins: [initials, formatDate],
+  mixins: [initials, formatDate, Table],
   components: {
     Comments,
     CommentsForm
@@ -73,7 +74,8 @@ export default {
       loading: false,
       apiService: PostService,
       postId: null,
-      post: {},
+      item: null,
+      preventSnackbar: true,
       comments: [
         {
           id: 1,
@@ -99,19 +101,7 @@ export default {
     }
   },
   methods: {
-    async getItem() {
-      try {
-        this.loading = true
-
-        const resp = await this.apiService.show(this.postId)
-
-        this.post = resp.data.data
-        this.loading = false
-      } catch (error) {
-        this.loading = false
-        console.log(error)
-      }
-    }
+    //
   },
   computed: {
     progress () {
@@ -121,7 +111,7 @@ export default {
   mounted() {
     this.postId = this.$route.params.id
     if (!this.postId) return this.$router.push('/')
-    this.getItem()
+    this.getItem(this.postId)
   },
 }
 </script>
