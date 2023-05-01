@@ -41,28 +41,28 @@
         >
           Registrarse | Iniciar sesión
         </v-btn>
-        <!-- <v-btn @click="toogleTheme()" text rounded :icon="night ? 'mdi-weather-sunny' : 'mdi-weather-night'"></v-btn> -->
+        <ToggleTheme v-if="!navIcon" />
       </div>
     </v-app-bar>
-  </div>z
+  </div>
 </template>
 <script>
 import NavigationMixins from '../../mixins/NavigationMixins';
 import layout from '../Common/Responsives/layout.vue';
+import ToggleTheme from '@/components/layouts/ToggleThemeBtn.vue'
 
 export default {
   extends: layout,
   mixins: [NavigationMixins],
+  components: {
+    ToggleTheme
+  },
   data() {
     return {
       //
     }
   },
   methods: {
-    toogleTheme() {
-      this.night = !this.night
-      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
-    },
     login() {
       this.$router.push({ path: '/login'})
     },
@@ -70,8 +70,8 @@ export default {
       this.$nextTick(() => {
         this.fireEvent("turnNavigationDrawer")
       })
-    },
-  },
+    }
+  }
 }
 </script>
 <style>

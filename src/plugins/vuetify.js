@@ -1,13 +1,13 @@
 // import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 import { createVuetify } from 'vuetify'
 
-const myCustomLightTheme = {
+const lightTheme = {
   dark: false,
   colors: {
     background: '#FFFFFF',
     surface: '#FFFFFF',
-    primary: '#6200EE',
-    'primary-darken-1': '#3700B3',
+    primary: '#64B5F6',
+    'primary-darken-1': '#1976D2',
     secondary: '#03DAC6',
     'secondary-darken-1': '#018786',
     error: '#B00020',
@@ -22,9 +22,12 @@ export default createVuetify({
     defaultSet: 'mdi', // This is already the default value - only for display purposes
   },
   theme: {
-    defaultTheme: 'myCustomLightTheme',
+    defaultTheme: 'lightTheme',
     themes: {
-      myCustomLightTheme,
+      lightTheme,
     }
   }
+  // theme: {
+  //   dark: true
+  // }
 })

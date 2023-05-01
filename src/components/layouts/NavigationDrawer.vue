@@ -25,6 +25,8 @@
         <v-list-item-title v-text="item.title"></v-list-item-title>
       </v-list-item>
       <v-divider></v-divider>
+      <ToggleTheme />
+      <v-divider></v-divider>
       <div
        class="text-subtitle-2 ml-1"
       >
@@ -36,9 +38,13 @@
 <script>
 // import Navigation from '../Common/Navigation.vue'
 import NavigationMixins from '../../mixins/NavigationMixins';
+import ToggleTheme from '@/components/layouts/ToggleThemeOpt.vue'
 
 export default {
   mixins: [NavigationMixins],
+  components: {
+    ToggleTheme
+  },
   data: () => ({
     drawer: false,
   }),
