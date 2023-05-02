@@ -1,32 +1,94 @@
 import router from ".";
+import store from "../store";
 
-// how to autheticate my session from laravel and set on vue ?
+function tokenHasExpired(expiration) {
+  return expiration < Math.floor(Date.now() / 1000);
+}
+
 let isAutheticated = () => {
-  if (window.token != undefined || window.token != null) {
-    return true
+  let token = store.getters['token']
+  let user = store.getters['user']
+
+  if (!token && !user) {
+    token = JSON.parse(localStorage.getItem("wud-user-token"))
+    user = JSON.parse(localStorage.getItem("wud-admin-user"))
+
+    if (user && token) {
+      store.commit('setUser', { user: user });
+      store.commit('setToken', { token: token.token, expires: token.expires });
+    }
   }
 
-  return false
+  if (!token || !user) {
+    console.log('User with error in authentication...')
+    store.commit('logout');
+    return false;
+  }
+
+  return !tokenHasExpired(token.expires);
 }
 
 let isAdmin = () => {
-  if (window.isAdmin != undefined || window.token != null) {
-    return true
+  let userAuth = isAutheticated()
+
+  if (userAuth) {
+    let user = store.getters['user']
+    console.log(user)
+  
+    if (user.is_admin) {
+      return true
+    }
   }
 
   return false
 }
 
-router.beforeEach(async (to, from) => {
-  if (to.meta.requiresAuth) {
-    if (!isAutheticated() && to.name !== 'login') {
-      return { name: 'login' }
-    }
+function routesNoAuth(route) {
+  var routes = [
+    'login',
+    'register',
+    'forgot',
+    'password',
+    'home',
+    'store',
+    'contact'
+  ]
+
+  return routes.includes(route)
+}
+
+function routes(to, from, next) {
+
+  if (!to.meta.requiresAuth && routesNoAuth(to.name)) {
+    return next()
   }
 
-  if (to.meta.requiresAdminAuth) {
-    if (!isAdmin() && to.name !== 'login') {
-      return { name: 'login' }
-    }
+  if (!to.meta.requiresAdminAuth && routesNoAuth(to.name)) {
+    return next()
   }
+
+  let userAuth = isAutheticated();
+  let adminAuth = isAdmin();
+
+  if (!userAuth && to.name != 'login') {
+    return router.replace({ name: "login" });
+  }
+
+  if (userAuth && to.name == 'login') {
+    return router.replace({ name: "home" });
+  }
+
+  if (!adminAuth && to.name == 'admin') {
+    if (!userAuth) {
+      return router.replace({ name: "login" })
+    }
+
+    return router.replace({ name: "home" })
+  }
+
+  next()
+}
+
+router.beforeEach((to, from, next) => {
+  routes(to, from, next)
 })

@@ -62,6 +62,7 @@
 import Form from '../Common/Form.vue'
 import login from '../Common/Responsives/login.vue'
 import AuthService from '../../services/AuthService'
+import { mapMutations } from "vuex";
 
 export default {
   extends: Form,
@@ -75,6 +76,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations("", ["setToken", "setUser", "setName", "setEmail"]),
     redirect(path) {
       this.pushRoute(path)
     },
@@ -84,13 +86,16 @@ export default {
       try {
         this.loading = true
         const resp = await this.apiService.login(this.form)
-        console.log(resp)
-        // add logic to set as auth user in our vue page
+        // console.log(resp)
+
+        var token = resp.data.token
+        var expires = resp.data.expires
+        var user = resp.data.user
+
+        this.$store.commit('setToken', { token: token, expires: expires })
+        this.$store.commit('setUser', { user: user })
 
         this.$nextTick(() => {
-          window.token = resp.data.token
-          window.user = resp.data.user
-          window.isAdmin = resp.data.user.is_admin
           this.successSnackbar(resp.message)
           this.formComplete = false
           this.loading = false
