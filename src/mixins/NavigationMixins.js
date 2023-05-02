@@ -1,7 +1,7 @@
 export default {
   data() {
     return {
-      admin: true, // test purposes
+      admin: false,
       night: false,
       items: [
         {
@@ -47,5 +47,10 @@ export default {
       if (this.admin == true && require == true) return true
       return false
     },
+  },
+  mounted() {
+    if (window.isAdmin) {
+      this.admin = true
+    }
   },
 }
