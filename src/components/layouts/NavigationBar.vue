@@ -76,7 +76,6 @@ export default {
   },
   data() {
     return {
-      isLogged: false,
       business: 'Shaddai Shop'
     }
   },
@@ -85,10 +84,7 @@ export default {
       this.$router.push({ path: '/login'})
     },
     logout() {
-      window.token = null
-      window.user = null
-      window.isAdmin = null
-
+      this.$store.commit('logout')
       this.isLogged = false
       this.$router.push({ path: '/' })
     },
@@ -99,9 +95,7 @@ export default {
     }
   },
   mounted() {
-    if (window.token) {
-      this.isLogged = true
-    }
+    //
   }
 }
 </script>

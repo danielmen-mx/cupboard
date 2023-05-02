@@ -1,7 +1,10 @@
+import { isAuthenticated, isAdmin } from "../utils/authentication"
+
 export default {
   data() {
     return {
       admin: false,
+      isLogged: false,
       night: false,
       items: [
         {
@@ -49,7 +52,14 @@ export default {
     },
   },
   mounted() {
-    if (window.isAdmin) {
+    let userAuth = isAuthenticated()
+    let adminAuth = isAdmin()
+
+    if (userAuth) {
+      this.isLogged = true
+    }
+
+    if (adminAuth) {
       this.admin = true
     }
   },
