@@ -23,7 +23,7 @@
         class="cursor-pointer satisfy-font font-size-main-title"
         @click="$router.push('/')"
         >
-          Shaddai Shop
+          {{ business }}
         </strong>
       </v-toolbar-title>
 
@@ -76,7 +76,8 @@ export default {
   },
   data() {
     return {
-      isLogged: false
+      isLogged: false,
+      business: 'Shaddai Shop'
     }
   },
   methods: {
