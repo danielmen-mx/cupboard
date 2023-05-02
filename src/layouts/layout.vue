@@ -7,8 +7,8 @@
         <Dialog />
         <Snackbar />
         <!-- <Background /> -->
-        <div class="pa-1" style="min-height: auto">
-          <v-container class="pa-1">
+        <div class="pa-1">
+          <v-container class="pa-1" style="min-height: 87vh">
             <router-view/>
           </v-container>
         </div>
