@@ -21,12 +21,12 @@ const routes = [
         path: '/admin',
         name: 'admin',
         component: () => import('../pages/Admin.vue'),
-        meta: { requiresAuth: true },
+        meta: { requiresAdminAuth: true },
         children: [
           {
             path: ':admin',
             component: () => import('../pages/Admin.vue'),
-            meta: { requiresAuth: true },
+            meta: { requiresAdminAuth: true },
             props: true
           },
         ]

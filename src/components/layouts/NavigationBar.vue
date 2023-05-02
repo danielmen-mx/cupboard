@@ -29,19 +29,36 @@
 
       <v-spacer></v-spacer>
 
-      <div class="buttons-group mr-2" >
-        <v-btn
-          v-if="navIcon"
-          icon="mdi-account-key"
-          @click="login()"
-        ></v-btn>
-        <v-btn
-          v-else
-          @click="login()"
-        >
-          Registrarse | Iniciar sesión
-        </v-btn>
-        <ToggleTheme v-if="!navIcon" />
+      <div class="buttons-group mr-2 d-flex" >
+        <div v-if="!isLogged">
+          <v-btn
+            v-if="navIcon"
+            icon="mdi-account-key"
+            @click="login()"
+          ></v-btn>
+          <v-btn
+            v-else
+            @click="login()"
+          >
+            Registrarse | Iniciar sesión
+          </v-btn>
+        </div>
+        <div v-else>
+          <v-btn
+            v-if="navIcon"
+            icon="mdi-logout"
+            @click="logout()"
+          ></v-btn>
+          <v-btn
+            v-else
+            @click="logout()"
+          >
+            Cerrar sesión
+          </v-btn>
+        </div>
+        <div>
+          <ToggleTheme v-if="!navIcon" />
+        </div>
       </div>
     </v-app-bar>
   </div>
@@ -59,17 +76,30 @@ export default {
   },
   data() {
     return {
-      //
+      isLogged: false
     }
   },
   methods: {
     login() {
       this.$router.push({ path: '/login'})
     },
+    logout() {
+      window.token = null
+      window.user = null
+      window.isAdmin = null
+
+      this.isLogged = false
+      this.$router.push({ path: '/' })
+    },
     openDrawer() {
       this.$nextTick(() => {
         this.fireEvent("turnNavigationDrawer")
       })
+    }
+  },
+  mounted() {
+    if (window.token) {
+      this.isLogged = true
     }
   }
 }

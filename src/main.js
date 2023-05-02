@@ -17,6 +17,7 @@ import EventsMixins from './mixins/EventsMixins'
 import mitt from 'mitt'
 
 import('./utils/helpers')
+import "./router/guard"
 
 window.moment = moment
 const emitter = mitt()

@@ -84,9 +84,13 @@ export default {
       try {
         this.loading = true
         const resp = await this.apiService.login(this.form)
+        console.log(resp)
         // add logic to set as auth user in our vue page
 
         this.$nextTick(() => {
+          window.token = resp.data.token
+          window.user = resp.data.user
+          window.isAdmin = resp.data.user.is_admin
           this.successSnackbar(resp.message)
           this.formComplete = false
           this.loading = false
