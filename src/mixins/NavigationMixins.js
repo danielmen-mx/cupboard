@@ -1,8 +1,10 @@
+import store from "../store"
 import { isAuthenticated, isAdmin } from "../utils/authentication"
 
 export default {
   data() {
     return {
+      user: '',
       admin: false,
       isLogged: false,
       night: false,
@@ -57,6 +59,11 @@ export default {
 
     if (userAuth) {
       this.isLogged = true
+      let user = store.getters['user']
+
+      if (user) {
+        this.user = user.username
+      }
     }
 
     if (adminAuth) {

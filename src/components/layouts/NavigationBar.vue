@@ -53,7 +53,7 @@
             v-else
             @click="logout()"
           >
-            Cerrar sesión
+            {{ user }}, Cerrar sesión
           </v-btn>
         </div>
         <div>
