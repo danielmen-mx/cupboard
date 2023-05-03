@@ -51,7 +51,8 @@ function routesNoAuth(route) {
     'password',
     'home',
     'store',
-    'contact'
+    'contact',
+    'test'
   ]
 
   return routes.includes(route)

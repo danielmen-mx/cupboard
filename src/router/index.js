@@ -55,6 +55,11 @@ const routes = [
     component: () => import('../pages/NotFound.vue')
   },
   {
+    path: '/test',
+    name: 'test',
+    component: () => import('../components/Common/SkeletonLoader.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import('../pages/Login.vue'),
