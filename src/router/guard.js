@@ -33,7 +33,7 @@ let isAdmin = () => {
 
   if (userAuth) {
     let user = store.getters['user']
-    console.log(user)
+    // console.log(user)
   
     if (user.is_admin) {
       return true
