@@ -101,7 +101,7 @@ export default {
       itemsPerPage: 5,
       items: [],
       post: null,
-      event: 'updateTable'
+      event: 'updateAdminTable'
     }
   },
   methods: {

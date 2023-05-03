@@ -1,5 +1,7 @@
 <template></template>
 <script>
+import { formDataFromObject } from './Helpers/Parser.js'
+
 export default {
   data() {
     return {
@@ -8,23 +10,63 @@ export default {
       // form: {},
       loading: false,
       show: false,
-      event: 'onSubmit'
+      event: 'onSubmit',
+      preventSnackbar: false,
+      preventUpdateItems: false
     }
   },
+  computed: {
+    isPostAction() {
+      if (this.itemId) {
+          return false;
+      }
+
+      return true;
+    },
+    arguments() {
+      if (this.form instanceof FormData) {
+        formDataFromObject(this.formAppend, this.form)
+        return this.form
+      }
+
+      return { ...this.form, ...this.formAppend }
+    },
+  },
   methods: {
-    submit() { // store() - update()
+    // store() - update()
+    async submit() {
       if (!this.form) return
 
-      this.loading = true
-      // console.log('Form contain: ', this.form)
-      // const resp = this.apiService.store()
+      try {
+        this.loading = true
+        let resp = null
 
-      setTimeout(() => {
-        this.form = {}
-        this.fireEvent(this.event)
+        if (this.isPostAction) {
+          resp = await this.apiService.store(this.arguments)
+        } else {
+          resp = await this.apiService.update(
+            this.itemId,
+            this.form
+          )
+        }
+
+        if (!this.preventSnackbar) {
+          // console.log('dispatching snackbar')
+          this.successSnackbar(resp.data.message)
+        }
+
+        if (!this.preventUpdateItems) {
+          // console.log('dispatching event')
+          this.fireEvent(this.event, resp.data)
+        }
+
         this.formComplete = false
-        this.loading = false
-      }, 2500);
+        this.form = {}
+      } catch (error) {
+        console.log(error)
+      }
+
+      this.loading = false
     },
     required(v) {
       return !!v || 'Campo requerido'

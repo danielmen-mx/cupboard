@@ -169,7 +169,7 @@ export default {
         'Overwrite post'
       ],
       search: null,
-      event: 'updateTable'
+      event: 'updateAdminTable'
     }
   },
   methods: {

@@ -41,3 +41,17 @@ export function isAdmin() {
 
   return false
 }
+
+export const userCanEdit = {
+  methods: {
+    userCanEdit(userId) {
+      let user = store.getters['user']
+
+      if (user.id === userId) {
+        return true
+      }
+
+      return false
+    }
+  },
+}

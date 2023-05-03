@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO: add empty state -->
   <div v-if="item" v-resize="onResize">
     <v-card v-if="!loading" class="elevation-1 pa-2">
       <v-btn
@@ -30,7 +31,7 @@
             color="amber"
           ></v-rating>
           <p class="text-grey" :class="fontInfoText">
-            {{ item.rating }} stars | ({{ comments.length }} comentarios) | {{ formatDate(item.created_at) }}
+            {{ item.rating }} stars | ({{ item.comments.length }} comentarios) | {{ formatDate(item.created_at) }}
           </p>
         </div>
         <v-divider></v-divider>
@@ -47,9 +48,9 @@
           </v-btn>
         </v-card-actions>
         <v-divider></v-divider>
-        <Comments :comments_arr="comments" />
+        <Comments :post_id="item.id" />
         <v-divider></v-divider>
-        <CommentsForm />
+        <Create :post_id="item.id"/>
       </div>
     </v-card>
   </div>
@@ -58,8 +59,8 @@
 import ResponsivePost from '../components/Common/Responsives/post.vue';
 import PostService from '@/services/PostService.js'
 import Table from '../components/Common/Table.vue';
-import Comments from '../components/Post/Comments.vue';
-import CommentsForm from '../components/Post/CommentsForm.vue';
+import Comments from '../components/Comment/Comments.vue';
+import Create from '../components/Comment/Create.vue';
 import { initials, formatDate } from '../utils/helpers';
 
 export default {
@@ -67,7 +68,7 @@ export default {
   mixins: [initials, formatDate, Table],
   components: {
     Comments,
-    CommentsForm
+    Create
   },
   data() {
     return {
@@ -76,28 +77,7 @@ export default {
       postId: null,
       item: null,
       preventSnackbar: true,
-      comments: [
-        {
-          id: 1,
-          autor: "Daniel Mendez",
-          comment: "this is a little comment, doesn't hurt anyone"
-        },
-        {
-          id: 2,
-          autor: "Dinosaurio Mendez",
-          comment: "that's good"
-        },
-        {
-          id: 3,
-          autor: "Fili Mendez",
-          comment: "hey did u come home early, because im boring and i miss u guys, dino is good but he doesn't want to play with me, i like so much to play with u both, but with dino, well u undesrtand that i didnt like u so much, well i hope you're coming home right now, love u, come for me please, hey did u come home early, because im boring and i miss u guys, dino is good but he doesn't want to play with me, i like so much to play with u both, but with dino, well u undesrtand that i didnt like u so much, well i hope you're coming home right now, love u, come for me please"
-        },
-        {
-          id: 4,
-          autor: "Jhovana Solis",
-          comment: "dont be bad boys i love u so much, hope you're ok"
-        },
-      ]
+      comments: []
     }
   },
   methods: {
@@ -109,9 +89,9 @@ export default {
     },
   },
   mounted() {
-    this.postId = this.$route.params.id
-    if (!this.postId) return this.$router.push('/')
-    this.getItem(this.postId)
+    this.itemId = this.$route.params.id
+    if (!this.itemId) return this.$router.push('/')
+    this.getItem()
   },
 }
 </script>
