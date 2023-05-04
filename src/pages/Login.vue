@@ -16,7 +16,7 @@
 <script>
 import login from '@/components/Common/Responsives/login.vue'
 import Register from '../components/Login/Register.vue'
-import LoginForm from '../components/Login/LoginForm.vue'
+import LoginForm from '../components/Login/Login.vue'
 import Snackbar from '@/components/layouts/Snackbar.vue'
 
 export default {

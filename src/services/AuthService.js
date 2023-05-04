@@ -5,6 +5,9 @@ export default {
     return Api.post('/login', data)
   },
   register(data) {
-    // return Api.get('/register' + id)
+    return Api.post('/register', data)
   },
+  logout(data) {
+    return Api.post('/logout', data)
+  }
 }

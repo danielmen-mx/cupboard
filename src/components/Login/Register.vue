@@ -11,10 +11,9 @@
         </div>
         <v-form
           v-model="formComplete"
-          @submit.prevent="submit" 
+          @submit.prevent="submit"
+          ref="form"
         >
-
-          <!-- Form -->
           <v-card-text>
             <v-row>
               <v-col cols="12">
@@ -83,6 +82,7 @@
 </template>
 <script>
 import Form from '../Common/Form.vue'
+import AuthService from '../../services/AuthService'
 
 export default {
   extends: Form,
@@ -90,16 +90,41 @@ export default {
     form: {},
     confirmation: '',
     dialog: false,
+    apiService: AuthService
   }),
   methods: {
     closeForm() {
       this.$router.push({ path: '/login' })
       this.dialog = false
+      this.form = {}
+      this.confirmation = ''
     },
     matchPassword(v) {
-      if (!this.form.password) return
-      if (this.form.password !== v) return 'Tus contraseñas no son las mismas'
-    }
+      if (this.form.password) {
+        if (this.form.password !== v) return 'Tus contraseñas no son las mismas'
+      }
+    },
+    async submit() {
+      if (!this.form) return
+
+      try {
+        this.loading = true
+        const resp = await this.apiService.register(this.form)
+        // console.log(resp)
+
+        this.$nextTick(() => {
+          this.successSnackbar(resp.message)
+          this.formComplete = false
+          this.loading = false
+          this.closeForm()
+        })
+      } catch (error) {
+        console.log(error)
+        this.formComplete = false
+        this.errorSnackbar(error.exception)
+        this.loading = false
+      }
+    },
   },
   mounted() {
     this.listenEvent(this.event, () => {

@@ -70,6 +70,7 @@ export default {
     return {
       loginClass: '',
       apiService: AuthService,
+      preventSnackbar: true,
       form: {
         remember: false
       },

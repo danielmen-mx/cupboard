@@ -20,7 +20,7 @@ let isAutheticated = () => {
   }
 
   if (!token || !user) {
-    console.log('User with error in authentication...')
+    // console.log('User with error in authentication...')
     store.commit('logout');
     return false;
   }

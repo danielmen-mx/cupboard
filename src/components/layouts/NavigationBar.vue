@@ -67,6 +67,8 @@
 import NavigationMixins from '../../mixins/NavigationMixins';
 import layout from '../Common/Responsives/layout.vue';
 import ToggleTheme from '@/components/layouts/ToggleThemeBtn.vue'
+import AuthService from '../../services/AuthService';
+import store from '../../store';
 
 export default {
   extends: layout,
@@ -76,17 +78,27 @@ export default {
   },
   data() {
     return {
-      business: 'Shaddai Shop'
+      business: 'Shaddai Shop',
+      apiService: AuthService,
+      form: {}
     }
   },
   methods: {
     login() {
       this.$router.push({ path: '/login'})
     },
-    logout() {
-      this.$store.commit('logout')
-      this.isLogged = false
-      this.$router.push({ path: '/' })
+    async logout() {
+      try {
+        this.form.user = store.getters['user']
+        const resp = await this.apiService.logout(this.form)
+        console.log(resp)
+
+        this.$store.commit('logout')
+        this.isLogged = false
+        this.$router.push({ path: '/' })
+      } catch (error) {
+        console.log(error) 
+      }
     },
     openDrawer() {
       this.$nextTick(() => {
