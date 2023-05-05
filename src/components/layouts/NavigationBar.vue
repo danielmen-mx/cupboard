@@ -91,7 +91,7 @@ export default {
       try {
         this.form.user = store.getters['user']
         const resp = await this.apiService.logout(this.form)
-        console.log(resp)
+        // console.log(resp)
 
         this.$store.commit('logout')
         this.isLogged = false
