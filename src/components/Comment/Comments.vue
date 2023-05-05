@@ -49,8 +49,6 @@
             {{ comment.comment }}
           </div>
         </v-card-text>
-        <!-- TODO: complete edit and delete comment -->
-        <!-- TODO: make unavailable the comments that is not the owner -->
         <div v-if="userCanEdit(comment.user.id)" class="mt-auto mr-4 mb-1" >
           <v-btn
             :disabled="loading"
@@ -103,6 +101,7 @@ export default {
       loading: false,
       apiService: CommentService,
       preventSnackbar: true,
+      preventReload: true,
       itemId: null,
       editing: false
     }
@@ -121,7 +120,7 @@ export default {
     if (this.post_id) this.query.post_id = this.post_id
 
     this.getItems()
-    this.listenEvent('onSubmit', this.getItems)
+    this.listenEvent('onSubmit', this.addItem)
   },
 }
 </script>

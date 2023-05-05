@@ -9,6 +9,8 @@ export default {
       itemId: null,
       // query: {},
       preventSnackbar: false,
+      preventRemoveItem: false,
+      preventReload: false,
       event: 'updateTable'
     }
   },
@@ -83,19 +85,37 @@ export default {
         this.loading = false
       }
     },
-    addItem() {
+    addItem(item) {
+      let match = this.items.find(i => i.id === item.id)
 
+      if (match) {
+        let newItems = this.items.map(function (val) {
+          if (val.id === item.id) {
+            return val = item
+          }
+  
+          return val
+        })
+
+        return this.items = newItems
+      }
+
+      return this.items.push(item)
     },
     async remove(id) { // remove()
       if (this.breakRequest()) return
 
       try {
-        this.loading = true
+
+        if (!this.preventReload) {
+          this.loading = true
+        }
 
         const resp = await this.apiService.remove(id)
 
-        var newItems = this.items.filter(item => item.id !== id)
-        this.items = newItems
+        if (!this.preventRemoveItem) {
+          this.removeItem(id)
+        }
 
         if (!this.preventSnackbar) {
           this.successSnackbar(resp.message)
@@ -106,6 +126,14 @@ export default {
         console.log(error)
         // this.errorSnackbar(resp.data.error)
       }
+    },
+    removeItem(id) {
+      let newItems = null
+      this.items.forEach((item, i) => {
+        if (item.id === id) newItems = this.items.toSpliced(i, 1)
+      });
+
+      this.items = newItems
     },
     breakRequest() {
       if (!this.apiService) {

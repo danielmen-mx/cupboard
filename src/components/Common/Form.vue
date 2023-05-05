@@ -51,12 +51,10 @@ export default {
         }
 
         if (!this.preventSnackbar) {
-          // console.log('dispatching snackbar')
           this.successSnackbar(resp.data.message)
         }
 
         if (!this.preventUpdateItems) {
-          // console.log('dispatching event')
           this.fireEvent(this.event, resp.data)
         }
 
