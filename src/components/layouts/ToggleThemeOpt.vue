@@ -16,15 +16,22 @@
 <script>
 import { useTheme } from 'vuetify'
 import { ref, reactive } from 'vue'
+import store from '../../store'
 
 export default {
-  setup () {
+  setup() {
     const theme = useTheme()
-    let themeIcon = ref(theme.global.current.value.dark ? 'mdi-weather-sunny' : 'mdi-weather-night')
+    let currentTheme = ref(store.getters['theme'])
+    let themeIcon = ref(currentTheme.value == 'light' ? 'mdi-weather-night' : 'mdi-weather-sunny')
+    theme.global.name.value = currentTheme.value
 
     function toggleTheme() {
-      theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+      console.log(currentTheme.value)
+      theme.global.name.value = currentTheme.value == 'light' ? 'dark' : 'light'
       themeIcon.value = theme.global.current.value.dark ? 'mdi-weather-sunny' : 'mdi-weather-night'
+      currentTheme.value = currentTheme.value == 'light' ? 'dark' : 'light'
+
+      store.commit('setTheme', { theme: currentTheme.value });
     }
 
     return {
@@ -32,6 +39,6 @@ export default {
       toggleTheme,
       themeIcon
     }
-  }
+  },
 }
 </script>

@@ -1,5 +1,5 @@
-import router from ".";
-import store from "../store";
+import router from "."
+import store from "../store"
 
 function tokenHasExpired(expiration) {
   return expiration < Math.floor(Date.now() / 1000);
@@ -14,18 +14,18 @@ let isAutheticated = () => {
     user = JSON.parse(localStorage.getItem("wud-admin-user"))
 
     if (user && token) {
-      store.commit('setUser', { user: user });
-      store.commit('setToken', { token: token.token, expires: token.expires });
+      store.commit('setUser', { user: user })
+      store.commit('setToken', { token: token.token, expires: token.expires })
     }
   }
 
   if (!token || !user) {
     // console.log('User with error in authentication...')
-    store.commit('logout');
+    store.commit('logout')
     return false;
   }
 
-  return !tokenHasExpired(token.expires);
+  return !tokenHasExpired(token.expires)
 }
 
 let isAdmin = () => {
@@ -58,7 +58,21 @@ function routesNoAuth(route) {
   return routes.includes(route)
 }
 
+function setTheme() {
+  let theme = store.getters['theme']
+
+  if (theme == 'light') {
+    theme = JSON.parse(localStorage.getItem("wud-user-theme"))
+
+    if (theme) {
+      store.commit('setTheme', { theme: theme })
+    }
+  }
+}
+
 function routes(to, from, next) {
+
+  setTheme()
 
   if (!to.meta.requiresAuth && routesNoAuth(to.name)) {
     return next()
