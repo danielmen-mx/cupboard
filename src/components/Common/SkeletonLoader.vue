@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="skeleton-container skeleton-body skeleton-all">
     <div class="" id="card-link">
       <div class="card__header">
         <div>
@@ -29,23 +29,23 @@
 <!-- <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> -->
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap");
-* {
+.skeleton-all {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-body {
+.skeleton-body {
   font-family: "Source Sans Pro", sans-serif;
   min-height: 100vh;
 }
 
-a {
+.skeleton-container {
   text-decoration: none;
 }
 
-img[alt] {
+.skeleton-img[alt] {
   text-indent: -10000px;
 }
 

@@ -47,17 +47,17 @@ const routes = [
         name: 'contact',
         component: () => import('../pages/Contact.vue')
       },
+      {
+        path: '/test',
+        name: 'test',
+        component: () => import('../components/Common/SkeletonLoader.vue')
+      },
     ]
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('../pages/NotFound.vue')
-  },
-  {
-    path: '/test',
-    name: 'test',
-    component: () => import('../components/Common/SkeletonLoader.vue')
   },
   {
     path: '/login',
