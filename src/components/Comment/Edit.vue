@@ -23,7 +23,7 @@
         v-model="form.comment"
         :disabled="loading"
         class="text-subtitle-1"
-        variant="underlined"
+        variant="plain"
       >
         <template v-slot:append-inner>
           <v-fade-transition leave-absolute>

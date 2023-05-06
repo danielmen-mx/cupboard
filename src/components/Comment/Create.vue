@@ -1,5 +1,5 @@
 <template>
-  <div class="my-2 ml-1 mr-2" id="comment_component">
+  <div class="mx-3 mt-4" id="comment_component">
     <v-form
       v-model="formComplete"
       ref="form"
@@ -13,6 +13,7 @@
         clear-icon="mdi-close-circle"
         clearable
         label="Añadir comentario"
+        variant="outlined"
         id="comment_input"
         type="text"
         @click:append="submit"
@@ -20,7 +21,7 @@
       <v-btn
         :disabled="!formComplete"
         :loading="loading"
-        class="elevation-0 ml-1"
+        class="elevation-0"
         height="55"
         type="submit"
         variant="plain"

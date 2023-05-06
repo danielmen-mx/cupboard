@@ -7,7 +7,7 @@
         <Edit :comment="comment" />
       </div>
   
-      <v-card v-else class="elevation-0 d-flex bg-grey-lighten-4 rounded-xl my-1 mx-1">
+      <v-card v-else class="elevation-0 d-flex bg-grey-lighten-4 rounded-xl my-3 mx-3">
         <template class="d-flex align-start pa-3">
           <v-avatar
             color="blue-darken-3"
