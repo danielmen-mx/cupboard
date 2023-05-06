@@ -1,7 +1,16 @@
 <template>
   <v-container class="skeleton-container skeleton-body skeleton-all">
     <div class="" id="card-link">
-      <div class="card__header">
+      <div class="skeleton skeleton-card-title"></div>
+      <v-divider class="my-4"></v-divider>
+      <div class="skeleton skeleton-card-right"></div>
+      <div class="skeleton skeleton-card-left"></div>
+      <div class="skeleton skeleton-card-right"></div>
+      <div class="skeleton skeleton-card-left"></div>
+      <div class="skeleton skeleton-card-right"></div>
+      <div class="skeleton skeleton-card-left"></div>
+      <div class="skeleton skeleton-card-right"></div>
+      <!-- <div class="card__header">
         <div>
           <div class="card__header header__img skeleton" id="logo-img" />
         </div>
@@ -11,8 +20,9 @@
   
       <div class="card__body">
         <div class="card__body body__text" id="card-details">
-          <div class="skeleton skeleton-text skeleton-text__body"></div>
-        </div>
+          <div class="skeleton skeleton-text skeleton-text__body"></div> -->
+          <!-- <div class="skeleton skeleton-text skeleton-text__body"></div> -->
+        <!-- </div>
   
         <div class="card__body body__img">
           <img class="skeleton" alt="" id="cover-img" />
@@ -21,7 +31,7 @@
   
       <div class="card__footer" id="card-footer">
         <div class="skeleton skeleton-text skeleton-footer"></div>
-      </div>
+      </div> -->
     </div>
   </v-container>
 </template>
@@ -131,7 +141,7 @@
 }
 
 .card__body .body__img {
-  height: 10rem;
+  height: 30rem;
   margin: 0.5rem 0;
 }
 
@@ -156,7 +166,7 @@
   margin: 0.5rem;
 }
 
-.card:hover {
+.skeleton:hover {
   border-color: rgba(82, 88, 102, 0.4);
 }
 
@@ -197,6 +207,30 @@ ion-icon:hover:nth-of-type(3) {
 .skeleton-text {
   width: 100%;
   height: 0.7rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.skeleton-card-title {
+  margin: auto;
+  width: 80%;
+  height: 6rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.skeleton-card-right {
+  float: right;
+  width: 80%;
+  height: 6rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.skeleton-card-left {
+  float: left;
+  width: 80%;
+  height: 6rem;
   margin-bottom: 0.5rem;
   border-radius: 0.25rem;
 }
