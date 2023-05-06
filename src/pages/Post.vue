@@ -1,5 +1,5 @@
 <template>
-  <!-- TODO: add empty state -->
+  <PostSkeleton v-if="loading"/>
   <div v-if="item" v-resize="onResize">
     <v-card v-if="!loading" class="elevation-1 pa-2">
       <v-btn
@@ -65,13 +65,15 @@ import Table from '../components/Common/Table.vue';
 import Comments from '../components/Comment/Comments.vue';
 import Create from '../components/Comment/Create.vue';
 import { initials, formatDate } from '../utils/helpers';
+import PostSkeleton from '../components/Common/Skeletons/PostSkeleton.vue';
 
 export default {
   extends: ResponsivePost,
   mixins: [initials, formatDate, Table],
   components: {
     Comments,
-    Create
+    Create,
+    PostSkeleton
   },
   data() {
     return {

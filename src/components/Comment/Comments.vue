@@ -1,26 +1,7 @@
 <template>
-  <!-- TODO: add empty state:loading -->
-  <div v-if="loading">
-    loading... please wait
-  </div>
-
-  <div v-else>
-    <div v-if="items.length == 0" >
-      <v-card class="elevation-0 bg-grey-lighten-4 rounded-xl my-1 py-4 pl-10 text-center text-grey-darken-3">
-        <v-avatar color="grey-lighten-2" size="100">
-          <v-icon class="text-h2">
-            mdi-comment-remove-outline
-          </v-icon>
-        </v-avatar>
-        <p class="pt-6">
-          Upss, parece que nadie ha comentado este post
-        </p>
-        <p class="text-h4">
-          Se el primero en comentar!
-        </p>
-      </v-card>
-    </div>
-  
+  <CommentsSkeleton v-if="loading" />
+  <template v-else>
+    <CommentsEmptyState v-if="items.length < 1" />
     <div v-for="comment in items" :key="comment.id" >
       <div v-if="comment.editing">
         <Edit :comment="comment" />
@@ -73,7 +54,7 @@
         </div>
       </v-card>
     </div>
-  </div>
+  </template>
 </template>
 <script>
 import { initials, ucFirst } from '../../utils/helpers'
@@ -82,12 +63,16 @@ import Responsive from '../Common/Responsive.vue'
 import Table from '../Common/Table.vue'
 import Edit from '@/components/Comment/Edit.vue'
 import CommentService from '@/services/CommentService'
+import CommentsEmptyState from '@/components/Common/EmptyState/CommentsEmptyState.vue'
+import CommentsSkeleton from '@/components/Common/Skeletons/CommentsSkeleton.vue'
 
 export default {
   extends: Table,
   mixins: [initials, ucFirst, userCanEdit],
   components: {
-    Edit
+    Edit,
+    CommentsEmptyState,
+    CommentsSkeleton
   },
   props: {
     post_id: {

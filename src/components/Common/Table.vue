@@ -58,6 +58,7 @@ export default {
         if (!this.preventSnackbar) {
           this.successSnackbar(resp.message)
         }
+
         this.loading = false
         this.successCallBack()
       } catch (error) {

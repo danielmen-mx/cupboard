@@ -18,7 +18,6 @@
         </div>
       </v-parallax>
     </v-card-title>
-
     <v-tabs
       v-model="tab"
       bg-color="transparent"
@@ -34,7 +33,7 @@
         {{ tab.title }}
       </v-tab>
     </v-tabs>
-
+    <v-divider></v-divider>
     <v-card-text>
       <v-window v-model="tab">
         <v-window-item value="main">
