@@ -276,9 +276,9 @@ export default {
 
       if (!comment) return
 
-      setTimeout(() => {
+      this.$nextTick(() => {
         this.fireEvent('focus-comment-input')
-      }, 500);
+      })
     },
     async addReaction(post) {
       // let react = await axios.post()

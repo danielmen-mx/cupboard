@@ -1,5 +1,5 @@
 <template>
-  <div class="my-2 ml-1 mr-2">
+  <div class="my-2 ml-1 mr-2" id="comment_component">
     <v-form
       v-model="formComplete"
       ref="form"
@@ -68,7 +68,10 @@ export default {
     },
     focusInput() {
       // this.$refs.comment_input.focus()
-      document.getElementById("comment_input").focus()
+      document.getElementById("comment_component").scrollIntoView({ behavior: "smooth", block: "end" })
+      this.$nextTick(() => {
+        document.getElementById("comment_input").focus() 
+      })
     }
   },
   mounted() {
