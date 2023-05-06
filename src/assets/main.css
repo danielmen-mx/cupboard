@@ -1,5 +1,6 @@
 @import './base.css';
 @import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap");
 
 .satisfy-font {
   font-family: 'Satisfy', cursive;
@@ -39,4 +40,28 @@
 
 .font-size-lg {
   font-size: 36px;
+}
+
+/* Skeleton loader sets */
+
+.skeleton:hover {
+  border-color: rgba(82, 88, 102, 0.4);
+}
+
+.skeleton {
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 75%);
+  }
+
+  /* 50% {
+    background-color: hsl(200, 20%, 80%);
+  } */
+
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
 }
