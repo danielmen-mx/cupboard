@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-3 mt-4" id="comment_component">
+  <div class="mx-2 mt-4" id="comment_component">
     <v-form
       v-model="formComplete"
       ref="form"
