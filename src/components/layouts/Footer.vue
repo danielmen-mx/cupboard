@@ -10,15 +10,13 @@
           variant="text"
         ></v-btn>
       </div>
-  
-      <div class="pt-0" :class="footerText">
-        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      <div class="pt-2" :class="footerText">
+        <p>Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc.</p>
+        <p><strong>Shaddai Shop</strong>, we love that you look good.</p>
       </div>
-  
       <v-divider></v-divider>
-  
-      <div>
-        Copyright © 2016-{{ new Date().getFullYear() }} <strong>Shaddai Shop</strong>
+      <div class="pt-2">
+        Copyright © 2016-{{ new Date().getFullYear() }} <strong class="satisfy-font font-size-xsm">Shaddai Shop</strong>
       </div>
     </v-footer>
   </div>
@@ -32,7 +30,7 @@ export default {
     icons: [
       'mdi-facebook',
       'mdi-twitter',
-      'mdi-linkedin',
+      // 'mdi-linkedin',
       'mdi-instagram',
     ],
   }),
