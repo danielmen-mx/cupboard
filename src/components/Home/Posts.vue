@@ -120,7 +120,7 @@
                         <v-icon class="me-1" icon="mdi-heart" color="red" @click="addReaction(post)"></v-icon>
                         <span class="subheading me-2">{{ post.reaction }}</span>
                         <span class="me-1">·</span>
-                        <v-icon class="me-1" icon="mdi-comment" color="blue" @click="redirect(post.id)"></v-icon>
+                        <v-icon class="me-1" icon="mdi-comment" color="blue" @click="redirect(post.id, true)"></v-icon>
                         <span class="subheading">{{ post.comments }}</span>
                       </div>
                     </template>
@@ -195,7 +195,7 @@
                         <v-icon class="me-1" icon="mdi-heart" color="red" @click="addReaction(post)"></v-icon>
                         <span class="subheading me-2">{{ post.reaction }}</span>
                         <span class="me-1">·</span>
-                        <v-icon class="me-1" icon="mdi-comment" color="blue" @click="redirect(post.id)"></v-icon>
+                        <v-icon class="me-1" icon="mdi-comment" color="blue" @click="redirect(post.id, true)"></v-icon>
                         <span class="subheading">{{ post.comments }}</span>
                       </div>
                     </template>
@@ -271,8 +271,14 @@ export default {
       if (Number.isInteger(i / 2)) return true
       return false
     },
-    redirect(id) {
-      this.$router.push({path: '/post/' + id})
+    redirect(id, comment = false) {
+      this.$router.push({ path: '/post/' + id })
+
+      if (!comment) return
+
+      setTimeout(() => {
+        this.fireEvent('focus-comment-input')
+      }, 500);
     },
     async addReaction(post) {
       // let react = await axios.post()

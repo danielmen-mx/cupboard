@@ -43,7 +43,10 @@
           <v-btn color="orange">
             Me gusta
           </v-btn>
-          <v-btn color="orange">
+          <v-btn 
+            color="orange"
+            @click="focusInput()"
+          >
             Comentar
           </v-btn>
         </v-card-actions>
@@ -81,12 +84,14 @@ export default {
     }
   },
   methods: {
-    //
+    focusInput() {
+      this.fireEvent('focus-comment-input')
+    }
   },
   computed: {
     progress () {
       return Math.min(100, this.comment.length * 10)
-    },
+    }
   },
   mounted() {
     this.itemId = this.$route.params.id

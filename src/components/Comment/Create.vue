@@ -13,6 +13,7 @@
         clear-icon="mdi-close-circle"
         clearable
         label="Añadir comentario"
+        id="comment_input"
         type="text"
         @click:append="submit"
       ></v-text-field>
@@ -64,10 +65,18 @@ export default {
       if (user) {
         this.form.user_id = user.id
       }
+    },
+    focusInput() {
+      // this.$refs.comment_input.focus()
+      document.getElementById("comment_input").focus()
     }
   },
   mounted() {
     this.setProperties()
+    this.listenEvent('focus-comment-input', this.focusInput)
+  },
+  beforeDestroy() {
+    this.unlistenEvent('focus-comment-input', this.focusInput)
   },
   watch: {
     'formComplete': {
