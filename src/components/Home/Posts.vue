@@ -247,10 +247,10 @@ export default {
       if (Number.isInteger(i / 2)) return true
       return false
     },
-    redirect(id, comment = false) {
+    redirect(id, focusCommentInput = false) {
       this.$router.push({ path: '/post/' + id })
 
-      if (!comment) return
+      if (!focusCommentInput) return
 
       this.$nextTick(() => {
         this.fireEvent('focus-comment-input')
