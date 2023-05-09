@@ -1,17 +1,13 @@
 <template>
-  <p class="text-subtitle-2 pl-1 pt-1">Opciones</p>
-  <v-list
-      :lines="false"
-      nav
-    >
-      <v-list-item @click="toggleTheme">
-        <template v-slot:prepend>
-          <v-icon :icon="themeIcon"></v-icon>
-        </template>
+  <v-list :lines="false" nav >
+    <v-list-item @click="toggleTheme">
+      <template v-slot:prepend>
+        <v-icon :icon="themeIcon"></v-icon>
+      </template>
 
-        <v-list-item-title>Cambiar tema</v-list-item-title>
-      </v-list-item>
-    </v-list>
+      <v-list-item-title>Cambiar tema</v-list-item-title>
+    </v-list-item>
+  </v-list>
 </template>
 <script>
 import { useTheme } from 'vuetify'

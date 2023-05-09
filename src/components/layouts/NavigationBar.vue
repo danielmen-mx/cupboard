@@ -49,12 +49,43 @@
             icon="mdi-logout"
             @click="logout()"
           ></v-btn>
-          <v-btn
-            v-else
-            @click="logout()"
-          >
-            {{ user }}, Cerrar sesión
-          </v-btn>
+          <div v-else class="d-flex">
+             <v-menu>
+              <template v-slot:activator="{ props }">
+                <v-btn
+                  v-bind="props"
+                  variant="plain"
+                  class="mr-0 pr-0"
+                  :ripple="false"
+                >
+                  {{ user }},
+                </v-btn>
+              </template>
+              <v-list>
+                <v-list-item
+                  v-for="(item, i) in userSettings"
+                  :key="i"
+                  :value="i"
+                  active-color="info"
+                  @click="redirect(item.path)"
+                >
+                  <template v-slot:prepend>
+                    <v-icon :icon="item.icon" size="small"></v-icon>
+                  </template>
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+
+            <v-btn
+              variant="plain"
+              class="ml-0 pl-1"
+              @click="logout()"
+            >
+              Cerrar sesión
+            </v-btn>
+
+          </div>
         </div>
         <div>
           <ToggleTheme v-if="!navIcon" />

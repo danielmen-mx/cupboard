@@ -25,6 +25,25 @@
         <v-list-item-title v-text="item.title"></v-list-item-title>
       </v-list-item>
       <v-divider></v-divider>
+      <p class="text-subtitle-2 pl-1 pt-1">Opciones</p>
+      <v-list
+        :lines="false"
+        nav
+      >
+        <v-list-item
+          v-for="(item, i) in userSettings"
+          :key="i"
+          :value="item"
+          active-color="info"
+          @click="redirect(item.path)"
+        >
+          <template v-slot:prepend>
+            <v-icon :icon="item.icon"></v-icon>
+          </template>
+
+          <v-list-item-title v-text="item.title"></v-list-item-title>
+        </v-list-item>
+      </v-list>
       <ToggleTheme />
       <v-divider></v-divider>
       <div

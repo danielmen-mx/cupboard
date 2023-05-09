@@ -8,6 +8,24 @@ export default {
       admin: false,
       isLogged: false,
       night: false,
+      userSettings: [
+        {
+          title: 'Configuraciones',
+          // icon: 'mdi-settings',
+          icon: 'mdi-wrench',
+          path: ""
+        },
+        {
+          title: 'Carrito',
+          icon: 'mdi-cart',
+          path: ""
+        },
+        {
+          title: 'Mis compras',
+          icon: 'mdi-shopping',
+          path: ""
+        },
+      ],
       items: [
         {
           title: 'Admin',
