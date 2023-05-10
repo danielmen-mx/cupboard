@@ -31,7 +31,7 @@
             color="amber"
           ></v-rating>
           <p class="text-grey" :class="fontInfoText">
-            {{ item.rating }} stars | ({{ item.comments.length }} comentarios) | {{ formatDate(item.created_at) }}
+            {{ item.rating }} stars | ({{ commentsLenght }} comentarios) | {{ formatDate(item.created_at) }}
           </p>
         </div>
         <v-divider></v-divider>
@@ -39,17 +39,7 @@
           {{ item.description }}
         </div>
         <v-divider></v-divider>
-        <v-card-actions>
-          <v-btn color="orange">
-            Me gusta
-          </v-btn>
-          <v-btn 
-            color="orange"
-            @click="focusInput()"
-          >
-            Comentar
-          </v-btn>
-        </v-card-actions>
+        <Actions />
         <v-divider></v-divider>
         <Comments :post_id="item.id" />
         <v-divider></v-divider>
@@ -63,6 +53,7 @@ import ResponsivePost from '../components/Common/Responsives/post.vue';
 import PostService from '@/services/PostService.js'
 import Table from '../components/Common/Table.vue';
 import Comments from '../components/Comment/Comments.vue';
+import Actions from '../components/Post/Actions.vue';
 import Create from '../components/Comment/Create.vue';
 import { initials, formatDate } from '../utils/helpers';
 import PostSkeleton from '../components/Common/Skeletons/PostSkeleton.vue';
@@ -73,6 +64,7 @@ export default {
   components: {
     Comments,
     Create,
+    Actions,
     PostSkeleton
   },
   data() {
@@ -82,23 +74,38 @@ export default {
       postId: null,
       item: null,
       preventSnackbar: true,
-      comments: []
+      comments: [],
+      commentsLenght: 0
     }
   },
   methods: {
-    focusInput() {
-      this.fireEvent('focus-comment-input')
+    getCommentLength() {
+      setTimeout(() => { this.commentsLenght = this.item.comments.length }, 1000);
+    },
+    addCommentLenght () {
+      this.commentsLenght++
+    },
+    reduceCommentLenght() {
+      this.commentsLenght = this.commentsLenght - 1
     }
   },
   computed: {
     progress () {
       return Math.min(100, this.comment.length * 10)
-    }
+    },
   },
   mounted() {
     this.itemId = this.$route.params.id
     if (!this.itemId) return this.$router.push('/')
+    // this.commentLength = 0
     this.getItem()
+    this.getCommentLength()
+    this.listenEvent("add-new-comment-length", this.addCommentLenght)
+    this.listenEvent("remove-comment-lenght", this.reduceCommentLenght)
+  },
+  beforeDestroy() {
+    this.unlistenEvent("add-new-comment-length", this.addCommentLenght)
+    this.unlistenEvent("remove-comment-lenght", this.reduceCommentLenght)
   },
 }
 </script>
