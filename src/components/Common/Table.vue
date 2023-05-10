@@ -63,6 +63,7 @@ export default {
         this.successCallBack()
       } catch (error) {
         console.log(error)
+        this.loading = false
       }
     },
     // show()
