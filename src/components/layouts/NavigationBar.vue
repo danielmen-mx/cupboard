@@ -7,7 +7,8 @@
           v-if="!navIcon"
           v-for="item in items"
           :key="item.title"
-          variant="text"
+          variant="plain"
+          :ripple="false"
           v-show="requireAdmin(item.require_admin)"
           active-color="info"
           @click="redirect(item.path)"
@@ -33,11 +34,13 @@
         <div v-if="!isLogged">
           <v-btn
             v-if="navIcon"
+            variant="plain"
             icon="mdi-account-key"
             @click="login()"
           ></v-btn>
           <v-btn
             v-else
+            variant="plain"
             @click="login()"
           >
             Registrarse | Iniciar sesión
@@ -46,6 +49,7 @@
         <div v-else>
           <v-btn
             v-if="navIcon"
+            variant="plain"
             icon="mdi-logout"
             @click="logout()"
           ></v-btn>

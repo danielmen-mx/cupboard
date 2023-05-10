@@ -30,7 +30,7 @@
             {{ comment.comment }}
           </div>
         </v-card-text>
-        <div v-if="userCanEdit(comment.user.id)" class="mt-auto mr-4 mb-1" >
+        <div v-if="userCanEdit(comment.user.id)" class="d-flex mt-auto mr-4 mb-1" >
           <v-btn
             :disabled="loading"
             size="x-small"
