@@ -6,17 +6,13 @@
     @submit.prevent="submit"
   >
     <template class="d-flex align-start pa-3">
-      <v-avatar
-        color="blue-darken-3"
-      >
+      <v-avatar color="blue-darken-3" >
         <span class="text-h6">{{ initials(comment.user.fullname??comment.user.username) }}</span>
       </v-avatar>
     </template>
 
     <v-card-text class="pa-2">
-      <div
-        class="text-subtitle-2 text-decoration-underline"
-      >
+      <div class="text-subtitle-2 text-decoration-underline" >
         <strong>{{ ucFirst(comment.user.fullname??comment.user.username) }}</strong>
       </div>
       <v-text-field

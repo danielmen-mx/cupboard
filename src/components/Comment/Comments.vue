@@ -98,7 +98,32 @@ export default {
     successCallBack() {
       this.items.map(item => item['editing'] = false)
       // console.log(this.items)
-    }
+    },
+    async remove(id) { // remove()
+      if (this.breakRequest()) return
+
+      try {
+
+        if (!this.preventReload) {
+          this.loading = true
+        }
+
+        const resp = await this.apiService.remove(id)
+
+        if (!this.preventRemoveItem) {
+          this.removeItem(id)
+        }
+
+        if (!this.preventSnackbar) {
+          this.successSnackbar(resp.message)
+        }
+        this.loading = false
+        this.fireEvent("remove-comment-lenght")
+      } catch (error) {
+        console.log(error)
+        // this.errorSnackbar(resp.data.error)
+      }
+    },
   },
   mounted() {
     if (!this.post_id) this.query.post_id = this.$route.params.id

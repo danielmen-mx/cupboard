@@ -77,6 +77,11 @@ export default {
           document.getElementById("comment_input").focus()
         })
       }, 1000)
+    },
+    successCallBack() {
+      if (this.isPostAction) {
+        this.fireEvent("add-new-comment-length")
+      }
     }
   },
   mounted() {
