@@ -39,7 +39,7 @@
           {{ item.description }}
         </div>
         <v-divider></v-divider>
-        <Actions />
+        <Actions :post_reactions="item.reactions"/>
         <v-divider></v-divider>
         <Comments :post_id="item.id" />
         <v-divider></v-divider>

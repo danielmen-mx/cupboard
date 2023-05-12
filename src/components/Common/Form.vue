@@ -1,5 +1,6 @@
 <template></template>
 <script>
+import store from '../../store';
 import { formDataFromObject } from './Helpers/Parser.js'
 
 export default {
@@ -67,6 +68,13 @@ export default {
       }
 
       this.loading = false
+    },
+    setUserId() {
+      let user = store.getters['user']
+
+      if (!user) return
+
+      return user
     },
     required(v) {
       return !!v || 'Campo requerido'
