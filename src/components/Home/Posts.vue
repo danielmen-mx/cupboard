@@ -63,7 +63,7 @@
                       ></v-rating>
       
                       <div class="text-grey ms-4">
-                        {{ post.rating }} ({{ post.reaction }})
+                        {{ post.rating }} ({{ 'TODO: complete review' }})
                       </div>
                     </v-row>
                   </v-card-title>
@@ -134,7 +134,7 @@
                       ></v-rating>
       
                       <div class="text-grey ms-4">
-                        {{ post.rating }} ({{ post.reaction }})
+                        {{ post.rating }} ({{ 'TODO: complete review' }})
                       </div>
                     </v-row>
                   </v-card-title>
