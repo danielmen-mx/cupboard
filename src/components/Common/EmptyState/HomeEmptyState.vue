@@ -3,11 +3,11 @@
     height="100vh"
     lazy-src="/logo/shadai-main.jpeg"
     class="grayscale"
-  >
+    >
     <div
       class="d-flex flex-column fill-height justify-center align-left"
     >
-      <div class="text-pink-lighten-1 rounded px-8">
+      <div class="rounded px-8 text-blue-darken-4">
         <!-- <p>🐶🐶🐶</p> -->
         <br>
         <h1 class="text-h4 font-weight-thin mb-4">
