@@ -11,7 +11,7 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import * as assets from './plugins/vuetify'
-import moment from 'moment';
+import moment from 'moment'
 import EventsMixins from './mixins/EventsMixins'
 
 // Event handling
@@ -19,6 +19,10 @@ import mitt from 'mitt'
 
 import('./utils/helpers')
 import "./router/guard"
+
+// Text editor
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
 window.moment = moment
 const emitter = mitt()
@@ -34,6 +38,7 @@ app.config.globalProperties.emitter = emitter
 
 app
   .mixin(EventsMixins)
+  .component('QuillEditor', QuillEditor)
   .use(store)
   .use(router)
   .use(vuetify)
