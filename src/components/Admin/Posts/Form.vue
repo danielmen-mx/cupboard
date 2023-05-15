@@ -58,9 +58,10 @@
               v-model:content="form.description"
               contentType="html"
               placeholder="Escribe el contenido."
-              style="height: 50px;"
+              style="height: 180px;"
               class="mb-4"
               theme="snow"
+              @keyup="checkFormComplete()"
             ></quill-editor>
             <v-row>
               <v-col cols="12" sm="6">
@@ -265,6 +266,11 @@ export default {
     },
     required (v) {
       return !!v || 'Campo requerido'
+    },
+    checkFormComplete() {
+      if (this.form.name && this.form.autor && this.form.description) {
+        this.unlock = true
+      }
     }
   },
   mounted() {
@@ -278,10 +284,8 @@ export default {
     },
     'formComplete': {
       handler: function () {
+        this.checkFormComplete()
         console.log(this.form)
-        if (this.form.name && this.form.autor && this.form.description) {
-          this.unlock = true
-        }
       }
     }
   },

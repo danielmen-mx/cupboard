@@ -35,8 +35,13 @@
           </p>
         </div>
         <v-divider></v-divider>
-        <div class="text-h6 ma-2">
-          {{ item.description }}
+        <div class="my-2 mx-0 px-0">
+          <quill-editor
+            v-model:content="item.description"
+            contentType="html"
+            :readOnly="true"
+            theme="bubble"
+          ></quill-editor>
         </div>
         <v-divider></v-divider>
         <Actions :post_reactions="item.reactions"/>
