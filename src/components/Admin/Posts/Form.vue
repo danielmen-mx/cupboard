@@ -20,7 +20,7 @@
         <v-form
           v-model="formComplete"
           ref="form"
-          @submit.prevent
+          @submit.prevent="submit"
         >
           <v-card-text>
             <v-row>
@@ -45,14 +45,23 @@
                 ></v-text-field>
               </v-col>
             </v-row>
-            <v-textarea
+            <!-- <v-textarea
               :loading="waitResponse"
               v-model="form.description"
               :rules="[required]"
               label="Contenido"
               hint="Escribe un poco sobre el tema de la publicación"
               clearable
-            ></v-textarea>
+            ></v-textarea> -->
+            <!-- <TextEditor :form_description="form.description"/> -->
+            <quill-editor
+              v-model:content="form.description"
+              contentType="html"
+              placeholder="Escribe el contenido."
+              style="height: 50px;"
+              class="mb-4"
+              theme="snow"
+            ></quill-editor>
             <v-row>
               <v-col cols="12" sm="6">
                 <v-file-input
@@ -117,7 +126,7 @@
               color="success"
               size="large"
               variant="text"
-              @click="submit()"
+              type="submit"
             >
               {{ btn_text }}
             </v-btn>
@@ -129,11 +138,15 @@
 </template>
 <script>
 import PostService from '@/services/PostService'
+import TextEditor from '../../Common/TextEditor.vue'
 import { copyData, slugify } from '../../../utils/helpers'
 import { imageHeaders } from '../../../services/api'
 
 export default {
   mixins: [copyData, slugify, imageHeaders],
+  components: {
+    TextEditor
+  },
   props: {
     item: {
       type: Object,
@@ -265,6 +278,7 @@ export default {
     },
     'formComplete': {
       handler: function () {
+        console.log(this.form)
         if (this.form.name && this.form.autor && this.form.description) {
           this.unlock = true
         }
