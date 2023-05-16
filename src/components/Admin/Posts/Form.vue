@@ -285,7 +285,6 @@ export default {
     'formComplete': {
       handler: function () {
         this.checkFormComplete()
-        console.log(this.form)
       }
     }
   },

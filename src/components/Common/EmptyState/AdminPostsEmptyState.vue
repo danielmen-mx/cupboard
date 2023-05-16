@@ -20,7 +20,6 @@
 export default {
   methods: {
     openPostForm() {
-      console.log('opening form')
       this.fireEvent('openPostForm')
     }
   },

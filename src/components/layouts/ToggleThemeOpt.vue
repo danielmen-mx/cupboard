@@ -22,7 +22,6 @@ export default {
     theme.global.name.value = currentTheme.value
 
     function toggleTheme() {
-      console.log(currentTheme.value)
       theme.global.name.value = currentTheme.value == 'light' ? 'dark' : 'light'
       themeIcon.value = theme.global.current.value.dark ? 'mdi-weather-sunny' : 'mdi-weather-night'
       currentTheme.value = currentTheme.value == 'light' ? 'dark' : 'light'
