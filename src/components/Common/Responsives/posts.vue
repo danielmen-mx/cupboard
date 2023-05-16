@@ -23,7 +23,7 @@ export default {
       this.$nextTick(() => {
         // height resizes
         if (this.windowSize.height < 700) {
-          this.words = 170
+          this.words = 130
           this.postNameText = 15
           this.titleText = 'text-h4'
         }
@@ -31,26 +31,26 @@ export default {
           this.postNameText = 10
         }
         if (this.windowSize.height < 360) {
-          this.words = 70
+          this.words = 30
           this.titleText = 'text-h6'
         }
         if (this.windowSize.height > 700) {
-          this.words = 270
+          this.words = 230
           this.postNameText = 20
           this.titleText = 'text-h3'
         }
   
         // width resizes
         if (this.windowSize.width < 1280) {
-          this.words = 170
+          this.words = 130
           this.titleText = 'text-h4'
-          this.actionHeight = '80px'
+          this.actionHeight = '50px'
         }
         if (this.windowSize.width < 700) {
           this.titleText = 'text-h6'
         }
         if (this.windowSize.width < 665) {
-          this.words = 70
+          this.words = 30
         }
         if (this.windowSize.width < 560) {
           this.presentationText = 'text-h4'
@@ -59,7 +59,7 @@ export default {
           this.presentationText = 'text-h2'
         }
         if (this.windowSize.width > 1280) {
-          this.words = 270
+          this.words = 230
           this.titleText = 'text-h3'
           this.actionHeight = 'auto'
         }

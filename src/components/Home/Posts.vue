@@ -50,9 +50,7 @@
                     >
                       {{ strLimit(post.name, postNameText) }}
                     </p>
-                    <v-row
-                      class="mx-0 pb-2"
-                    >
+                    <v-row class="mx-0 pb-2" >
                       <v-rating
                         :model-value="post.rating"
                         color="amber"
@@ -61,38 +59,36 @@
                         readonly
                         size="small"
                       ></v-rating>
-      
                       <div class="text-grey ms-4">
-                        {{ post.rating }} ({{ 'TODO: complete review' }})
+                        {{ post.rating }} stars ({{ post.reactions.length }} reactions)
                       </div>
                     </v-row>
                   </v-card-title>
                   <v-divider></v-divider>
                   <v-card-text >
-                    <p class="text-subtitle-1 fill-card">{{ limitText(post.description) }}</p>
+                    <p class="text-subtitle-1 fill-card">{{ transformText(post.description) }}</p>
                   </v-card-text>
                   <v-divider></v-divider>
                   <v-card-actions :style="{height: actionHeight}">
                     <v-list-item class="w-100">
                       <template v-slot:prepend>
-                        <v-avatar
-                          color="pink-lighten-1"
-                        >
+                        <v-avatar color="pink-lighten-1" >
                           <span class="text-h5">{{ initials(post.autor) }}</span>
                         </v-avatar>
                       </template>
-    
-                      <v-list-item-title>{{ post.autor }}</v-list-item-title>
-    
-                      <v-list-item-subtitle>Autor</v-list-item-subtitle>
-    
+                      <v-list-item-title>
+                        {{ post.autor }}
+                      </v-list-item-title>
+                      <v-list-item-subtitle>
+                        Autor
+                      </v-list-item-subtitle>
                       <template v-slot:append>
                         <div class="justify-self-end fix-height">
                           <v-icon class="me-1" icon="mdi-heart" color="red" @click="addReaction(post)"></v-icon>
-                          <span class="subheading me-2">{{ post.reaction }}</span>
+                          <span class="subheading me-2">{{ post.reactions.length }}</span>
                           <span class="me-1">·</span>
                           <v-icon class="me-1" icon="mdi-comment" color="blue" @click="redirect(post.id, true)"></v-icon>
-                          <span class="subheading">{{ post.comments }}</span>
+                          <span class="subheading">{{ post.comments.length }}</span>
                         </div>
                       </template>
                     </v-list-item>
@@ -134,40 +130,33 @@
                       ></v-rating>
       
                       <div class="text-grey ms-4">
-                        {{ post.rating }} ({{ 'TODO: complete review' }})
+                        {{ post.rating }} stars ({{ post.reactions.length }} reactions)
                       </div>
                     </v-row>
                   </v-card-title>
                   <v-divider></v-divider>
                   <v-card-text>
-                    <p
-                      class="text-subtitle-1 text-right fill-card"
-                    >
-                      {{ limitText(post.description) }}
+                    <p class="text-subtitle-1 text-right fill-card" >
+                      {{ transformText(post.description) }}
                     </p>
                   </v-card-text>
                   <v-divider></v-divider>
                   <v-card-actions :style="{height: actionHeight}">
                     <v-list-item class="w-100">
                       <template v-slot:prepend>
-                        <v-avatar
-                          color="orange-darken-4"
-                        >
+                        <v-avatar color="orange-darken-4" >
                           <span class="text-h5">{{ initials(post.autor) }}</span>
                         </v-avatar>
                       </template>
-    
                       <v-list-item-title>{{ post.autor }}</v-list-item-title>
-    
                       <v-list-item-subtitle>Autor</v-list-item-subtitle>
-    
                       <template v-slot:append>
                         <div class="justify-self-end">
                           <v-icon class="me-1" icon="mdi-heart" color="red" @click="addReaction(post)"></v-icon>
-                          <span class="subheading me-2">{{ post.reaction }}</span>
+                          <span class="subheading me-2">{{ post.reactions.length }}</span>
                           <span class="me-1">·</span>
                           <v-icon class="me-1" icon="mdi-comment" color="blue" @click="redirect(post.id, true)"></v-icon>
-                          <span class="subheading">{{ post.comments }}</span>
+                          <span class="subheading">{{ post.comments.length }}</span>
                         </div>
                       </template>
                     </v-list-item>
@@ -267,8 +256,9 @@ export default {
       this.chance = 1
       return post.reaction = post.reaction - 1
     },
-    limitText(text) {
-      return this.strLimit(text, this.words)
+    transformText(text) {
+      let newText = text.replace(/(<([^>]+)>)/ig, '')
+      return this.strLimit(newText, this.words)
     }
   },
   mounted() {
