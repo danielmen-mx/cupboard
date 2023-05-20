@@ -25,7 +25,7 @@
         <v-list-item-title v-text="item.title"></v-list-item-title>
       </v-list-item>
       <v-divider></v-divider>
-      <p class="text-subtitle-2 pl-1 pt-1">Opciones</p>
+      <p class="pl-1 pt-1 satisfy-font font-size-xsm">Opciones</p>
       <v-list
         :lines="false"
         nav
@@ -46,12 +46,13 @@
       </v-list>
       <ToggleTheme />
       <v-divider></v-divider>
-      <div
-       class="text-subtitle-2 ml-1"
-      >
-        Made with <span class="satisfy-font font-size-xsm">love</span> ❤️ by <strong>Daniel Mendez</strong>
-      </div>
     </v-list>
+    <v-spacer style="height: 5vh;"></v-spacer>
+    <div class="text-subtitle-2 label-footer d-flex justify-center align-center bg-grey-lighten-4 pa-3" >
+      <p>
+        Made with <span class="satisfy-font font-size-xsm">love</span> ❤️ by <strong>Daniel Mendez</strong>
+      </p>
+    </div>
   </v-navigation-drawer>
 </template>
 <script>
@@ -80,3 +81,11 @@ export default {
   }
 }
 </script>
+<style>
+.label-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 5vh;
+}
+</style>

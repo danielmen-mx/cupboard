@@ -69,3 +69,11 @@
     background-color: hsl(200, 20%, 95%);
   }
 }
+
+/* Footer configuration to keep on the bottom the <div /> */
+.keep-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 5vh;
+}
