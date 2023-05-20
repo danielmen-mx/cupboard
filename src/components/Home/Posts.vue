@@ -5,6 +5,7 @@
     <div v-else>
       <Presentation />
       <v-divider class="my-2"></v-divider>
+      <!-- <v-skeleton-loader type="card-avatar"></v-skeleton-loader> -->
       <div
         v-for="(post, i) in items"
         :key="post.id"
