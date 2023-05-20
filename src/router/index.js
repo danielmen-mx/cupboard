@@ -50,7 +50,7 @@ const routes = [
       {
         path: '/test',
         name: 'test',
-        component: () => import('../components/Common/SkeletonLoader.vue')
+        component: () => import('../components/Common/Test.vue')
       },
     ]
   },
