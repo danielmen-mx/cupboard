@@ -2,18 +2,11 @@
   <v-card>
     <v-card-item :title="`Bienvenido de nuevo, ` + user">
       <template v-slot:subtitle>
-        <!-- <v-icon
-          icon="mdi-alert"
-          size="18"
-          color="error"
-          class="me-1 pb-1"
-        ></v-icon> -->
-
         {{ date }}
       </template>
     </v-card-item>
     <v-card-item>
-      
+      Dashboards
     </v-card-item>
   </v-card>
 </template>
