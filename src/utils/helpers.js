@@ -99,3 +99,40 @@ export const initials = {
     }
   },
 }
+
+export const getCurrentDate = {
+  methods: {
+    getCurrentDate() {
+      let date = new Date();
+      let weekdays = new Array(7);
+      weekdays[0] = "Domingo";
+      weekdays[1] = "Lunes";
+      weekdays[2] = "Martes";
+      weekdays[3] = "Miercoles";
+      weekdays[4] = "Jueves";
+      weekdays[5] = "Viernes";
+      weekdays[6] = "Sabado";
+
+      let months = new Array(12)
+      months[0] = "Enero"
+      months[1] = "Febrero"
+      months[2] = "Marzo"
+      months[3] = "Abril"
+      months[4] = "Mayo"
+      months[5] = "Junio"
+      months[6] = "Julio"
+      months[7] = "Agosto"
+      months[8] = "Septiembre"
+      months[9] = "Octubre"
+      months[10] = "Noviembre"
+      months[11] = "Diciembre"
+
+      let weekday = weekdays[date.getDay()]
+      let day = date.getDate()
+      let month = months[date.getMonth()]
+      let year = date.getFullYear()
+
+      return weekday + ' ' + day + ' de ' + month + ' del ' + year
+    }
+  },
+}
