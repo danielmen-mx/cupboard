@@ -43,7 +43,7 @@
                     v-bind="props"
                     :color="isHovering ? 'light-green' : undefined"
                     height="320"
-                    width="auto"
+                    :width="widthPostCard"
                   >
                     <v-card-title>
                       <p
