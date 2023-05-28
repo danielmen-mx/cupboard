@@ -17,6 +17,7 @@
         <v-table
           height="64vh"
           fixed-header
+          fixed-footer
           class="py-1"
         >
           <thead>
@@ -78,6 +79,13 @@
               </td>
             </tr>
           </tbody>
+          <tfoot>
+            <tr>
+              <div>
+                
+              </div>
+            </tr>
+          </tfoot>
         </v-table>
       </v-card>
     </div>
@@ -107,7 +115,8 @@ export default {
       itemsPerPage: 5,
       items: [],
       post: null,
-      event: 'updateAdminTable'
+      event: 'updateAdminTable',
+      page: 1,
     }
   },
   methods: {
