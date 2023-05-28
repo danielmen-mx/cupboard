@@ -63,7 +63,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100px;
-  background: url('public/images/wave.png');
+  background: url('/images/wave.png');
   background-size: 1000px 100px;
 }
 
