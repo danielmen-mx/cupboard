@@ -80,11 +80,9 @@
             </tr>
           </tbody>
           <tfoot>
-            <tr>
-              <div>
-                
-              </div>
-            </tr>
+            <div
+              
+            ></div>
           </tfoot>
         </v-table>
       </v-card>
