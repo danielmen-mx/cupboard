@@ -26,7 +26,7 @@ export default {
         if (this.windowSize.height < 700) {
           this.widthPostCard = 'auto'
           this.words = 130
-          this.postNameText = 15
+          this.postNameText = 16
           this.titleText = 'text-h4'
         }
         if (this.windowSize.height < 450) {
@@ -39,7 +39,7 @@ export default {
         if (this.windowSize.height > 700) {
           this.widthPostCard = '588'
           this.words = 230
-          this.postNameText = 20
+          this.postNameText = 16
           this.titleText = 'text-h3'
         }
   
