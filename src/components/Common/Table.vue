@@ -7,6 +7,7 @@ export default {
       items: [],
       item: null,
       itemId: null,
+      itemsPerPage: 15,
       // query: {},
       preventSnackbar: false,
       preventRemoveItem: false,
