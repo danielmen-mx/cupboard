@@ -14,12 +14,12 @@
       <v-btn
         :disabled="backDisabled"
         variant="text"
-        @click="back()"
+        @click="movePosition(`--`)"
       ><v-icon>mdi-arrow-left</v-icon></v-btn>
       <v-btn
         :disabled="forwardDisabled"
         variant="text"
-        @click="forward()"
+        @click="movePosition(`++`)"
       ><v-icon>mdi-arrow-right</v-icon></v-btn>
     </div>
   </v-card>
@@ -64,16 +64,15 @@ export default {
       this.pageRequested = this.properties.current_page
     },
     dispatchNewProperties() {
+      // TODO: when you're in the last page of the pagination && change the 'items_per_page' something goes broken...
       this.fireEvent('updatePaginationTable', {
-        'per_page': parseInt(this.properties.items_per_page),
+        'per_page': this.properties.items_per_page,
         'page': parseInt(this.pageRequested)
       })
     },
-    back() {
-      this.pageRequested = (this.properties.current_page - 1)
-    },
-    forward() {
-      this.pageRequested = (this.properties.current_page + 1)
+    movePosition(operation) {
+      if (operation === '++') this.pageRequested = this.properties.current_page + 1
+      if (operation === '--') this.pageRequested = this.properties.current_page - 1
     }
   },
   mounted() {
