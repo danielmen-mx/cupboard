@@ -79,12 +79,9 @@
               </td>
             </tr>
           </tbody>
-          <tfoot>
-            <div
-              
-            ></div>
-          </tfoot>
         </v-table>
+        <v-divider></v-divider>
+        <Pagination :pagination_values="paginationProps" :per_page="query"/>
       </v-card>
     </div>
   </template>
@@ -96,6 +93,7 @@ import { formatDate, slugify, countArray } from '../../utils/helpers'
 import Table from '@/components/Common/Table.vue'
 import AdminPostsEmptyState from '../Common/EmptyState/AdminPostsEmptyState.vue'
 import AdminPostsSkeleton from '../Common/Skeletons/AdminPostsSkeleton.vue'
+import Pagination from '../Common/Pagination.vue'
 
 export default {
   extends: Table,
@@ -104,17 +102,20 @@ export default {
   components: {
     PostForm,
     AdminPostsEmptyState,
-    AdminPostsSkeleton
+    AdminPostsSkeleton,
+    Pagination
   },
   data () {
     return {
       loading: false,
       apiService: PostService,
-      itemsPerPage: 5,
       items: [],
       post: null,
       event: 'updateAdminTable',
-      page: 1,
+      query: {
+        per_page: 15,
+        page: 1
+      }
     }
   },
   methods: {
@@ -134,11 +135,17 @@ export default {
 
       let split = imageName.split('/')
       return split[split.length - 1]
+    },
+    updatePagination(properties) {
+      if (this.query.per_page === properties.per_page && this.query.page === properties.page) return
+      this.query = properties
+      this.getItems()
     }
   },
   mounted() {
     this.getItems()
     this.listenEvent(this.event, this.getItems)
-  },
+    this.listenEvent('updatePaginationTable', this.updatePagination)
+  }
 }
 </script>
