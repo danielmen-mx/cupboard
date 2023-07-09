@@ -6,7 +6,7 @@
         v-model="properties.items_per_page"
         :items="['15', '25', '50']"
         variant="outlined"
-        
+        :disabled="itemsPerPageDisabled"
       ></v-select>
     </div>
     <p class="pa-4 ml-2">{{ properties.first_item }} - {{ properties.last_item }} of {{ properties.total_items }}</p>
@@ -46,6 +46,9 @@ export default {
       if (this.properties.current_page === this.properties.last_page) return true
 
       return false
+    },
+    itemsPerPageDisabled() {
+      // TODO: avoid that the elements per page can be modified if the number of elements is greater than the rest of the elements to be displayed
     }
   },
   methods: {
