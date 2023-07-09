@@ -5,10 +5,14 @@ export default {
     return {
       apiService: null,
       items: [],
+      paginationProps: [],
       item: null,
       itemId: null,
       itemsPerPage: 15,
-      // query: {},
+      query: {
+        per_page: 15,
+        page: 1
+      },
       preventSnackbar: false,
       preventRemoveItem: false,
       preventReload: false,
@@ -56,12 +60,15 @@ export default {
         // console.log(resp)
         
         this.items = resp.data
+        this.paginationProps = resp.pagination??resp.pagination
+
         if (!this.preventSnackbar) {
           this.successSnackbar(resp.message)
         }
 
         this.loading = false
         this.successCallBack()
+        // console.log('response: ', resp)
       } catch (error) {
         console.log(error)
         this.loading = false
