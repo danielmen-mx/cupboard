@@ -71,8 +71,7 @@ export default {
       })
     },
     movePosition(operation) {
-      if (operation === '++') this.pageRequested = this.properties.current_page + 1
-      if (operation === '--') this.pageRequested = this.properties.current_page - 1
+      this.pageRequested = operation === '++' ? this.properties.current_page + 1 : this.properties.current_page - 1
     }
   },
   mounted() {
