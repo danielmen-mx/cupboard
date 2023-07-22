@@ -1,15 +1,15 @@
 <template>
-  <v-card class="d-flex justify-end bg-grey-lighten-3 elevation-0" style="height: 6.2vh;">
-    <p class="pa-4">Items per page:</p>
-    <div>
+  <div class="d-flex justify-end bg-grey-lighten-3">
+    <div class="d-flex">
+      <p class="pa-4">Items per page:</p>
       <v-select
         v-model="properties.items_per_page"
         :items="['15', '25', '50']"
-        variant="outlined"
+        variant=""
         :disabled="itemsPerPageDisabled"
       ></v-select>
     </div>
-    <p class="pa-4 ml-2">{{ properties.first_item }} - {{ properties.last_item }} of {{ properties.total_items }}</p>
+    <p class="pa-4">{{ properties.first_item }} - {{ properties.last_item }} of {{ properties.total_items }}</p>
     <div class="pa-2">
       <v-btn
         :disabled="backDisabled"
@@ -22,7 +22,7 @@
         @click="movePosition(`++`)"
       ><v-icon>mdi-arrow-right</v-icon></v-btn>
     </div>
-  </v-card>
+  </div>
 </template>
 <script>
 export default {
