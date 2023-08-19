@@ -192,15 +192,8 @@
           </v-row>
         </div>
         <v-divider></v-divider>
-
-        <!-- TODO: connect pagination with API -->
         <div class="text-center">
-          <v-pagination
-            v-model="page"
-            :length="4"
-            prev-icon="mdi-menu-left"
-            next-icon="mdi-menu-right"
-          ></v-pagination>
+          <HomePagination :pagination_values="paginationProps" :per_page="query" />
         </div>
       </v-card>
     </div>
@@ -213,6 +206,7 @@ import Table from '../Common/Table.vue'
 import Presentation from './Presentation.vue'
 import HomeSkeleton from '@/components/Common/Skeletons/HomeSkeleton.vue'
 import HomeEmptyState from '../Common/EmptyState/HomeEmptyState.vue'
+import HomePagination from '../Common/HomePagination.vue'
 import { initials } from '../../utils/helpers'
 
 export default {
@@ -222,17 +216,21 @@ export default {
   components: {
     Presentation,
     HomeSkeleton,
-    HomeEmptyState
+    HomeEmptyState,
+    HomePagination
   },
   data() {
     return {
       loading: false,
       apiService: PostService,
       chance: 1,
-      page: 1,
       items: [],
       configuration: {},
-      preventSnackbar: true
+      preventSnackbar: true,
+      query: {
+        per_page: 15,
+        page: 1
+      }
     }
   },
   methods: {
@@ -252,21 +250,30 @@ export default {
     async addReaction(post) {
       // let react = await axios.post()
 
-      if (this.chance > 0) {
-        this.chance = 0
-        return post.reaction = post.reaction + 1
-      }
+      // if (this.chance > 0) {
+      //   this.chance = 0
+      //   return post.reaction = post.reaction + 1
+      // }
 
-      this.chance = 1
-      return post.reaction = post.reaction - 1
+      // this.chance = 1
+      // return post.reaction = post.reaction - 1
+
+      // post.reaction doesn't exists anymore, you need to improve the "add reaction button" adding the user who is reacting to this post
+      // send the user && the reaction
     },
     transformText(text) {
       let newText = text.replace(/(<([^>]+)>)/ig, '')
       return this.strLimit(newText, this.words)
+    },
+    updatePagination(properties) {
+      if (this.query.per_page === properties.per_page && this.query.page === properties.page) return
+      this.query = properties
+      this.getItems()
     }
   },
   mounted() {
     this.getItems()
+    this.listenEvent('updateHomePaginationTable', this.updatePagination)
   },
 }
 </script>
