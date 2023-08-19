@@ -1,31 +1,5 @@
-<template>
-  <div class="d-flex justify-end bg-grey-lighten-3">
-    <div class="d-flex">
-      <p class="pa-4">Items per page:</p>
-      <v-select
-        v-model="properties.items_per_page"
-        :items="['15', '25', '50']"
-        variant=""
-        :disabled="itemsPerPageDisabled"
-      ></v-select>
-    </div>
-    <p class="pa-4">{{ properties.first_item }} - {{ properties.last_item }} of {{ properties.total_items }}</p>
-    <div class="pa-2">
-      <v-btn
-        :disabled="backDisabled"
-        variant="text"
-        @click="movePosition(`--`)"
-      ><v-icon>mdi-arrow-left</v-icon></v-btn>
-      <v-btn
-        :disabled="forwardDisabled"
-        variant="text"
-        @click="movePosition(`++`)"
-      ><v-icon>mdi-arrow-right</v-icon></v-btn>
-    </div>
-  </div>
-</template>
+<template></template>
 <script>
-// IMPORTANT: in the line 8 v-select > variant property is empty, keep as it is because there's no way to use the style we need
 export default {
   props: {
     pagination_values: {
@@ -36,6 +10,8 @@ export default {
   data: () => ({
     properties: [],
     pageRequested: null,
+    currentPage: null,
+    lastPage: 0
   }),
   computed: {
     backDisabled() {
@@ -66,12 +42,15 @@ export default {
       }
 
       this.pageRequested = this.properties.current_page
+      this.lastPage = this.properties.last_page
+      this.currentPage = this.properties.current_page
     },
-    dispatchNewProperties() {
+    dispatchNewProperties(target) {
+      let page = target === 'updatePaginationTable' ? this.pageRequested : this.currentPage
       // TODO: when you're in the last page of the pagination && change the 'items_per_page' something goes broken...
-      this.fireEvent('updatePaginationTable', {
+      this.fireEvent(target, {
         'per_page': this.properties.items_per_page,
-        'page': parseInt(this.pageRequested)
+        'page': parseInt(page)
       })
     },
     movePosition(operation) {
@@ -80,22 +59,6 @@ export default {
   },
   mounted() {
     this.setProperties()
-  },
-  watch: {
-    'properties.items_per_page': {
-      handler: function () {
-        if (!this.properties.items_per_page) return
-        this.dispatchNewProperties()
-      },
-      deep: true,
-      immediate: true
-    },
-    'pageRequested': {
-      handler: function () {
-        if (!this.pageRequested || this.pageRequested === this.properties.current_page) return
-        this.dispatchNewProperties()
-      }
-    }
   }
 }
 </script>
