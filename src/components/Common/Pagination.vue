@@ -25,6 +25,7 @@
   </div>
 </template>
 <script>
+// IMPORTANT: in the line 8 v-select > variant property is empty, keep as it is because there's no way to use the style we need
 export default {
   props: {
     pagination_values: {
