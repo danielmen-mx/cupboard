@@ -206,7 +206,7 @@ import Table from '../Common/Table.vue'
 import Presentation from './Presentation.vue'
 import HomeSkeleton from '@/components/Common/Skeletons/HomeSkeleton.vue'
 import HomeEmptyState from '../Common/EmptyState/HomeEmptyState.vue'
-import HomePagination from '../Common/HomePagination.vue'
+import HomePagination from '../Common/Paginations/Home.vue'
 import { initials } from '../../utils/helpers'
 
 export default {

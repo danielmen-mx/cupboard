@@ -81,7 +81,7 @@
           </tbody>
         </v-table>
         <v-divider></v-divider>
-        <Pagination :pagination_values="paginationProps" :per_page="query"/>
+        <AdminPagination :pagination_values="paginationProps" :per_page="query"/>
       </v-card>
     </div>
   </template>
@@ -93,7 +93,7 @@ import { formatDate, slugify, countArray } from '../../utils/helpers'
 import Table from '@/components/Common/Table.vue'
 import AdminPostsEmptyState from '../Common/EmptyState/AdminPostsEmptyState.vue'
 import AdminPostsSkeleton from '../Common/Skeletons/AdminPostsSkeleton.vue'
-import Pagination from '../Common/Pagination.vue'
+import AdminPagination from '../Common/Paginations/Admin.vue'
 
 export default {
   extends: Table,
@@ -103,7 +103,7 @@ export default {
     PostForm,
     AdminPostsEmptyState,
     AdminPostsSkeleton,
-    Pagination
+    AdminPagination
   },
   data () {
     return {
