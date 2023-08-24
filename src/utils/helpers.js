@@ -84,6 +84,27 @@ export const countArray = {
   },
 }
 
+export const indexPair = {
+  methods: {
+    indexPair(i) {
+      if (Number.isInteger(i / 2)) return true
+      return false
+    },
+  }
+}
+
+export const findItemById = {
+  methods: {
+    findItemById(items, target) {
+      let match = items.find(item => item.id === target)
+
+      if (!match) return null
+
+      return match
+    }
+  },
+}
+
 export const initials = {
   methods: {
     initials(sentence) {
