@@ -34,8 +34,7 @@ export default {
     },
   },
   methods: {
-    successCallBack() {},
-    // store() - update()
+    successCallBack(data = null) {},
     async submit() {
       if (!this.form) return
 
@@ -62,7 +61,7 @@ export default {
 
         this.formComplete = false
         this.form = {}
-        this.successCallBack()
+        this.successCallBack(resp.data)
       } catch (error) {
         console.log(error)
       }
