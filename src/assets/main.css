@@ -70,6 +70,15 @@
   }
 }
 
+/** Simple Star Image */
+.star {
+  background-color: hsl(200, 20%, 75%);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  display: inline-block;
+  height: 2vh;
+  width: 1.2vw;
+}
+
 /* Footer configuration to keep on the bottom the <div /> */
 .keep-footer {
   position: fixed;
