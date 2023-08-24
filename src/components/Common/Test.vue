@@ -1,16 +1,19 @@
 <template>
-  <v-data-iterator :items="items" :page="page">
-    <template v-slot:default="{ items }">
-      <template
-        v-for="(item, i) in items"
-        :key="i"
-      >
-        <v-card v-bind="item.raw"></v-card>
-
-        <br>
-      </template>
-    </template>
-  </v-data-iterator>
+  <div class="d-flex">
+    <v-avatar class="skeleton my-2 mr-2" size="45" height="5vh"></v-avatar>
+    <div class="d-flex flex-column justify-space-between">
+      <v-sheet class="skeleton rounded ma-1 pa-1 mt-2" height="2vh" width="7vw"></v-sheet>
+      <v-sheet class="skeleton rounded ma-1 pa-1 mb-2" height="2vh" width="3vw"></v-sheet>
+    </div>
+    <v-spacer></v-spacer>
+    <div class="d-flex align-center justify-center">
+      <v-icon class="me-1" icon="mdi-heart" color="grey-darken-1"></v-icon>
+      <span class="me-2" color="grey-darken-1">0</span>
+      <span class="me-1" color="grey-darken-1">·</span>
+      <v-icon class="me-1" icon="mdi-comment" color="grey-darken-1"></v-icon>
+      <span class="subheading me-2">0</span>
+    </div>
+  </div>
 </template>
 <script>
 export default {
