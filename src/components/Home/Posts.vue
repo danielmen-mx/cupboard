@@ -5,7 +5,6 @@
     <div v-else>
       <Presentation />
       <v-divider class="mt-1"></v-divider>
-      <!-- <v-skeleton-loader type="card-avatar"></v-skeleton-loader> -->
       <v-card class="elevation-0">
         <div
           v-for="(post, i) in items"
@@ -52,19 +51,7 @@
                       >
                         {{ strLimit(post.name, postNameText) }}
                       </p>
-                      <v-row class="mx-0 pb-2" >
-                        <v-rating
-                          :model-value="post.rating"
-                          color="amber"
-                          density="compact"
-                          half-increments
-                          readonly
-                          size="small"
-                        ></v-rating>
-                        <div class="text-grey ms-4">
-                          {{ post.rating }} stars ({{ post.reactions.length }} reactions)
-                        </div>
-                      </v-row>
+                      <Ratings parent_class="mx-0 pb-2" :parent_post="post" />
                     </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text >
@@ -72,28 +59,7 @@
                     </v-card-text>
                     <v-divider></v-divider>
                     <v-card-actions :style="{height: actionHeight}">
-                      <v-list-item class="w-100">
-                        <template v-slot:prepend>
-                          <v-avatar color="pink-lighten-1" >
-                            <span class="text-h5">{{ initials(post.autor) }}</span>
-                          </v-avatar>
-                        </template>
-                        <v-list-item-title>
-                          {{ post.autor }}
-                        </v-list-item-title>
-                        <v-list-item-subtitle>
-                          Autor
-                        </v-list-item-subtitle>
-                        <template v-slot:append>
-                          <div class="justify-self-end fix-height">
-                            <v-icon class="me-1" icon="mdi-heart" color="red" @click="addReaction(post)"></v-icon>
-                            <span class="subheading me-2">{{ post.reactions.length }}</span>
-                            <span class="me-1">·</span>
-                            <v-icon class="me-1" icon="mdi-comment" color="blue" @click="redirect(post.id, true)"></v-icon>
-                            <span class="subheading">{{ post.comments.length }}</span>
-                          </div>
-                        </template>
-                      </v-list-item>
+                      <Actions parent_class="justify-self-end fix-height" :parent_post="post" />
                     </v-card-actions>
                   </v-card>
                 </template>
@@ -119,22 +85,7 @@
                       >
                         {{ strLimit(post.name, postNameText) }}
                       </p>
-                      <v-row
-                        class="mx-0 pb-2 d-flex flex-row-reverse"
-                      >
-                        <v-rating
-                          :model-value="post.rating"
-                          color="amber"
-                          density="compact"
-                          half-increments
-                          readonly
-                          size="small"
-                        ></v-rating>
-        
-                        <div class="text-grey ms-4">
-                          {{ post.rating }} stars ({{ post.reactions.length }} reactions)
-                        </div>
-                      </v-row>
+                      <Ratings parent_class="mx-0 pb-2 d-flex flex-row-reverse" :parent_post="post" />
                     </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text>
@@ -144,24 +95,7 @@
                     </v-card-text>
                     <v-divider></v-divider>
                     <v-card-actions :style="{height: actionHeight}">
-                      <v-list-item class="w-100">
-                        <template v-slot:prepend>
-                          <v-avatar color="orange-darken-4" >
-                            <span class="text-h5">{{ initials(post.autor) }}</span>
-                          </v-avatar>
-                        </template>
-                        <v-list-item-title>{{ post.autor }}</v-list-item-title>
-                        <v-list-item-subtitle>Autor</v-list-item-subtitle>
-                        <template v-slot:append>
-                          <div class="justify-self-end">
-                            <v-icon class="me-1" icon="mdi-heart" color="red" @click="addReaction(post)"></v-icon>
-                            <span class="subheading me-2">{{ post.reactions.length }}</span>
-                            <span class="me-1">·</span>
-                            <v-icon class="me-1" icon="mdi-comment" color="blue" @click="redirect(post.id, true)"></v-icon>
-                            <span class="subheading">{{ post.comments.length }}</span>
-                          </div>
-                        </template>
-                      </v-list-item>
+                      <Actions parent_class="justify-self-end" :parent_post="post" />
                     </v-card-actions>
                   </v-card>
                 </template>
@@ -207,23 +141,26 @@ import Presentation from './Presentation.vue'
 import HomeSkeleton from '@/components/Common/Skeletons/HomeSkeleton.vue'
 import HomeEmptyState from '../Common/EmptyState/HomeEmptyState.vue'
 import HomePagination from '../Common/Paginations/Home.vue'
-import { initials } from '../../utils/helpers'
+import Actions from './Actions.vue'
+import Ratings from './Ratings.vue'
+import { findItemById, indexPair } from '../../utils/helpers'
 
 export default {
-  mixins: [initials, Table],
+  mixins: [Table, findItemById, indexPair],
   extends: ResponsivePosts,
   inject: ['strLimit'],
   components: {
     Presentation,
     HomeSkeleton,
     HomeEmptyState,
-    HomePagination
+    HomePagination,
+    Actions,
+    Ratings
   },
   data() {
     return {
       loading: false,
       apiService: PostService,
-      chance: 1,
       items: [],
       configuration: {},
       preventSnackbar: true,
@@ -234,10 +171,6 @@ export default {
     }
   },
   methods: {
-    indexPair(i) {
-      if (Number.isInteger(i / 2)) return true
-      return false
-    },
     redirect(id, focusCommentInput = false) {
       this.$router.push({ path: '/post/' + id })
 
@@ -247,20 +180,6 @@ export default {
         this.fireEvent('focus-comment-input')
       })
     },
-    async addReaction(post) {
-      // let react = await axios.post()
-
-      // if (this.chance > 0) {
-      //   this.chance = 0
-      //   return post.reaction = post.reaction + 1
-      // }
-
-      // this.chance = 1
-      // return post.reaction = post.reaction - 1
-
-      // post.reaction doesn't exists anymore, you need to improve the "add reaction button" adding the user who is reacting to this post
-      // send the user && the reaction
-    },
     transformText(text) {
       let newText = text.replace(/(<([^>]+)>)/ig, '')
       return this.strLimit(newText, this.words)
@@ -269,11 +188,41 @@ export default {
       if (this.query.per_page === properties.per_page && this.query.page === properties.page) return
       this.query = properties
       this.getItems()
-    }
+    },
+    updatePost(resp) {
+      let newObj = []
+      let match = this.findItemById(this.items, resp.id)
+
+      if (match) {
+        newObj = this.items.map(function (item) {
+          if (item.id === resp.id) {
+            return resp
+          }
+  
+          return item
+        })
+      } else {
+        newObj.push(resp)
+      }
+
+      this.items = newObj
+    },
+    postReactions(reactions) {
+      let num = 0
+      reactions.map(reaction => {
+        if (reaction.reaction === true) num++
+      })
+
+      return num
+    },
+  },
+  computed: {
+    
   },
   mounted() {
     this.getItems()
-    this.listenEvent('updateHomePaginationTable', this.updatePagination)
+    this.listenEvent('update-reactions', this.updatePost)
+    this.listenEvent('update-home-pagination-table', this.updatePagination)
   },
 }
 </script>
