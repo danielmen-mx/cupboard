@@ -21,7 +21,7 @@ export default {
   },
   data() {
     return {
-      event: 'updateHomePaginationTable'
+      event: 'update-home-pagination-table'
     }
   },
   mounted() {
