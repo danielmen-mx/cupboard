@@ -102,8 +102,9 @@ export default {
       this.setForm()
     },
     setForm() {
+      let user = this.setUserVar()
       this.form.post_id = this.post.id
-      this.form.user_id = this.setUserId().id
+      this.form.user_id = !user ? null : user.id
       this.setReaction()
     }
   },

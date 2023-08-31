@@ -68,7 +68,7 @@ export default {
 
       this.loading = false
     },
-    setUserId() {
+    setUserVar() {
       let user = store.getters['user']
 
       if (!user) return

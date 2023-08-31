@@ -75,7 +75,7 @@ export default {
     },
     setForm() {
       this.form.post_id = this.$route.params.id
-      this.form.user_id = this.setUserId().id
+      this.form.user_id = this.setUserVar().id
     }
   },
   mounted() {
