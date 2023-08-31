@@ -10,7 +10,7 @@
     <v-list-item-subtitle>Autor</v-list-item-subtitle>
     <template v-slot:append>
       <div :class="mainClass">
-        <v-icon class="me-1" icon="mdi-heart" color="red" @click="submit()"></v-icon>
+        <v-icon class="me-1" icon="mdi-heart" color="red" @click="react()"></v-icon>
         <span class="subheading me-2">{{ postReactions }}</span>
         <span class="me-1">·</span>
         <v-icon class="me-1" icon="mdi-comment" color="blue" @click="redirect(post.id, true)"></v-icon>
@@ -21,10 +21,10 @@
 </template>
 <script>
 import HomeActionsSkeleton from '@/components/Common/Skeletons/HomeActionsSkeleton.vue'
-import store from '../../store'
 import Form from '../Common/Form.vue'
 import ReactionService from '@/services/ReactionService'
 import { initials, findItemById } from '../../utils/helpers'
+import { isAuthenticated } from '../../utils/authentication'
 
 export default {
   extends: Form,
@@ -66,6 +66,13 @@ export default {
       if (!focusCommentInput) return
 
       this.$nextTick(() => { this.fireEvent('focus-comment-input') })
+    },
+    react() {
+      let logged = isAuthenticated()
+
+      if (!logged) return this.$router.push({ path: '/login' })
+
+      this.submit()
     },
     setReaction() {
       if (this.reactions.length <= 0) return this.form.reaction = true
