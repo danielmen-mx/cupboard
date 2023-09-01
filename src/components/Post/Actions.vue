@@ -68,10 +68,11 @@ export default {
 
       return reaction
     },
-    successCallBack() {
+    successCallBack(resp) {
       this.setForm()
       this.form.reaction = !this.reacted
       this.reacted = !this.reacted
+      this.$nextTick(() => { this.fireEvent('update-rating-in-post', resp.post) })
     },
     setForm() {
       this.form.post_id = this.$route.params.id

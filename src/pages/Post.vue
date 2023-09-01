@@ -26,12 +26,12 @@
         </div>
         <div class="d-flex align-center">
           <v-rating
-            :model-value="item.rating"
+            :model-value="item.rating.review"
             readonly
             color="amber"
           ></v-rating>
           <p class="text-grey" :class="fontInfoText">
-            {{ item.rating }} stars | ({{ commentsLenght }} comentarios) | {{ formatDate(item.created_at) }}
+            {{ item.rating.review }} stars | ({{ commentsLenght }} comentarios) | {{ formatDate(item.created_at) }}
           </p>
         </div>
         <v-divider></v-divider>
@@ -92,6 +92,9 @@ export default {
     },
     reduceCommentLenght() {
       this.commentsLenght = this.commentsLenght - 1
+    },
+    updateRating(post) {
+      this.item.rating = post.rating
     }
   },
   computed: {
@@ -107,10 +110,12 @@ export default {
     this.getCommentLength()
     this.listenEvent("add-new-comment-length", this.addCommentLenght)
     this.listenEvent("remove-comment-lenght", this.reduceCommentLenght)
+    this.listenEvent("update-rating-in-post", this.updateRating)
   },
   beforeDestroy() {
     this.unlistenEvent("add-new-comment-length", this.addCommentLenght)
     this.unlistenEvent("remove-comment-lenght", this.reduceCommentLenght)
+    this.unlistenEvent("update-rating-in-post", this.updateRating)
   },
 }
 </script>
