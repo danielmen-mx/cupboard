@@ -90,6 +90,14 @@ export default {
       let newObj = []
       let match = this.findItemById(this.reactions, resp.id)
 
+      // TODO: improve this merequetengue
+      // map the reactions array:
+      // if its empty add the resp
+      // if contain something:
+        // map the content to check if the reaction.id match with the resp.id
+        // if match replace the content of the reaction with the resp
+        // if isnt match just add the reaction in the newObj, dont change nothing
+      // the result would be the newObj with the right values
       if (match) {
         newObj = this.reactions.map(function (reaction) {
           if (reaction.id === resp.id) {
@@ -99,6 +107,10 @@ export default {
           return reaction
         })
       } else {
+        if (this.reactions.length >= 1) {
+          newObj = this.reactions
+        }
+
         newObj.push(resp)
       }
 
