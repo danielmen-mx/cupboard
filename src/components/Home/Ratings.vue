@@ -44,14 +44,14 @@ export default {
   methods: {
     setData() {
       this.customClass = this.parent_class
-      this.rating = this.parent_post.rating
+      this.rating = this.parent_post.rating.review
       this.reactionsArr = this.parent_post.reactions
       this.reactions = this.postReactions
       this.loading = false
     },
     updateReactions(resp) {
       if (this.parent_post.id !== resp.id) return
-      this.rating = resp.rating
+      this.rating = resp.rating.review
       this.reactionsArr = resp.reactions
       this.reactions = this.postReactions
     }
@@ -67,7 +67,7 @@ export default {
       })
 
       return num
-    },
+    }
   },
   mounted() {
     this.setData()

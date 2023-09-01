@@ -83,6 +83,8 @@ export default {
           this.form.reaction = !reaction.reaction
         }
       })
+
+      if (this.form.reaction == null) this.form.reaction = true
     },
     updateItems(resp) {
       let newObj = []
@@ -102,6 +104,7 @@ export default {
 
       this.reactions = newObj
       this.parent_post.reactions = newObj
+      this.parent_post.rating = resp.post.rating
       this.$nextTick(() => { this.fireEvent('update-reactions', this.parent_post) })
     },
     successCallBack(resp) {
