@@ -93,8 +93,23 @@ export default {
     reduceCommentLenght() {
       this.commentsLenght = this.commentsLenght - 1
     },
-    updateRating(post) {
-      this.item.rating = post.rating
+    updatePost(resp) {
+      this.item.rating = resp.post.rating
+
+      if (this.item.reactions.length <= 0) {
+        this.item.reactions[0] = resp
+        return
+      }
+
+      let reactionsUpdated = this.item.reactions.map(function (reaction) {
+        if (reaction.id === resp.id) {
+          return resp
+        }
+
+        return reaction
+      })
+
+      this.item.reactions = reactionsUpdated
     }
   },
   computed: {
@@ -105,17 +120,16 @@ export default {
   mounted() {
     this.itemId = this.$route.params.id
     if (!this.itemId) return this.$router.push('/')
-    // this.commentLength = 0
     this.getItem()
     this.getCommentLength()
     this.listenEvent("add-new-comment-length", this.addCommentLenght)
     this.listenEvent("remove-comment-lenght", this.reduceCommentLenght)
-    this.listenEvent("update-rating-in-post", this.updateRating)
+    this.listenEvent("update-post-reaction-rating", this.updatePost)
   },
   beforeDestroy() {
     this.unlistenEvent("add-new-comment-length", this.addCommentLenght)
     this.unlistenEvent("remove-comment-lenght", this.reduceCommentLenght)
-    this.unlistenEvent("update-rating-in-post", this.updateRating)
+    this.unlistenEvent("update-post-reaction-rating", this.updatePost)
   },
 }
 </script>

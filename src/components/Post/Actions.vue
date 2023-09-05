@@ -1,11 +1,11 @@
 <template>
-  <v-card-actions>
+  <v-card-actions >
     <v-form
       ref="form"
       @submit.prevent="submit"
     >
       <v-btn
-        v-if="reacted"
+        v-if="!reacted"
         :loading="loading"
         color="orange"
         type="submit"
@@ -32,9 +32,11 @@
 <script>
 import ReactionService from '@/services/ReactionService'
 import Form from '../Common/Form.vue'
+import { findItemById } from '../../utils/helpers'
 
 export default {
   extends: Form,
+  mixins: [findItemById],
   props: {
     post_reactions: {
       type: Array,
@@ -44,6 +46,7 @@ export default {
   data() {
     return {
       apiService: ReactionService,
+      reactions: {},
       form: {},
       reacted: false,
       itemId: null,
@@ -55,34 +58,61 @@ export default {
     focusInput() {
       this.fireEvent('focus-comment-input')
     },
-    userHasReacted() {
-      if (!this.post_reactions) return
+    setData() {
+      if (this.reactions.length <= 0) return this.reacted = false
 
-      let reaction = true
-      let match = this.post_reactions.find(i => i.user.id === this.form.user_id)
+      let match = this.reactions.find(item => item.user.id === this.form.user_id)
 
-      if (match) {
-        reaction = !match.reaction
-        this.itemId = match.id
+      if (!match) return
+
+      this.setReaction(match)
+    },
+    updateReactions(resp) {
+      if (this.reactions <= 0) {
+        this.reactions[0] = resp
+        this.setReaction(resp)
+        return
       }
 
-      return reaction
+      let match = this.findItemById(this.reactions, resp.id)
+
+      if (!match) {
+        this.reactions.push(resp)
+        this.setReaction(resp)
+        return
+      }
+
+      let reactionsUpdated = this.reactions.map(function (reaction) {
+        if (reaction.id === resp.id) {
+          return resp
+        }
+
+        return reaction
+      })
+
+      this.reactions = reactionsUpdated
+      this.setReaction(resp)
+    },
+    setReaction(react) {
+      this.itemId = react.id
+      this.reacted = react.reaction
+      this.form.reaction = !react.reaction
     },
     successCallBack(resp) {
       this.setForm()
-      this.form.reaction = !this.reacted
-      this.reacted = !this.reacted
-      this.$nextTick(() => { this.fireEvent('update-rating-in-post', resp.post) })
+      this.$nextTick(() => { this.fireEvent('update-post-reaction-rating', resp) })
+      this.updateReactions(resp)
     },
     setForm() {
+      this.reactions = this.post_reactions
       this.form.post_id = this.$route.params.id
       this.form.user_id = this.setUserVar().id
+      this.form.reaction = true
     }
   },
   mounted() {
     this.setForm()
-    this.form.reaction = this.userHasReacted()
-    this.reacted = this.userHasReacted()  
+    this.setData()
   },
 }
 </script>
