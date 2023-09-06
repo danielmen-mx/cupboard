@@ -10,7 +10,7 @@
     <v-list-item-subtitle>Autor</v-list-item-subtitle>
     <template v-slot:append>
       <div :class="mainClass">
-        <v-icon class="me-1" icon="mdi-heart" color="red" @click="react()"></v-icon>
+        <v-icon :class="heartClass" :icon="heartIcon" :color="heartColor" @click="react()"></v-icon>
         <span class="subheading me-2">{{ postReactions }}</span>
         <span class="me-1">·</span>
         <v-icon class="me-1" icon="mdi-comment" color="blue" @click="redirect(post.id, true)"></v-icon>
@@ -48,6 +48,8 @@ export default {
       post: {},
       form: {},
       itemId: null,
+      heartColor: 'grey',
+      heartClass: 'me-1',
       apiService: ReactionService,
       mainClass: 'justify-self-end',
       loading: true,
@@ -142,6 +144,20 @@ export default {
 
       return num
     },
+    heartIcon() {
+      let user = this.setUserVar()
+      if (!user || this.reactions.length <= 0) return 'mdi-heart'
+
+      let userHasReacted = this.reactions.find(item => item.user.id === user.id)
+
+      if (!userHasReacted) return 'mdi-heart'
+
+      this.heartColor = 'red'
+      if (userHasReacted.reaction == false) return 'mdi-heart-broken'
+
+      this.heartClass = "me-1 bum-bum"
+      return 'mdi-heart'
+    }
   },
   mounted() {
     this.setData()
@@ -150,3 +166,23 @@ export default {
   },
 }
 </script>
+<style>
+.bum-bum {
+  transform: scale(1);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.85);
+    }
+
+    70% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(0.85);
+    }
+}
+</style>
