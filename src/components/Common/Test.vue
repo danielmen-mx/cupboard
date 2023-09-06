@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex">
+  <!-- <div class="d-flex">
     <v-avatar class="skeleton my-2 mr-2" size="45" height="5vh"></v-avatar>
     <div class="d-flex flex-column justify-space-between">
       <v-sheet class="skeleton rounded ma-1 pa-1 mt-2" height="2vh" width="7vw"></v-sheet>
@@ -13,7 +13,9 @@
       <v-icon class="me-1" icon="mdi-comment" color="grey-darken-1"></v-icon>
       <span class="subheading me-2">0</span>
     </div>
-  </div>
+  </div> -->
+  <p>Something</p>
+  <p>{{ $t('nav.admin') }}</p>
 </template>
 <script>
 export default {

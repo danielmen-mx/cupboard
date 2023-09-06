@@ -13,7 +13,7 @@
           variant="text"
           @click="visible = false"
         >
-          Close
+          {{ $t("close") }}
         </v-btn>
       </template>
     </v-snackbar>

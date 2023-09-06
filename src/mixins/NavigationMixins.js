@@ -10,49 +10,49 @@ export default {
       night: false,
       userSettings: [
         {
-          title: 'Configuraciones',
+          title: 'user-settings.settings',
           // icon: 'mdi-settings',
           icon: 'mdi-wrench',
           path: ""
         },
         {
-          title: 'Carrito',
+          title: 'user-settings.cart',
           icon: 'mdi-cart',
           path: ""
         },
         {
-          title: 'Mis compras',
+          title: 'user-settings.shopping',
           icon: 'mdi-shopping',
           path: ""
         },
       ],
       items: [
         {
-          title: 'Admin',
+          title: "nav.admin",
           icon: 'mdi-account-circle',
           require_admin: true,
           path: '/admin'
         },
         {
-          title: 'Home',
+          title: 'nav.home',
           icon: 'mdi-home',
           require_admin: false,
           path: '/'
         },
         {
-          title: 'Store',
+          title: 'nav.store',
           icon: 'mdi-store',
           require_admin: false,
           path: '/store'
         },
         {
-          title: 'Reviews',
+          title: 'nav.reviews',
           icon: 'mdi-star-circle',
           require_admin: false,
           path: '/review'
         },
         {
-          title: 'Contact',
+          title: 'nav.contact',
           icon: 'mdi-account',
           require_admin: false,
           path: '/contact'

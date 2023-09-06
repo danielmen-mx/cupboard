@@ -5,7 +5,7 @@
         <v-icon :icon="themeIcon"></v-icon>
       </template>
 
-      <v-list-item-title>Cambiar tema</v-list-item-title>
+      <v-list-item-title>{{ $t("user-settings.toggle-theme") }}</v-list-item-title>
     </v-list-item>
   </v-list>
 </template>

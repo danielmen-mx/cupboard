@@ -11,7 +11,7 @@
     ></v-rating>
 
     <div class="text-grey ms-4">
-      {{ rating }} stars ({{ reactions }} reactions)
+      {{ rating }} {{ $t("home.stars") }} ({{ reactions }} {{ $t("home.reactions") }})
     </div>
   </v-row>
 </template>

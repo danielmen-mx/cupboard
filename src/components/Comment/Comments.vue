@@ -39,7 +39,7 @@
             class="text-decoration-underline"
             @click="edit(comment)"
           >
-            Editar
+            {{ $t("edit") }}
           </v-btn>
           <v-btn
             :disabled="loading"
@@ -49,7 +49,7 @@
             class="text-decoration-underline"
             @click="remove(comment.id)"
           >
-            Eliminar
+            {{  $t("delete") }}
           </v-btn>
         </div>
       </v-card>

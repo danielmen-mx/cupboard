@@ -13,7 +13,7 @@
         :value="tab.value"
         @click="pushRoute(tab.path)"
       >
-        {{ tab.title }}
+        {{ $t(tab.title) }}
       </v-tab>
     </v-tabs>
     <v-divider></v-divider>
@@ -54,19 +54,19 @@ export default {
     tab: 'main',
     tabs: [
       {
-        title: 'Configuracion',
+        title: 'admin.setting',
         value: 'setting',
         path: '/admin/settings',
         component: null
       },
       {
-        title: 'Publicaciones',
+        title: 'posts',
         value: 'posts',
         path: '/admin/posts',
         component: null
       },
       {
-        title: 'Productos',
+        title: 'admin.products',
         value: 'products',
         path: '/admin/products',
         component: null

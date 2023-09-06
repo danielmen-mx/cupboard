@@ -42,7 +42,7 @@
         class="text-decoration-underline"
         type="submit"
       >
-        Actualizar
+        {{ $t("update") }}
       </v-btn>
       <v-btn
         :disabled="loading"
@@ -52,7 +52,7 @@
         class="text-decoration-underline"
         @click="cancel()"
       >
-        Cancelar
+        {{ $t("cancel") }}
       </v-btn>
     </div>
   </v-form>
@@ -90,7 +90,6 @@ export default {
       this.itemId = this.comment.id
       this.form.user_id = this.comment.user.id
       this.form.comment = this.comment.comment
-      // console.log(this.comment)
     }
   },
   mounted() {

@@ -7,7 +7,7 @@
       </v-avatar>
     </template>
     <v-list-item-title>{{ post.autor }}</v-list-item-title>
-    <v-list-item-subtitle>Autor</v-list-item-subtitle>
+    <v-list-item-subtitle>{{ $t("autor") }}</v-list-item-subtitle>
     <template v-slot:append>
       <div :class="mainClass">
         <v-icon :class="heartClass" :icon="heartIcon" :color="heartColor" @click="react()"></v-icon>

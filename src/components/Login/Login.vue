@@ -9,7 +9,7 @@
       :rules="[required]"
       class="mb-2"
       clearable
-      label="Usuario ó Email"
+      :label="$t('login.sign-up')"
     ></v-text-field>
 
     <v-text-field
@@ -20,13 +20,13 @@
       :type="show ? 'text' : 'password'"
       @click:append-inner="show = !show"
       clearable
-      label="Contraseña"
-      placeholder="Introduce tu contraseña"
+      :label="$t('password')"
+      :placeholder="$t('login.type-password')"
     ></v-text-field>
 
     <v-checkbox
       v-model="form.remember"
-      label="Recuerdame"
+      :label="$t('login.checkbox')"
     ></v-checkbox>
 
     <br>
@@ -40,20 +40,20 @@
       type="submit"
       variant="elevated"
     >
-      Iniciar Sesión
+      {{ $t("login.sign-in") }}
     </v-btn>
     <div :class="loginClass">
       <p
         class="cursor-pointer text-grey mt-2 text-decoration-underline"
         @click="redirect('/')"
       >
-        Home
+        {{ $t("nav.home") }}
       </p>
       <p
         class="cursor-pointer text-grey mt-2 text-decoration-underline"
         @click="redirect('/login/register')"
       >
-        No tienes una cuenta?
+        {{ $t("login.account-create") }}
       </p>
     </div>
   </v-form>

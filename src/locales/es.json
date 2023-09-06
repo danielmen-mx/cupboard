@@ -1,0 +1,144 @@
+{
+  "admin": {
+    "welcome": "Bienvenido de nuevo",
+    "setting": "Configuración",
+    "posts": {
+      "add": "Añadir nueva publicación",
+      "edit": "Editar publicación",
+      "title": "Titulo",
+      "upload-asset": "Subir imagen",
+      "add-tags": "Añadir etiquetas",
+      "create": "Crear publicación",
+      "name": "Nombre",
+      "autor": "Autor",
+      "asset": "Imagen",
+      "tags": "Etiquetas",
+      "created-at": "Creado el",
+      "tag-list": {
+        "release": "Nuevo lanzamiento",
+        "update": "Actualizar publicación",
+        "overwrite": "Sobrescribir publicación"
+      },
+      "guides": {
+        "title": "Escribe el nombre de tu publicación",
+        "autor": "Escribe el nombre del autor de la publicación",
+        "description": "Escribe el contenido",
+        "tags": "Añade etiquetas que concuerden con el post",
+        "new-tags-1": "Escriba su etiqueta y presione",
+        "new-tags-2": "para crear una nueva"
+      }
+    },
+    "products": "Productos"
+  },
+  "calendar": {
+    "january": "Enero",
+    "february": "Febrero",
+    "march": "Marzo",
+    "april": "Abril",
+    "may": "Mayo",
+    "june": "Junio",
+    "july": "Julio",
+    "august": "Agosto",
+    "september": "Septiembre",
+    "october": "Octubre",
+    "november": "Noviembre",
+    "december": "Diciembre"
+  },
+  "empty-states": {
+    "AdminPosts": {
+      "no-posts": "Aún no hay publicaciones",
+      "add-new": "Crea una publicación ahora"
+    },
+    "Comments": {
+      "no-comments": "Upss, parece que nadie ha comentado esta publicación",
+      "add-new": "¡Se el primero en comentar!"
+    },
+    "Home": {
+      "no-posts": "¡Hoy no tenemos publicaciones recientes!",
+      "working": "Seguimos trabajando"
+    }
+  },
+  "week-days": {
+    "monday": "Lunes",
+    "tuesday": "Martes",
+    "wednesday": "Miercoles",
+    "thursday": "Jueves",
+    "friday": "Viernes",
+    "saturday": "Sábado",
+    "sunday": "Domingo"
+  },
+  "nav": {
+    "admin": "Admin",
+    "home": "Inicio",
+    "store": "Tienda",
+    "reviews": "Reseñas",
+    "contact": "Contacto",
+    "loggin": "Registrarse / Iniciar sesión",
+    "logout": "Cerrar sesión"
+  },
+  "user-settings": {
+    "settings": "Configuraciones",
+    "cart": "Carrito",
+    "shopping": "Compras",
+    "toggle-theme": "Cambiar tema"
+  },
+  "home": {
+    "grettings": "Mira lo nuevo!",
+    "stars": "estrellas",
+    "reactions": "reacciones",
+    "comments": "comentarios",
+    "post": {
+      "comments": {
+        "add": "Añadir comentario"
+      }
+    }
+  },
+  "login": {
+    "create": "Crear Cuenta",
+    "sign-in": "Iniciar sesión",
+    "sign-up": "Usuario ó Correo",
+    "checkbox": "Recuerdame",
+    "type-password": "Introduce tu contraseña",
+    "password-confirmation": "Repita contraseña",
+    "required": "Campos obligatorios",
+    "account-create": "No tienes una cuenta?",
+    "account-created": "Ya tengo una cuenta",
+    "validations": {
+      "password": "Tus contraseñas no son las mismas"
+    }
+  },
+  "form": {
+    "validations": {
+      "require-field": "Campo requerido",
+      "bad-email": "Correo no válido",
+      "bad-phone": "Tu número telefonico debe estar mal"
+    }
+  },
+  "actions": {
+    "like": "Me gusta",
+    "dont-like": "No me gusta",
+    "comment": "Comentar"
+  },
+  "paginations": {
+    "per-page": "Elementos en pág"
+  },
+  "validations": {
+    "required-fields": "Campos requeridos"
+  },
+  "autor": "Autor",
+  "cancel": "Cancelar",
+  "close": "Cerrar",
+  "create": "Crear",
+  "delete": "Eliminar",
+  "dashboards": "Paneles",
+  "email": "Correo",
+  "edit": "Editar",
+  "enter": "Ingresar",
+  "options": "Opciones",
+  "password": "Contraseña",
+  "posts": "Publicaciones",
+  "post": "Publicación",
+  "sorry": "Disculpa",
+  "update": "Actualizar",
+  "404": "¡No encontramos la página que estás buscando!"
+}

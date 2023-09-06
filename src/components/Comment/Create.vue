@@ -12,7 +12,7 @@
         :disabled="loading"
         clear-icon="mdi-close-circle"
         clearable
-        label="Añadir comentario"
+        :label="$t('home.post.comments.add')"
         variant="outlined"
         id="comment_input"
         type="text"
@@ -37,7 +37,6 @@
 import Form from '../Common/Form.vue'
 import CommentService from '@/services/CommentService'
 import store from '../../store'
-import { nextTick } from 'vue'
 
 export default {
   extends: Form,
@@ -70,10 +69,8 @@ export default {
     },
     focusInput() {
       setTimeout(() => {
-        // this.$refs.comment_component.scrollIntoView({ behavior: "smooth", block: "end" })
         document.getElementById("comment_component").scrollIntoView({ behavior: "smooth", block: "end" })
         this.$nextTick(() => {
-          // this.$refs.comment_input.focus()
           document.getElementById("comment_input").focus()
         })
       }, 1000)

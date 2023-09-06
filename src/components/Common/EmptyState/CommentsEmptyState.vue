@@ -6,10 +6,10 @@
       </v-icon>
     </v-avatar>
     <p class="pt-6">
-      Upss, parece que nadie ha comentado este post
+      {{ $t("empty-states.Comments.no-comments") }}
     </p>
     <p class="text-h4">
-      Se el primero en comentar!
+      {{ $t("empty-states.Comments.add-new") }}
     </p>
   </v-card>
 </template>

@@ -1,0 +1,144 @@
+{
+  "admin": {
+    "welcome": "Welcome again",
+    "setting": "Settings",
+    "posts": {
+      "add": "Add new post",
+      "edit": "Edit post",
+      "title": "Title",
+      "upload-asset": "Upload image",
+      "add-tags": "Add Tags",
+      "create": "Create post",
+      "name": "Name",
+      "autor": "Autor",
+      "asset": "Asset",
+      "tags": "Tags",
+      "created-at": "Created at",
+      "tag-list": {
+        "release": "New release",
+        "update": "Update post",
+        "overwrite": "Overwrite post"
+      },
+      "guides": {
+        "title": "Type the name of your post",
+        "autor": "Type the name of the autor",
+        "description": "Type description",
+        "tags": "Add tags that match the post",
+        "new-tags-1": "Write your label and press",
+        "new-tags-2" : "to create a new tag"
+      }
+    },
+    "products": "Products"
+  },
+  "calendar": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
+  },
+  "empty-states": {
+    "AdminPosts": {
+      "no-posts": "No posts yet",
+      "add-new": "Create a post now"
+    },
+    "Comments": {
+      "no-comments": "Oops, no one seems to have commented on this post",
+      "add-new": "Be the first to comment!"
+    },
+    "Home": {
+      "no-posts": "We have no recent posts today!",
+      "working": "We keep working"
+    }
+  },
+  "week-days": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  },
+  "nav": {
+    "admin": "Admin",
+    "home": "Home",
+    "store": "Store",
+    "reviews": "Reviews",
+    "contact": "Contact",
+    "loggin": "Register / Log in",
+    "logout": "Logout"
+  },
+  "user-settings": {
+    "settings": "Settings",
+    "cart": "Cart",
+    "shopping": "Shopping",
+    "toggle-theme": "Toggle theme"
+  },
+  "home": {
+    "grettings": "See whats new",
+    "stars": "stars",
+    "reactions": "reactions",
+    "comments": "comments",
+    "post": {
+      "comments": {
+        "add": "Add comment"
+      }
+    }
+  },
+  "login": {
+    "create": "Create Account",
+    "sign-in": "Log In",
+    "sign-up": "User or Email",
+    "checkbox": "Remember me",
+    "type-password": "Enter your password",
+    "password-confirmation": "Repeat password",
+    "required": "Required fields",
+    "account-create": "You don't have an account?",
+    "account-created": "I already have an account",
+    "validations": {
+      "password": "Your passwords are not the same"
+    }
+  },
+  "form": {
+    "validations": {
+      "require-field": "Required field",
+      "bad-email": "Invalid mail",
+      "bad-phone": "Your phone number must be wrong"
+    }
+  },
+  "actions": {
+    "like": "I like",
+    "dont-like": "I don't like",
+    "comment": "Comment"
+  },
+  "paginations": {
+    "per-page": "Items per page"
+  },
+  "validations": {
+    "required-fields": "Required fields"
+  },
+  "autor": "Autor",
+  "cancel": "Cancel",
+  "close": "Close",
+  "create": "Create",
+  "delete": "Delete",
+  "dashboards": "Dashboards",
+  "email": "Email",
+  "edit": "Edit",
+  "enter": "Enter",
+  "options": "Options",
+  "password": "Password",
+  "posts": "Posts",
+  "post": "Post",
+  "sorry": "Sorry",
+  "update": "Update",
+  "404": "We don't found the page you're looking for!"
+}

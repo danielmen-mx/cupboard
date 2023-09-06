@@ -126,34 +126,34 @@ export const getCurrentDate = {
     getCurrentDate() {
       let date = new Date();
       let weekdays = new Array(7);
-      weekdays[0] = "Domingo";
-      weekdays[1] = "Lunes";
-      weekdays[2] = "Martes";
-      weekdays[3] = "Miercoles";
-      weekdays[4] = "Jueves";
-      weekdays[5] = "Viernes";
-      weekdays[6] = "Sabado";
+      weekdays[0] = this.$t("week-days.sunday")
+      weekdays[1] = this.$t("week-days.monday")
+      weekdays[2] = this.$t("week-days.tuesday")
+      weekdays[3] = this.$t("week-days.wednesday")
+      weekdays[4] = this.$t("week-days.thursday")
+      weekdays[5] = this.$t("week-days.friday");
+      weekdays[6] = this.$t("week-days.saturday");
 
       let months = new Array(12)
-      months[0] = "Enero"
-      months[1] = "Febrero"
-      months[2] = "Marzo"
-      months[3] = "Abril"
-      months[4] = "Mayo"
-      months[5] = "Junio"
-      months[6] = "Julio"
-      months[7] = "Agosto"
-      months[8] = "Septiembre"
-      months[9] = "Octubre"
-      months[10] = "Noviembre"
-      months[11] = "Diciembre"
+      months[0] = this.$t("calendar.january")
+      months[1] = this.$t("calendar.february")
+      months[2] = this.$t("calendar.march")
+      months[3] = this.$t("calendar.april")
+      months[4] = this.$t("calendar.may")
+      months[5] = this.$t("calendar.june")
+      months[6] = this.$t("calendar.july")
+      months[7] = this.$t("calendar.august")
+      months[8] = this.$t("calendar.september")
+      months[9] = this.$t("calendar.october")
+      months[10] = this.$t("calendar.november")
+      months[11] = this.$t("calendar.december")
 
       let weekday = weekdays[date.getDay()]
       let day = date.getDate()
       let month = months[date.getMonth()]
       let year = date.getFullYear()
 
-      return weekday + ' ' + day + ' de ' + month + ' del ' + year
+      return weekday + " " + month + ' ' + day + ', ' + year
     }
   },
 }

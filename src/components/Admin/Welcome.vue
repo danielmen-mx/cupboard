@@ -1,12 +1,12 @@
 <template>
   <v-card>
-    <v-card-item :title="`Bienvenido de nuevo, ` + user">
+    <v-card-item :title="$t('admin.welcome')+', '+user">
       <template v-slot:subtitle>
         {{ date }}
       </template>
     </v-card-item>
     <v-card-item>
-      Dashboards
+      {{ $t("dashboards") }}
     </v-card-item>
   </v-card>
 </template>

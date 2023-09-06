@@ -10,7 +10,7 @@
         color="orange"
         type="submit"
       >
-        Me gusta
+        {{ $t("actions.like") }}
       </v-btn>
       <v-btn
         v-else
@@ -18,14 +18,14 @@
         color="orange"
         type="submit"
       >
-        No me gusta
+        {{ $t("actions.dont-like") }}
       </v-btn>
     </v-form>
     <v-btn 
       color="orange"
       @click="focusInput()"
     >
-      Comentar
+      {{ $t("actions.comment") }}
     </v-btn>
   </v-card-actions>
 </template>

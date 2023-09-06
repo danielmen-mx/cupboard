@@ -8,7 +8,7 @@
       <v-card>
         <div class="d-flex justify-space-between pa-2">
           <v-card-title>
-            <span class="text-h5">{{ title }}</span>
+            <span class="text-h5">{{ $t(title) }}</span>
           </v-card-title>
           <v-card-actions>
             <v-btn
@@ -29,8 +29,8 @@
                   :loading="waitResponse"
                   v-model="form.name"
                   :rules="[required]"
-                  label="Titulo*"
-                  hint="Escribe el nombre de tu publicación"
+                  :label="$t('admin.posts.title')+'*'"
+                  :hint="$t('admin.posts.guides.title')"
                   clearable
                 ></v-text-field>
               </v-col>
@@ -39,25 +39,16 @@
                   :loading="waitResponse"
                   v-model="form.autor"
                   :rules="[required]"
-                  label="Autor*"
-                  hint="Escribe el nombre del autor de la publicación"
+                  :label="$t('admin.posts.autor')+'*'"
+                  :hint="$t('admin.posts.guides.autor')"
                   clearable
                 ></v-text-field>
               </v-col>
             </v-row>
-            <!-- <v-textarea
-              :loading="waitResponse"
-              v-model="form.description"
-              :rules="[required]"
-              label="Contenido"
-              hint="Escribe un poco sobre el tema de la publicación"
-              clearable
-            ></v-textarea> -->
-            <!-- <TextEditor :form_description="form.description"/> -->
             <quill-editor
               v-model:content="form.description"
               contentType="html"
-              placeholder="Escribe el contenido."
+              :placeholder="$t('admin.posts.guides.description')"
               style="height: 180px;"
               class="mb-4"
               theme="snow"
@@ -78,19 +69,6 @@
                     {{ image_stored }}
                   </template>
                 </v-file-input>
-                <!-- <v-file-input
-                  accept="image/*"
-                  show-size
-                  counter
-                  :loading="waitResponse"
-                  @change="onChange"
-                  :label="getFileInputLabel()"
-                  prepend-icon="mdi-camera"
-                >
-                  <template v-if="image_stored" #prepend-inner>
-                    {{ image_stored }}
-                  </template>
-                </v-file-input> -->
               </v-col>
               <v-col cols="12" sm="6">
                 <v-combobox
@@ -99,8 +77,8 @@
                   :hide-no-data="false"
                   :items="base_tags"
                   hide-selected
-                  hint="Añade etiquetas que concuerden con el post"
-                  label="Añadir etiquetas"
+                  :hint="$t('admin.posts.guides.tags')"
+                  :label="$t('admin.posts.add-tags')"
                   multiple
                   persistent-hint
                   chips
@@ -108,7 +86,7 @@
                   <template v-slot:no-data>
                     <v-list-item>
                       <v-list-item-title>
-                        Escriba su etiqueta y presione <kbd>enter</kbd> para crear una nueva
+                        {{ $t("admin.posts.guides.new-tags-1") }} <kbd>{{ $t("enter") }}</kbd> {{ $t("admin.posts.guides.new-tags-2") }}
                       </v-list-item-title>
                     </v-list-item>
                   </template>
@@ -116,7 +94,7 @@
               </v-col>
             </v-row>
 
-            <small>*Campos requeridos</small>
+            <small>*{{ $t("validations.required-fields") }}</small>
           </v-card-text>
 
           <v-card-actions>
@@ -129,7 +107,7 @@
               variant="text"
               type="submit"
             >
-              {{ btn_text }}
+              {{ $t(btn_text) }}
             </v-btn>
           </v-card-actions>
         </v-form>
@@ -165,8 +143,8 @@ export default {
       unlock: false,
       waitResponse: false,
       dialog: false,
-      title: "Añadir nueva publicación",
-      btn_text: "Crear",
+      title: "admin.posts.add",
+      btn_text: "create",
       item_id: null,
       backup: {},
       form: {
@@ -178,9 +156,9 @@ export default {
       },
       image_stored: null,
       base_tags: [
-        'New release',
-        'Update post',
-        'Overwrite post'
+        this.$t("admin.posts.tag-list.release"),
+        this.$t("admin.posts.tag-list.update"),
+        this.$t("admin.posts.tag-list.overwrite")
       ],
       search: null,
       event: 'updateAdminTable'
@@ -194,7 +172,7 @@ export default {
       this.image_stored = null
     },
     getFileInputLabel() {
-      if (!this.image_stored) return "Subir imagen"
+      if (!this.image_stored) return this.$t("admin.posts.upload-asset")
       return ''
     },
     getHeaders() {
@@ -202,6 +180,8 @@ export default {
       return null
     },
     async submit() {
+      if (!this.form.name || !this.form.autor || !this.form.description) return
+
       try {
         this.waitResponse = true
 
@@ -240,7 +220,6 @@ export default {
     },
     closeForm() {
       this.$nextTick(() => { this.dialog = false })
-      // this.dialog = false
 
       this.form = {
         name: null,
@@ -255,17 +234,17 @@ export default {
     },
     updateTitles(action) {
       if (action == 'edition') {
-        this.title = "Editar publicación"
-        this.btn_text = "Actualizar"
+        this.title = "admin.posts.edit"
+        this.btn_text = "update"
       } else {
-        this.title = "Añadir nueva publicación"
-        this.btn_text = "Crear"
+        this.title = "admin.posts.add"
+        this.btn_text = "create"
         this.item_id = null
         this.image_stored = null
       }
     },
     required (v) {
-      return !!v || 'Campo requerido'
+      return !!v || this.$t("form.validations.require-field")
     },
     checkFormComplete() {
       if (this.form.name && this.form.autor && this.form.description) {
