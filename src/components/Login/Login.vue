@@ -62,6 +62,7 @@
 import Form from '../Common/Form.vue'
 import login from '../Common/Responsives/login.vue'
 import AuthService from '../../services/AuthService'
+import { updateLang } from '../../router/languages'
 import { mapMutations } from "vuex";
 
 export default {
@@ -77,7 +78,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations("", ["setToken", "setUser", "setName", "setEmail"]),
+    ...mapMutations("", ["setToken", "setUser", "setName", "setEmail", "setLanguage"]),
     redirect(path) {
       this.pushRoute(path)
     },
@@ -87,14 +88,17 @@ export default {
       try {
         this.loading = true
         const resp = await this.apiService.login(this.form)
-        // console.log(resp)
 
         var token = resp.data.token
         var expires = resp.data.expires
         var user = resp.data.user
+        var language = resp.data.user.language
 
         this.$store.commit('setToken', { token: token, expires: expires })
         this.$store.commit('setUser', { user: user })
+        this.$store.commit('setLanguage', { language: language })
+
+        updateLang(language)
 
         this.$nextTick(() => {
           this.successSnackbar(resp.message)

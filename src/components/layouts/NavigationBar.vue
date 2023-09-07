@@ -100,11 +100,12 @@
   </div>
 </template>
 <script>
-import NavigationMixins from '../../mixins/NavigationMixins';
-import layout from '../Common/Responsives/layout.vue';
+import NavigationMixins from '../../mixins/NavigationMixins'
+import layout from '../Common/Responsives/layout.vue'
 import ToggleTheme from '@/components/layouts/ToggleThemeBtn.vue'
-import AuthService from '../../services/AuthService';
-import store from '../../store';
+import AuthService from '../../services/AuthService'
+import store from '../../store'
+import { updateLang } from '../../router/languages'
 
 export default {
   extends: layout,
@@ -131,6 +132,7 @@ export default {
 
         this.$store.commit('logout')
         this.isLogged = false
+        updateLang()
         this.$router.push({ path: '/' })
       } catch (error) {
         console.log(error) 
