@@ -29,6 +29,10 @@ export const mutations = {
     state.isAdmin = user.isAdmin
     localStorage.setItem("wud-admin-user", JSON.stringify(state.user))
   },
+  setLanguage(state, { language }) {
+    state.language = language
+    localStorage.setItem("language", JSON.stringify(state.language))
+  },
   setName(state, { name }) {
     var user = state.user
     user.first_name = user.first_name
@@ -46,10 +50,12 @@ export const mutations = {
   logout(state) {
     state.user = null;
     state.token = null;
-    localStorage.removeItem("wud-user-token");
-    localStorage.removeItem("wud-admin-user");
-    Cookies.remove("wud_token");
-    Cookies.remove("wud_expires");
+    state.language = null
+    localStorage.removeItem("wud-user-token")
+    localStorage.removeItem("wud-admin-user")
+    localStorage.removeItem("language")
+    Cookies.remove("wud_token")
+    Cookies.remove("wud_expires")
   },
 }
 

@@ -6,13 +6,14 @@ const store = createStore({
     return {
       user: null,
       token: null,
-      language: 'es',
+      language: 'en',
       theme: 'light'
     }
   },
   getters: {
     user: (state) => state.user,
     theme: (state) => state.theme,
+    language: (state) => state.language,
     token: (state) => state.token,
     token_expiration: (state) => state.token ? state.token.expires : null,
   },
@@ -36,6 +37,10 @@ const store = createStore({
       state.isAdmin = user.isAdmin
       localStorage.setItem("wud-admin-user", JSON.stringify(state.user))
     },
+    setLanguage(state, { language }) {
+      state.language = language
+      localStorage.setItem("language", JSON.stringify(state.language))
+    },
     setName(state, { name }) {
       var user = state.user
       user.first_name = user.first_name
@@ -58,9 +63,11 @@ const store = createStore({
       state.user = null;
       state.token = null;
       state.theme = 'light'
+      state.language = null
       localStorage.removeItem("wud-user-token");
       localStorage.removeItem("wud-admin-user");
       localStorage.removeItem("wud-user-theme");
+      localStorage.removeItem("language");
       Cookies.remove("wud_token");
       Cookies.remove("wud_expires");
     },
