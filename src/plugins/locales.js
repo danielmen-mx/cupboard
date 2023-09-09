@@ -5,12 +5,9 @@ import store from "../store"
 
 let user = store.getters['user']
 var localLang = store.getters['language']
-console.log(localLang)
 if (!user) user = JSON.parse(localStorage.getItem("wud-admin-user"))
 if (!user && !localLang) localLang = 'en'
 if (user) localLang = user.language
-
-console.log(localLang)
 
 let translate = createI18n({
   locale: localLang,
