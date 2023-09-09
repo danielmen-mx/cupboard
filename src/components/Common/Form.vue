@@ -76,16 +76,16 @@ export default {
       return user
     },
     required(v) {
-      return !!v || this.$t("form.validations.require-field")
+      return !!v || this.translate("form.validations.require-field")
     },
     email(v) {
       const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      return pattern.test(v) || this.$t("form.validations.bad-email")
+      return pattern.test(v) || this.translate("form.validations.bad-email")
     },
     numeric(v) {
       if (!v.trim()) return true;
       if (!isNaN(parseFloat(v)) && v >= 0 && v <= 9999999999) return true;
-      return this.$t("form.validations.bad-phone")
+      return this.translate("form.validations.bad-phone")
     },
   },
 }

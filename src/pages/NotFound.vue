@@ -6,10 +6,10 @@
     <div class="d-flex flex-column fill-height justify-center align-center text-white ">
       <div class="bg-black ma-2 pa-2 d-flex flex-column justify-center align-center rounded">
         <h1 class="text-h4 font-weight-thin mb-4">
-          {{ $t("sorry") }}
+          {{ translate("sorry") }}
         </h1>
         <h4 class="subheading">
-          {{ $t("404") }}
+          {{ translate("404") }}
         </h4>
 
       </div>

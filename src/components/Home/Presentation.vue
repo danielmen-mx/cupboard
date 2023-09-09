@@ -7,7 +7,7 @@
      class="text-center main-title"
      :class="presentationText"
     >
-      {{ $t("home.grettings") }}
+      {{ translate("home.grettings") }}
     </span>
     <!-- TODO: add something awesome -->
   </div>

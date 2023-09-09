@@ -42,7 +42,7 @@
         class="text-decoration-underline"
         type="submit"
       >
-        {{ $t("update") }}
+        {{ translate("update") }}
       </v-btn>
       <v-btn
         :disabled="loading"
@@ -52,7 +52,7 @@
         class="text-decoration-underline"
         @click="cancel()"
       >
-        {{ $t("cancel") }}
+        {{ translate("cancel") }}
       </v-btn>
     </div>
   </v-form>

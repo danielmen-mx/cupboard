@@ -5,6 +5,7 @@
       <NavigationDrawer />
       <v-main class="mt-16 pt-6">
         <Dialog />
+        <Confirmation />
         <Snackbar />
         <!-- <Background /> -->
         <div class="pa-1">
@@ -25,6 +26,7 @@ import Snackbar from '@/components/layouts/Snackbar.vue'
 import Dialog from '@/components/layouts/Dialog.vue'
 import Footer from '@/components/layouts/Footer.vue'
 import Button from '@/components/layouts/Button.vue'
+import Confirmation from '../components/Common/Confirmation.vue'
 import responsiveLayout from '../components/Common/Responsives/layout.vue'
 
 export default {
@@ -35,6 +37,7 @@ export default {
     Background,
     Snackbar,
     Dialog,
+    Confirmation,
     Footer,
     Button
   },

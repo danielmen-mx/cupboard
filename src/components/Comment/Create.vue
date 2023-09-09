@@ -12,7 +12,7 @@
         :disabled="loading"
         clear-icon="mdi-close-circle"
         clearable
-        :label="$t('home.post.comments.add')"
+        :label="translate('home.post.comments.add')"
         variant="outlined"
         id="comment_input"
         type="text"

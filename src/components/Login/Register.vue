@@ -7,7 +7,7 @@
     >
       <v-card class="pa-4">
         <div class="satisfy-font font-size-lg text-center">
-          {{ $t("login.create") }}
+          {{ translate("login.create") }}
         </div>
         <v-form
           v-model="formComplete"
@@ -19,7 +19,7 @@
               <v-col cols="12">
                 <v-text-field
                   v-model="form.email"
-                  :label="$t('email')+'*'"
+                  :label="translate('email')+'*'"
                   type="email"
                   :readonly="loading"
                   :rules="[required, email]"
@@ -29,7 +29,7 @@
               <v-col cols="12">
                 <v-text-field
                   v-model="form.password"
-                  :label="$t('password')+'*'"
+                  :label="translate('password')+'*'"
                   :append-inner-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                   :type="show ? 'text' : 'password'"
                   @click:append-inner="show = !show"
@@ -40,7 +40,7 @@
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  :label="$t('login.password-confirmation')+'*'"
+                  :label="translate('login.password-confirmation')+'*'"
                   v-model="confirmation"
                   :append-inner-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                   :type="show ? 'text' : 'password'"
@@ -51,7 +51,7 @@
                 ></v-text-field>
               </v-col>
             </v-row>
-            <small>*{{ $t("login.required") }}</small>
+            <small>*{{ translate("login.required") }}</small>
           </v-card-text>
 
           <!-- Button -->
@@ -66,13 +66,13 @@
               type="submit"
               variant="elevated"
             >
-              {{ $t("login.create") }}
+              {{ translate("login.create") }}
             </v-btn>
             <p
               class="cursor-pointer text-light-green mt-2 text-decoration-underline text-center"
               @click="closeForm()"
             >
-              {{ $t("login.account-created") }}
+              {{ translate("login.account-created") }}
             </p>
           </div>
         </v-form>
@@ -101,7 +101,7 @@ export default {
     },
     matchPassword(v) {
       if (this.form.password) {
-        if (this.form.password !== v) return this.$t("login.validations.password")
+        if (this.form.password !== v) return this.translate("login.validations.password")
       }
     },
     async submit() {

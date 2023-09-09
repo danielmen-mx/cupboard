@@ -10,7 +10,7 @@
         color="orange"
         type="submit"
       >
-        {{ $t("actions.like") }}
+        {{ translate("actions.like") }}
       </v-btn>
       <v-btn
         v-else
@@ -18,14 +18,14 @@
         color="orange"
         type="submit"
       >
-        {{ $t("actions.dont-like") }}
+        {{ translate("actions.dont-like") }}
       </v-btn>
     </v-form>
     <v-btn 
       color="orange"
       @click="focusInput()"
     >
-      {{ $t("actions.comment") }}
+      {{ translate("actions.comment") }}
     </v-btn>
   </v-card-actions>
 </template>

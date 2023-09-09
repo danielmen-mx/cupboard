@@ -11,10 +11,10 @@
         <!-- <p>🐶🐶🐶</p> -->
         <br>
         <h1 class="text-h4 font-weight-thin mb-4">
-          {{ $t("empty-states.Home.working") }}
+          {{ translate("empty-states.Home.working") }}
         </h1>
         <h4 class="subheading">
-          {{ $t("empty-states.Home.no-posts") }}
+          {{ translate("empty-states.Home.no-posts") }}
         </h4>
       </div>
     </div>

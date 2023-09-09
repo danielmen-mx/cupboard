@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-end bg-grey-lighten-3">
     <div class="d-flex">
-      <p class="pa-4">{{ $t("paginations.per-page") }}:</p>
+      <p class="pa-4">{{ translate("paginations.per-page") }}:</p>
       <v-select
         v-model="properties.items_per_page"
         :items="['15', '25', '50']"

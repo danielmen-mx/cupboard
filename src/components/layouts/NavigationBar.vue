@@ -13,7 +13,7 @@
           active-color="info"
           @click="redirect(item.path)"
         >
-          {{ $t(item.title) }}
+          {{ translate(item.title) }}
         </v-btn>
       </div>
 
@@ -43,7 +43,7 @@
             variant="plain"
             @click="login()"
           >
-            {{ $t("nav.loggin") }}
+            {{ translate("nav.loggin") }}
           </v-btn>
         </div>
         <div v-else>
@@ -76,8 +76,8 @@
                   <template v-slot:prepend>
                     <v-icon :icon="item.icon" size="small"></v-icon>
                   </template>
-                  <!-- <p>{{ $t("nav.admin") }}</p> -->
-                  <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+                  <!-- <p>{{ translate("nav.admin") }}</p> -->
+                  <v-list-item-title>{{ translate(item.title) }}</v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-menu>
@@ -87,7 +87,7 @@
               class="ml-0 pl-1"
               @click="logout()"
             >
-              {{ $t("nav.logout") }}
+              {{ translate("nav.logout") }}
             </v-btn>
 
           </div>

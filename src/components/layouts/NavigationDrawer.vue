@@ -22,10 +22,10 @@
           <v-icon :icon="item.icon"></v-icon>
         </template>
 
-        <v-list-item-title v-text="$t(item.title)"></v-list-item-title>
+        <v-list-item-title v-text="translate(item.title)"></v-list-item-title>
       </v-list-item>
       <v-divider></v-divider>
-      <p class="pl-1 pt-1 satisfy-font font-size-xsm">{{ $t("options") }}</p>
+      <p class="pl-1 pt-1 satisfy-font font-size-xsm">{{ translate("options") }}</p>
       <v-list
         :lines="false"
         nav
@@ -41,7 +41,7 @@
             <v-icon :icon="item.icon"></v-icon>
           </template>
 
-          <v-list-item-title v-text="$t(item.title)"></v-list-item-title>
+          <v-list-item-title v-text="translate(item.title)"></v-list-item-title>
         </v-list-item>
       </v-list>
       <ToggleTheme />

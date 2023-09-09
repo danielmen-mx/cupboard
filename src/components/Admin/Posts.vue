@@ -5,12 +5,12 @@
     <AdminPostsEmptyState v-if="items.length < 1"/>
     <div v-else>
       <div class="d-flex justify-space-between mx-2 my-6">
-        <span class="text-h5">{{ $t("posts") }}</span>
+        <span class="text-h5">{{ translate("posts") }}</span>
         <v-btn
           color="light-green"
           @click="openForm()"
         >
-          {{ $t("admin.posts.create") }}
+          {{ translate("admin.posts.create") }}
         </v-btn>
       </div>
       <v-card variant="outlined">
@@ -22,11 +22,11 @@
         >
           <thead>
             <tr class="text-subtitle-1">
-              <th>{{ $t("admin.posts.name") }}</th>
-              <th>{{ $t("autor") }}</th>
-              <th>{{ $t("admin.posts.asset") }}</th>
-              <th>{{ $t("admin.posts.tags") }}</th>
-              <th>{{ $t("admin.posts.created-at") }}</th>
+              <th>{{ translate("admin.posts.name") }}</th>
+              <th>{{ translate("autor") }}</th>
+              <th>{{ translate("admin.posts.asset") }}</th>
+              <th>{{ translate("admin.posts.tags") }}</th>
+              <th>{{ translate("admin.posts.created-at") }}</th>
               <th></th>
             </tr>
           </thead>
@@ -68,10 +68,10 @@
                   <v-list>
                     <v-list-item>
                       <v-list-item-title class="cursor-pointer pb-2" @click="openForm(item)">
-                        {{ $t("edit") }}
+                        {{ translate("edit") }}
                       </v-list-item-title>
                       <v-list-item-title class="cursor-pointer pt-2" @click="remove(item.id)">
-                        {{ $t("delete") }}
+                        {{ translate("delete") }}
                       </v-list-item-title>
                     </v-list-item>
                   </v-list>

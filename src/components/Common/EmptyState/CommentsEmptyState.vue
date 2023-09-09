@@ -6,10 +6,10 @@
       </v-icon>
     </v-avatar>
     <p class="pt-6">
-      {{ $t("empty-states.Comments.no-comments") }}
+      {{ translate("empty-states.Comments.no-comments") }}
     </p>
     <p class="text-h4">
-      {{ $t("empty-states.Comments.add-new") }}
+      {{ translate("empty-states.Comments.add-new") }}
     </p>
   </v-card>
 </template>

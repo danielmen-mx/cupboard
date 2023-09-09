@@ -13,7 +13,7 @@
         :value="tab.value"
         @click="pushRoute(tab.path)"
       >
-        {{ $t(tab.title) }}
+        {{ translate(tab.title) }}
       </v-tab>
     </v-tabs>
     <v-divider></v-divider>

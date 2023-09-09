@@ -31,7 +31,7 @@
             color="amber"
           ></v-rating>
           <p class="text-grey" :class="fontInfoText">
-            {{ item.rating.review }} {{ $t("home.stars") }} | ({{ commentsLenght }} {{ $t("home.comments") }}) | {{ formatDate(item.created_at) }}
+            {{ item.rating.review }} {{ translate("home.stars") }} | ({{ commentsLenght }} {{ translate("home.comments") }}) | {{ formatDate(item.created_at) }}
           </p>
         </div>
         <v-divider></v-divider>

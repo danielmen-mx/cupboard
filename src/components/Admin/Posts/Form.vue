@@ -8,7 +8,7 @@
       <v-card>
         <div class="d-flex justify-space-between pa-2">
           <v-card-title>
-            <span class="text-h5">{{ $t(title) }}</span>
+            <span class="text-h5">{{ translate(title) }}</span>
           </v-card-title>
           <v-card-actions>
             <v-btn
@@ -29,8 +29,8 @@
                   :loading="waitResponse"
                   v-model="form.name"
                   :rules="[required]"
-                  :label="$t('admin.posts.title')+'*'"
-                  :hint="$t('admin.posts.guides.title')"
+                  :label="translate('admin.posts.title')+'*'"
+                  :hint="translate('admin.posts.guides.title')"
                   clearable
                 ></v-text-field>
               </v-col>
@@ -39,8 +39,8 @@
                   :loading="waitResponse"
                   v-model="form.autor"
                   :rules="[required]"
-                  :label="$t('admin.posts.autor')+'*'"
-                  :hint="$t('admin.posts.guides.autor')"
+                  :label="translate('admin.posts.autor')+'*'"
+                  :hint="translate('admin.posts.guides.autor')"
                   clearable
                 ></v-text-field>
               </v-col>
@@ -48,7 +48,7 @@
             <quill-editor
               v-model:content="form.description"
               contentType="html"
-              :placeholder="$t('admin.posts.guides.description')"
+              :placeholder="translate('admin.posts.guides.description')"
               style="height: 180px;"
               class="mb-4"
               theme="snow"
@@ -77,8 +77,8 @@
                   :hide-no-data="false"
                   :items="base_tags"
                   hide-selected
-                  :hint="$t('admin.posts.guides.tags')"
-                  :label="$t('admin.posts.add-tags')"
+                  :hint="translate('admin.posts.guides.tags')"
+                  :label="translate('admin.posts.add-tags')"
                   multiple
                   persistent-hint
                   chips
@@ -86,7 +86,7 @@
                   <template v-slot:no-data>
                     <v-list-item>
                       <v-list-item-title>
-                        {{ $t("admin.posts.guides.new-tags-1") }} <kbd>{{ $t("enter") }}</kbd> {{ $t("admin.posts.guides.new-tags-2") }}
+                        {{ translate("admin.posts.guides.new-tags-1") }} <kbd>{{ translate("enter") }}</kbd> {{ translate("admin.posts.guides.new-tags-2") }}
                       </v-list-item-title>
                     </v-list-item>
                   </template>
@@ -94,7 +94,7 @@
               </v-col>
             </v-row>
 
-            <small>*{{ $t("validations.required-fields") }}</small>
+            <small>*{{ translate("validations.required-fields") }}</small>
           </v-card-text>
 
           <v-card-actions>
@@ -107,7 +107,7 @@
               variant="text"
               type="submit"
             >
-              {{ $t(btn_text) }}
+              {{ translate(btn_text) }}
             </v-btn>
           </v-card-actions>
         </v-form>
@@ -156,9 +156,9 @@ export default {
       },
       image_stored: null,
       base_tags: [
-        this.$t("admin.posts.tag-list.release"),
-        this.$t("admin.posts.tag-list.update"),
-        this.$t("admin.posts.tag-list.overwrite")
+        this.translate("admin.posts.tag-list.release"),
+        this.translate("admin.posts.tag-list.update"),
+        this.translate("admin.posts.tag-list.overwrite")
       ],
       search: null,
       event: 'updateAdminTable'
@@ -172,7 +172,7 @@ export default {
       this.image_stored = null
     },
     getFileInputLabel() {
-      if (!this.image_stored) return this.$t("admin.posts.upload-asset")
+      if (!this.image_stored) return this.translate("admin.posts.upload-asset")
       return ''
     },
     getHeaders() {
@@ -244,7 +244,7 @@ export default {
       }
     },
     required (v) {
-      return !!v || this.$t("form.validations.require-field")
+      return !!v || this.translate("form.validations.require-field")
     },
     checkFormComplete() {
       if (this.form.name && this.form.autor && this.form.description) {

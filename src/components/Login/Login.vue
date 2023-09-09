@@ -9,7 +9,7 @@
       :rules="[required]"
       class="mb-2"
       clearable
-      :label="$t('login.sign-up')"
+      :label="translate('login.sign-up')"
     ></v-text-field>
 
     <v-text-field
@@ -20,13 +20,13 @@
       :type="show ? 'text' : 'password'"
       @click:append-inner="show = !show"
       clearable
-      :label="$t('password')"
-      :placeholder="$t('login.type-password')"
+      :label="translate('password')"
+      :placeholder="translate('login.type-password')"
     ></v-text-field>
 
     <v-checkbox
       v-model="form.remember"
-      :label="$t('login.checkbox')"
+      :label="translate('login.checkbox')"
     ></v-checkbox>
 
     <br>
@@ -40,20 +40,20 @@
       type="submit"
       variant="elevated"
     >
-      {{ $t("login.sign-in") }}
+      {{ translate("login.sign-in") }}
     </v-btn>
     <div :class="loginClass">
       <p
         class="cursor-pointer text-grey mt-2 text-decoration-underline"
         @click="redirect('/')"
       >
-        {{ $t("nav.home") }}
+        {{ translate("nav.home") }}
       </p>
       <p
         class="cursor-pointer text-grey mt-2 text-decoration-underline"
         @click="redirect('/login/register')"
       >
-        {{ $t("login.account-create") }}
+        {{ translate("login.account-create") }}
       </p>
     </div>
   </v-form>
