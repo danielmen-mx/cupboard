@@ -14,6 +14,7 @@ import * as assets from './plugins/vuetify'
 import language from './plugins/locales'
 import moment from 'moment'
 import EventsMixins from './mixins/EventsMixins'
+import TranslationsMixins from './mixins/TranslationsMixins'
 
 // Event handling
 import mitt from 'mitt'
@@ -40,6 +41,7 @@ app.config.globalProperties.emitter = emitter
 
 app
   .mixin(EventsMixins)
+  .mixin(TranslationsMixins)
   .component('QuillEditor', QuillEditor)
   .use(language)
   .use(store)
