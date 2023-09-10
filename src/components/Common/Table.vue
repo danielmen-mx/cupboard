@@ -56,8 +56,6 @@ export default {
         };
 
         const resp = await this.apiService.index(params)
-        // console.log(resp)
-        
         this.items = resp.data
         this.paginationProps = resp.pagination??resp.pagination
 
@@ -67,7 +65,6 @@ export default {
 
         this.loading = false
         this.successCallBack()
-        // console.log('response: ', resp)
       } catch (error) {
         console.log(error)
         this.loading = false
@@ -81,7 +78,6 @@ export default {
 
         const resp = await this.apiService.show(this.itemId)
         this.item = resp.data
-        // console.log(resp)
 
         if (!this.preventSnackbar) {
           this.successSnackbar(resp.message)
@@ -129,10 +125,9 @@ export default {
           this.successSnackbar(resp.message)
         }
         this.loading = false
-        this.successCallBack()
+        this.successCallBack(id)
       } catch (error) {
         console.log(error)
-        // this.errorSnackbar(resp.data.error)
       }
     },
     removeItem(id) {
