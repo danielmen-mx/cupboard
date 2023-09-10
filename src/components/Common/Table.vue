@@ -41,7 +41,6 @@ export default {
   },
   methods: {
     successCallBack() {},
-    // index()
     async getItems() {
       if (this.breakRequest()) return
 
@@ -74,7 +73,6 @@ export default {
         this.loading = false
       }
     },
-    // show()
     async getItem() {
       if (this.breakRequest()) return
 
@@ -112,7 +110,7 @@ export default {
 
       return this.items.push(item)
     },
-    async remove(id) { // remove()
+    async remove(id) {
       if (this.breakRequest()) return
 
       try {
