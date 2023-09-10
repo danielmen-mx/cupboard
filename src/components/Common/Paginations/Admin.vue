@@ -5,7 +5,8 @@
       <v-select
         v-model="properties.items_per_page"
         :items="['15', '25', '50']"
-        variant=""
+        variant="outlined"
+        class="d-flex align-center"
         :disabled="itemsPerPageDisabled"
       ></v-select>
     </div>
@@ -25,7 +26,6 @@
   </div>
 </template>
 <script>
-// IMPORTANT: in the line 8 v-select > variant property is empty, keep as it is because there's no way to use the style we need
 import Pagination from '../Pagination.vue'
 
 export default {
