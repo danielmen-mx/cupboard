@@ -85,13 +85,14 @@ export default {
   },
   methods: {
     getCommentLength() {
-      setTimeout(() => { this.commentsLenght = this.item.comments.length }, 1000);
+      setTimeout(() => { this.commentsLenght = this.item.comments.length }, 500);
     },
     addCommentLenght () {
       this.commentsLenght++
     },
     reduceCommentLenght() {
-      this.commentsLenght = this.commentsLenght - 1
+      setTimeout(() => { this.commentsLenght = this.commentsLenght - 1 }, 1000)
+      
     },
     updatePost(resp) {
       this.item.rating = resp.post.rating
