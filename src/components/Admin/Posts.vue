@@ -70,7 +70,7 @@
                       <v-list-item-title class="cursor-pointer pb-2" @click="openForm(item)">
                         {{ translate("edit") }}
                       </v-list-item-title>
-                      <v-list-item-title class="cursor-pointer pt-2" @click="remove(item.id)">
+                      <v-list-item-title class="cursor-pointer pt-2" @click="openConfirmation(item.id)">
                         {{ translate("delete") }}
                       </v-list-item-title>
                     </v-list-item>
@@ -90,6 +90,7 @@
 import PostService from '@/services/PostService.js'
 import PostForm from '@/components/Admin/Posts/Form.vue'
 import { formatDate, slugify, countArray } from '../../utils/helpers'
+import { openConfirmation } from '../Common/Helpers/Actions'
 import Table from '@/components/Common/Table.vue'
 import AdminPostsEmptyState from '../Common/EmptyState/AdminPostsEmptyState.vue'
 import AdminPostsSkeleton from '../Common/Skeletons/AdminPostsSkeleton.vue'
@@ -97,7 +98,7 @@ import AdminPagination from '../Common/Paginations/Admin.vue'
 
 export default {
   extends: Table,
-  mixins: [formatDate, slugify, countArray],
+  mixins: [formatDate, slugify, countArray, openConfirmation],
   inject:['strLimit'],
   components: {
     PostForm,
@@ -146,6 +147,12 @@ export default {
     this.getItems()
     this.listenEvent(this.event, this.getItems)
     this.listenEvent('updatePaginationTable', this.updatePagination)
-  }
+    this.listenEvent('deletion-confirmation', this.remove)
+  },
+  beforeDestroy() {
+    this.unlistenEvent(this.event, this.getItems)
+    this.unlistenEvent('updatePaginationTable', this.updatePagination)
+    this.unlistenEvent('deletion-confirmation', this.remove)
+  },
 }
 </script>
