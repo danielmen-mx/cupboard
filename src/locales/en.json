@@ -44,6 +44,11 @@
     "november": "November",
     "december": "December"
   },
+  "confirmations": {
+    "you-sure": "Are you sure?",
+    "yes": "Yes",
+    "no": "No"
+  },
   "empty-states": {
     "AdminPosts": {
       "no-posts": "No posts yet",

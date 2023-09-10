@@ -44,6 +44,12 @@
     "november": "Noviembre",
     "december": "Diciembre"
   },
+  "confirmations": {
+    "you-sure": "¿Estás seguro?",
+    "remove": "¿Estás seguro de eliminar este elemento?",
+    "yes": "Sí",
+    "no": "No"
+  },
   "empty-states": {
     "AdminPosts": {
       "no-posts": "Aún no hay publicaciones",
