@@ -47,7 +47,7 @@
             :ripple="false"
             variant="plain"
             class="text-decoration-underline"
-            @click="remove(comment.id)"
+            @click="openConfirmation(comment.id)"
           >
             {{  translate("delete") }}
           </v-btn>
@@ -59,6 +59,7 @@
 <script>
 import { initials, ucFirst } from '../../utils/helpers'
 import { userCanEdit } from '../../utils/authentication'
+import { openConfirmation } from '../Common/Helpers/Actions'
 import Responsive from '../Common/Responsive.vue'
 import Table from '../Common/Table.vue'
 import Edit from '@/components/Comment/Edit.vue'
@@ -68,7 +69,7 @@ import CommentsSkeleton from '@/components/Common/Skeletons/CommentsSkeleton.vue
 
 export default {
   extends: Table,
-  mixins: [initials, ucFirst, userCanEdit],
+  mixins: [initials, ucFirst, userCanEdit, openConfirmation],
   components: {
     Edit,
     CommentsEmptyState,
@@ -95,34 +96,9 @@ export default {
     edit(comment) {
       comment.editing = true
     },
-    successCallBack() {
-      this.items.map(item => item['editing'] = false)
-      // console.log(this.items)
-    },
-    async remove(id) { // remove()
-      if (this.breakRequest()) return
-
-      try {
-
-        if (!this.preventReload) {
-          this.loading = true
-        }
-
-        const resp = await this.apiService.remove(id)
-
-        if (!this.preventRemoveItem) {
-          this.removeItem(id)
-        }
-
-        if (!this.preventSnackbar) {
-          this.successSnackbar(resp.message)
-        }
-        this.loading = false
-        this.fireEvent("remove-comment-lenght")
-      } catch (error) {
-        console.log(error)
-        // this.errorSnackbar(resp.data.error)
-      }
+    delete(id) {
+      this.remove(id)
+      this.fireEvent("remove-comment-lenght")
     },
   },
   mounted() {
@@ -131,6 +107,10 @@ export default {
 
     this.getItems()
     this.listenEvent('onSubmit', this.addItem)
+    this.listenEvent('deletion-confirmation', this.delete)
+  },
+  beforeDestroy() {
+    this.unlistenEvent('deletion-confirmation', this.delete)
   },
 }
 </script>
