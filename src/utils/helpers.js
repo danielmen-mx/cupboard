@@ -49,12 +49,6 @@ export const ucFirst = {
   }
 }
 
-// export const prevent = {
-//   methods: {
-//     prevent(action)
-//   },
-// }
-
 export const copyData = {
   methods: {
     copyData(data) {
