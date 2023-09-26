@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <AdminSettingsSkeleton v-if="!user"/>
+  <div v-else>
     <v-card class="px-4 py-2 ma- elevation-10">
       <span class="text-h5">
         {{ translate("profile") }}
@@ -172,11 +173,15 @@ import UserService from '@/services/UserService'
 import { formatRequest } from '../../utils/requests'
 import { mapMutations } from "vuex";
 import { updateLang } from '../../router/languages'
+import AdminSettingsSkeleton from '../Common/Skeletons/AdminSettingsSkeleton.vue';
 
 export default {
   ...mapMutations("", ["setToken", "setUser", "setName", "setEmail", "setLanguage"]),
   extends: Form,
   mixins: [formatRequest],
+  components: {
+    AdminSettingsSkeleton
+  },
   data() {
     return {
       validatingUsername: false,
