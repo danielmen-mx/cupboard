@@ -45,7 +45,7 @@ export default {
 .main-section {
   position: relative;
   width: 100%;
-  height: 24vh;
+  height: 30vh;
   overflow: hidden;
 }
 
