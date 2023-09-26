@@ -7,7 +7,7 @@
       <v-divider></v-divider>
       <v-form
         ref="form"
-        @submit.prevent="submit"
+        @submit.prevent="validate"
       >
         <v-responsive
           class="my-4 mx-4"
@@ -50,7 +50,7 @@
                     <v-icon
                       v-bind="props"
                       icon="mdi-account-search"
-                      @click="validateUsername"
+                      @click="handleUsernameValidation"
                     ></v-icon>
                   </template>
                     {{ translate("user-settings.validate-username") }}
@@ -94,7 +94,7 @@
                   <template v-slot:activator="{ props }">
                     <v-icon
                       v-bind="props"
-                      @click="validateEmail"
+                      @click="handleEmailValidation"
                     >
                     <svg 
                       xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +157,7 @@
               :disabled="loading || validatingUsername || validatingEmail || validatedEmail === false || validatedUsername === false"
               density="comfortable"
               variant="tonal"
-              color="info"
+              color="success"
               type="submit"
             >{{ translate("update") }}</v-btn>
           </div>
@@ -168,45 +168,89 @@
 </template>
 <script>
 import Form from '../Common/Form.vue'
+import UserService from '@/services/UserService'
+import { formatRequest } from '../../utils/requests'
+import { mapMutations } from "vuex";
+import { updateLang } from '../../router/languages'
 
 export default {
+  ...mapMutations("", ["setToken", "setUser", "setName", "setEmail", "setLanguage"]),
   extends: Form,
+  mixins: [formatRequest],
   data() {
     return {
       validatingUsername: false,
       validatingEmail: false,
       validatedUsername: null,
       validatedEmail: null,
-      languages: [
-        { title: this.translate("es"), value: "es" },
-        { title: this.translate("en"), value: "en" }
-      ],
-      form: {
-        "username": "Daniel",
-        "email": "danielmenc@webunderdevelopment.com",
-        "first_name": "Daniel",
-        "last_name": "Mendez",
-        "language": "es"
-      }
+      form: {},
+      itemId: null,
+      user: null,
+      apiService: UserService
     }
   },
   methods: {
-    validateUsername () {
-      this.validatingUsername = true
+    async handleUsernameValidation() {
+      if (this.user.username === this.form.username) return
+      try {
+        this.validatingUsername = true
+        this.loading = true
+        let req = this.formatRequest({username: this.form.username})
 
-      setTimeout(() => {
+        const resp = await this.apiService.validateUsername(this.itemId, req)
+
+        this.successSnackbar(resp.message)
+        this.validatedUsername = true
         this.validatingUsername = false
-        this.validatedUsername = Math.random() >= 0.5
-      }, 2000)
+        this.loading = false
+      } catch (error) {
+        console.log(error)
+        this.errorSnackbar(error.message)
+        this.validatedUsername = false
+        this.validatingUsername = false
+        this.loading = false
+      }
     },
-    validateEmail () {
-      this.validatingEmail = true
+    async handleEmailValidation() {
+      if (this.user.email === this.form.email) return
+      try {
+        this.validatingEmail = true
+        this.loading = true
+        let req = this.formatRequest({email: this.form.email})
 
-      setTimeout(() => {
+        const resp = await this.apiService.validateEmail(this.itemId, req)
+
+        this.successSnackbar(resp.message)
+        this.validatedEmail = true
         this.validatingEmail = false
-        this.validatedEmail = Math.random() >= 0.5
-      }, 2000)
+        this.loading = false
+      } catch (error) {
+        console.log(error)
+        this.errorSnackbar(error.message)
+        this.validatedEmail = false
+        this.validatingEmail = false
+        this.loading = false
+      }
     },
+    validate() {
+      if (this.form.username === this.user.username) this.form.username = ""
+      if (this.form.email === this.user.email) this.form.email = ""
+      this.submit()
+    },
+    successCallBack(data) {
+      var user = data
+      var language = data.language
+      this.$store.commit('setUser', { user: user })
+      this.$store.commit('setLanguage', { language: language })
+      updateLang(language)
+      this.getItem()
+    },
+    getItem() {
+      this.user = Object.assign({}, this.setUserVar())
+      if (!this.user) return
+      this.form = Object.assign({}, this.user)
+      this.itemId = this.form.id
+    }
   },
   computed: {
     usernameValidationTooltip() {
@@ -216,7 +260,16 @@ export default {
     emailValidationTooltip() {
       if (this.validatedEmail === null) return this.translate("user-settings.correct-email")
       return this.validatedEmail ? this.translate("user-settings.validated-email") : this.translate("user-settings.fail-validation-email")
+    },
+    languages() {
+      return [
+        { title: this.translate("es"), value: "es" },
+        { title: this.translate("en"), value: "en" }
+      ]
     }
+  },
+  mounted() {
+    this.getItem()
   },
   watch: {
     'validated_username': {
@@ -230,7 +283,7 @@ export default {
       handler: function () {
         this.emailValidationTooltip
       }
-    }
+    },
   }
 }
 </script>
