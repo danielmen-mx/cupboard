@@ -52,7 +52,7 @@ export default {
         }
 
         if (!this.preventSnackbar) {
-          this.successSnackbar(resp.data.message)
+          this.successSnackbar(resp.message)
         }
 
         if (!this.preventUpdateItems) {
