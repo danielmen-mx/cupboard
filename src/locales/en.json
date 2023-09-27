@@ -94,10 +94,10 @@
     "correct-email": "Correct Email",
     "validate-username": "Validate available username",
     "validated-username": "Validated and available username",
-    "fail-validation-username": "That username is in use, choose another",
+    "fail-validation-username": "The username is not validated or is in use by someone else. Try another",
     "validate-email": "Validate available email",
     "validated-email": "Validated and available email",
-    "fail-validation-email": "That email is in use, choose another"
+    "fail-validation-email": "The email is not validated or is in use by someone else. Try another"
   },
   "home": {
     "grettings": "See whats new",

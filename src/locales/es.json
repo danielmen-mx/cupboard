@@ -95,10 +95,10 @@
     "correct-email": "Correo correcto",
     "validate-username": "Validar nombre de usuario disponible",
     "validated-username": "Nombre de usuario validado y disponible",
-    "fail-validation-username": "Ese nombre de usuario está en uso, elige otro",
+    "fail-validation-username": "El nombre de usuario no está validado o está en uso por alguien más. Intenta con otro.",
     "validate-email": "Validar correo disponible",
     "validated-email": "Correo validado",
-    "fail-validation-email": "Ese correo está en uso, elige otro"
+    "fail-validation-email": "El correo no está validado o está en uso por alguien más. Intenta con otro."
   },
   "home": {
     "grettings": "Mira lo nuevo!",
