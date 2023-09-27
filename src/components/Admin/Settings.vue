@@ -266,6 +266,14 @@ export default {
       if (this.validatedEmail === null) return this.translate("user-settings.correct-email")
       return this.validatedEmail ? this.translate("user-settings.validated-email") : this.translate("user-settings.fail-validation-email")
     },
+    waitUsernameValidation() {
+      if (this.form.username !== this.user.username) return this.validatedUsername = false
+      return this.validatedUsername = true
+    },
+    waitEmailValidation() {
+      if (this.form.email !== this.user.email) return this.validatedEmail = false
+      return this.validatedEmail = true
+    },
     languages() {
       return [
         { title: this.translate("es"), value: "es" },
@@ -289,6 +297,20 @@ export default {
         this.emailValidationTooltip
       }
     },
+    'form.username': {
+      handler: function () {
+        this.waitUsernameValidation
+      },
+      deep: true,
+      inmediate: true
+    },
+    'form.email': {
+      handler: function () {
+        this.waitEmailValidation
+      },
+      deep: true,
+      inmediate: true
+    }
   }
 }
 </script>
