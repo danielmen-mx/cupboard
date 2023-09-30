@@ -63,7 +63,11 @@ export default {
   methods: {
     closeDrawer() { },
     redirect(path) {
-      if (path === "openUserSettings") return this.fireEvent(path)
+      if (path === "openUserSettings") {
+        if (this.$route.fullPath === "/admin/settings") return this.$router.push("/admin/settings")
+        return this.fireEvent(path)
+      }
+
       return this.$router.push({ path: path })
     },
     requireAdmin(require) {
