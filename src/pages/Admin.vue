@@ -55,7 +55,7 @@ export default {
     tabs: [
       {
         title: 'admin.setting',
-        value: 'setting',
+        value: 'settings',
         path: '/admin/settings',
         component: null
       },
@@ -86,7 +86,7 @@ export default {
     '$route.params': {
       handler: function (params) {
           if (params.admin === undefined) return setTimeout(() => { this.tab = 'main' }, 100)
-          if (params.admin === 'settings') return this.tab = 'settings'
+          if (params.admin === 'settings') this.tab = 'settings'
           if (params.admin === 'posts') return this.tab = 'posts'
           if (params.admin === 'products') return this.tab = 'products'
         },
