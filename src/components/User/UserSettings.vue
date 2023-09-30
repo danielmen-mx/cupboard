@@ -210,7 +210,7 @@ export default {
         this.loading = false
       } catch (error) {
         console.log(error)
-        this.errorSnackbar(error.message)
+        this.errorSnackbar(error.message??exception)
         this.validatedUsername = false
         this.validatingUsername = false
         this.loading = false
@@ -231,7 +231,7 @@ export default {
         this.loading = false
       } catch (error) {
         console.log(error)
-        this.errorSnackbar(error.message)
+        this.errorSnackbar(error.message??exception)
         this.validatedEmail = false
         this.validatingEmail = false
         this.loading = false
@@ -252,10 +252,12 @@ export default {
       this.fireEvent("update-username-in-navigation-bar", data.username)
     },
     getItem() {
-      this.user = Object.assign({}, this.setUserVar())
-      if (!this.user) return
-      this.form = Object.assign({}, this.user)
-      this.itemId = this.form.id
+      setTimeout(() => {
+        this.user = Object.assign({}, this.setUserVar())
+        if (!this.user) return
+        this.form = Object.assign({}, this.user)
+        this.itemId = this.form.id
+      }, 200);
     }
   },
   computed: {
