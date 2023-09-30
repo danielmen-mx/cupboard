@@ -1,5 +1,6 @@
 <template>
-  <v-sheet class="elevation-0 bg-grey-lighten-4 rounded-xl mt-6 text-center text-grey-darken-3" height="68vh">
+  <!-- <Button /> -->
+  <!-- <v-sheet class="elevation-0 bg-grey-lighten-4 rounded-xl mt-6 text-center text-grey-darken-3" height="68vh">
     <div class="d-flex justify-space-between mx-4 pt-4">
       <v-sheet class="skeleton rounded my-2" height="5vh" width="13vw"></v-sheet>
     </div>
@@ -36,12 +37,17 @@
         </div>
       </v-sheet>
     </v-responsive>
-    </v-sheet>
+    </v-sheet> -->
   <!-- <p>Something</p>
   <p>{{ $t('nav.admin') }}</p> -->
 </template>
 <script>
+import Button from '../layouts/Button.vue'
+
 export default {
+  components: {
+    Button
+  },
   data: () => ({
     //
   }),
