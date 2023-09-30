@@ -22,7 +22,7 @@
         <v-window-item value="main">
           <Welcome />
         </v-window-item>
-        <v-window-item value="setting">
+        <v-window-item value="settings">
           <Settings />
         </v-window-item>
         <v-window-item value="posts">
@@ -76,7 +76,7 @@ export default {
   methods: {
     pushRoute(route) {
       this.$router.push(route)
-      if (route === '/admin') setTimeout(() => { this.tab = 'main' }, 500);
+      if (route === '/admin') setTimeout(() => { this.tab = 'main' }, 500)
     }
   },
   mounted() {
@@ -85,10 +85,10 @@ export default {
   watch: {
     '$route.params': {
       handler: function (params) {
-          if (params.admin == undefined) this.tab = 'none'
-          if (params.admin == 'settings') this.tab = 'setting'
-          if (params.admin == 'posts') this.tab = 'posts'
-          if (params.admin == 'products') this.tab = 'products'
+          if (params.admin === undefined) return setTimeout(() => { this.tab = 'main' }, 100)
+          if (params.admin === 'settings') return this.tab = 'settings'
+          if (params.admin === 'posts') return this.tab = 'posts'
+          if (params.admin === 'products') return this.tab = 'products'
         },
         deep: true,
         immediate: true
