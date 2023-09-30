@@ -75,6 +75,9 @@ export default {
       if (this.admin == true && require == true) return true
       return false
     },
+    updateUsername(username) {
+      this.user = username
+    }
   },
   mounted() {
     let userAuth = isAuthenticated()
@@ -92,5 +95,7 @@ export default {
     if (adminAuth) {
       this.admin = true
     }
+
+    this.listenEvent("update-username-in-navigation-bar", this.updateUsername)
   },
 }

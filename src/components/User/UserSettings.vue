@@ -249,6 +249,7 @@ export default {
       this.$store.commit('setLanguage', { language: language })
       updateLang(language)
       this.getItem()
+      this.fireEvent("update-username-in-navigation-bar", data.username)
     },
     getItem() {
       this.user = Object.assign({}, this.setUserVar())
