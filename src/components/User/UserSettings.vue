@@ -1,7 +1,7 @@
 <template>
   <AdminSettingsSkeleton v-if="!user"/>
   <div v-else>
-    <v-card class="px-4 py-2 ma- elevation-10">
+    <v-card class="pa-6 elevation-0">
       <span class="text-h5">
         {{ translate("profile") }}
       </span>
@@ -12,7 +12,7 @@
       >
         <v-responsive
           class="my-4 mx-4"
-          max-width="35vw"
+          max-width="34vw"
         >
           <div class="d-flex align-center">
             <div class="configuration-title px-4">
