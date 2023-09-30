@@ -13,7 +13,7 @@ export default {
           title: 'user-settings.settings',
           // icon: 'mdi-settings',
           icon: 'mdi-wrench',
-          path: ""
+          path: "openUserSettings"
         },
         {
           title: 'user-settings.cart',
@@ -63,7 +63,8 @@ export default {
   methods: {
     closeDrawer() { },
     redirect(path) {
-      this.$router.push({ path: path })
+      if (path === "openUserSettings") return this.fireEvent(path)
+      return this.$router.push({ path: path })
     },
     requireAdmin(require) {
       if (!require) return true
