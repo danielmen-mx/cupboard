@@ -118,7 +118,7 @@ export default {
 
       this.reactions = newObj
       this.parent_post.reactions = newObj
-      this.parent_post.rating = resp.post.rating
+      this.parent_post.rating = resp.rating
       this.$nextTick(() => { this.fireEvent('update-reactions', this.parent_post) })
     },
     successCallBack(resp) {
@@ -127,7 +127,8 @@ export default {
     },
     setForm() {
       let user = this.setUserVar()
-      this.form.post_id = this.post.id
+      this.form.model_type = "App\\Models\\Cupboard\\Post"
+      this.form.model_id = this.post.id
       this.form.user_id = !user ? null : user.id
       this.setReaction()
     }
