@@ -30,15 +30,16 @@
   </v-card-actions>
 </template>
 <script>
+import { findItemById } from '../../utils/helpers'
+import { getModel } from '../Common/Helpers/GetModel'
 import ReactionService from '@/services/ReactionService'
 import Form from '../Common/Form.vue'
-import { findItemById } from '../../utils/helpers'
 
 export default {
   extends: Form,
-  mixins: [findItemById],
+  mixins: [findItemById, getModel],
   props: {
-    post_reactions: {
+    model_reactions: {
       type: Array,
       required: true
     }
@@ -100,13 +101,14 @@ export default {
     },
     successCallBack(resp) {
       this.setForm()
-      this.$nextTick(() => { this.fireEvent('update-post-reaction-rating', resp) })
+      this.$nextTick(() => { this.fireEvent('update-reaction-rating', resp) })
       this.updateReactions(resp)
     },
     setForm() {
-      this.reactions = this.post_reactions
-      this.form.post_id = this.$route.params.id
+      this.reactions = this.model_reactions
       this.form.user_id = this.setUserVar().id
+      this.form.model_type = this.getModel()
+      this.form.model_id = this.$route.params.id
       this.form.reaction = true
     }
   },
