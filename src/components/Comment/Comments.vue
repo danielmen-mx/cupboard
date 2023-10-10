@@ -60,6 +60,7 @@
 import { initials, ucFirst } from '../../utils/helpers'
 import { userCanEdit } from '../../utils/authentication'
 import { openConfirmation } from '../Common/Helpers/Actions'
+import { getModel } from '../Common/Helpers/GetModel'
 import Responsive from '../Common/Responsive.vue'
 import Table from '../Common/Table.vue'
 import Edit from '@/components/Comment/Edit.vue'
@@ -69,14 +70,14 @@ import CommentsSkeleton from '@/components/Common/Skeletons/CommentsSkeleton.vue
 
 export default {
   extends: Table,
-  mixins: [initials, ucFirst, userCanEdit, openConfirmation],
+  mixins: [initials, ucFirst, userCanEdit, openConfirmation, getModel],
   components: {
     Edit,
     CommentsEmptyState,
     CommentsSkeleton
   },
   props: {
-    post_id: {
+    model_id: {
       type: String,
       required: true
     }
@@ -102,8 +103,9 @@ export default {
     },
   },
   mounted() {
-    if (!this.post_id) this.query.post_id = this.$route.params.id
-    if (this.post_id) this.query.post_id = this.post_id
+    if (!this.model_id) this.query.model_id = this.$route.params.id
+    if (this.model_id) this.query.model_id = this.model_id
+    this.query.model_type = this.getModel()
 
     this.getItems()
     this.listenEvent('onSubmit', this.addItem)
