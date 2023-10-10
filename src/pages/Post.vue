@@ -44,11 +44,11 @@
           ></quill-editor>
         </div>
         <v-divider></v-divider>
-        <Actions :post_reactions="item.reactions"/>
+        <Actions :model_reactions="item.reactions"/>
         <v-divider></v-divider>
-        <Comments :post_id="item.id" />
+        <Comments :model_id="item.id" />
         <v-divider></v-divider>
-        <Create :post_id="item.id"/>
+        <Create :model_id="item.id"/>
       </div>
     </v-card>
   </div>
@@ -95,7 +95,7 @@ export default {
       
     },
     updatePost(resp) {
-      this.item.rating = resp.post.rating
+      this.item.rating = resp.rating
 
       if (this.item.reactions.length <= 0) {
         this.item.reactions[0] = resp
@@ -125,12 +125,12 @@ export default {
     this.getCommentLength()
     this.listenEvent("add-new-comment-length", this.addCommentLenght)
     this.listenEvent("remove-comment-lenght", this.reduceCommentLenght)
-    this.listenEvent("update-post-reaction-rating", this.updatePost)
+    this.listenEvent("update-reaction-rating", this.updatePost)
   },
   beforeDestroy() {
     this.unlistenEvent("add-new-comment-length", this.addCommentLenght)
     this.unlistenEvent("remove-comment-lenght", this.reduceCommentLenght)
-    this.unlistenEvent("update-post-reaction-rating", this.updatePost)
+    this.unlistenEvent("update-reaction-rating", this.updatePost)
   },
 }
 </script>
