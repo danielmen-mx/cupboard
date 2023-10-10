@@ -59,12 +59,13 @@
 </template>
 <script>
 import { initials, ucFirst } from '../../utils/helpers'
+import { getModel } from '../Common/Helpers/GetModel'
 import Form from '../Common/Form.vue'
 import CommentService from '@/services/CommentService'
 
 export default {
   extends: Form,
-  mixins: [initials, ucFirst],
+  mixins: [initials, ucFirst, getModel],
   props: {
     comment: {
       type: Object,
@@ -85,9 +86,10 @@ export default {
       this.comment.editing = false
     },
     setProperties() {
-      if (!this.post_id) this.form.post_id = this.$route.params.id
-      if (this.post_id) this.form.post_id = this.post_id
       this.itemId = this.comment.id
+      this.form.model_type = this.getModel()
+      if (!this.model_id) this.form.model_id = this.$route.params.id
+      if (this.model_id) this.form.model_id = this.model_id
       this.form.user_id = this.comment.user.id
       this.form.comment = this.comment.comment
     }

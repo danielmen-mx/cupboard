@@ -12,7 +12,7 @@
         :disabled="loading"
         clear-icon="mdi-close-circle"
         clearable
-        :label="translate('home.post.comments.add')"
+        :label="translate('comments.add')"
         variant="outlined"
         id="comment_input"
         type="text"
@@ -37,11 +37,13 @@
 import Form from '../Common/Form.vue'
 import CommentService from '@/services/CommentService'
 import store from '../../store'
+import { getModel } from '@/components/Common/Helpers/GetModel'
 
 export default {
   extends: Form,
+  mixins: [getModel],
   props: {
-    post_id: {
+    model_id: {
       type: String,
       required: true
     }
@@ -51,15 +53,17 @@ export default {
       apiService: CommentService,
       preventSnackbar: true,
       form: {
-        post_id: null,
+        model_type: null,
+        model_id: null,
         user_id: null
       },
     }
   },
   methods: {
     setProperties() {
-      if (!this.post_id) this.form.post_id = this.$route.params.id
-      if (this.post_id) this.form.post_id = this.post_id
+      if (!this.model_id) this.form.model_id = this.$route.params.id
+      if (this.model_id) this.form.model_id = this.model_id
+      this.form.model_type = this.getModel()
 
       let user = store.getters['user']
 
@@ -70,9 +74,7 @@ export default {
     focusInput() {
       setTimeout(() => {
         document.getElementById("comment_component").scrollIntoView({ behavior: "smooth", block: "end" })
-        this.$nextTick(() => {
-          document.getElementById("comment_input").focus()
-        })
+        this.$nextTick(() => { document.getElementById("comment_input").focus() })
       }, 1000)
     },
     successCallBack() {
