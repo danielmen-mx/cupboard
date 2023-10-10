@@ -50,6 +50,9 @@
     "yes": "Sí",
     "no": "No"
   },
+  "comments": {
+    "add": "Añadir comentario"
+  },
   "empty-states": {
     "AdminPosts": {
       "no-posts": "Aún no hay publicaciones",

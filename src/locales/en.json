@@ -46,8 +46,12 @@
   },
   "confirmations": {
     "you-sure": "Are you sure?",
+    "remove": "Are you sure to remove this item?",
     "yes": "Yes",
     "no": "No"
+  },
+  "comments": {
+    "add": "Add comment"
   },
   "empty-states": {
     "AdminPosts": {
