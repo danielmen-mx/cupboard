@@ -1,6 +1,6 @@
 <template>
   <PostForm :function-file-name="getImageName"/>
-  <AdminPostsSkeleton v-if="loading" />
+  <AdminTableSkeleton v-if="loading" />
   <template v-else>
     <AdminPostsEmptyState v-if="items.length < 1"/>
     <div v-else>
@@ -26,8 +26,8 @@
               <th>{{ translate("autor") }}</th>
               <th>{{ translate("admin.posts.asset") }}</th>
               <th>{{ translate("admin.posts.tags") }}</th>
-              <th>{{ translate("admin.posts.created-at") }}</th>
-              <th></th>
+              <th>{{ translate("table.created_at") }}</th>
+              <th>{{ translate("options") }}</th>
             </tr>
           </thead>
           <tbody>
@@ -39,7 +39,6 @@
                 {{ item.autor }}
               </td>
               <td>
-                <!-- TODO: improve the redirection to the image path -->
                 <a :href="item.image" class="text-blue-darken-4" target="_blank">
                   {{ getImageName(item.image, item.name) }}
                 </a>
@@ -93,7 +92,7 @@ import { formatDate, slugify, countArray } from '../../utils/helpers'
 import { openConfirmation } from '../Common/Helpers/Actions'
 import Table from '@/components/Common/Table.vue'
 import AdminPostsEmptyState from '../Common/EmptyState/AdminPostsEmptyState.vue'
-import AdminPostsSkeleton from '../Common/Skeletons/AdminPostsSkeleton.vue'
+import AdminTableSkeleton from '../Common/Skeletons/AdminTableSkeleton.vue'
 import AdminPagination from '../Common/Paginations/Admin.vue'
 
 export default {
@@ -103,7 +102,7 @@ export default {
   components: {
     PostForm,
     AdminPostsEmptyState,
-    AdminPostsSkeleton,
+    AdminTableSkeleton,
     AdminPagination
   },
   data () {
