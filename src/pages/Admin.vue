@@ -54,7 +54,7 @@ export default {
     tab: 'main',
     tabs: [
       {
-        title: 'admin.setting',
+        title: 'settings',
         value: 'settings',
         path: '/admin/settings',
         component: null
@@ -66,7 +66,7 @@ export default {
         component: null
       },
       {
-        title: 'admin.products',
+        title: 'products',
         value: 'products',
         path: '/admin/products',
         component: null
