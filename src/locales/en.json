@@ -13,7 +13,6 @@
       "autor": "Autor",
       "asset": "Asset",
       "tags": "Tags",
-      "created-at": "Created at",
       "tag-list": {
         "release": "New release",
         "update": "Update post",
@@ -28,7 +27,19 @@
         "new-tags-2" : "to create a new tag"
       }
     },
-    "products": "Products"
+    "products": {
+      "add": "Add new product",
+      "edit": "Edit product",
+      "create": "Create product",
+      "table_headers": {
+        "name": "Name",
+        "price": "Price",
+        "shipping_price": "Shipping price",
+        "quantity": "Quantity",
+        "description": "Description",
+        "asset": "Asset"
+      }
+    }
   },
   "calendar": {
     "january": "January",
@@ -135,6 +146,11 @@
       "bad-phone": "Your phone number must be wrong"
     }
   },
+  "table": {
+    "created_at": "Created at",
+    "options": "Options",
+    "sort": "Sort as"
+  },
   "actions": {
     "like": "I like",
     "dont-like": "I don't like",
@@ -162,7 +178,10 @@
   "posts": "Posts",
   "post": "Post",
   "profile": "Profile",
+  "product": "Product",
+  "products": "Products",
   "sorry": "Sorry",
+  "settings": "Settings",
   "update": "Update",
   "user_settings": "User Settings",
   "404": "We don't found the page you're looking for!"

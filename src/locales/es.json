@@ -28,7 +28,19 @@
         "new-tags-2": "para crear una nueva"
       }
     },
-    "products": "Productos"
+    "products": {
+      "add": "Añadir nuevo producto",
+      "edit": "Editar producto",
+      "create": "Crear producto",
+      "table_headers": {
+        "name": "Nombre",
+        "price": "Precio",
+        "shipping_price": "Precio de envío",
+        "quantity": "Cantidad disponible",
+        "description": "Descripción",
+        "asset": "Imagen"
+      }
+    }
   },
   "calendar": {
     "january": "Enero",
@@ -135,6 +147,11 @@
       "bad-phone": "Tu número telefonico debe estar mal"
     }
   },
+  "table": {
+    "created_at": "Creado el",
+    "options": "Opciones",
+    "sort": "Ordenar por"
+  },
   "actions": {
     "like": "Me gusta",
     "dont-like": "No me gusta",
@@ -162,7 +179,10 @@
   "posts": "Publicaciones",
   "post": "Publicación",
   "profile": "Perfil",
+  "product": "Producto",
+  "products": "Productos",
   "sorry": "Disculpa",
+  "settings": "Configuraciones",
   "update": "Actualizar",
   "user_settings": "Ajustes de Usuario",
   "404": "¡No encontramos la página que estás buscando!"
