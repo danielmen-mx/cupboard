@@ -1,5 +1,5 @@
 <template>
-  <PostForm :function-file-name="getImageName"/>
+  <!-- <PostForm :function-file-name="getImageName"/> -->
   <AdminTableSkeleton v-if="loading" />
   <template v-else>
     <AdminPostsEmptyState v-if="items.length < 1"/>
@@ -13,7 +13,9 @@
           {{ translate("admin.products.create") }}
         </v-btn>
       </div>
-      <v-card variant="outlined">
+      <v-card
+        variant="outlined"
+      >
         <v-table
           height="64vh"
           fixed-header
@@ -33,36 +35,43 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in items" :key="item.name">
-              <td><p class="text-subtitle-1">{{ strLimit(item.name, 25) }}</p></td>
-              <td>${{ item.price }}</td>
-              <td>${{ item.shipping_price }}</td>
-              <td>{{ item.quantity }}</td>
-              <td>{{ strLimit(item.description, 50) }}</td>
-              <td>
-                <a :href="item.assets" class="text-blue-darken-4" target="_blank">
-                  {{ getImageName(item.assets, item.name) }}
-                </a>
-              </td>
-              <td>{{ formatDate(item.created_at) }}</td>
-              <td>
-                <v-menu>
-                  <template v-slot:activator="{ props }">
-                    <v-btn icon="mdi-dots-vertical" v-bind="props" variant="flat"></v-btn>
-                  </template>
-                  <v-list>
-                    <v-list-item>
-                      <v-list-item-title class="cursor-pointer pb-2" @click="openForm(item)">
-                        {{ translate("edit") }}
-                      </v-list-item-title>
-                      <v-list-item-title class="cursor-pointer pt-2" @click="openConfirmation(item.id)">
-                        {{ translate("delete") }}
-                      </v-list-item-title>
-                    </v-list-item>
-                  </v-list>
-                </v-menu>
-              </td>
-            </tr>
+            <template v-for="item in items" :key="item.name">
+              <v-hover v-slot="{ isHovering, props }">
+                <tr
+                  v-bind="props"
+                  :class="isHovering ? 'bg-light-green' : undefined"
+                >
+                  <td><p class="text-subtitle-1">{{ strLimit(item.name, 25) }}</p></td>
+                  <td>${{ item.price }}</td>
+                  <td>${{ item.shipping_price }}</td>
+                  <td>{{ item.quantity }}</td>
+                  <td>{{ strLimit(item.description, 50) }}</td>
+                  <td>
+                    <a :href="item.assets" class="text-blue-darken-4" target="_blank">
+                      {{ getImageName(item.assets, item.name) }}
+                    </a>
+                  </td>
+                  <td>{{ formatDate(item.created_at) }}</td>
+                  <td>
+                    <v-menu>
+                      <template v-slot:activator="{ props }">
+                        <v-btn :class="isHovering ? 'bg-light-green-lighten-1' : undefined" icon="mdi-dots-vertical" v-bind="props" variant="flat"></v-btn>
+                      </template>
+                      <v-list>
+                        <v-list-item>
+                          <v-list-item-title class="cursor-pointer pb-2" @click="openForm(item)">
+                            {{ translate("edit") }}
+                          </v-list-item-title>
+                          <v-list-item-title class="cursor-pointer pt-2" @click="openConfirmation(item.id)">
+                            {{ translate("delete") }}
+                          </v-list-item-title>
+                        </v-list-item>
+                      </v-list>
+                    </v-menu>
+                  </td>
+                </tr>
+              </v-hover>
+            </template>
           </tbody>
         </v-table>
         <v-divider></v-divider>
@@ -97,7 +106,7 @@ export default {
       apiService: ProductService,
       items: [],
       post: null,
-      event: 'updateAdminTable',
+      event: 'updateTable',
       query: {
         per_page: 15,
         page: 1
