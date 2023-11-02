@@ -23,15 +23,13 @@
           class="py-1"
         >
           <thead>
-            <tr class="text-subtitle-1">
-              <th>{{ translate("admin.products.table_headers.name") }}</th>
-              <th>{{ translate("admin.products.table_headers.price") }}</th>
-              <th>{{ translate("admin.products.table_headers.shipping_price") }}</th>
-              <th>{{ translate("admin.products.table_headers.quantity") }}</th>
-              <th>{{ translate("admin.products.table_headers.description") }}</th>
-              <th>{{ translate("admin.products.table_headers.asset") }}</th>
-              <th>{{ translate("table.created_at") }}</th>
-              <th>{{ translate("table.options") }}</th>
+            <tr>
+              <template
+                v-for="header in headers"
+                :key="header"
+              >
+                <th class="text-subtitle-1">{{ translate(header) }}</th>
+              </template>
             </tr>
           </thead>
           <tbody>
@@ -110,7 +108,17 @@ export default {
       query: {
         per_page: 15,
         page: 1
-      }
+      },
+      headers: [
+        "admin.products.table_headers.name",
+        "admin.products.table_headers.price",
+        "admin.products.table_headers.shipping_price",
+        "admin.products.table_headers.quantity",
+        "admin.products.table_headers.description",
+        "admin.products.table_headers.asset",
+        "table.created_at",
+        "table.options",
+      ]
     }
   },
   methods: {

@@ -21,13 +21,10 @@
           class="py-1"
         >
           <thead>
-            <tr class="text-subtitle-1">
-              <th>{{ translate("admin.posts.name") }}</th>
-              <th>{{ translate("autor") }}</th>
-              <th>{{ translate("admin.posts.asset") }}</th>
-              <th>{{ translate("admin.posts.tags") }}</th>
-              <th>{{ translate("table.created_at") }}</th>
-              <th>{{ translate("options") }}</th>
+            <tr>
+              <template v-for="header in headers" :key="header">
+                <th class="text-subtitle-1">{{ translate(header) }}</th>
+              </template>
             </tr>
           </thead>
           <tbody>
@@ -114,7 +111,15 @@ export default {
       query: {
         per_page: 15,
         page: 1
-      }
+      },
+      headers: [
+        "admin.posts.name",
+        "autor",
+        "admin.posts.asset",
+        "admin.posts.tags",
+        "table.created_at",
+        "options"
+      ]
     }
   },
   methods: {
