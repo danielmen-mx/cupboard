@@ -31,52 +31,51 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in items" :key="item.name">
-              <td>
-                <p class="text-subtitle-1">{{ strLimit(item.name, 25) }}</p>
-              </td>
-              <td>
-                {{ item.autor }}
-              </td>
-              <td>
-                <a :href="item.image" class="text-blue-darken-4" target="_blank">
-                  {{ getImageName(item.image, item.name) }}
-                </a>
-              </td>
-              <td>
-                <div>
-                  <!-- TODO: improve add tooltip to show all the tags in lists(if contain more than 1 tag) -->
-                  <v-chip
-                    v-if="item.tags"
-                    prepend-icon="mdi-label"
-                    color="light-green"
-                    variant="outlined"
-                  >
-                    {{ countTags(item.tags) }}
-                  </v-chip>
-                </div>
-              </td>
-              <td>
-                {{ formatDate(item.created_at) }}
-              </td>
-              <td>
-                <v-menu>
-                  <template v-slot:activator="{ props }">
-                    <v-btn icon="mdi-dots-vertical" v-bind="props" variant="flat"></v-btn>
-                  </template>
-                  <v-list>
-                    <v-list-item>
-                      <v-list-item-title class="cursor-pointer pb-2" @click="openForm(item)">
-                        {{ translate("edit") }}
-                      </v-list-item-title>
-                      <v-list-item-title class="cursor-pointer pt-2" @click="openConfirmation(item.id)">
-                        {{ translate("delete") }}
-                      </v-list-item-title>
-                    </v-list-item>
-                  </v-list>
-                </v-menu>
-              </td>
-            </tr>
+            <template v-for="item in items" :key="item.name">
+              <v-hover v-slot="{ isHovering, props }">
+                <tr
+                  v-bind="props"
+                  :class="isHovering ? 'bg-light-green' : undefined"
+                >
+                  <td><p class="text-subtitle-1">{{ strLimit(item.name, 25) }}</p></td>
+                  <td>{{ item.autor }}</td>
+                  <td>
+                    <a :href="item.image" class="text-blue-darken-4" target="_blank">{{ getImageName(item.image, item.name) }}</a>
+                  </td>
+                  <td>
+                    <div>
+                      <!-- TODO: improve add tooltip to show all the tags in lists(if contain more than 1 tag) -->
+                      <v-chip
+                        v-if="item.tags"
+                        prepend-icon="mdi-label"
+                        :color="isHovering ? 'light-blue-darken-3' : 'light-green'"
+                        variant="outlined"
+                      >
+                        {{ countTags(item.tags) }}
+                      </v-chip>
+                    </div>
+                  </td>
+                  <td>{{ formatDate(item.created_at) }}</td>
+                  <td>
+                    <v-menu>
+                      <template v-slot:activator="{ props }">
+                        <v-btn :class="isHovering ? 'bg-light-green-lighten-1' : undefined" icon="mdi-dots-vertical" v-bind="props" variant="flat"></v-btn>
+                      </template>
+                      <v-list>
+                        <v-list-item>
+                          <v-list-item-title class="cursor-pointer pb-2" @click="openForm(item)">
+                            {{ translate("edit") }}
+                          </v-list-item-title>
+                          <v-list-item-title class="cursor-pointer pt-2" @click="openConfirmation(item.id)">
+                            {{ translate("delete") }}
+                          </v-list-item-title>
+                        </v-list-item>
+                      </v-list>
+                    </v-menu>
+                  </td>
+                </tr>
+              </v-hover>
+            </template>
           </tbody>
         </v-table>
         <v-divider></v-divider>
@@ -140,6 +139,9 @@ export default {
       if (this.query.per_page === properties.per_page && this.query.page === properties.page) return
       this.query = properties
       this.getItems()
+    },
+    handleHover () {
+      console.log('hello there')
     }
   },
   mounted() {
