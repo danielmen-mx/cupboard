@@ -13,7 +13,7 @@
         clear-icon="mdi-close-circle"
         clearable
         :label="translate('comments.add')"
-        variant="outlined"
+        variant="solo"
         id="comment_input"
         type="text"
         @click:append="submit"
@@ -55,7 +55,8 @@ export default {
       form: {
         model_type: null,
         model_id: null,
-        user_id: null
+        user_id: null,
+        comment: null
       },
     }
   },
@@ -67,9 +68,7 @@ export default {
 
       let user = store.getters['user']
 
-      if (user) {
-        this.form.user_id = user.id
-      }
+      if (user) this.form.user_id = user.id
     },
     focusInput() {
       setTimeout(() => {
@@ -78,9 +77,7 @@ export default {
       }, 1000)
     },
     successCallBack() {
-      if (this.isPostAction) {
-        this.fireEvent("add-new-comment-length")
-      }
+      if (this.isPostAction) this.fireEvent("add-new-comment-length")
     }
   },
   mounted() {
@@ -92,6 +89,11 @@ export default {
   },
   watch: {
     'formComplete': {
+      handler: function () {
+        //
+      }
+    },
+    'form.comment': {
       handler: function () {
         if (this.form.comment !== null || this.form.comment !== '') {
           this.setProperties()
