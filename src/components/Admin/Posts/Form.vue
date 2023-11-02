@@ -255,6 +255,9 @@ export default {
   mounted() {
     this.listenEvent('openPostForm', this.openForm)
   },
+  beforeDestroy() {
+    this.unlistenEvent('openPostForm', this.openForm)
+  },
   watch: {
     model (val) {
       if (val.length > 5) {
