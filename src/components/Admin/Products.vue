@@ -37,7 +37,7 @@
               <v-hover v-slot="{ isHovering, props }">
                 <tr
                   v-bind="props"
-                  :class="isHovering ? 'bg-light-green' : undefined"
+                  :class="isHovering ? 'bg-grey-lighten-3' : undefined"
                 >
                   <td><p class="text-subtitle-1">{{ strLimit(item.name, 25) }}</p></td>
                   <td>${{ item.price }}</td>
@@ -53,7 +53,7 @@
                   <td>
                     <v-menu>
                       <template v-slot:activator="{ props }">
-                        <v-btn :class="isHovering ? 'bg-light-green-lighten-1' : undefined" icon="mdi-dots-vertical" v-bind="props" variant="flat"></v-btn>
+                        <v-btn :class="isHovering ? 'bg-grey-lighten-3' : undefined" icon="mdi-dots-vertical" v-bind="props" variant="flat"></v-btn>
                       </template>
                       <v-list>
                         <v-list-item>
@@ -104,7 +104,7 @@ export default {
       apiService: ProductService,
       items: [],
       post: null,
-      event: 'updateTable',
+      event: 'updateProductAdminTable',
       query: {
         per_page: 15,
         page: 1

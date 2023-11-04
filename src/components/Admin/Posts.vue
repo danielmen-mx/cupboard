@@ -32,7 +32,7 @@
               <v-hover v-slot="{ isHovering, props }">
                 <tr
                   v-bind="props"
-                  :class="isHovering ? 'bg-light-green' : undefined"
+                  :class="isHovering ? 'bg-grey-lighten-3' : undefined"
                 >
                   <td><p class="text-subtitle-1">{{ strLimit(item.name, 25) }}</p></td>
                   <td>{{ item.autor }}</td>
@@ -56,7 +56,7 @@
                   <td>
                     <v-menu>
                       <template v-slot:activator="{ props }">
-                        <v-btn :class="isHovering ? 'bg-light-green-lighten-1' : undefined" icon="mdi-dots-vertical" v-bind="props" variant="flat"></v-btn>
+                        <v-btn :class="isHovering ? 'bg-grey-lighten-3' : undefined" icon="mdi-dots-vertical" v-bind="props" variant="flat"></v-btn>
                       </template>
                       <v-list>
                         <v-list-item>
@@ -107,7 +107,7 @@ export default {
       apiService: PostService,
       items: [],
       post: null,
-      event: 'updateAdminTable',
+      event: 'updatePostAdminTable',
       query: {
         per_page: 15,
         page: 1
@@ -144,9 +144,6 @@ export default {
       if (this.query.per_page === properties.per_page && this.query.page === properties.page) return
       this.query = properties
       this.getItems()
-    },
-    handleHover () {
-      console.log('hello there')
     }
   },
   mounted() {
