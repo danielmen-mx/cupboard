@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <Main />
+    <Header />
     <v-tabs
       v-model="tab"
       bg-color="transparent"
@@ -37,7 +37,7 @@
 </template>
 <script>
 import Welcome from '@/components/Admin/Welcome.vue'
-import Main from '../components/Admin/Main.vue'
+import Header from '../components/Admin/Main.vue'
 import Settings from '@/components/Admin/Settings.vue'
 import Posts from '@/components/Admin/Posts.vue'
 import Products from '@/components/Admin/Products.vue'
@@ -45,7 +45,7 @@ import Products from '@/components/Admin/Products.vue'
 export default {
   components: {
     Welcome,
-    Main,
+    Header,
     Settings,
     Posts,
     Products
