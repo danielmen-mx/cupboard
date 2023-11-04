@@ -116,6 +116,7 @@
               v-model="form.first_name"
               :loading="loading"
               :disabled="loading"
+              :rules="[required]"
               variant="solo"
               density="compact"
               class="pt-5"
@@ -130,6 +131,7 @@
               v-model="form.last_name"
               :loading="loading"
               :disabled="loading"
+              :rules="[required]"
               variant="solo"
               density="compact"
               class="pt-5"
@@ -238,6 +240,8 @@ export default {
       }
     },
     validate() {
+      if (!this.form.first_name || this.form.first_name == '') return
+      if (!this.form.last_name || this.form.last_name == '') return
       if (this.form.username === this.user.username) this.form.username = ""
       if (this.form.email === this.user.email) this.form.email = ""
       this.submit()
