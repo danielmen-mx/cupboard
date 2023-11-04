@@ -86,3 +86,7 @@
   width: 100%;
   height: 5vh;
 }
+
+.keep-in-front {
+  z-index: 0;
+}
