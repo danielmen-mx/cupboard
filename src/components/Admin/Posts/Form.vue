@@ -161,7 +161,7 @@ export default {
         this.translate("admin.posts.tag-list.overwrite")
       ],
       search: null,
-      event: 'updateAdminTable'
+      event: 'updatePostAdminTable'
     }
   },
   methods: {
