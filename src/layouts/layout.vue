@@ -8,6 +8,7 @@
         <Settings />
         <Confirmation />
         <Snackbar />
+        <CustomDrawer />
         <!-- <Background /> -->
         <div class="pa-1">
           <v-container class="pa-1" style="min-height: 87vh">
@@ -22,6 +23,7 @@
 <script>
 import Navigation from '@/components/layouts/NavigationBar.vue'
 import NavigationDrawer from '@/components/layouts/NavigationDrawer.vue'
+import CustomDrawer from '../components/layouts/CustomDrawer.vue'
 import Background from '@/components/layouts/Background.vue'
 import Snackbar from '@/components/layouts/Snackbar.vue'
 import Dialog from '@/components/layouts/Dialog.vue'
@@ -36,6 +38,7 @@ export default {
   components: {
     Navigation,
     NavigationDrawer,
+    CustomDrawer,
     Background,
     Snackbar,
     Dialog,
