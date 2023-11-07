@@ -23,7 +23,7 @@
           <thead>
             <tr>
               <template v-for="header in headers" :key="header">
-                <th class="text-subtitle-1">{{ translate(header) }}</th>
+                <th class="text-subtitle-1 font-weight-bold">{{ translate(header) }}</th>
               </template>
             </tr>
           </thead>
