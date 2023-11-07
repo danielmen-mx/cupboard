@@ -25,7 +25,7 @@ export default {
   methods: {
     openSnackbar() {
       // this.successSnackbar(this.snackbar)
-      this.fireEvent('openTestDialog', this.dialog)
+      this.fireEvent('openDrawer')
     }
   },
 }

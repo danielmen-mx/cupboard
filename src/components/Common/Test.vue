@@ -1,45 +1,99 @@
 <template>
-  <!-- <Button /> -->
-  <!-- <v-sheet class="elevation-0 bg-grey-lighten-4 rounded-xl mt-6 text-center text-grey-darken-3" height="68vh">
-    <div class="d-flex justify-space-between mx-4 pt-4">
-      <v-sheet class="skeleton rounded my-2" height="5vh" width="13vw"></v-sheet>
-    </div>
-    <v-divider></v-divider>
-    <v-responsive
-      class="my-4 mx-4 rounded"
-      max-width="35vw"
+  <Button />
+  <v-row justify="center">
+    <v-navigation-drawer
+      v-model="drawer"
+      location="right"
+      width="700"
+      class="pa-2"
+      temporary
     >
-      <v-sheet class="py-2">
-        <div class="d-flex justify-space-between my-4 mx-4">
-          <v-sheet class="skeleton rounded" height="5vh" width="17vw"></v-sheet>
-          <v-sheet class="skeleton rounded" height="5vh" width="12vw"></v-sheet>
-          <v-avatar class="skeleton" size="35" height="3vh"></v-avatar>
-        </div>
-        <div class="d-flex justify-space-between my-4 mx-4">
-          <v-sheet class="skeleton rounded" height="5vh" width="12vw"></v-sheet>
-          <v-sheet class="skeleton rounded" height="5vh" width="17vw"></v-sheet>
-          <v-avatar class="skeleton" size="35" height="3vh"></v-avatar>
-        </div>
-        <div class="d-flex justify-space-between my-4 mx-4">
-          <v-sheet class="skeleton rounded" height="5vh" width="14vw"></v-sheet>
-          <v-sheet class="skeleton rounded" height="5vh" width="18vw"></v-sheet>
-        </div>
-        <div class="d-flex justify-space-between my-4 mx-4">
-          <v-sheet class="skeleton rounded" height="5vh" width="12vw"></v-sheet>
-          <v-sheet class="skeleton rounded" height="5vh" width="20vw"></v-sheet>
-        </div>
-        <div class="d-flex justify-space-between my-4 mx-4">
-          <v-sheet class="skeleton rounded" height="5vh" width="14vw"></v-sheet>
-          <v-sheet class="skeleton rounded" height="5vh" width="18vw"></v-sheet>
-        </div>
-        <div class="d-flex align-end flex-column my-4 mx-4">
-          <v-sheet class="skeleton rounded" height="5vh" width="8vw"></v-sheet>
-        </div>
-      </v-sheet>
-    </v-responsive>
-    </v-sheet> -->
-  <!-- <p>Something</p>
-  <p>{{ $t('nav.admin') }}</p> -->
+      <v-card class="mx-auto pa-2 ma-2 elevation-0 bg-grey-lighten-3">
+        <template class="d-flex justify-space-between pa-2">
+          <v-card-title class="text-h6 font-weight-regular justify-space-between">
+            <span>{{ currentTitle }}</span>
+            <v-avatar
+              color="light-green"
+              size="24"
+              v-text="step"
+            ></v-avatar>
+          </v-card-title>
+          <v-card-actions>
+            <v-btn
+              icon="mdi-close-circle-outline"
+              @click="closeDrawer()"
+            ></v-btn>
+          </v-card-actions>
+        </template>
+
+        <!-- <v-window v-model="step">
+          <v-window-item :value="1">
+            <v-card-text>
+              <v-text-field
+                label="Email"
+                placeholder="john@google.com"
+              ></v-text-field>
+              <span class="text-caption text-grey-darken-1">
+                This is the email you will use to login to your Vuetify account
+              </span>
+            </v-card-text>
+          </v-window-item>
+
+          <v-window-item :value="2">
+            <v-card-text>
+              <v-text-field
+                label="Password"
+                type="password"
+              ></v-text-field>
+              <v-text-field
+                label="Confirm Password"
+                type="password"
+              ></v-text-field>
+              <span class="text-caption text-grey-darken-1">
+                Please enter a password for your account
+              </span>
+            </v-card-text>
+          </v-window-item>
+
+          <v-window-item :value="3">
+            <div class="pa-4 text-center">
+              <v-img
+                class="mb-4"
+                contain
+                height="128"
+                src="https://cdn.vuetifyjs.com/images/logos/v.svg"
+              ></v-img>
+              <h3 class="text-h6 font-weight-light mb-2">
+                Welcome to Vuetify
+              </h3>
+              <span class="text-caption text-grey">Thanks for signing up!</span>
+            </div>
+          </v-window-item>
+        </v-window> -->
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-btn
+            v-if="step > 1"
+            variant="text"
+            @click="step--"
+          >
+            Back
+          </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn
+            v-if="step < 3"
+            color="light-green"
+            variant="flat"
+            @click="step++"
+          >
+            Next
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-navigation-drawer>
+  </v-row>
 </template>
 <script>
 import Button from '../layouts/Button.vue'
@@ -49,7 +103,31 @@ export default {
     Button
   },
   data: () => ({
-    //
+    step: 1,
+    drawer: false,
   }),
+  computed: {
+    currentTitle () {
+      switch (this.step) {
+        case 1: return 'Sign-up'
+        case 2: return 'Create a password'
+        default: return 'Account created'
+      }
+    },
+  },
+  methods: {
+    openDrawer() {
+      return this.drawer = true
+    },
+    closeDrawer() {
+      this.$nextTick(() => { this.drawer = false })
+    }
+  },
+  mounted() {
+    this.listenEvent('openDrawer', this.openDrawer)
+  },
+  beforeDestroy() {
+    this.unlistenEvent('openDrawer', this.openDrawer)
+  },
 }
 </script>
