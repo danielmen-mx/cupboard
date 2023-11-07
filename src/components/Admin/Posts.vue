@@ -34,23 +34,47 @@
                   v-bind="props"
                   :class="isHovering ? 'bg-grey-lighten-3' : undefined"
                 >
-                  <td><p class="text-subtitle-1">{{ strLimit(item.name, 25) }}</p></td>
+                  <td>
+                    <v-tooltip v-if="item.name.length > 30" location="bottom">
+                      <template v-slot:activator="{ props }">
+                        <p
+                          class="text-subtitle-1"
+                          v-bind="props"
+                        >{{ strLimit(item.name, 30) }}</p>
+                      </template>
+                      <span>{{ item.name }}</span>
+                    </v-tooltip>
+                    <p v-else class="text-subtitle-1">{{ strLimit(item.name, 30) }}</p>
+                  </td>
                   <td>{{ item.autor }}</td>
                   <td>
                     <a :href="item.image" class="text-blue-darken-4" target="_blank">{{ getImageName(item.image, item.name) }}</a>
                   </td>
                   <td>
-                    <div>
-                      <!-- TODO: improve add tooltip to show all the tags in lists(if contain more than 1 tag) -->
-                      <v-chip
-                        v-if="item.tags"
-                        prepend-icon="mdi-label"
-                        :color="isHovering ? 'light-blue-darken-3' : 'light-green'"
-                        variant="outlined"
-                      >
-                        {{ countTags(item.tags) }}
-                      </v-chip>
-                    </div>
+                    <v-tooltip v-if="item.tags.length > 1" location="bottom">
+                      <template v-slot:activator="{ props }">
+                        <v-chip
+                          v-if="item.tags"
+                          prepend-icon="mdi-label"
+                          :color="isHovering ? 'light-blue-darken-3' : 'light-green'"
+                          variant="outlined"
+                          v-bind="props"
+                        >
+                          {{ mapTags(item.tags) }}
+                        </v-chip>
+                      </template>
+                      <span>{{ item.tags.toString() }}</span>
+                    </v-tooltip>
+                    <v-chip
+                      v-if="item.tags.length == 1"
+                      prepend-icon="mdi-label"
+                      :color="isHovering ? 'light-blue-darken-3' : 'light-green'"
+                      variant="outlined"
+                      v-bind="props"
+                    >
+                      {{ mapTags(item.tags) }}
+                    </v-chip>
+                    <!-- TODO: add a button as a shorthand to add new tags -->
                   </td>
                   <td>{{ formatDate(item.created_at) }}</td>
                   <td>
@@ -124,9 +148,10 @@ export default {
   },
   methods: {
     openForm(item = null) {
-      this.$nextTick(() => { this.fireEvent('openPostForm', item) })
+      // this.$nextTick(() => { this.fireEvent('openDrawer', item) })
+      this.$router.push({ path: '/admin/posts/create' })
     },
-    countTags(tags) {
+    mapTags(tags) {
       let count = this.countArray(tags)
 
       if (count == 1) return tags[0]

@@ -39,11 +39,32 @@
                   v-bind="props"
                   :class="isHovering ? 'bg-grey-lighten-3' : undefined"
                 >
-                  <td><p class="text-subtitle-1">{{ strLimit(item.name, 25) }}</p></td>
+                  <td>
+                    <v-tooltip v-if="item.name.length > 30" location="bottom">
+                      <template v-slot:activator="{ props }">
+                        <p
+                          class="text-subtitle-1"
+                          v-bind="props"
+                        >{{ strLimit(item.name, 30) }}</p>
+                      </template>
+                      <span>{{ item.name }}</span>
+                    </v-tooltip>
+                    <p v-else class="text-subtitle-1">{{ strLimit(item.name, 30) }}</p>
+                  </td>
                   <td>${{ item.price }}</td>
                   <td>${{ item.shipping_price }}</td>
                   <td>{{ item.quantity }}</td>
-                  <td>{{ strLimit(item.description, 50) }}</td>
+                  <td>
+                    <v-tooltip v-if="item.description.length > 40" location="bottom">
+                      <template v-slot:activator="{ props }">
+                        <p
+                          v-bind="props"
+                        >{{ strLimit(item.description, 40) }}</p>
+                      </template>
+                      <span>{{ item.description }}</span>
+                    </v-tooltip>
+                    <p v-else>{{ strLimit(item.description, 40) }}</p>
+                  </td>
                   <td>
                     <a :href="item.assets" class="text-blue-darken-4" target="_blank">
                       {{ getImageName(item.assets, item.name) }}
@@ -123,7 +144,8 @@ export default {
   },
   methods: {
     openForm(item = null) {
-      this.$nextTick(() => { this.fireEvent('openProductForm', item) })
+      // this.$nextTick(() => { this.fireEvent('openDrawer', item) })
+      this.$router.push({ path: '/admin/products/create' })
     },
     countTags(tags) {
       let count = this.countArray(tags)
