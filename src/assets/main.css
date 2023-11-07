@@ -90,3 +90,9 @@
 .keep-in-front {
   z-index: 0;
 }
+
+/** Business theme */
+.main-theme {
+  color: rgb(139, 195, 74);
+  caret-color: rgb(139, 195, 74);
+}
