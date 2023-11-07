@@ -27,7 +27,21 @@ const routes = [
             path: ':admin',
             component: () => import('../pages/Admin.vue'),
             meta: { requiresAdminAuth: true },
-            props: true
+            props: true,
+            children: [
+              {
+                path: ':action',
+                component: () => import('../pages/Admin.vue'),
+                meta: { requiresAdminAuth: true },
+                props: true
+              },
+              {
+                path: ':action/:id',
+                component: () => import('../pages/Admin.vue'),
+                meta: { requiresAdminAuth: true },
+                props: true
+              }
+            ]
           },
         ]
       },
