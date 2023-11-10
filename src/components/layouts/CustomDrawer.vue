@@ -7,11 +7,11 @@
       class="pa-2"
       temporary
     >
-      <v-card class="mx-auto pa-2 ma-2 elevation-0 bg-grey-lighten-4">
+      <v-card class="mx-auto pa-2 ma-2 elevation-0 bg-grey-lighten-5">
         <template class="d-flex justify-space-between pa-2">
           <v-card-title class="text-h6 font-weight-regular justify-space-between">
             <v-avatar
-              color="blue-accent-3"
+              color="blue-accent-2"
               size="24"
               v-text="step"
             ></v-avatar>
@@ -25,7 +25,7 @@
           </v-card-actions>
         </template>
 
-        <Post v-if="this.admin === 'posts'" :current_step="step"/>
+        <Post v-if="this.admin === 'posts'" :current_step="step" :post_form="form" @enable_next_button="enableStepForwardButton" @enable_submit="enableSubmit" />
 
         <v-divider></v-divider>
 
@@ -35,24 +35,25 @@
             variant="text"
             @click="step--"
           >
-            Back
+            {{ translate("back") }}
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn
             v-if="step < 3"
-            color="light-green"
+            :disabled="!enableNextButton"
+            color="blue-darken-3"
             variant="flat"
-            @click="step++"
+            @click="stepForward()"
           >
-            Next
+            {{ translate("next") }}
           </v-btn>
           <v-btn
             v-else
-            :disabled="!formComplete"
-            color="light-green"
+            :disabled="!enableSubmit"
+            color="green"
             variant="flat"
           >
-            Submit
+            {{ translate('create') }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -61,8 +62,13 @@
 </template>
 <script>
 import Post from '../Admin/Forms/Post.vue'
+import Form from '../Admin/Forms/Form.vue'
+import PostService from '@/services/PostService'
 
 export default {
+  extends: {
+    //
+  },
   components: {
     Post
   },
@@ -70,7 +76,9 @@ export default {
     step: 1,
     drawer: false,
     admin: null,
-    formComplete: false,
+    enableSubmit: false,
+    enableNextButton: false,
+    form: {},
     titles: {
       posts: [
         { title: "basic_information" },
@@ -86,6 +94,18 @@ export default {
     //
   },
   methods: {
+    setData() {
+      this.$nextTick(() => {
+        let params = this.$route.params
+  
+        this.step = 1
+        this.admin = params.admin
+        this.apiService = this.admin === 'posts' ? PostService : null
+        this.event = this.admin === 'posts' ? 'updatePostAdminTable' : 'updateProductAdminTable'
+  
+        if (params.action) return this.drawer = true
+      })
+    },
     closeDrawer() {
       this.$router.push({ path: "/admin/" + this.admin })
       this.step = 1
@@ -100,14 +120,29 @@ export default {
         default: return 'Preview'
       }
     },
+    enableStepForwardButton() {
+      console.log('next button is unlocked')
+      this.enableNextButton = true
+    },
+    stepForward() {
+      this.step++
+      this.enableNextButton = false
+    },
+    submit() {
+      //
+    }
+  },
+  mounted() {
+    // if (!this.$route.params.action) return
+    this.listenEvent('openDrawer', this.setData)
+  },
+  beforeDestroy() {
+    this.unlistenEvent('openDrawer', this.setData)
   },
   watch: {
     '$route.params': {
       handler: function (params) {
-        if (!this.$route.fullPath.includes("/admin")) return this.step = 1
-        this.admin = params.admin
-
-        if (params.action) return this.drawer = true
+        if (params.action) { this.setData() }
       },
       deep: true,
       immediate: true
