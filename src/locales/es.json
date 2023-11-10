@@ -12,6 +12,7 @@
       "name": "Nombre",
       "autor": "Autor",
       "asset": "Imagen",
+      "description": "Descripción",
       "tags": "Etiquetas",
       "created-at": "Creado el",
       "tag-list": {
@@ -166,6 +167,7 @@
   "autor": "Autor",
   "autor_information": "Información de autor",
   "basic_information": "Información básica",
+  "back": "Atrás",
   "cancel": "Cancelar",
   "close": "Cerrar",
   "create": "Crear",
@@ -176,6 +178,7 @@
   "es": "Español",
   "en": "Inglés",
   "enter": "Ingresar",
+  "next": "Siguiente",
   "options": "Opciones",
   "password": "Contraseña",
   "posts": "Publicaciones",
@@ -188,6 +191,7 @@
   "prices_information": "Información de precios",
   "sorry": "Disculpa",
   "settings": "Configuraciones",
+  "submit": "Enviar",
   "update": "Actualizar",
   "user_settings": "Ajustes de Usuario",
   "404": "¡No encontramos la página que estás buscando!"
