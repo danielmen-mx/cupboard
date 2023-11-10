@@ -144,8 +144,8 @@ export default {
   },
   methods: {
     openForm(item = null) {
-      // this.$nextTick(() => { this.fireEvent('openDrawer', item) })
       this.$router.push({ path: '/admin/products/create' })
+      setTimeout(() => { this.fireEvent('openDrawer', item) }, 100);
     },
     countTags(tags) {
       let count = this.countArray(tags)
