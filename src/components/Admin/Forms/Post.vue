@@ -8,7 +8,7 @@
         <v-window-item :value="1">
           <v-card-text>
             <v-row>
-              <v-col cols="12" sm="12">
+              <v-col cols="12" sm="12" class="mb-2">
                 <v-text-field
                   :loading="loading"
                   v-model="form.name"
@@ -167,7 +167,11 @@ export default {
     current_step: {
       type: Number,
       required: true
-    }
+    },
+    // form_parent: {
+    //   type: Object,
+    //   required: true
+    // }
   },
   data() {
     return {
