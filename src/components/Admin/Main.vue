@@ -49,7 +49,6 @@ export default {
   width: 100%;
   height: 30vh;
   overflow: hidden;
-  margin-top: 1vh;
 }
 
 .background-index {
