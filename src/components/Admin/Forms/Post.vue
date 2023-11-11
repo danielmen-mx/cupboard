@@ -210,7 +210,7 @@ export default {
       }
     },
     answeredForm(formTarget) {
-      if (formTarget && formTarget.length > 1) return true
+      if (formTarget && formTarget.length > 1 && formTarget !== '') return true
       return false
     },
     validateStepOne() {
@@ -225,16 +225,18 @@ export default {
   watch: {
     'form.name': {
       handler: function () {
-        console.log('watching form.name')
-        if (this.step === 1 && this.validateStepOne()) return this.$emit('enable_next_button')
+        console.log('form.name: ', this.form.name)
+        if (this.validateStepOne()) return this.$emit('enable_next_button', true)
+        return this.$emit('enable_next_button', false)
       },
       deep: true,
       immediate: true
     },
     'form.description': {
       handler: function () {
-        console.log('watching form.description')
-        if (this.step === 1 && this.validateStepOne()) return this.$emit('enable_next_button')
+        console.log('form.description: ', this.form.description)
+        if (this.validateStepOne()) return this.$emit('enable_next_button', true)
+        return this.$emit('enable_next_button', false)
       },
       deep: true,
       immediate: true
@@ -242,7 +244,7 @@ export default {
     'current_step': {
       handler: function () {
         this.step = this.current_step
-        if (this.step === 1 && this.validateStepOne()) return this.$emit('enable_next_button')
+        if (this.step === 1) return this.validateStepOne() ? this.$emit('enable_next_button', true) : this.$emit('enable_next_button', false)
       },
       deep: true,
       immediate: true

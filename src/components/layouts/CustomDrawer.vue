@@ -120,9 +120,9 @@ export default {
         default: return 'Preview'
       }
     },
-    enableStepForwardButton() {
-      console.log('next button is unlocked')
-      this.enableNextButton = true
+    enableStepForwardButton(enable) {
+      console.log('next button is unlocked', enable)
+      this.enableNextButton = enable
     },
     stepForward() {
       this.step++
