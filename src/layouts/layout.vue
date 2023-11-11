@@ -11,7 +11,7 @@
         <CustomDrawer />
         <!-- <Background /> -->
         <div class="pa-1">
-          <v-container class="pa-1" style="min-height: 87vh">
+          <v-container class="pa-3" style="min-height: 87vh">
             <router-view/>
           </v-container>
         </div>
