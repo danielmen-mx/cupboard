@@ -1,17 +1,19 @@
 <template>
   <div class="main-section" :class="colorAtTime">
-    <div class="d-flex flex-column fill-height justify-cente mt-10 align-center">
+    <div class="d-flex flex-column fill-height justify-center pb-2 align-center" style="z-index: 1;">
       <div class="bg-black rounded text-center pa-4" style="opacity: 0.8;">
         <h1 class="text-h4 font-weight-thin glow cursor-pointer" @click="turnDashboard()">
           Shaddai Shop
         </h1>
       </div>
     </div>
-    <div class="wave wave1"></div>
-    <div class="wave wave2 sepia"></div>
-    <div class="wave wave3 grayscale"></div>
-    <div class="wave wave4 huerotate"></div>
-    <div class="feet"></div>
+    <div class="d-flex flex-column" style="z-index: 0;">
+      <div class="wave wave1"></div>
+      <div class="wave wave2 sepia"></div>
+      <div class="wave wave3 grayscale"></div>
+      <div class="wave wave4 huerotate"></div>
+      <div class="feet"></div>
+    </div>
   </div>
 </template>
 <script>
@@ -47,6 +49,11 @@ export default {
   width: 100%;
   height: 30vh;
   overflow: hidden;
+  margin-top: 1vh;
+}
+
+.background-index {
+  z-index: 0;
 }
 
 .glow {
