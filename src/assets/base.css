@@ -59,6 +59,17 @@
   font-weight: normal;
 }
 
+html {
+  overflow: auto !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
 body {
   min-height: 100vh;
   color: var(--color-text);
