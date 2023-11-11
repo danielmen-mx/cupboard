@@ -51,30 +51,32 @@
                     <a :href="item.image" class="text-blue-darken-4" target="_blank">{{ getImageName(item.image, item.name) }}</a>
                   </td>
                   <td>
-                    <v-tooltip v-if="item.tags.length > 1" location="bottom">
-                      <template v-slot:activator="{ props }">
-                        <v-chip
-                          v-if="item.tags"
-                          prepend-icon="mdi-label"
-                          :color="isHovering ? 'light-blue-darken-3' : 'light-green'"
-                          variant="outlined"
-                          v-bind="props"
-                        >
-                          {{ mapTags(item.tags) }}
-                        </v-chip>
-                      </template>
-                      <span>{{ item.tags.toString() }}</span>
-                    </v-tooltip>
-                    <v-chip
-                      v-if="item.tags.length == 1"
-                      prepend-icon="mdi-label"
-                      :color="isHovering ? 'light-blue-darken-3' : 'light-green'"
-                      variant="outlined"
-                      v-bind="props"
-                    >
-                      {{ mapTags(item.tags) }}
-                    </v-chip>
-                    <!-- TODO: add a button as a shorthand to add new tags -->
+                    <div v-if="item.tags">
+                      <v-tooltip v-if="item.tags.length > 1" location="bottom">
+                        <template v-slot:activator="{ props }">
+                          <v-chip
+                            v-if="item.tags"
+                            prepend-icon="mdi-label"
+                            :color="isHovering ? 'light-blue-darken-3' : 'light-green'"
+                            variant="outlined"
+                            v-bind="props"
+                          >
+                            {{ mapTags(item.tags) }}
+                          </v-chip>
+                        </template>
+                        <span>{{ item.tags.toString() }}</span>
+                      </v-tooltip>
+                      <v-chip
+                        v-if="item.tags.length == 1"
+                        prepend-icon="mdi-label"
+                        :color="isHovering ? 'light-blue-darken-3' : 'light-green'"
+                        variant="outlined"
+                        v-bind="props"
+                      >
+                        {{ mapTags(item.tags) }}
+                      </v-chip>
+                      <!-- TODO: add a button as a shorthand to add new tags -->
+                    </div>
                   </td>
                   <td>{{ formatDate(item.created_at) }}</td>
                   <td>
