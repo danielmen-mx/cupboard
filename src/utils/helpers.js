@@ -57,6 +57,28 @@ export const copyData = {
   },
 }
 
+export const validateHTMLTags = {
+  methods: {
+    validateHTMLTags(str) {
+      // export const containsHTML = (str) => /<[a-z][\s\S]*>/i.test(str)
+      let regexForHTML = /<([A-Za-z][A-Za-z0-9]*)\b[^>]*>(.*?)<\/\1>/
+
+      return regexForHTML.test(str)
+    }
+  }
+}
+
+export const removeHTMLTags = {
+  methods: {
+    removeHTMLTags(str) {
+      let regex = /<\/?[^>]+(>|$)/g
+      if (!str) return
+
+      return str.replace(regex, "\n")
+    }
+  }
+}
+
 export const slugify = {
   methods: {
     slugify(str) {
