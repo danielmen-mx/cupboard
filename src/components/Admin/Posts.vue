@@ -1,5 +1,5 @@
 <template>
-  <PostForm :function-file-name="getImageName"/>
+  <!-- <PostForm :function-file-name="getImageName"/> -->
   <AdminTableSkeleton v-if="loading" />
   <template v-else>
     <AdminPostsEmptyState v-if="items.length < 1"/>
@@ -8,7 +8,7 @@
         <span class="text-h5">{{ translate("posts") }}</span>
         <v-btn
           color="light-green"
-          @click="openForm()"
+          @click="create()"
         >
           {{ translate("admin.posts.create") }}
         </v-btn>
@@ -86,10 +86,10 @@
                       </template>
                       <v-list>
                         <v-list-item>
-                          <v-list-item-title class="cursor-pointer pb-2" @click="openForm(item)">
+                          <v-list-item-title class="cursor-pointer pb-2" @click="editItem(item)">
                             {{ translate("edit") }}
                           </v-list-item-title>
-                          <v-list-item-title class="cursor-pointer pt-2" @click="openConfirmation(item.id)">
+                          <v-list-item-title class="cursor-pointer pt-2" @click.stop="openConfirmation(item.id)">
                             {{ translate("delete") }}
                           </v-list-item-title>
                         </v-list-item>
@@ -149,9 +149,15 @@ export default {
     }
   },
   methods: {
-    openForm(item = null) {
+    editItem(item) {
+      if (!item) return
+      let path = '/admin/posts/edit/' + item.id;
+      this.$router.push({ path: path })
+      setTimeout(() => { this.fireEvent('openDrawer') }, 100);
+    },
+    create() {
       this.$router.push({ path: '/admin/posts/create' })
-      setTimeout(() => { this.fireEvent('openDrawer', item) }, 100);
+      setTimeout(() => { this.fireEvent('openDrawer') }, 100);
     },
     mapTags(tags) {
       let count = this.countArray(tags)
