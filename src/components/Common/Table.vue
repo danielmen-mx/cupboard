@@ -84,6 +84,7 @@ export default {
         }
 
         this.loading = false
+        this.successCallBack(this.item)
       } catch (error) {
         console.log(error)
         this.loading = false
