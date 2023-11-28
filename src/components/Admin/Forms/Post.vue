@@ -41,6 +41,7 @@
             style="height: 180px;"
             class="mb-4"
             theme="snow"
+            @keyup="validateDescription"
           ></quill-editor>
 
           <v-row>
@@ -55,8 +56,8 @@
                 :loading="loading"
                 :label="getFileInputLabel()"
               >
-                <!-- <template v-if="image_stored" #prepend-inner>
-                  {{ image_stored.name }}
+                <!-- <template v-if="imageStored" #prepend-inner>
+                  {{ imageStored }}
                 </template> -->
               </v-file-input>
             </v-col>
@@ -150,7 +151,7 @@
           <v-col cols="12" sm="6">
             <v-text-field
               :disabled="true"
-              v-model="form.autor"
+              v-model="form.tags"
               :label="translate('admin.posts.add-tags')"
               density="compact"
             ></v-text-field>
@@ -184,7 +185,7 @@
         variant="flat"
         @click.prevent="submit"
       >
-        {{ translate('create') }}
+        {{ translate(submitButtonText) }}
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -194,16 +195,22 @@ import PostService from '@/services/PostService'
 import Form from '../../Common/Form.vue'
 import required from '../../Common/Form.vue'
 import TextEditor from '../../Common/TextEditor.vue'
-import { copyData, slugify } from '../../../utils/helpers'
+import { copyData, slugify, removeHTMLTags } from '../../../utils/helpers'
 import { imageHeaders } from '../../../services/api'
 
 export default {
   extends: {
     Form
   },
-  mixins: [required, copyData, slugify, imageHeaders],
+  mixins: [required, copyData, slugify, imageHeaders, removeHTMLTags],
   components: {
     TextEditor
+  },
+  props: {
+    item_parent: {
+      type: Object,
+      required: false,
+    }
   },
   data() {
     return {
@@ -211,6 +218,7 @@ export default {
       step: 1,
       enableNextButton: false,
       enableSubmit: false,
+      submitButtonText: 'create',
       form: {
         name: null,
         autor: null,
@@ -220,7 +228,7 @@ export default {
       },
       itemId: null,
       loading: false,
-      image_stored: null,
+      imageStored: null,
       search: null,
       base_tags: [
         this.translate("admin.posts.tag-list.release"),
@@ -242,6 +250,10 @@ export default {
       this.step++
       this.enableNextButton = false
     },
+    validateDescription() {
+      if (this.validateStepOne()) return this.enableNextButton = true
+      return this.enableNextButton = false
+    },
     async submit() {
       if (!this.validateStepOne() || !this.validateStepTwo()) return
 
@@ -249,12 +261,12 @@ export default {
         this.loading = true
 
         let resp = null
-        if (!this.item_id) {
+        if (!this.itemId) {
           resp = await this.apiService.store(this.form)
         } else {
           let headers = this.getHeaders()
           this.form._method = "PUT"
-          resp = await this.apiService.update(this.item_id, this.form, headers)
+          resp = await this.apiService.update(this.itemId, this.form, headers)
         }
 
         this.loading = false
@@ -274,11 +286,18 @@ export default {
     },
     addFile(e) {
       this.form.image = e.target.files[0]
-      this.image_stored = !this.form.image ? null : this.form.image
+      this.imageStored = !this.form.image ? null : this.form.image.name
     },
     getFileInputLabel() {
+      if (this.imageStored) return this.imageStored
       if (!this.form.image) return this.translate("admin.posts.upload-asset")
       return this.form.image.name
+    },
+    getImageName(imageName) {
+      if (!imageName) return
+
+      let split = imageName.split('/')
+      return split[split.length - 1]
     },
     getHeaders() {
       if (this.form.image instanceof File) return this.imageHeaders()
@@ -289,7 +308,8 @@ export default {
       return false
     },
     validateStepOne() {
-      if (this.answeredForm(this.form.name) && this.answeredForm(this.form.description)) return true
+      let description = this.removeHTMLTags(this.form.description)?.trim()
+      if (this.answeredForm(this.form.name) && this.answeredForm(description)) return true
       return false
     },
     validateStepTwo() {
@@ -298,29 +318,30 @@ export default {
     },
     closeDrawer() {
       this.step = 1
-      this.form.description = null
+      this.submitButtonText = 'create'
+      this.itemId = null,
+      this.imageStored = null
       this.form = {
         name: null,
+        description: null,
         autor: null,
         image: null,
         tags: null
       }
 
       this.$nextTick(() => { this.$router.push({ path: "/admin/posts" }) })
-
-      console.log(this.form)
     }
+  },
+  mounted() {
+    if (!this.item_parent) return
+    let itemBackup = this.copyData(this.item_parent)
+    this.submitButtonText = 'update'
+    this.itemId = itemBackup.id
+    this.imageStored = !itemBackup.image ? null : this.getImageName(itemBackup.image)
+    this.form = itemBackup
   },
   watch: {
     'form.name': {
-      handler: function () {
-        if (this.validateStepOne()) return this.enableNextButton = true
-        return this.enableNextButton = false
-      },
-      deep: true,
-      immediate: true
-    },
-    'form.description': {
       handler: function () {
         if (this.validateStepOne()) return this.enableNextButton = true
         return this.enableNextButton = false
@@ -342,7 +363,7 @@ export default {
       },
       deep: true,
       immediate: true
-    }
+    },
   }
 }
 </script>
