@@ -84,6 +84,10 @@
       "no-posts": "No posts yet",
       "add-new": "Create a post now"
     },
+    "AdminProducts": {
+      "no-products": "No products yet",
+      "add-new": "Create product now"
+    },
     "Comments": {
       "no-comments": "Oops, no one seems to have commented on this post",
       "add-new": "Be the first to comment!"

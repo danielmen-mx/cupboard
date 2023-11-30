@@ -36,7 +36,7 @@
       "name": "Nombre del producto",
       "price": "Precio",
       "shipping_price": "Precio de envío",
-      "stock": "Unidades disponibles",
+      "stock": "Stock",
       "description": "Descripción",
       "asset": "Imagen",
       "table_headers": {
@@ -84,6 +84,10 @@
     "AdminPosts": {
       "no-posts": "Aún no hay publicaciones",
       "add-new": "Crea una publicación ahora"
+    },
+    "AdminProducts": {
+      "no-products": "Aún no hay productos",
+      "add-new": "Crea un producto ahora"
     },
     "Comments": {
       "no-comments": "Upss, parece que nadie ha comentado esta publicación",
