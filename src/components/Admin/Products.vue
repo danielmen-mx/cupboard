@@ -1,14 +1,13 @@
 <template>
-  <!-- <PostForm :function-file-name="getImageName"/> -->
   <AdminTableSkeleton v-if="loading" />
   <template v-else>
-    <AdminPostsEmptyState v-if="items.length < 1"/>
+    <AdminProductsEmptyState v-if="items.length < 1"/>
     <div v-else>
       <div class="d-flex justify-space-between mx-2 my-6">
         <span class="text-h5">{{ translate("products") }}</span>
         <v-btn
           color="light-green"
-          @click="openForm()"
+          @click="openDrawer()"
         >
           {{ translate("admin.products.create") }}
         </v-btn>
@@ -102,7 +101,7 @@ import PostForm from '@/components/Admin/Posts/Form.vue'
 import { formatDate, slugify, countArray } from '../../utils/helpers'
 import { openConfirmation } from '../Common/Helpers/Actions'
 import Table from '@/components/Common/Table.vue'
-import AdminPostsEmptyState from '../Common/EmptyState/AdminPostsEmptyState.vue'
+import AdminProductsEmptyState from '../Common/EmptyState/AdminProductsEmptyState.vue'
 import AdminTableSkeleton from '../Common/Skeletons/AdminTableSkeleton.vue'
 import AdminPagination from '../Common/Paginations/Admin.vue'
 
@@ -112,7 +111,7 @@ export default {
   inject:['strLimit'],
   components: {
     PostForm,
-    AdminPostsEmptyState,
+    AdminProductsEmptyState,
     AdminTableSkeleton,
     AdminPagination
   },
@@ -146,7 +145,7 @@ export default {
       this.$router.push({ path: path })
       setTimeout(() => { this.fireEvent('openDrawer') }, 100);
     },
-    openForm(item = null) {
+    openDrawer(item = null) {
       this.$router.push({ path: '/admin/products/create' })
       setTimeout(() => { this.fireEvent('openDrawer', item) }, 100);
     },
