@@ -131,7 +131,7 @@ export default {
         "admin.products.table_headers.name",
         "admin.products.table_headers.price",
         "admin.products.table_headers.shipping_price",
-        "admin.products.table_headers.quantity",
+        "admin.products.table_headers.stock",
         "admin.products.table_headers.description",
         "admin.products.table_headers.asset",
         "table.created_at",
