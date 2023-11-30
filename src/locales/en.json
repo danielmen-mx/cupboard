@@ -32,13 +32,27 @@
       "add": "Add new product",
       "edit": "Edit product",
       "create": "Create product",
+      "name": "Name",
+      "price": "Price",
+      "shipping_price": "Shipping price",
+      "description": "Description",
+      "stock": "Stock",
+      "asset": "Asset",
       "table_headers": {
         "name": "Name",
         "price": "Price",
         "shipping_price": "Shipping price",
-        "quantity": "Quantity",
+        "stock": "Stock",
         "description": "Description",
         "asset": "Asset"
+      },
+      "guides": {
+        "name": "Write the name of your product",
+        "price": "Set a price",
+        "shipping_price": "Add shipping price",
+        "stock": "Available units",
+        "description": "Add the description of the product",
+        "asset": "Add image"
       }
     }
   },
@@ -144,7 +158,8 @@
     "validations": {
       "require-field": "Required field",
       "bad-email": "Invalid mail",
-      "bad-phone": "Your phone number must be wrong"
+      "bad-phone": "Your phone number must be wrong",
+      "numeric": "Only quantities are allowed"
     }
   },
   "table": {

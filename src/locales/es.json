@@ -33,13 +33,27 @@
       "add": "Añadir nuevo producto",
       "edit": "Editar producto",
       "create": "Crear producto",
+      "name": "Nombre del producto",
+      "price": "Precio",
+      "shipping_price": "Precio de envío",
+      "stock": "Unidades disponibles",
+      "description": "Descripción",
+      "asset": "Imagen",
       "table_headers": {
         "name": "Nombre",
         "price": "Precio",
         "shipping_price": "Precio de envío",
-        "quantity": "Cantidad disponible",
+        "Stock": "Unidades disponibles",
         "description": "Descripción",
         "asset": "Imagen"
+      },
+      "guides": {
+        "name": "Escribe el nombre de tu producto",
+        "price": "Establece un precio",
+        "shipping_price": "Añade precio de envío",
+        "stock": "Unidades disponibles",
+        "description": "Escribe la descripción del producto",
+        "asset": "Agregar imagen"
       }
     }
   },
@@ -145,7 +159,8 @@
     "validations": {
       "require-field": "Campo requerido",
       "bad-email": "Correo no válido",
-      "bad-phone": "Tu número telefonico debe estar mal"
+      "bad-phone": "Tu número telefonico debe estar mal",
+      "numeric": "Solo se admiten cantidades"
     }
   },
   "table": {
