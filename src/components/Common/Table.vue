@@ -116,6 +116,8 @@ export default {
           this.loading = true
         }
 
+        if (!this.itemFound(id)) return
+
         const resp = await this.apiService.remove(id)
 
         if (!this.preventRemoveItem) {
@@ -138,6 +140,10 @@ export default {
       });
 
       this.items = newItems
+    },
+    itemFound(id) {
+      let match = this.items.find(i => i.id === id)
+      return match ? true : false
     },
     breakRequest() {
       if (!this.apiService) {

@@ -11,7 +11,7 @@
         <v-card-actions class="d-flex justify-space-around py-3">
           <v-btn
             color="red"
-            @click.stop="confirm()"
+            @click.once="confirm()"
             class="text-h6"
           >{{ translate("confirmations.yes") }}</v-btn>
           <v-btn
