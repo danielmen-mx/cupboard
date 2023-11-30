@@ -82,6 +82,13 @@ export default {
       const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       return pattern.test(v) || this.translate("form.validations.bad-email")
     },
+    number(v) {
+      // const invalidStrings = /^[A-Za-z]*$/
+      // console.log(invalidStrings.test(v))
+      if (!v) return
+      let invalid = isNaN(v)
+      return !invalid ? true : this.translate("form.validations.numeric")
+    },
     numeric(v) {
       if (!v.trim()) return true;
       if (!isNaN(parseFloat(v)) && v >= 0 && v <= 9999999999) return true;
