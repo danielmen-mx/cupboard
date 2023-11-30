@@ -20,6 +20,56 @@
       <!-- Step One -->
       <v-window-item :value="1">
         <!-- name, description, assets && stock -->
+        <v-card-text>
+          <v-row>
+            <v-col cols="12" sm="12" class="mb-2">
+              <v-text-field
+                :loading="loading"
+                v-model="form.name"
+                density="compact"
+                :rules="[required]"
+                :label="translate('admin.products.name')+'*'"
+                :hint="translate('admin.products.guides.name')"
+                clearable
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <quill-editor
+            v-model:content="form.description"
+            contentType="html"
+            :placeholder="translate('admin.products.guides.description')+'*'"
+            style="height: 180px;"
+            class="mb-4"
+            theme="snow"
+            @keyup="validateDescription"
+          ></quill-editor>
+          <v-row class="d-flex justify-space-between">
+            <v-col cols="12" sm="6">
+              <v-file-input
+                prepend-icon="mdi-camera"
+                accept="image/*"
+                density="compact"
+                show-size
+                counter
+                @change="addFile"
+                :loading="loading"
+                :label="getFileInputLabel()"
+              ></v-file-input>
+            </v-col>
+            <v-col cols="12" sm="3">
+              <v-text-field
+                :loading="loading"
+                v-model="form.stock"
+                density="compact"
+                suffix="qty"
+                :rules="[required, number]"
+                :label="translate('admin.products.stock')+'*'"
+                :hint="translate('admin.products.guides.stock')"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <small>*{{ translate("validations.required-fields") }}</small>
+        </v-card-text>
       </v-window-item>
 
       <!-- Step Two -->
@@ -67,6 +117,7 @@
 import ProductService from '@/services/ProductService'
 import Form from '../../Common/Form.vue'
 import required from '../../Common/Form.vue'
+import number from '../../Common/Form.vue'
 import TextEditor from '../../Common/TextEditor.vue'
 import { copyData, slugify, removeHTMLTags } from '../../../utils/helpers'
 import { imageHeaders } from '../../../services/api'
@@ -75,7 +126,7 @@ export default {
   extends: {
     Form
   },
-  mixins: [required, copyData, slugify, imageHeaders, removeHTMLTags],
+  mixins: [required, number, copyData, slugify, imageHeaders, removeHTMLTags],
   components: {
     TextEditor
   },
@@ -111,7 +162,7 @@ export default {
   methods: {
     currentTitle() {
       switch (this.step) {
-        case 1: return this.translate("basic_information")
+        case 1: return this.translate("basic_information")  
         case 2: return this.translate("prices")
         default: return 'Preview'
       }
@@ -174,12 +225,17 @@ export default {
       return null
     },
     answeredForm(formTarget) {
-      if (formTarget && formTarget.length > 1 && formTarget !== '') return true
+      if (formTarget && formTarget.length > 0 && formTarget !== '') return true
       return false
+    },
+    validateStock(v) {
+      if (!v) return false
+      let invalid = isNaN(v)
+      return !invalid ? true : false
     },
     validateStepOne() {
       let description = this.removeHTMLTags(this.form.description)?.trim()
-      if (this.answeredForm(this.form.name) && this.answeredForm(description)) return true
+      if (this.answeredForm(this.form.name) && this.answeredForm(description) && this.validateStock(this.form.stock)) return true
       return false
     },
     validateStepTwo() {
@@ -192,7 +248,11 @@ export default {
       this.itemId = null,
       this.imageStored = null
       this.form = {
-        //
+        name: null,
+        description: null,
+        assets: null,
+        price: null,
+        shipping_price: null
       }
 
       this.$nextTick(() => { this.$router.push({ path: "/admin/products" }) })
@@ -208,6 +268,14 @@ export default {
   },
   watch: {
     'form.name': {
+      handler: function () {
+        if (this.validateStepOne()) return this.enableNextButton = true
+        return this.enableNextButton = false
+      },
+      deep: true,
+      immediate: true
+    },
+    'form.stock': {
       handler: function () {
         if (this.validateStepOne()) return this.enableNextButton = true
         return this.enableNextButton = false
