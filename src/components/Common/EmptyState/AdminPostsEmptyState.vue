@@ -12,16 +12,17 @@
       :ripple="false"
       class="text-h6 my-2 text-grey-darken-2 text-decoration-underline"
       variant="plain"
-      @click="openPostForm()"
+      @click.stop="create()"
     >{{ translate("empty-states.AdminPosts.add-new") }}</v-btn>
   </div>
 </template>
 <script>
 export default {
   methods: {
-    openPostForm() {
-      this.fireEvent('openPostForm')
-    }
+    create() {
+      this.$router.push({ path: '/admin/posts/create' })
+      setTimeout(() => { this.fireEvent('openDrawer') }, 100);
+    },
   },
 }
 </script>
