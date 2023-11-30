@@ -47,7 +47,7 @@
             :ripple="false"
             variant="plain"
             class="text-decoration-underline"
-            @click="openConfirmation(comment.id)"
+            @click.stop="openConfirmation(comment.id)"
           >
             {{  translate("delete") }}
           </v-btn>
