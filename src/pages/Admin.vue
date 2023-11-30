@@ -20,16 +20,16 @@
     <v-card-text>
       <v-window v-model="tab">
         <v-window-item value="main">
-          <Welcome />
+          <Welcome v-if="tab === 'main'" />
         </v-window-item>
         <v-window-item value="settings">
-          <Settings />
+          <Settings v-if="tab === 'settings'" />
         </v-window-item>
         <v-window-item value="posts">
-          <Posts />
+          <Posts v-if="tab === 'posts'" />
         </v-window-item>
         <v-window-item value="products">
-          <Products />
+          <Products v-if="tab === 'products'" />
         </v-window-item>
       </v-window>
     </v-card-text>
@@ -76,7 +76,7 @@ export default {
   methods: {
     pushRoute(route) {
       this.$router.push(route)
-      if (route === '/admin') setTimeout(() => { this.tab = 'main' }, 500)
+      if (route === '/admin') setTimeout(() => { this.tab = 'main' }, 100)
     }
   },
   mounted() {
