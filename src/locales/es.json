@@ -43,7 +43,7 @@
         "name": "Nombre",
         "price": "Precio",
         "shipping_price": "Precio de envío",
-        "Stock": "Unidades disponibles",
+        "stock": "Unidades disponibles",
         "description": "Descripción",
         "asset": "Imagen"
       },
