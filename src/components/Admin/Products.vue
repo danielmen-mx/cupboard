@@ -24,10 +24,7 @@
         >
           <thead>
             <tr>
-              <template
-                v-for="header in headers"
-                :key="header"
-              >
+              <template v-for="header in headers" :key="header" >
                 <th class="text-subtitle-1 font-weight-bold">{{ translate(header) }}</th>
               </template>
             </tr>
@@ -78,7 +75,7 @@
                       </template>
                       <v-list>
                         <v-list-item>
-                          <v-list-item-title class="cursor-pointer pb-2" @click="openForm(item)">
+                          <v-list-item-title class="cursor-pointer pb-2" @click="editItem(item)">
                             {{ translate("edit") }}
                           </v-list-item-title>
                           <v-list-item-title class="cursor-pointer pt-2" @click="openConfirmation(item.id)">
@@ -143,6 +140,12 @@ export default {
     }
   },
   methods: {
+    editItem(item) {
+      if (!item) return
+      let path = '/admin/products/edit/' + item.id;
+      this.$router.push({ path: path })
+      setTimeout(() => { this.fireEvent('openDrawer') }, 100);
+    },
     openForm(item = null) {
       this.$router.push({ path: '/admin/products/create' })
       setTimeout(() => { this.fireEvent('openDrawer', item) }, 100);
