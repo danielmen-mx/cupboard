@@ -17,6 +17,7 @@ import Post from '../Admin/Forms/Post.vue'
 import Product from '../Admin/Forms/Product.vue'
 import Table from '@/components/Common/Table.vue'
 import PostService from '@/services/PostService'
+import ProductService from '@/services/ProductService'
 
 export default {
   extends: Table,
@@ -35,7 +36,7 @@ export default {
     setData() {
       let params = this.$route.params
       this.admin = params.admin
-      // this.apiService = this.admin === 'posts' ? PostService : null
+      this.apiService = this.admin === 'posts' ? PostService : ProductService
 
       if (!this.item && params.id) {
         this.itemId = params.id
