@@ -50,7 +50,7 @@
                   <td>${{ item.price }}</td>
                   <td>${{ item.shipping_price }}</td>
                   <td>{{ item.stock }}</td>
-                  <td>
+                  <!-- <td>
                     <v-tooltip v-if="item.description.length > 40" location="bottom">
                       <template v-slot:activator="{ props }">
                         <p
@@ -60,7 +60,7 @@
                       <span>{{ item.description }}</span>
                     </v-tooltip>
                     <p v-else>{{ strLimit(item.description, 40) }}</p>
-                  </td>
+                  </td> -->
                   <td>
                     <a :href="item.image" class="text-blue-darken-4" target="_blank">
                       {{ getImageName(item.image, item.name) }}
@@ -131,7 +131,7 @@ export default {
         "admin.products.table_headers.price",
         "admin.products.table_headers.shipping_price",
         "admin.products.table_headers.stock",
-        "admin.products.table_headers.description",
+        // "admin.products.table_headers.description",
         "admin.products.table_headers.asset",
         "table.created_at",
         "table.options",
