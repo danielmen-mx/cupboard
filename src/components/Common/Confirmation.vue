@@ -2,7 +2,8 @@
   <div>
     <v-dialog
       v-model="visible"
-      max-width="15vw"
+      max-width="18vw"
+      persistent
     >
       <v-card>
         <v-card-text class="d-flex text-center justify-space-around text-h6">
@@ -11,11 +12,15 @@
         <v-card-actions class="d-flex justify-space-around py-3">
           <v-btn
             color="red"
-            @click.once="confirm()"
+            variant="outlined"
+            :min-width="buttonWidth"
+            @click.stop="submit()"
             class="text-h6"
           >{{ translate("confirmations.yes") }}</v-btn>
           <v-btn
             color="success"
+            variant="outlined"
+            :min-width="buttonWidth"
             @click="visible = false"
             class="text-h6"
           >{{ translate("confirmations.no") }}</v-btn>
@@ -25,29 +30,45 @@
   </div>
 </template>
 <script>
-  export default {
-    data () {
-      return {
-        itemId: null,
-        visible: false,
-        event: 'confirmation-dialog'
-      }
+import Table from './Table.vue';
+
+export default {
+  extends: Table,
+  data () {
+    return {
+      buttonWidth: 140,
+      visible: false,
+      apiService: null,
+      itemId: null,
+      event: null,
+      preventRemoveItem: null,
+      preventSnackbar: null,
+      preventReload: null,
+    }
+  },
+  methods: {
+    handle(data) {
+      this.itemId = data.id
+      this.apiService = data.apiService
+      this.event = data.event
+      this.preventRemoveItem = data.preventRemoveItem,
+      this.preventSnackbar = data.preventSnackbar,
+      this.preventReload = data.preventReload,
+      setTimeout(() => { this.visible = true }, 100);
     },
-    methods: {
-      handle(data) {
-        this.visible = true
-        this.itemId = data
-      },
-      confirm() {
-        this.fireEvent('deletion-confirmation', this.itemId)
-        this.visible = false
-      }
+    submit() {
+      this.remove(this.itemId)
+      this.visible = false
     },
-    mounted() {
-      this.listenEvent(this.event, this.handle)
-    },
-    beforeDestroy() {
-      this.unlistenEvent(this.event, this.handle)
-    },
-  }
+    successCallBack() {
+      this.fireEvent(this.event)
+    }
+  },
+  mounted() {
+    this.listenEvent("confirmation-dialog", this.handle)
+  },
+  beforeDestroy() {
+    this.unlistenEvent("confirmation-dialog", this.handle)
+  },
+}
 </script>
