@@ -25,7 +25,7 @@ export default {
     visible: false,
     color: 'success',
     message: '',
-    timeout: 5000,
+    timeout: 3000,
     event: 'snackbarNotify'
   }),
   methods: {
