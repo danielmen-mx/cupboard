@@ -30,6 +30,7 @@ export default {
     admin: null,
     loading: false,
     apiService: null,
+    preventSnackbar: true,
     itemId: null
   }),
   methods: {
