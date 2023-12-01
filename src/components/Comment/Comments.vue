@@ -47,7 +47,7 @@
             :ripple="false"
             variant="plain"
             class="text-decoration-underline"
-            @click.stop="openConfirmation(comment.id)"
+            @click.stop="requestItemRemoval(comment.id, apiService, event, true, preventSnackbar, preventReload)"
           >
             {{  translate("delete") }}
           </v-btn>
@@ -59,7 +59,7 @@
 <script>
 import { initials, ucFirst } from '../../utils/helpers'
 import { userCanEdit } from '../../utils/authentication'
-import { openConfirmation } from '../Common/Helpers/Actions'
+import { requestItemRemoval } from '../Common/Helpers/Actions'
 import { getModel } from '../Common/Helpers/GetModel'
 import Responsive from '../Common/Responsive.vue'
 import Table from '../Common/Table.vue'
@@ -70,7 +70,7 @@ import CommentsSkeleton from '@/components/Common/Skeletons/CommentsSkeleton.vue
 
 export default {
   extends: Table,
-  mixins: [initials, ucFirst, userCanEdit, openConfirmation, getModel],
+  mixins: [initials, ucFirst, userCanEdit, requestItemRemoval, getModel],
   components: {
     Edit,
     CommentsEmptyState,
@@ -87,6 +87,7 @@ export default {
       query: {},
       loading: false,
       apiService: CommentService,
+      event: "remove-comment-lenght",
       preventSnackbar: true,
       preventReload: true,
       itemId: null,
@@ -109,10 +110,11 @@ export default {
 
     this.getItems()
     this.listenEvent('onSubmit', this.addItem)
-    this.listenEvent('deletion-confirmation', this.delete)
+    this.listenEvent(this.event, this.getItems)
   },
   beforeDestroy() {
-    this.unlistenEvent('deletion-confirmation', this.delete)
+    this.unlistenEvent('onSubmit', this.addItem)
+    this.unlistenEvent(this.event, this.getItems)
   },
 }
 </script>
