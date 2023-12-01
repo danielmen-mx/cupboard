@@ -111,22 +111,12 @@ export default {
       if (this.breakRequest()) return
 
       try {
-
-        if (!this.preventReload) {
-          this.loading = true
-        }
-
-        if (!this.itemFound(id)) return
+        if (!this.preventReload) this.loading = true
 
         const resp = await this.apiService.remove(id)
 
-        if (!this.preventRemoveItem) {
-          this.removeItem(id)
-        }
-
-        if (!this.preventSnackbar) {
-          this.successSnackbar(resp.message)
-        }
+        if (!this.preventRemoveItem) this.removeItem(id)
+        if (!this.preventSnackbar) this.successSnackbar(resp.message)
         this.loading = false
         this.successCallBack(id)
       } catch (error) {
