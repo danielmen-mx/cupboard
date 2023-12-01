@@ -38,6 +38,7 @@
       "description": "Description",
       "stock": "Stock",
       "asset": "Asset",
+      "stock_suffix": "Qtys",
       "table_headers": {
         "name": "Name",
         "price": "Price",

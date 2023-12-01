@@ -39,6 +39,7 @@
       "stock": "Stock",
       "description": "Descripción",
       "asset": "Imagen",
+      "stock_suffix": "Unids",
       "table_headers": {
         "name": "Nombre",
         "price": "Precio",
