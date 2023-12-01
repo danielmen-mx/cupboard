@@ -49,7 +49,7 @@
                   </td>
                   <td>${{ item.price }}</td>
                   <td>${{ item.shipping_price }}</td>
-                  <td>{{ item.quantity }}</td>
+                  <td>{{ item.stock }}</td>
                   <td>
                     <v-tooltip v-if="item.description.length > 40" location="bottom">
                       <template v-slot:activator="{ props }">
@@ -62,8 +62,8 @@
                     <p v-else>{{ strLimit(item.description, 40) }}</p>
                   </td>
                   <td>
-                    <a :href="item.assets" class="text-blue-darken-4" target="_blank">
-                      {{ getImageName(item.assets, item.name) }}
+                    <a :href="item.image" class="text-blue-darken-4" target="_blank">
+                      {{ getImageName(item.image, item.name) }}
                     </a>
                   </td>
                   <td>{{ formatDate(item.created_at) }}</td>
