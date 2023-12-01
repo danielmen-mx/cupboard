@@ -20,16 +20,16 @@
     <v-card-text>
       <v-window v-model="tab">
         <v-window-item value="main">
-          <Welcome v-if="tab === 'main'" />
+          <Welcome />
         </v-window-item>
         <v-window-item value="settings">
-          <Settings v-if="tab === 'settings'" />
+          <Settings />
         </v-window-item>
         <v-window-item value="posts">
-          <Posts v-if="tab === 'posts'" />
+          <Posts />
         </v-window-item>
         <v-window-item value="products">
-          <Products v-if="tab === 'products'" />
+          <Products />
         </v-window-item>
       </v-window>
     </v-card-text>
