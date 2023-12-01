@@ -61,7 +61,7 @@
                 :loading="loading"
                 v-model="form.stock"
                 density="compact"
-                suffix="qty"
+                :suffix="translate('admin.products.stock_suffix')"
                 :rules="[required, number]"
                 :label="translate('admin.products.stock')+'*'"
                 :hint="translate('admin.products.guides.stock')"
@@ -71,15 +71,93 @@
           <small>*{{ translate("validations.required-fields") }}</small>
         </v-card-text>
       </v-window-item>
-
       <!-- Step Two -->
       <v-window-item :value="2">
         <!-- price && shipping price -->
+        <v-row>
+            <v-col cols="12" sm="6" class="mb-2">
+              <v-text-field
+                :loading="loading"
+                v-model="form.price"
+                density="compact"
+                prefix="$"
+                :rules="[required]"
+                :label="translate('admin.products.price')+'*'"
+                :hint="translate('admin.products.guides.price')"
+                clearable
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6" class="mb-2">
+              <v-text-field
+                :loading="loading"
+                v-model="form.shipping_price"
+                density="compact"
+                prefix="$"
+                :rules="[required]"
+                :label="translate('admin.products.shipping_price')"
+                :hint="translate('admin.products.guides.shipping_price')"
+                clearable
+              ></v-text-field>
+            </v-col>
+          </v-row>
       </v-window-item>
-
       <!-- Step three -->
       <v-window-item :value="3">
-
+        <v-row>
+          <v-col cols="12" sm="6">
+            <v-text-field
+              :disabled="true"
+              v-model="form.name"
+              :label="translate('admin.products.name')"
+              density="compact"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="3">
+            <v-text-field
+              :disabled="true"
+              v-model="form.price"
+              prefix="$"
+              :label="translate('admin.products.price')"
+              density="compact"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="3">
+            <v-text-field
+              :disabled="true"
+              v-model="form.shipping_price"
+              prefix="$"
+              :label="translate('admin.products.shipping_price')"
+              density="compact"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-text-field
+          :disabled="true"
+          v-model="form.description"
+          :label="translate('admin.products.description')"
+          density="compact"
+        ></v-text-field>
+        <v-row>
+          <v-col cols="12" sm="6">
+            <v-text-field
+              :disabled="true"
+              prepend-icon="mdi-camera"
+              show-size
+              counter
+              density="compact"
+              :label="getFileInputLabel()"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="6">
+            <v-text-field
+              :disabled="true"
+              v-model="form.stock"
+              :suffix="translate('admin.products.stock_suffix')"
+              :label="translate('admin.products.stock')"
+              density="compact"
+            ></v-text-field>
+          </v-col>
+        </v-row>
       </v-window-item>
     </v-window>
     <v-divider></v-divider>
@@ -106,7 +184,7 @@
         :disabled="!enableSubmit"
         color="green"
         variant="flat"
-        @click.prevent="submit"
+        @click.stop="submit"
       >
         {{ translate(submitButtonText) }}
       </v-btn>
@@ -145,11 +223,11 @@ export default {
       submitButtonText: 'create',
       form: {
         name: null,
-        price: null,
-        shipping_price: null,
+        price: 0,
+        shipping_price: 0,
         stock: null,
         description: null,
-        assets: null,
+        image: null,
         user_id: null
       },
       itemId: null,
@@ -177,6 +255,7 @@ export default {
     },
     async submit() {
       if (!this.validateStepOne() || !this.validateStepTwo()) return
+      console.log(this.form)
 
       try {
         this.loading = true
@@ -239,7 +318,7 @@ export default {
       return false
     },
     validateStepTwo() {
-      if (this.answeredForm(this.form.autor)) return true
+      if (this.answeredForm(this.form.price)) return true
       return false
     },
     closeDrawer() {
@@ -250,21 +329,25 @@ export default {
       this.form = {
         name: null,
         description: null,
-        assets: null,
-        price: null,
-        shipping_price: null
+        image: null,
+        price: 0,
+        shipping_price: 0,
+        user_id: null
       }
 
       this.$nextTick(() => { this.$router.push({ path: "/admin/products" }) })
     }
   },
   mounted() {
+    let userId = this.setUserVar().id
+    this.form.user_id = userId
     if (!this.item_parent) return
     let itemBackup = this.copyData(this.item_parent)
     this.submitButtonText = 'update'
     this.itemId = itemBackup.id
     this.imageStored = !itemBackup.image ? null : this.getImageName(itemBackup.image)
     this.form = itemBackup
+    this.form.user_id = userId
   },
   watch: {
     'form.name': {
@@ -283,7 +366,7 @@ export default {
       deep: true,
       immediate: true
     },
-    'form.autor': {
+    'form.price': {
       handler: function () {
         if (this.validateStepTwo()) return this.enableNextButton = true
         return this.enableNextButton = false
