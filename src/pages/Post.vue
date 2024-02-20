@@ -1,13 +1,13 @@
 <template>
   <PostSkeleton v-if="loading"/>
   <div v-if="item" v-resize="onResize">
-    <v-card v-if="!loading" class="elevation-1 pa-2">
+    <v-card v-if="!loading" class="elevation-0">
       <v-btn
         v-if="item.image"
         icon="mdi-keyboard-backspace"
         color="orange-darken-4"
         @click="$router.push('/')"
-        class="back-button"
+        class="back-button ma-2"
       >
       </v-btn>
       <v-img
