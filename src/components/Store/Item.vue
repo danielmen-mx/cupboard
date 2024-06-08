@@ -5,7 +5,9 @@
         <v-card height="50vh" class="bg-grey">
           <v-card-title>Image</v-card-title>
         </v-card>
+
         <div class="my-2"></div>
+
         <v-card height="10vh" class="bg-grey">
           <v-card-title>Product Description</v-card-title>
         </v-card>
