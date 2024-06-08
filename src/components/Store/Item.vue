@@ -19,7 +19,9 @@
       </v-col>
     </v-row>
   </div>
+
   <v-divider class="my-4"></v-divider>
+
   <div>another component soon</div>
 </template>
 <script>
