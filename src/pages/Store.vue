@@ -1,6 +1,6 @@
 <template>
   <v-card class="elevation-0">
-    <Item/>
+    <!-- <Item/> -->
   </v-card>
 </template>
 <script>
