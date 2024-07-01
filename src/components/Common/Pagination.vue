@@ -31,6 +31,7 @@ export default {
   methods: {
     setProperties() {
       let data = this.pagination_values
+      console.log(data)
 
       this.properties = {
         'items_per_page': parseInt(data.per_page),
