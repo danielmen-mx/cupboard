@@ -37,8 +37,9 @@
             <v-card-title>Filters</v-card-title>
           </v-card>
         </v-col>
-        <v-col cols="9" class="bg-grey">
+        <v-col cols="9" class="store-items-container">
           <Items />
+          <!-- <CommonPagination /> -->
         </v-col>
       </v-row>
     </div>
@@ -47,11 +48,24 @@
 <script>
 import Responsive from '@/components/Common/Responsive.vue'
 import Items from '../components/Store/Items.vue';
+import CommonPagination from '../components/Common/Paginations/Common.vue';
 
 export default {
   extends: Responsive,
   components: {
-    Items
+    Items,
+    CommonPagination
   }
 }
 </script>
+<style>
+.store-items-container {
+  height: 75.5vh;
+  -ms-overflow-style: none;
+  overflow-y: scroll;
+}
+
+.store-items-container::-webkit-scrollbar {
+  display: none;
+}
+</style>
