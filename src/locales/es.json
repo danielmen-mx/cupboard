@@ -97,6 +97,9 @@
     "Home": {
       "no-posts": "¡Hoy no tenemos publicaciones recientes!",
       "working": "Seguimos trabajando"
+    },
+    "StoreItems": {
+      "no-items": "Aún no hay productos por el momento"
     }
   },
   "week-days": {
