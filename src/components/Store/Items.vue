@@ -1,41 +1,47 @@
 <template>
-  <!-- empty state -->
-  <!-- loading state -->
-   <div
-    v-for="item in items"
-    :key="item.id"
-   >
-     <v-card
-       class="mx-auto my-1"
-       max-width="98%"
-       elevation="4"
-       @click="redirect()"
-       hover
-     >
-       <v-card-item>
-         <v-card-title>
-           {{ item.name }}
-         </v-card-title>
-         <v-card-subtitle>
-           $ {{ item.price }}
-         </v-card-subtitle>
-       </v-card-item>
-       <v-card-text>
-         {{ item.description }}
-       </v-card-text>
-     </v-card>
-   </div>
-  <CommonPagination :pagination_values="paginationProps" :per_page="query" />
+  <StoreItemSkeleton v-if="loading"/>
+   <template v-else>
+    <StoreItemEmptyState v-if="items.length == 0"/>
+    <div v-else>
+      <v-card
+        v-for="item in items"
+        :key="item.id"
+        class="mx-auto my-1"
+        max-width="98%"
+        elevation="4"
+        @click="redirect()"
+        hover
+      >
+        <v-card-item>
+          <v-card-title>
+            {{ item.name }}
+          </v-card-title>
+          <v-card-subtitle>
+            $ {{ item.price }}
+          </v-card-subtitle>
+        </v-card-item>
+        <v-card-text>
+          {{ item.description }}
+        </v-card-text>
+      </v-card>
+
+      <CommonPagination :pagination_values="paginationProps" :per_page="query" />
+    </div>
+   </template>
 </template>
 <script>
 import ProductService from '../../services/ProductService';
 import Table from '../Common/Table.vue';
 import CommonPagination from '../Common/Paginations/Common.vue';
+import StoreItemSkeleton from '../Common/Skeletons/StoreItemSkeleton.vue';
+import StoreItemEmptyState from '../Common/EmptyState/StoreItemEmptyState.vue';
 
 export default {
-  extends: Table,
+  mixins: [Table],
   components: {
-    CommonPagination
+    CommonPagination,
+    StoreItemSkeleton,
+    StoreItemEmptyState
   },
   data() {
     return {
@@ -57,7 +63,10 @@ export default {
     }
   },
   mounted() {
-    this.getItems()
+    // this.getItems()
+    setTimeout(() => {
+      // console.log(this.paginationProps);
+    }, 500);
   },
 }
 </script>
