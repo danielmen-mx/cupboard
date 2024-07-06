@@ -55,6 +55,11 @@ export default {
     },
     movePosition(operation) {
       this.pageRequested = operation === '++' ? this.properties.current_page + 1 : this.properties.current_page - 1
+    },
+    setDinamicEvent () {
+      let currentPath = this.$route.name
+      if (!currentPath) return
+      this.event = 'update-' + currentPath + '-pagination-component'
     }
   },
   mounted() {
