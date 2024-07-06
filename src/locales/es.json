@@ -99,7 +99,9 @@
       "working": "Seguimos trabajando"
     },
     "StoreItems": {
-      "no-items": "Aún no hay productos por el momento"
+      "no-items": "No hay productos para mostrar por el momento",
+      "come-back": "Vuelva más tarde, o",
+      "refresh": "Actualice la página"
     }
   },
   "week-days": {
@@ -192,6 +194,7 @@
   "basic_information": "Información básica",
   "back": "Atrás",
   "cancel": "Cancelar",
+  "come-back": "Vuelva más tarde",
   "close": "Cerrar",
   "create": "Crear",
   "delete": "Eliminar",
@@ -212,8 +215,10 @@
   "products": "Productos",
   "prices": "Precios",
   "prices_information": "Información de precios",
+  "refresh": "Actualizar",
   "sorry": "Disculpa",
   "settings": "Configuraciones",
+  "store": "Tienda",
   "submit": "Enviar",
   "update": "Actualizar",
   "user_settings": "Ajustes de Usuario",

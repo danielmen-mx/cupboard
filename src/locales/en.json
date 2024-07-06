@@ -98,7 +98,9 @@
       "working": "We keep working"
     },
     "StoreItems": {
-      "no-items": "No products at the moment"
+      "no-items": "No products to show for the moment",
+      "come-back": "Come back later, or",
+      "refresh": "Refresh the page"
     }
   },
   "week-days": {
@@ -191,6 +193,7 @@
   "basic_information": "Basic information",
   "back": "Back",
   "cancel": "Cancel",
+  "come-back": "Come back later",
   "close": "Close",
   "create": "Create",
   "delete": "Delete",
@@ -211,9 +214,11 @@
   "products": "Products",
   "prices": "Prices",
   "prices_information": "Prices information",
+  "refresh": "Refresh",
   "sorry": "Sorry",
-  "submit": "Submit",
   "settings": "Settings",
+  "store": "Store",
+  "submit": "Submit",
   "update": "Update",
   "user_settings": "User Settings",
   "404": "We don't found the page you're looking for!"
