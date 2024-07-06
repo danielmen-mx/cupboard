@@ -24,7 +24,7 @@
           {{ item.description }}
         </v-card-text>
       </v-card>
-
+      <v-divider></v-divider>
       <CommonPagination :pagination_values="paginationProps" :per_page="query" />
     </div>
    </template>
@@ -60,13 +60,21 @@ export default {
     redirect() {
       // window.alert("UR joking around")
       console.log("still building ur dreams babe")
+    },
+    updatePagination(properties) {
+      if (this.query.per_page === properties.per_page && this.query.page === properties.page) return
+      this.query = properties
+      this.getItems()
     }
   },
   mounted() {
-    // this.getItems()
-    setTimeout(() => {
-      // console.log(this.paginationProps);
-    }, 500);
+    this.getItems()
+    this.listenEvent("refresh-store-items-component", this.getItems)
+    this.listenEvent('update-store-pagination-component', this.updatePagination)
+  },
+  beforeDestroy() {
+    this.listenEvent("refresh-store-items-component", this.getItems)
+    this.unlistenEvent('update-store-pagination-component', this.updatePagination)
   },
 }
 </script>
