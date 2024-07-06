@@ -1,6 +1,6 @@
 <template>
   <v-card class="elevation-0">
-    <div class="d-flex mb-2">
+    <div class="d-flex">
       <v-row dense>
         <v-col cols="3">
           <v-card
@@ -10,7 +10,7 @@
           >
             <v-card-title
               class="align-self-center"
-            >Store</v-card-title>
+            >{{ translate("store") }}</v-card-title>
           </v-card>
         </v-col>
         <v-col cols="9" class="d-flex align-center">
@@ -27,12 +27,12 @@
 
     <v-divider></v-divider>
 
-    <div class="d-flex my-4">
+    <div class="d-flex mt-2">
       <v-row dense>
         <v-col cols="3">
           <v-card
             color="secondary"
-            height="75vh"
+            height="72vh"
           >
             <v-card-title>Filters</v-card-title>
           </v-card>
@@ -60,7 +60,7 @@ export default {
 </script>
 <style>
 .store-items-container {
-  height: 75.5vh;
+  height: 72.5vh;
   -ms-overflow-style: none;
   overflow-y: scroll;
 }
