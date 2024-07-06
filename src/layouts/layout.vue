@@ -10,8 +10,8 @@
         <Snackbar />
         <CustomDrawer />
         <!-- <Background /> -->
-        <div class="pa-1">
-          <v-container class="elevation-4 pa-3 mt-3" style="min-height: 87vh">
+        <div class="pa-0">
+          <v-container class="elevation-1 pa-3 mt-2" style="min-height: 79.9vh">
             <router-view/>
           </v-container>
         </div>
