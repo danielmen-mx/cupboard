@@ -24,13 +24,6 @@ export default {
       event: 'update-current-pagination-table'
     }
   },
-  methods: {
-    setDinamicEvent () {
-      let currentPath = this.$route.name
-      if (!currentPath) return
-      this.event = 'update-' + currentPath + '-pagination-table'
-    }
-  },
   mounted() {
     this.setProperties()
     this.setDinamicEvent()
