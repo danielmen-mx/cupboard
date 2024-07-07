@@ -12,17 +12,30 @@
         @click="redirect()"
         hover
       >
-        <v-card-item>
-          <v-card-title>
-            {{ item.name }}
-          </v-card-title>
-          <v-card-subtitle>
-            $ {{ item.price }}
-          </v-card-subtitle>
-        </v-card-item>
-        <v-card-text>
-          {{ item.description }}
-        </v-card-text>
+        <div class="d-flex">
+          <v-row dense>
+            <v-col cols="3">
+              <v-img
+                :src="item.image"
+                lazy-src="/logo/shadai-main.jpeg"
+                cover
+              ></v-img>
+            </v-col>
+            <v-col cols="9">
+              <v-card-item>
+                <v-card-title>
+                  {{ item.name }}
+                </v-card-title>
+                <v-card-subtitle>
+                  $ {{ item.price }}
+                </v-card-subtitle>
+              </v-card-item>
+              <v-card-text>
+                {{ removeHtmlTags(item.description) }}
+              </v-card-text>
+            </v-col>
+          </v-row>
+        </div>
       </v-card>
       <v-divider></v-divider>
       <CommonPagination :pagination_values="paginationProps" :per_page="query" />
@@ -38,6 +51,7 @@ import StoreItemEmptyState from '../Common/EmptyState/StoreItemEmptyState.vue';
 
 export default {
   mixins: [Table],
+  inject: ['strLimit','removeHtmlTags'],
   components: {
     CommonPagination,
     StoreItemSkeleton,
