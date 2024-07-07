@@ -8,6 +8,9 @@ const providers = {
       return value;
     }
     return value.substr(0, size) + '...';
+  },
+  removeHtmlTags: (text) => {
+    return text.replace(/(<([^>]+)>)/ig, '')
   }
 }
 
