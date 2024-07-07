@@ -2,7 +2,7 @@
   <div>
     <v-dialog
       v-model="visible"
-      max-width="18vw"
+      width="auto"
       persistent
     >
       <v-card>
