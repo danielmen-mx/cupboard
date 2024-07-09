@@ -130,6 +130,9 @@
     "first-name": "First Name",
     "last-name": "Last Name",
     "language": "Language",
+    "password": "Password",
+    "password-tooltip": "Validated and secure password",
+    "change-password": "Change password",
     "correct-username": "Correct username",
     "correct-email": "Correct Email",
     "validate-username": "Validate available username",
@@ -188,6 +191,7 @@
   "validations": {
     "required-fields": "Required fields"
   },
+  "accept": "Accept",
   "autor": "Autor",
   "autor_information": "Autor information",
   "basic_information": "Basic information",

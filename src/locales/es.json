@@ -131,6 +131,9 @@
     "first-name": "Nombre(s)",
     "last-name": "Apellido(s)",
     "language": "Lenguaje",
+    "password": "Contraseña",
+    "password-tooltip": "Contraseña validada y segura",
+    "change-password": "Cambiar contraseña",
     "correct-username": "Nombre de usuario correcto",
     "correct-email": "Correo correcto",
     "validate-username": "Validar nombre de usuario disponible",
@@ -189,6 +192,7 @@
   "validations": {
     "required-fields": "Campos requeridos"
   },
+  "accept": "Aceptar",
   "autor": "Autor",
   "autor_information": "Información de autor",
   "basic_information": "Información básica",
