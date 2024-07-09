@@ -31,7 +31,7 @@
 }
 
 .font-size-xsm {
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .font-size-sm {
@@ -39,11 +39,15 @@
 }
 
 .font-size-md {
-  font-size: 28px;
+  font-size: 26px;
 }
 
 .font-size-lg {
-  font-size: 36px;
+  font-size: 32px;
+}
+
+.font-size-xlg {
+  font-size: 38px;
 }
 
 /* Skeleton loader sets */
