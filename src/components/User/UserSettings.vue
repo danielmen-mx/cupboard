@@ -1,7 +1,7 @@
 <template>
   <AdminSettingsSkeleton v-if="!user"/>
   <div v-else>
-    <v-card class="pa-6 elevation-0">
+    <v-card class="pa-4 elevation-0">
       <span class="text-h5">
         {{ translate("profile") }}
       </span>
@@ -12,7 +12,7 @@
       >
         <v-responsive
           class="my-4 mx-4"
-          max-width="34vw"
+          width="auto"
         >
           <div class="d-flex align-center">
             <div class="configuration-title px-4">
@@ -154,6 +154,51 @@
               single-line
             ></v-select>
           </div>
+          <div class="d-flex align-center ">
+            <div class="configuration-title px-4">
+              {{ translate("user-settings.password") }}:
+            </div>
+            <v-text-field
+              v-model="form.password"
+              :loading="loading"
+              variant="solo"
+              density="compact"
+              class="pt-5"
+              single-line
+              :model-value="translate('user-settings.password')+'*****'"
+              readonly
+            >
+              <template v-slot:append-inner>
+                  <v-progress-circular
+                    v-if="loading"
+                    color="info"
+                    indeterminate
+                    size="24"
+                  ></v-progress-circular>
+                  <v-tooltip v-else location="bottom" >
+                    <template v-slot:activator="{ props }">
+                      <v-icon
+                        v-bind="props"
+                        color="green"
+                        icon="mdi-check-circle-outline"
+                      ></v-icon>
+                    </template>
+                      {{ translate("user-settings.password-tooltip") }}
+                  </v-tooltip>
+              </template>
+              <template v-slot:append>
+                <v-tooltip location="right" >
+                  <template v-slot:activator="{ props }">
+                    <v-icon
+                      v-bind="props"
+                      @click.stop="changePasswordRequestDialog"
+                    >mdi-lock-reset</v-icon>
+                  </template>
+                    {{ this.translate("user-settings.change-password") }}
+                </v-tooltip>
+              </template>
+            </v-text-field>
+          </div>
           <div class="d-flex flex-row-reverse mt-8">
             <v-btn
               :loading="loading"
@@ -175,12 +220,14 @@ import UserService from '@/services/UserService'
 import { formatRequest } from '../../utils/requests'
 import { mapMutations } from "vuex"
 import { updateLang } from '../../router/languages'
+import { changePasswordRequestDialog } from '../Common/Helpers/Actions'
 import AdminSettingsSkeleton from '../Common/Skeletons/AdminSettingsSkeleton.vue'
+import translate from '../../plugins/locales'
 
 export default {
   ...mapMutations("", ["setToken", "setUser", "setName", "setEmail", "setLanguage"]),
   extends: Form,
-  mixins: [formatRequest],
+  mixins: [formatRequest, changePasswordRequestDialog],
   components: {
     AdminSettingsSkeleton
   },
