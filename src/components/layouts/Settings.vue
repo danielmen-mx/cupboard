@@ -3,7 +3,7 @@
     <v-dialog
       v-model="showModal"
       activator="parent"
-      width="37vw"
+      width="80vw"
     >
       <v-card>
         <v-card-actions class="d-flex justify-space-between flex-row-reverse pa-2">
