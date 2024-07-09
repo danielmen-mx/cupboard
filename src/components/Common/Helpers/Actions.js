@@ -19,5 +19,18 @@ export const requestItemRemoval = {
         preventReload: preventReload,
       })
     }
+  }
+}
+
+export const changePasswordRequestDialog = {
+  methods: {
+    /**
+     * 
+     */
+    changePasswordRequestDialog () {
+      this.fireEvent('change-password-dialog', {
+        //
+      })
+    }
   },
 }
