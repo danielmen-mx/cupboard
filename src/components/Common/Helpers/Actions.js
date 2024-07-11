@@ -25,11 +25,13 @@ export const requestItemRemoval = {
 export const changePasswordRequestDialog = {
   methods: {
     /**
-     * 
+     * @param {String} itemId
+     * @param {Object} item
      */
-    changePasswordRequestDialog () {
+    changePasswordRequestDialog (itemId, item) {
       this.fireEvent('change-password-dialog', {
-        //
+        id: itemId,
+        item: item
       })
     }
   },
