@@ -19,4 +19,7 @@ export default {
   validateEmail(id, data) {
     return Api.get('/users/' + id + '/validate-email', data)
   },
+  changePassword(id, data) {
+    return Api.put('/users/' + id + '/change-password', data)
+  }
 }
