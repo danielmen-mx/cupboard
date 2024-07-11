@@ -45,13 +45,15 @@
 
           <v-card-actions class="d-flex justify-center ">
             <v-btn
+              :disabled="loading"
               color="red"
               size="small"
               variant="outlined"
               width="10vw"
-              @click="closeForm"
+              @click="resetValues"
             >{{ translate("cancel") }}</v-btn>
             <v-btn
+              :disabled="loading || !enableSubmitBtn"
               color="green"
               size="small"
               variant="outlined"
@@ -66,54 +68,82 @@
 </template>
 <script>
 import translate from '../../plugins/locales';
+import UserService from '../../services/UserService';
 import Form from './Form.vue';
 
 export default {
   extends: Form,
   data () {
     return {
+      visible: false,
+      apiService: UserService,
+      itemId: null,
+      item: null,
       form: {},
       confirmation: '',
-      buttonWidth: 140,
-      visible: false,
-      apiService: null,
-      itemId: null,
+      enableSubmitBtn: false,
       event: null,
-      preventRemoveItem: null,
-      preventSnackbar: null,
-      preventReload: null,
     }
   },
   methods: {
-    closeForm() {
+    resetValues() {
       this.visible = false
       this.form = {}
       this.confirmation = ''
     },
     matchPassword(v) {
-      if (this.form.password) {
-        if (this.form.password !== v) return this.translate("login.validations.password")
+      if (!this.form.password) return
+      if (this.form.password !== v) return this.translate("login.validations.password")
+    },
+    async submit() {
+      if (!this.form) return
+
+      try {
+        this.loading = true
+        const resp = await this.apiService.changePassword(this.itemId, this.form)
+
+        this.$nextTick(() => {
+          this.successSnackbar(resp.message)
+          this.loading = false
+          this.resetValues()
+        })
+      } catch (error) {
+        console.log(error)
+        this.errorSnackbar(error.exception)
+        this.loading = false
       }
     },
     handle(data) {
-      // this.itemId = data.id
-      // this.apiService = data.apiService
-      // this.event = data.event
-      // this.preventRemoveItem = data.preventRemoveItem,
-      // this.preventSnackbar = data.preventSnackbar,
-      // this.preventReload = data.preventReload,
+      this.itemId = data.id
+      this.item = data.item
       setTimeout(() => { this.visible = true }, 100);
-    },
-    submit() {
-      this.remove(this.itemId)
-      this.visible = false
     },
     successCallBack() {
       this.fireEvent(this.event)
+    },
+    validatefields(currentEntry, sisterEntry) {
+      if (!currentEntry || currentEntry == "" || !sisterEntry || sisterEntry == "") return this.enableSubmitBtn = false
+      if (currentEntry !== sisterEntry) return this.enableSubmitBtn = false
+      return this.enableSubmitBtn = true
     }
+  },
+  computed: {
+    //
   },
   mounted() {
     this.listenEvent("change-password-dialog", this.handle)
+  },
+  watch: {
+    'form.password': {
+      handler: function() {
+        this.validatefields(this.form.password, this.confirmation)
+      }
+    },
+    'confirmation': {
+      handler: function() {
+        this.validatefields(this.confirmation, this.form.password)
+      }
+    }
   },
   beforeDestroy() {
     this.unlistenEvent("change-password-dialog", this.handle)
