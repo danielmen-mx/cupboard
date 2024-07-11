@@ -15,7 +15,7 @@
             {{ translate("user_settings") }}
           </v-card-title>
         </v-card-actions>
-        <UserSettings />
+        <UserSettings class="ma-2" />
       </v-card>
     </v-dialog>
   </v-row>
