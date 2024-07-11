@@ -110,7 +110,6 @@ export default {
       try {
         this.loading = true
         const resp = await this.apiService.register(this.form)
-        // console.log(resp)
 
         this.$nextTick(() => {
           this.successSnackbar(resp.message)
