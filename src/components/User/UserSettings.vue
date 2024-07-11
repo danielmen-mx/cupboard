@@ -191,7 +191,7 @@
                   <template v-slot:activator="{ props }">
                     <v-icon
                       v-bind="props"
-                      @click.stop="changePasswordRequestDialog"
+                      @click.stop="changePasswordRequestDialog(user.id, user)"
                     >mdi-lock-reset</v-icon>
                   </template>
                     {{ this.translate("user-settings.change-password") }}
