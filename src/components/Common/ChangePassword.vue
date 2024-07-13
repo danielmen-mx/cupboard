@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-dialog
+      v-if="!loading"
       v-model="visible"
       width="auto"
       persistent
@@ -70,10 +71,7 @@
 import NavigationMixins from '../../mixins/NavigationMixins';
 import translate from '../../plugins/locales';
 import UserService from '../../services/UserService';
-import AuthService from '../../services/AuthService';
 import Form from './Form.vue';
-import store from '../../store';
-import { updateLang } from '../../router/languages';
 
 export default {
   extends: Form,
@@ -82,7 +80,6 @@ export default {
     return {
       visible: false,
       apiService: UserService,
-      authService: AuthService,
       itemId: null,
       item: null,
       form: {},
@@ -106,34 +103,22 @@ export default {
 
       try {
         this.loading = true
-        const resp = await this.apiService.changePassword(this.itemId, this.form)
+        const resp = await this.apiService.changePassword(this.itemId, this.form).then(this.dispatchLogout())
 
         this.$nextTick(() => {
           this.successSnackbar(resp.message)
           this.loading = false
         })
-
-        this.logout()
       } catch (error) {
         console.log(error)
         this.errorSnackbar(error.exception)
         this.loading = false
       }
     },
-    async logout() {
-      try {
-        this.form.user = !this.form.user ? store.getters['user'] : this.form.user
-        console.log("loggin out....")
-        const resp = await this.authService.logout(this.form)
-
-        this.$store.commit('logout')
-        this.isLogged = false
-        updateLang()
-        this.visible = false
-        this.$router.push({ path: '/' })
-      } catch (error) {
-        console.log(error) 
-      }
+    dispatchLogout() {
+      this.resetValues()
+      this.fireEvent('close-user-settings-modal')
+      this.fireEvent('logout-session-remotely')
     },
     handle(data) {
       this.itemId = data.id
