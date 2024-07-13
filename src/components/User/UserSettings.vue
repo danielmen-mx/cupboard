@@ -303,12 +303,11 @@ export default {
       this.fireEvent("update-username-in-navigation-bar", data.username)
     },
     getItem() {
-      setTimeout(() => {
-        this.user = Object.assign({}, this.setUserVar())
-        if (!this.user) return
-        this.form = Object.assign({}, this.user)
-        this.itemId = this.form.id
-      }, 200);
+      let currentUser = this.setUserVar()
+      this.user = Object.assign({}, currentUser)
+      if (!currentUser) return this.$router.push({ path: '/login'})
+      this.form = Object.assign({}, this.user)
+      this.itemId = this.form.id
     }
   },
   computed: {
