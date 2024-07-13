@@ -37,10 +37,18 @@ export default {
     handle() {
       this.showModal = false
       this.$nextTick(() => { this.showModal = true })
+    },
+    remotelyCloseModal () {
+      this.showModal = false
     }
   },
   mounted() {
     this.listenEvent(this.event, this.handle)
+    this.listenEvent('close-user-settings-modal', this.remotelyCloseModal)
+  },
+  beforeDestroy() {
+    this.unlistenEvent(this.event, this.handle)
+    this.unlistenEvent('close-user-settings-modal', this.remotelyCloseModal)
   },
 }
 </script>
