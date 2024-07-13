@@ -132,6 +132,8 @@ export default {
 
         this.$store.commit('logout')
         this.isLogged = false
+        this.admin = false
+        this.fireEvent('closeNavigationDrawer')
         updateLang()
         this.$router.push({ path: '/' })
       } catch (error) {
@@ -145,7 +147,7 @@ export default {
     }
   },
   mounted() {
-    //
+    this.listenEvent('logout-session-remotely', this.logout)
   }
 }
 </script>
