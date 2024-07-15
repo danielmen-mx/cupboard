@@ -4,6 +4,7 @@ export default {
   data() {
     return {
       apiService: null,
+      loading: false,
       items: [],
       paginationProps: [],
       item: null,
