@@ -7,7 +7,7 @@
     <div v-else class="d-flex">
       <v-row dense>
         <v-col cols="8">
-          <v-card height="50vh" class="bg-grey">
+          <v-card height="50vh">
             <v-img
               :src="item.image"
               lazy-src="/logo/shadai-main.jpeg"
@@ -15,20 +15,20 @@
               class="w-auto"
             ></v-img>
           </v-card>
-  
           <div class="my-2"></div>
-  
           <v-card height="10vh">
             <div class="text-h6 px-2">{{ translate("product-information") }}</div>
             <div class="px-2">{{ removeHtmlTags(item.description) }}</div>
           </v-card>
         </v-col>
-  
         <v-col cols="4">
-          <v-card height="60.8vh">
-            <v-card-title>{{ item.name }}</v-card-title>
-            <v-card-subtitle>{{ translate("price") + ": " + item.price}}</v-card-subtitle>
-            <v-card-subtitle>{{ translate("shipping-price") + ": " + item.shipping_price}}</v-card-subtitle>
+          <v-card height="60.8vh" class="text-h6 px-4">
+            <div class="mt-2 mb-4 font-weight-black">{{ item.name }}</div>
+            <!-- <div class="text-h6">{{translate("price")}} : <strong class="text-light-green text-h4 font-weight-bold">${{item.price}}</strong></div> -->
+            <!-- <div class="text-caption">{{translate("price")}}</div> -->
+            <strong class="text-light-green text-h4 font-weight-bold">${{item.price}}</strong>
+            <div class="text-caption">{{translate("shipping-price")}}</div>
+            <strong class="text-light-green text-h5">${{item.shipping_price}}</strong>
           </v-card>
         </v-col>
       </v-row>
