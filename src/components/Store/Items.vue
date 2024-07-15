@@ -9,7 +9,7 @@
         class="mx-auto my-1"
         max-width="98%"
         elevation="4"
-        @click="redirect()"
+        @click="redirect(item.id)"
         hover
       >
         <div class="d-flex">
@@ -71,9 +71,9 @@ export default {
     }
   },
   methods: {
-    redirect() {
-      // window.alert("UR joking around")
-      console.log("still building ur dreams babe")
+    redirect(id) {
+      let path 
+      this.$router.push({ path: '/store/item/' + id })
     },
     updatePagination(properties) {
       if (this.query.per_page === properties.per_page && this.query.page === properties.page) return
