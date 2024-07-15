@@ -1,37 +1,67 @@
 <template>
-  <div class="d-flex">
-    <v-row dense>
-      <v-col cols="8">
-        <v-card height="50vh" class="bg-grey">
-          <v-card-title>Image</v-card-title>
-        </v-card>
-
-        <div class="my-2"></div>
-
-        <v-card height="10vh" class="bg-grey">
-          <v-card-title>Product Description</v-card-title>
-        </v-card>
-      </v-col>
-
-      <v-col cols="4">
-        <v-card height="60.8vh" class="bg-grey">
-          <v-card-title>Product Information</v-card-title>
-          <v-card-subtitle>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </v-card-subtitle>
-        </v-card>
-      </v-col>
-    </v-row>
-  </div>
-
-  <v-divider class="my-4"></v-divider>
-
-  <div>another component soon</div>
+  <StoreShowItemSkeleton v-if="loading" />
+  <template v-else>
+    <div v-if="!item">
+      Ups, no item found
+    </div>
+    <div v-else class="d-flex">
+      <v-row dense>
+        <v-col cols="8">
+          <v-card height="50vh" class="bg-grey">
+            <v-img
+              :src="item.image"
+              lazy-src="/logo/shadai-main.jpeg"
+              cover
+              class="w-auto"
+            ></v-img>
+          </v-card>
+  
+          <div class="my-2"></div>
+  
+          <v-card height="10vh">
+            <div class="text-h6 px-2">{{ translate("product-information") }}</div>
+            <div class="px-2">{{ removeHtmlTags(item.description) }}</div>
+          </v-card>
+        </v-col>
+  
+        <v-col cols="4">
+          <v-card height="60.8vh">
+            <v-card-title>{{ item.name }}</v-card-title>
+            <v-card-subtitle>{{ translate("price") + ": " + item.price}}</v-card-subtitle>
+            <v-card-subtitle>{{ translate("shipping-price") + ": " + item.shipping_price}}</v-card-subtitle>
+          </v-card>
+        </v-col>
+      </v-row>
+    </div>
+    <v-divider class="my-4"></v-divider>
+    <div>another component soon</div>
+  </template>
 </template>
 <script>
+import ProductService from '../../services/ProductService';
+import StoreShowItemSkeleton from '../Common/Skeletons/StoreShowItemSkeleton.vue';
+import Table from '../Common/Table.vue';
+
+
 export default {
+  extends: Table,
+  components: { StoreShowItemSkeleton },
+  inject: ['removeHtmlTags'],
   data() {
     return {
-        
+      apiService: ProductService,
+      preventSnackbar: true
     }
+  },
+  methods: {
+    
+  },
+  mounted() {
+    // TODO: if the $route.params.id is undefined or null must send us to another component called itemNotFound wich show that the product is already out, or dont exists
+    if (!this.$route.params.id) return this.$router.push("store")
+    this.itemId = this.$route.params.id
+
+    this.getItem()
   },
 }
 </script>
