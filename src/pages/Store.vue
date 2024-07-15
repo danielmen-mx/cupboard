@@ -39,7 +39,6 @@
         </v-col>
         <v-col cols="9" class="store-items-container">
           <Items />
-          <!-- <CommonPagination /> -->
         </v-col>
       </v-row>
     </div>
