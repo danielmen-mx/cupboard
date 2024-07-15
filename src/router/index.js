@@ -51,13 +51,19 @@ const routes = [
         component: () => import('../pages/Store.vue'),
         meta: { requiresAuth: false },
         children: [
-          {
-            path: ':id',
-            component: () => import('../components/Store/Item.vue'),
-            meta: { requiresAdminAuth: true },
-            props: true
-          }
+          // {
+          //   path: ':item/:id',
+          //   component: () => import('../components/Store/Item.vue'),
+          //   meta: { requiresAdminAuth: false },
+          //   props: true
+          // }
         ]
+      },
+      {
+        path: '/store/item/:id',
+        name: 'item',
+        component: () => import('../components/Store/Item.vue'),
+        meta: { requiresAuth: false },
       },
       {
         path: '/review',
