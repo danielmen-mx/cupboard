@@ -12,7 +12,7 @@
         :disabled="loading"
         clear-icon="mdi-close-circle"
         clearable
-        :label="translate('comments.add')"
+        :label="translate('comments-component.add')"
         variant="solo"
         id="comment_input"
         type="text"
