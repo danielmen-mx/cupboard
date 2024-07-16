@@ -23,12 +23,13 @@
         </v-col>
         <v-col cols="4">
           <v-card height="60.8vh" class="text-h6 px-4">
-            <div class="mt-2 mb-4 font-weight-black">{{ item.name }}</div>
+            <div class="mt-2 text-h5 font-weight-black">{{ item.name }}</div>
+            <Ratings class="mb-6" :parent_rating="item.rating" />
             <!-- <div class="text-h6">{{translate("price")}} : <strong class="text-light-green text-h4 font-weight-bold">${{item.price}}</strong></div> -->
             <!-- <div class="text-caption">{{translate("price")}}</div> -->
-            <strong class="text-light-green text-h4 font-weight-bold">${{item.price}}</strong>
-            <div class="text-caption">{{translate("shipping-price")}}</div>
-            <strong class="text-light-green text-h5">${{item.shipping_price}}</strong>
+            <div class="text-light-green font-weight-bold text-h4">${{item.price}}</div>
+            <div class="text-caption text-grey pt-4">{{translate("shipping-price")}}</div>
+            <div class="text-light-green text-h5">${{item.shipping_price}}</div>
           </v-card>
         </v-col>
       </v-row>
@@ -41,11 +42,11 @@
 import ProductService from '../../services/ProductService';
 import StoreShowItemSkeleton from '../Common/Skeletons/StoreShowItemSkeleton.vue';
 import Table from '../Common/Table.vue';
-
+import Ratings from '../Common/Ratings.vue';
 
 export default {
   extends: Table,
-  components: { StoreShowItemSkeleton },
+  components: { StoreShowItemSkeleton, Ratings },
   inject: ['removeHtmlTags'],
   data() {
     return {
