@@ -77,7 +77,7 @@
     "yes": "Yes",
     "no": "No"
   },
-  "comments": {
+  "comments-component": {
     "add": "Add comment"
   },
   "empty-states": {
@@ -192,12 +192,14 @@
     "required-fields": "Required fields"
   },
   "accept": "Accept",
+  "available stock": "Available stock",
   "autor": "Autor",
   "autor_information": "Autor information",
   "basic_information": "Basic information",
   "back": "Back",
   "cancel": "Cancel",
   "come-back": "Come back later",
+  "comments": "Comments",
   "close": "Close",
   "create": "Create",
   "delete": "Delete",
@@ -223,6 +225,7 @@
   "refresh": "Refresh",
   "sorry": "Sorry",
   "settings": "Settings",
+  "stars": "Stars",
   "store": "Store",
   "shipping-price": "Shipping price",
   "submit": "Submit",

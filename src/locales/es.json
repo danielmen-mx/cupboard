@@ -78,7 +78,7 @@
     "yes": "Sí",
     "no": "No"
   },
-  "comments": {
+  "comments-component": {
     "add": "Añadir comentario"
   },
   "empty-states": {
@@ -193,12 +193,14 @@
     "required-fields": "Campos requeridos"
   },
   "accept": "Aceptar",
+  "available stock": "Stock disponible",
   "autor": "Autor",
   "autor_information": "Información de autor",
   "basic_information": "Información básica",
   "back": "Atrás",
   "cancel": "Cancelar",
   "come-back": "Vuelva más tarde",
+  "comments": "Comentarios",
   "close": "Cerrar",
   "create": "Crear",
   "delete": "Eliminar",
@@ -224,6 +226,7 @@
   "refresh": "Actualizar",
   "sorry": "Disculpa",
   "settings": "Configuraciones",
+  "stars": "Estrellas",
   "store": "Tienda",
   "shipping-price": "Precio del envío",
   "submit": "Enviar",
