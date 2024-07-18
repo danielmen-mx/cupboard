@@ -31,9 +31,10 @@
                 <v-avatar
                   color="pink-lighten-1"
                   size="30"
+                  @click="react()"
                 >
                   <v-icon
-                    class="pa-2 cursor-pointer"
+                    class="cursor-pointer"
                     size="small"
                   >mdi-heart</v-icon>
                 </v-avatar>
@@ -54,6 +55,9 @@
               </div>
             </div>
             <v-spacer></v-spacer>
+            <div class="d-flex text-h4 font-weight-black flex-row-reverse py-2 text-light-blue-darken-2">
+              {{ moneyFormat(totalAmount) }}
+            </div>
             <section class="d-flex flex-column my-2">
               <v-btn 
                 class="my-2 mt-auto"
@@ -78,10 +82,12 @@ import ProductService from '../../services/ProductService';
 import StoreShowItemSkeleton from '../Common/Skeletons/StoreShowItemSkeleton.vue';
 import Table from '../Common/Table.vue';
 import Ratings from '../Common/Ratings.vue';
+import { moneyFormat } from '../../utils/helpers'
 
 export default {
   extends: Table,
   components: { StoreShowItemSkeleton, Ratings },
+  mixins: [moneyFormat],
   inject: ['removeHtmlTags', 'strLimit'],
   data() {
     return {
@@ -91,8 +97,17 @@ export default {
     }
   },
   methods: {
+    react () {
+      console.log("send an api to update state of the reaction of the product")
+    }
   },
   computed: {
+    totalAmount () {
+      let subtotal = parseInt(this.item.price, 10) + parseInt(this.item.shipping_price, 10)
+      let qty = parseInt(this.unitsToBePurchased.replace(/[^0-9]/g, ''), 10)
+
+      return subtotal * qty
+    },
     stockAvailable() {
       let stock = parseInt(this.item.stock, 10)
       let count = []
