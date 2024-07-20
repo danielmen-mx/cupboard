@@ -28,16 +28,7 @@
                 <span class="align-self-center text-caption text-decoration-underline">
                   {{ translate("new") }}+
                 </span>
-                <v-avatar
-                  color="pink-lighten-1"
-                  size="30"
-                  @click="react()"
-                >
-                  <v-icon
-                    class="cursor-pointer"
-                    size="small"
-                  >mdi-heart</v-icon>
-                </v-avatar>
+                <Actions :parent_model="item"/>
               </div>
               <div class="mt-2 text-h5 font-weight-black">{{ strLimit(item.name, 31) }}</div>
               <Ratings class="mb-6" :parent_rating="item.rating" />
@@ -82,11 +73,12 @@ import ProductService from '../../services/ProductService';
 import StoreShowItemSkeleton from '../Common/Skeletons/StoreShowItemSkeleton.vue';
 import Table from '../Common/Table.vue';
 import Ratings from '../Common/Ratings.vue';
+import Actions from './Actions.vue';
 import { moneyFormat } from '../../utils/helpers'
 
 export default {
   extends: Table,
-  components: { StoreShowItemSkeleton, Ratings },
+  components: { StoreShowItemSkeleton, Ratings, Actions },
   mixins: [moneyFormat],
   inject: ['removeHtmlTags', 'strLimit'],
   data() {
@@ -97,9 +89,7 @@ export default {
     }
   },
   methods: {
-    react () {
-      console.log("send an api to update state of the reaction of the product")
-    }
+    //
   },
   computed: {
     totalAmount () {
