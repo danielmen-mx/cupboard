@@ -2,10 +2,12 @@
 <script>
 import ReactionService from '@/services/ReactionService'
 import Form from './Form.vue';
+import { findItemById } from '../../utils/helpers';
 import { isAuthenticated } from '../../utils/authentication'
 
 export default {
   extends: Form,
+  mixins: [findItemById],
   data() {
     return {
       reactions: {},
