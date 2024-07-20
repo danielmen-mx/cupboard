@@ -27,9 +27,19 @@ export default {
       rating: {}
     }
   },
+  methods: {
+    updateData(model) {
+      if (this.parent_rating.id !== model.rating.id) return
+      this.rating = model.rating
+    }
+  },
   mounted() {
     if (!this.parent_rating) return
     this.rating = this.parent_rating
-  }
+    this.listenEvent("update-ratings", this.updateData)
+  },
+  beforeDestroy() {
+    this.unlistenEvent("update-ratings", this.updateData)
+  },
 }
 </script>
