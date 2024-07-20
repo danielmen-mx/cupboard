@@ -22,12 +22,11 @@
 <script>
 import HomeActionsSkeleton from '@/components/Common/Skeletons/HomeActionsSkeleton.vue'
 import Reactions from '../Common/Reactions.vue'
-import { initials, findItemById } from '../../utils/helpers'
-import { isAuthenticated } from '../../utils/authentication'
+import { initials } from '../../utils/helpers'
 
 export default {
   extends: Reactions,
-  mixins: [initials, findItemById, Reactions],
+  mixins: [initials, Reactions],
   props: {
     parent_class: {
       type: String,
