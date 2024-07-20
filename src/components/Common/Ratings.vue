@@ -4,9 +4,9 @@
       :model-value="rating.review"
       readonly
       color="amber"
-      size="small"
+      size="x-small"
     ></v-rating>
-    <p class="text-grey">
+    <p class="text-grey text-subtitle-2">
       ({{ rating.review }} {{ translate("stars").toLowerCase() }})
     </p>
   </div>
