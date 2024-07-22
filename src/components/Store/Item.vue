@@ -1,13 +1,11 @@
 <template>
   <StoreShowItemSkeleton v-if="loading" />
   <template v-else>
-    <div v-if="!item">
-      Ups, no item found
-    </div>
+    <ItemNotFound v-if="!item" />
     <div v-else class="d-flex">
       <v-row dense>
         <v-col cols="8">
-          <v-card height="52.2vh">
+          <v-card height="71.8vh">
             <v-img
               :src="item.image"
               lazy-src="/logo/shadai-main.jpeg"
@@ -22,7 +20,7 @@
           </v-card>
         </v-col>
         <v-col cols="4">
-          <v-card height="65.8vh" class="text-h6 px-4 d-flex flex-column justify-space-between" overflow>
+          <v-card height="85.8vh" class="text-h6 px-2 d-flex flex-column justify-space-between" overflow>
             <div>
               <div class="d-flex justify-space-between">
                 <span class="align-self-center text-caption text-decoration-underline">
@@ -69,16 +67,17 @@
   </template>
 </template>
 <script>
-import ProductService from '../../services/ProductService';
+import ItemNotFound from '@/components/Store/ItemNotFound.vue'
 import StoreShowItemSkeleton from '../Common/Skeletons/StoreShowItemSkeleton.vue';
-import Table from '../Common/Table.vue';
-import Ratings from '../Common/Ratings.vue';
-import Actions from './Actions.vue';
+import ProductService from '../../services/ProductService';
 import { moneyFormat } from '../../utils/helpers'
+import Ratings from '../Common/Ratings.vue';
+import Table from '../Common/Table.vue';
+import Actions from './Actions.vue';
 
 export default {
   extends: Table,
-  components: { StoreShowItemSkeleton, Ratings, Actions },
+  components: { StoreShowItemSkeleton, Ratings, Actions, ItemNotFound },
   mixins: [moneyFormat],
   inject: ['removeHtmlTags', 'strLimit'],
   data() {
@@ -117,8 +116,8 @@ export default {
     // TODO: if the $route.params.id is undefined or null must send us to another component called itemNotFound wich show that the product is already out, or dont exists
     if (!this.$route.params.id) return this.$router.push("store")
     this.itemId = this.$route.params.id
-
-    this.getItem()
+    this.loading = false
+    // this.getItem()
   },
 }
 </script>
