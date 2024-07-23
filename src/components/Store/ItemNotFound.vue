@@ -1,10 +1,19 @@
 <template>
-  <div class="d-flex justify-center align-center" style="height: 70vh;">
-    <!-- <template> -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 24">
-        <title>store-remove-outline</title>
-        <path d="M20 6H4V4H20V6M15.69 14H14V15.69C13.37 16.64 13 17.77 13 19C13 19.34 13.04 19.67 13.09 20H4V14H3V12L4 7H20L21 12V13.35C20.37 13.13 19.7 13 19 13C17.77 13 16.64 13.37 15.69 14M12 14H6V18H12V14M18.96 12L18.36 9H5.64L5.04 12H18.96M22.54 16.88L21.12 15.47L19 17.59L16.88 15.47L15.47 16.88L17.59 19L15.47 21.12L16.88 22.54L19 20.41L21.12 22.54L22.54 21.12L20.41 19L22.54 16.88Z" />
-      </svg>
-    <!-- </template> -->
+  <div class="d-flex flex-column justify-center align-center" style="height: 70vh;">
+    <p class="text-h3 font-weight-bold">{{ translate("oops") }},</p>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="150" height="150">
+      <title>store-remove</title>
+      <path d="M4 4H20V6H4V4M15.46 16.88L16.88 15.46L19 17.59L21.12 15.47L22.54 16.88L20.41 19L22.54 21.12L21.12 22.54L19 20.41L16.88 22.54L15.46 21.12L17.59 19L15.47 16.88M4 7H20L21 12V13.34C20.33 13.09 19.62 12.96 18.91 12.96C17.71 12.96 16.54 13.33 15.54 14H14V15.53C13.3 16.53 12.92 17.73 12.92 18.95L13 20H4V14H3V12L4 7M6 14V18H12V14H6Z" />
+    </svg>
+    <p class="text-h5">{{ translate("store-module.throw-wrong") }}, <strong class="cursor-pointer" @click="refresh()">{{ translate("try-again").toLowerCase() }}</strong>.</p>
   </div>
 </template>
+<script>
+export default {
+  methods: {
+    refresh() {
+      this.fireEvent("refresh-store-items")
+    }
+  },
+}
+</script>
