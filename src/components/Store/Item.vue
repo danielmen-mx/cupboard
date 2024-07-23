@@ -117,7 +117,7 @@ export default {
     if (!this.$route.params.id) return this.$router.push("store")
     this.itemId = this.$route.params.id
     this.loading = false
-    // this.getItem()
+    this.getItem()
   },
 }
 </script>
