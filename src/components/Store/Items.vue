@@ -18,6 +18,7 @@
               <v-img
                 :src="item.image"
                 lazy-src="/logo/shadai-main.jpeg"
+                class="fill-height"
                 cover
               ></v-img>
             </v-col>
