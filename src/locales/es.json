@@ -176,6 +176,9 @@
       "numeric": "Solo se admiten cantidades"
     }
   },
+  "store-module": {
+    "throw-wrong": "Algo salió mal"
+  },
   "table": {
     "created_at": "Creado el",
     "options": "Opciones",
@@ -216,9 +219,11 @@
   "next": "Siguiente",
   "new": "Nuevo",
   "options": "Opciones",
+  "oops": "Ups",
   "password": "Contraseña",
   "posts": "Publicaciones",
   "post": "Publicación",
+  "please": "Por favor",
   "preview": "Vista previa",
   "profile": "Perfil",
   "product": "Producto",
@@ -235,6 +240,7 @@
   "store": "Tienda",
   "shipping-price": "Precio del envío",
   "submit": "Enviar",
+  "try-again": "Inténtalo de nuevo",
   "update": "Actualizar",
   "units": "Unidades",
   "user_settings": "Ajustes de Usuario",

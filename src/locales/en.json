@@ -175,6 +175,9 @@
       "numeric": "Only quantities are allowed"
     }
   },
+  "store-module": {
+    "throw-wrong": "Something went wrong"
+  },
   "table": {
     "created_at": "Created at",
     "options": "Options",
@@ -215,9 +218,11 @@
   "next": "Next",
   "new": "New",
   "options": "Options",
+  "oops": "Oops",
   "password": "Password",
   "posts": "Posts",
   "post": "Post",
+  "please": "Please",
   "preview": "Preview",
   "profile": "Profile",
   "product": "Product",
@@ -234,6 +239,7 @@
   "store": "Store",
   "shipping-price": "Shipping price",
   "submit": "Submit",
+  "try-again": "Try again",
   "update": "Update",
   "units": "Units",
   "user_settings": "User Settings",
