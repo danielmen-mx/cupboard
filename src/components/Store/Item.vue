@@ -10,7 +10,7 @@
               :src="item.image"
               lazy-src="/logo/shadai-main.jpeg"
               cover
-              class="w-auto"
+              class="w-auto fill-height bottom-gradient"
             ></v-img>
           </v-card>
           <div class="my-2"></div>
@@ -44,7 +44,7 @@
               </div>
             </div>
             <v-spacer></v-spacer>
-            <div class="d-flex text-h4 font-weight-black flex-row-reverse py-2 text-light-blue-darken-2">
+            <div class="d-flex text-h4 font-weight-black flex-row-reverse py-2 pr-2 text-blue-darken-4">
               {{ moneyFormat(totalAmount) }}
             </div>
             <section class="d-flex flex-column my-2">
@@ -118,6 +118,10 @@ export default {
     this.itemId = this.$route.params.id
     this.loading = false
     this.getItem()
+    this.listenEvent("refresh-store-items", this.getItem)
+  },
+  beforeDestroy() {
+    this.unlistenEvent("refresh-store-items", this.getItem)
   },
 }
 </script>
