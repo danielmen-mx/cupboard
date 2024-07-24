@@ -77,6 +77,11 @@ const routes = [
         component: () => import('../pages/Contact.vue')
       },
       {
+        path: '/cart',
+        name: 'cart',
+        component: () => import('../pages/Cart.vue')
+      },
+      {
         path: '/test',
         name: 'test',
         component: () => import('../components/Common/Test.vue')
