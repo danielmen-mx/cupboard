@@ -16,7 +16,7 @@
       </div>
       <v-divider></v-divider>
       <div class="pt-2">
-        Copyright © 2016-{{ new Date().getFullYear() }} | <strong class="satisfy-font font-size-xsm">Shaddai Shop</strong>
+        Copyright © 2016-{{ new Date().getFullYear() }} | <strong class="shaddai-font font-size-xsm">Shaddai Shop</strong>
       </div>
     </v-footer>
   </div>

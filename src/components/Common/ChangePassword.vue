@@ -8,7 +8,7 @@
     >
       <v-card class="pa-5">
         <v-form>
-          <span class="d-flex justify-center satisfy-font font-size-md pt-2 pb-4">
+          <span class="d-flex justify-center shaddai-font font-size-md pt-2 pb-4">
             {{ translate("user-settings.change-password") }}
           </span>
             <v-row class="d-flex justify-center">

@@ -6,7 +6,7 @@
       width="500"
     >
       <v-card class="pa-4">
-        <div class="satisfy-font font-size-lg text-center">
+        <div class="shaddai-font font-size-lg text-center">
           {{ translate("login.create") }}
         </div>
         <v-form

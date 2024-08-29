@@ -21,7 +21,7 @@
 
       <v-toolbar-title class="custom-main-title">
         <strong
-        class="cursor-pointer satisfy-font font-size-main-title"
+        class="cursor-pointer shaddai-font font-size-main-title"
         @click="$router.push('/')"
         >
           {{ business }}
