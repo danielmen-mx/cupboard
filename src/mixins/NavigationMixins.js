@@ -18,7 +18,7 @@ export default {
         {
           title: 'user-settings.cart',
           icon: 'mdi-cart',
-          path: ""
+          path: "openCartPage"
         },
         {
           title: 'user-settings.shopping',
@@ -66,6 +66,10 @@ export default {
       if (path === "openUserSettings") {
         if (this.$route.fullPath === "/admin/settings") return this.$router.push("/admin/settings")
         return this.fireEvent(path)
+      } else if (path === "openCartPage") {
+        let userId = store.getters['user'].id
+        let route = "/cart/" + userId
+        return this.$router.push(route)
       }
 
       return this.$router.push({ path: path })
