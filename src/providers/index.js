@@ -11,6 +11,15 @@ const providers = {
   },
   removeHtmlTags: (text) => {
     return text.replace(/(<([^>]+)>)/ig, '')
+  },
+  moneyFormat(total) {
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+    });
+
+    return formatter.format(total)
   }
 }
 
