@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap");
 
-.satisfy-font {
+.shaddai-font {
   font-family: 'Satisfy', cursive;
 }
 
@@ -99,4 +99,13 @@
 .main-theme {
   color: rgb(139, 195, 74);
   caret-color: rgb(139, 195, 74);
+}
+
+.scroll-container-component {
+  -ms-overflow-style: none;
+  overflow-y: scroll;
+}
+
+.scroll-container-component::-webkit-scrollbar {
+  display: none;
 }
