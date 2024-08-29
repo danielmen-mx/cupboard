@@ -3,7 +3,7 @@
   <template v-else>
     <div v-if="items.length == 0"></div>
     <div v-else class="ma-2" >
-      <!-- testing github commits -->
+      <!-- nes test: testing github commits -->
       <div class="pa-2 rounded-t-lg elevation-1 shaddai-font font-size-sm">
         {{ translate("cart-products") }}
       </div>
