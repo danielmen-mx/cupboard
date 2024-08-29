@@ -37,7 +37,7 @@
             <v-card-title>Filters</v-card-title>
           </v-card>
         </v-col>
-        <v-col cols="9" class="store-items-container">
+        <v-col cols="9" class="scroll-container-component" style="height: 72.5vh;">
           <Items />
         </v-col>
       </v-row>
@@ -57,14 +57,3 @@ export default {
   }
 }
 </script>
-<style>
-.store-items-container {
-  height: 72.5vh;
-  -ms-overflow-style: none;
-  overflow-y: scroll;
-}
-
-.store-items-container::-webkit-scrollbar {
-  display: none;
-}
-</style>
