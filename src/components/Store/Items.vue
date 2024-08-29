@@ -1,6 +1,6 @@
 <template>
   <StoreItemSkeleton v-if="loading"/>
-   <template v-else>
+  <template v-else>
     <StoreItemEmptyState v-if="items.length == 0"/>
     <div v-else>
       <v-card
@@ -41,7 +41,7 @@
       <v-divider></v-divider>
       <CommonPagination :pagination_values="paginationProps" :per_page="query" />
     </div>
-   </template>
+  </template>
 </template>
 <script>
 import ProductService from '../../services/ProductService';
