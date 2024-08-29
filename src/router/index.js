@@ -66,6 +66,12 @@ const routes = [
         meta: { requiresAuth: false },
       },
       {
+        path: '/cart/:userId',
+        name: 'cart',
+        component: () => import('../pages/Cart.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
         path: '/review',
         name: 'review',
         component: () => import('../pages/Review.vue'),
@@ -75,11 +81,6 @@ const routes = [
         path: '/contact',
         name: 'contact',
         component: () => import('../pages/Contact.vue')
-      },
-      {
-        path: '/cart',
-        name: 'cart',
-        component: () => import('../pages/Cart.vue')
       },
       {
         path: '/test',
