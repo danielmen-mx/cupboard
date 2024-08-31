@@ -31,7 +31,7 @@
                     cover
                   ></v-img>
                 </v-avatar>
-                <span class="text-subtitle">
+                <span class="text-subtitle mt-2 ml-1">
                   {{ strLimit(item.product.name, 50) }}
                 </span>
                 <v-card-subtitle class="mx-auto" max-width="200" rounded="lg">
@@ -39,8 +39,8 @@
                     :loading="loading"
                     prepend-inner-icon="mdi-minus"
                     append-inner-icon="mdi-plus"
-                    @click:prepend-inner="subtractQty"
-                    @click:append-inner="increaseQty"
+                    @click:prepend-inner="subtractQty(item)"
+                    @click:append-inner="increaseQty(item)"
                     density="compact"
                     v-model="item.quantity"
                     variant="solo"
@@ -50,9 +50,19 @@
                     readonly
                   ></v-text-field>
                 </v-card-subtitle>
-                <v-card-title>
-                  {{ pricePerProduct(item.quantity, item.product.price) }}
-                </v-card-title>
+                <div>
+                  <v-card-title>
+                    {{ pricePerProduct(item.quantity, item.product.price) }}
+                  </v-card-title>
+                  <v-card-subtitle class="text-center mr-2">
+                    <v-icon
+                      icon="mdi-truck"
+                      size="small"
+                      color="success"
+                    ></v-icon>
+                    <span class="ml-2">{{ item.product.shipping_price }}</span>
+                  </v-card-subtitle>
+                </div>
               </template>
             </v-card>
           </template>
@@ -86,11 +96,11 @@ export default {
     }
   },
   methods: {
-    subtractQty() {
-      
+    subtractQty(product) {
+      console.log(product)
     },
-    increaseQty() {
-      
+    increaseQty(product) {
+      console.log(product)
     },
     pricePerProduct(qty, price) {
       let totalPrice = qty * price
