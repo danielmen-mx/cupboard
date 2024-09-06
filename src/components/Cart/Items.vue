@@ -34,22 +34,7 @@
                 <span class="text-subtitle mt-2 ml-1">
                   {{ strLimit(item.product.name, 50) }}
                 </span>
-                <v-card-subtitle class="mx-auto" max-width="200" rounded="lg">
-                  <v-text-field
-                    :loading="loading"
-                    prepend-inner-icon="mdi-minus"
-                    append-inner-icon="mdi-plus"
-                    @click:prepend-inner="subtractQty(item)"
-                    @click:append-inner="increaseQty(item)"
-                    density="compact"
-                    v-model="item.quantity"
-                    variant="solo"
-                    class="centered-input"
-                    hide-details
-                    single-line
-                    readonly
-                  ></v-text-field>
-                </v-card-subtitle>
+                <Quantity :item_parent="item" />
                 <div>
                   <v-card-title>
                     {{ pricePerProduct(item.quantity, item.product.price) }}
@@ -60,7 +45,7 @@
                       size="small"
                       color="success"
                     ></v-icon>
-                    <span class="ml-2">{{ item.product.shipping_price }}</span>
+                    <span class="ml-2">{{ item.quantity == 0 ? "0.00" : item.product.shipping_price }}</span>
                   </v-card-subtitle>
                 </div>
               </template>
@@ -79,10 +64,12 @@
 import Table from '../Common/Table.vue';
 import CartService from '../../services/CartService';
 import translate from '../../plugins/locales';
+import Quantity from './Quantity.vue';
 
 export default {
   extends: Table,
   inject: ['strLimit', 'moneyFormat'],
+  components: { Quantity },
   data() {
     return {
       userId: null,
@@ -96,15 +83,12 @@ export default {
     }
   },
   methods: {
-    subtractQty(product) {
-      console.log(product)
-    },
-    increaseQty(product) {
-      console.log(product)
-    },
     pricePerProduct(qty, price) {
       let totalPrice = qty * price
       return this.moneyFormat(totalPrice)
+    },
+    updateCart(item) {
+      this.addItem(item)
     }
   },
   computed: {
@@ -117,11 +101,7 @@ export default {
     this.query.user_id = this.userId
     this.query.status = this.cartStatus
     this.getItems()
+    this.listenEvent("update-cart-total", this.updateCart)
   },
 }
 </script>
-<style scoped>
-.centered-input::v-deep input {
-  text-align: center;
-}
-</style>
