@@ -2,10 +2,6 @@
   <v-card-subtitle class="mx-auto" max-width="200" rounded="lg">
     <v-text-field
       :loading="loading"
-      prepend-inner-icon="mdi-minus"
-      append-inner-icon="mdi-plus"
-      @click:prepend-inner="subtractQty()"
-      @click:append-inner="increaseQty()"
       density="compact"
       v-model="form.quantity"
       variant="solo"
@@ -13,7 +9,14 @@
       hide-details
       single-line
       readonly
-    ></v-text-field>
+    >
+      <template
+        v-slot:prepend-inner
+      ><v-icon @click="subtractQty()">mdi-minus</v-icon></template>
+      <template
+        v-slot:append-inner
+      ><v-icon @click="increaseQty()">mdi-plus</v-icon></template>
+    </v-text-field>
   </v-card-subtitle>
 </template>
 <script>
@@ -44,14 +47,12 @@ export default {
     },
     subtractQty() {
       if (this.form.quantity == 0) return
-      let newQty = this.form.quantity - 1
-      this.form.quantity = newQty
+      this.form.quantity = this.form.quantity - 1
       this.submit()
     },
     increaseQty() {
       if (this.form.quantity == this.maxQty) return
-      let newQty = this.form.quantity + 1
-      this.form.quantity = newQty
+      this.form.quantity = this.form.quantity + 1
       this.submit()
     },
     successCallBack(resp) {
