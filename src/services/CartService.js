@@ -15,7 +15,7 @@ export default {
     return Api.get('/carts/' + id)
   },
   update(id, data, headers = null) {
-    return Api.post('/carts/' + id, data, headers)
+    return Api.put('/carts/' + id, data, headers)
   },
   remove(id) {
     return Api.delete('/carts/' + id)
