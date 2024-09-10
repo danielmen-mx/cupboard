@@ -31,9 +31,16 @@
                     cover
                   ></v-img>
                 </v-avatar>
-                <span class="text-subtitle mt-2 ml-1">
-                  {{ strLimit(item.product.name, 50) }}
-                </span>
+                <div>
+                  <span class="text-subtitle mt-2 ml-1">
+                    {{ strLimit(item.product.name, 50) }}
+                  </span>
+                  <div class="d-flex mx-1" height="100">
+                    <v-btn variant="text" size="small" class="mr-2 ma-2 pa-2 align-self-end" color="blue-darken-4">Remove</v-btn>
+                    <v-btn variant="text" size="small" class="mx-2 ma-2 pa-2 align-self-end" color="blue-darken-4">Save for later</v-btn>
+                    <v-btn variant="text" size="small" class="ml-2 ma-2 pa-2 align-self-end" color="blue-darken-4">Buy now</v-btn>
+                  </div>
+                </div>
                 <Quantity :item_parent="item" />
                 <div>
                   <v-card-title>
