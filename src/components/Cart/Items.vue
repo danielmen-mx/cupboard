@@ -2,7 +2,7 @@
   <div v-if="loading"></div>
   <template v-else>
     <div v-if="items.length == 0"></div>
-    <div v-else class="ma-2" >
+    <div v-else class="ma-1" >
       <!-- nes test: testing github commits -->
       <div class="pa-2 rounded-t-lg elevation-1 shaddai-font font-size-sm">
         {{ translate("cart-products") }}
@@ -44,7 +44,7 @@
                 <Quantity :item_parent="item" />
                 <div>
                   <v-card-title>
-                    {{ pricePerProduct(item.quantity, item.product.price) }}
+                    {{ moneyFormat(item.quantity * item.product.price) }}
                   </v-card-title>
                   <v-card-subtitle class="text-center mr-2">
                     <v-icon
@@ -52,7 +52,7 @@
                       size="small"
                       color="success"
                     ></v-icon>
-                    <span class="ml-2">{{ item.quantity == 0 ? "0.00" : item.product.shipping_price }}</span>
+                    <span class="ml-2">{{ moneyFormat(item.quantity == 0 ? 0 : item.product.shipping_price) }}</span>
                   </v-card-subtitle>
                 </div>
               </template>
@@ -90,10 +90,6 @@ export default {
     }
   },
   methods: {
-    pricePerProduct(qty, price) {
-      let totalPrice = qty * price
-      return this.moneyFormat(totalPrice)
-    },
     updateCart(item) {
       this.addItem(item)
     },
@@ -109,8 +105,7 @@ export default {
   },
   computed: {
     shippingPrice() {
-      console.log(this.items)
-      this.items.map()
+      return this.items.reduce((total, item) => total + (item.quantity >= 1 ? +item.product.shipping_price : 0), 0);
     },
   },
   mounted() {
@@ -118,7 +113,7 @@ export default {
     this.query.user_id = this.userId
     this.query.status = this.cartStatus
     this.getItems()
-    this.listenEvent("update-cart-total", this.updateCart)
+    this.listenEvent("update-cart-total", this.addItem)
   },
 }
 </script>
