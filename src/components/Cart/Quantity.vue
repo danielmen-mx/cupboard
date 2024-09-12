@@ -12,10 +12,10 @@
     >
       <template
         v-slot:prepend-inner
-      ><v-icon @click="subtractQty()">mdi-minus</v-icon></template>
+      ><v-icon @click="adjustQty(-1)">mdi-minus</v-icon></template>
       <template
         v-slot:append-inner
-      ><v-icon @click="increaseQty()">mdi-plus</v-icon></template>
+      ><v-icon @click="adjustQty(1)">mdi-plus</v-icon></template>
     </v-text-field>
   </v-card-subtitle>
 </template>
@@ -42,15 +42,13 @@ export default {
     }
   },
   methods: {
-    subtractQty() {
-      if (this.form.quantity == 0) return
-      this.form.quantity = this.form.quantity - 1
-      this.submit()
-    },
-    increaseQty() {
-      if (this.form.quantity == this.maxQty) return
-      this.form.quantity = this.form.quantity + 1
-      this.submit()
+    adjustQty(amount) {
+      const newQty = this.form.quantity + amount;
+
+      if (newQty >= 0 && newQty <= this.maxQty) {
+        this.form.quantity = newQty;
+        this.submit();
+      }
     },
     successCallBack(resp) {
       this.form = resp
