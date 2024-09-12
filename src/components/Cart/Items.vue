@@ -90,9 +90,6 @@ export default {
     }
   },
   methods: {
-    updateCart(item) {
-      this.addItem(item)
-    },
     remove() {
       console.log("remove")
     },
