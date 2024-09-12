@@ -36,9 +36,9 @@
                     {{ strLimit(item.product.name, 50) }}
                   </span>
                   <div class="d-flex mx-1" height="100">
-                    <v-btn variant="text" size="small" class="mr-2 ma-2 pa-2 align-self-end" color="blue-darken-4">Remove</v-btn>
-                    <v-btn variant="text" size="small" class="mx-2 ma-2 pa-2 align-self-end" color="blue-darken-4">Save for later</v-btn>
-                    <v-btn variant="text" size="small" class="ml-2 ma-2 pa-2 align-self-end" color="blue-darken-4">Buy now</v-btn>
+                    <v-btn variant="text" size="small" class="mr-2 ma-2 pa-2" color="blue-darken-4" @click="remove()">Remove</v-btn>
+                    <v-btn variant="text" size="small" class="mx-2 ma-2 pa-2" color="blue-darken-4" @click="deferret()">Save for later</v-btn>
+                    <v-btn variant="text" size="small" class="ml-2 ma-2 pa-2" color="blue-darken-4" @click="buy()">Buy now</v-btn>
                   </div>
                 </div>
                 <Quantity :item_parent="item" />
@@ -86,7 +86,7 @@ export default {
       query: {
         per_page: 8,
         page: 1
-      }
+      },
     }
   },
   methods: {
@@ -96,11 +96,21 @@ export default {
     },
     updateCart(item) {
       this.addItem(item)
+    },
+    remove() {
+      console.log("remove")
+    },
+    deferret() {
+      console.log("deferret")
+    },
+    buy() {
+      console.log("buy")
     }
   },
   computed: {
     shippingPrice() {
-      return 0
+      console.log(this.items)
+      this.items.map()
     },
   },
   mounted() {
