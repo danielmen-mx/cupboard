@@ -22,23 +22,13 @@ export default {
   },
   computed: {
     queryParams() {
-      var params = {};
-
-      for (let field in this.query) {
-
-        if (Array.isArray(this.query[field])) {
-          if (this.query[field].length > 0) {
-            params[field] = this.query[field].join(",");
-          } else {
-            params[field] = null;
-          }
-        } else {
-          params[field] = this.query[field];
-        }
-      }
-
-      return params;
-    },
+      return Object.fromEntries(
+        Object.entries(this.query).map(([field, value]) => [
+          field,
+          Array.isArray(value) ? (value.length > 0 ? value.join(",") : null) : value
+        ])
+      );
+    }
   },
   methods: {
     successCallBack() {},
@@ -66,6 +56,7 @@ export default {
 
         this.loading = false
         this.successCallBack()
+        // console.log(this.items) // test purposes
       } catch (error) {
         console.log(error)
         this.loading = false
@@ -92,21 +83,11 @@ export default {
       }
     },
     addItem(item) {
-      let match = this.items.find(i => i.id === item.id)
+      const index = this.items.findIndex(i => i.id === item.id);
 
-      if (match) {
-        let newItems = this.items.map(function (val) {
-          if (val.id === item.id) {
-            return val = item
-          }
-  
-          return val
-        })
-
-        return this.items = newItems
-      }
-
-      return this.items.push(item)
+      index !== -1
+        ? this.items[index] = item
+        : this.items.push(item);
     },
     async remove(id) {
       if (this.breakRequest()) return
@@ -125,25 +106,17 @@ export default {
       }
     },
     removeItem(id) {
-      let newItems = null
-      this.items.forEach((item, i) => {
-        if (item.id === id) newItems = this.items.toSpliced(i, 1)
-      });
-
-      this.items = newItems
+      this.items = this.items.filter(item => item.id !== id)
     },
     itemFound(id) {
-      let match = this.items.find(i => i.id === id)
-      return match ? true : false
+      return !!this.items.find(i => i.id === id);
     },
     breakRequest() {
       if (!this.apiService) {
         console.error("No api service declared");
-        return true
       }
-
-      return false
-    },
+      return !this.apiService;
+    }
   },
   mounted() {
     
