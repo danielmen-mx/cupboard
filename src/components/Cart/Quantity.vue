@@ -42,9 +42,6 @@ export default {
     }
   },
   methods: {
-    updateQty(operation) {
-      
-    },
     subtractQty() {
       if (this.form.quantity == 0) return
       this.form.quantity = this.form.quantity - 1
@@ -65,7 +62,6 @@ export default {
     this.itemId = this.form.id
     this.maxQty = this.form.product.stock
     if (!this.form) return
-    console.log(this.form)
   },
 }
 </script>
