@@ -112,5 +112,8 @@ export default {
     this.getItems()
     this.listenEvent("update-cart-total", this.addItem)
   },
+  beforeDestroy() {
+    this.unlistenEvent("update-cart-total", this.addItem)
+  },
 }
 </script>
