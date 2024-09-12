@@ -153,8 +153,7 @@ export default {
   methods: {
     editItem(item) {
       if (!item) return
-      let path = '/admin/posts/edit/' + item.id;
-      this.$router.push({ path: path })
+      this.$router.push({ path: `/admin/posts/edit/${item.id}` });
       setTimeout(() => { this.fireEvent('openDrawer') }, 100);
     },
     create() {
@@ -162,18 +161,16 @@ export default {
       setTimeout(() => { this.fireEvent('openDrawer') }, 100);
     },
     mapTags(tags) {
-      let count = this.countArray(tags)
+      const count = this.countArray(tags);
 
-      if (count == 1) return tags[0]
-      if (count > 1) return ` +${count} tags`
-
-      return false
+      return count === 1
+        ? tags[0]
+        : count > 1
+        ? ` +${count} tags`
+        : false;
     },
-    getImageName(imageName, postName) {
-      if (!imageName) return
-
-      let split = imageName.split('/')
-      return split[split.length - 1]
+    getImageName(imageName) {
+      return imageName ? imageName.split('/').pop() : undefined;
     },
     updatePagination(properties) {
       if (this.query.per_page === properties.per_page && this.query.page === properties.page) return
