@@ -1,6 +1,6 @@
 <template>  
-  <v-btn variant="text" size="small" class="mr-2 ma-2 pa-2" color="blue-darken-4" @click="this.form.status = 'cancelled'; submit()">Remove</v-btn>
-  <v-btn variant="text" size="small" class="mx-2 ma-2 pa-2" color="blue-darken-4" @click="this.form.status = 'deferred'; submit()">Save for later</v-btn>
+  <v-btn variant="text" size="small" class="mr-2 ma-2 pa-2" color="blue-darken-4" @click="updateState('cancelled')">Remove</v-btn>
+  <v-btn variant="text" size="small" class="mx-2 ma-2 pa-2" color="blue-darken-4" @click="updateState('deferred')">Save for later</v-btn>
   <v-btn variant="text" size="small" class="ml-2 ma-2 pa-2" color="blue-darken-4" @click="">Buy now</v-btn>
 </template>
 <script>
@@ -24,6 +24,10 @@ export default {
     }
   },
   methods: {
+    updateState(newState) {
+      this.form.status = newState
+      this.submit()
+    },
     successCallBack(resp) {
       this.fireEvent("update-cart-table", resp.id)
     }
