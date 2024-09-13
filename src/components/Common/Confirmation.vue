@@ -60,8 +60,8 @@ export default {
       this.remove(this.itemId)
       this.visible = false
     },
-    successCallBack() {
-      this.fireEvent(this.event)
+    successCallBack(resp) {
+      this.fireEvent(this.event, resp)
     }
   },
   mounted() {
