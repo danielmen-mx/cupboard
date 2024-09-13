@@ -180,11 +180,11 @@ export default {
   },
   mounted() {
     this.getItems()
-    this.listenEvent(this.event, this.getItems)
+    this.listenEvent(this.event, this.removeItem)
     this.listenEvent('updatePaginationTable', this.updatePagination)
   },
   beforeDestroy() {
-    this.unlistenEvent(this.event, this.getItems)
+    this.unlistenEvent(this.event, this.removeItem)
     this.unlistenEvent('updatePaginationTable', this.updatePagination)
   },
 }
