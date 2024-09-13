@@ -110,11 +110,11 @@ export default {
 
     this.getItems()
     this.listenEvent('onSubmit', this.addItem)
-    this.listenEvent(this.event, this.getItems)
+    this.listenEvent(this.event, this.removeItem)
   },
   beforeDestroy() {
     this.unlistenEvent('onSubmit', this.addItem)
-    this.unlistenEvent(this.event, this.getItems)
+    this.unlistenEvent(this.event, this.removeItem)
   },
 }
 </script>
