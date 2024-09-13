@@ -35,7 +35,6 @@ export default {
       status: this.parent_item_form.status,
       quantity: this.parent_item_form.quantity
     }
-    // this.form.product_id = 
   },
 }
 </script>
