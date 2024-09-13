@@ -1,7 +1,7 @@
 <template>
-  <div v-if="loading"></div>
+  <div v-if="loading">loading state</div>
   <template v-else>
-    <div v-if="items.length == 0"></div>
+    <div v-if="items.length == 0">empty state</div>
     <div v-else class="ma-1" >
       <!-- nes test: testing github commits -->
       <div class="pa-2 rounded-t-lg elevation-1 shaddai-font font-size-sm">
@@ -36,9 +36,7 @@
                     {{ strLimit(item.product.name, 50) }}
                   </span>
                   <div class="d-flex mx-1" height="100">
-                    <v-btn variant="text" size="small" class="mr-2 ma-2 pa-2" color="blue-darken-4" @click="remove()">Remove</v-btn>
-                    <v-btn variant="text" size="small" class="mx-2 ma-2 pa-2" color="blue-darken-4" @click="deferret()">Save for later</v-btn>
-                    <v-btn variant="text" size="small" class="ml-2 ma-2 pa-2" color="blue-darken-4" @click="buy()">Buy now</v-btn>
+                    <Actions :parent_item_form="item" />
                   </div>
                 </div>
                 <Quantity :item_parent="item" />
@@ -72,17 +70,19 @@ import Table from '../Common/Table.vue';
 import CartService from '../../services/CartService';
 import translate from '../../plugins/locales';
 import Quantity from './Quantity.vue';
+import Actions from './Actions.vue';
 
 export default {
   extends: Table,
   inject: ['strLimit', 'moneyFormat'],
-  components: { Quantity },
+  components: { Quantity, Actions },
   data() {
     return {
       userId: null,
       preventSnackbar: true,
       apiService: CartService,
       cartStatus: "standby",
+      event: "update-cart-table",
       query: {
         per_page: 8,
         page: 1
@@ -90,15 +90,7 @@ export default {
     }
   },
   methods: {
-    remove() {
-      console.log("remove")
-    },
-    deferret() {
-      console.log("deferret")
-    },
-    buy() {
-      console.log("buy")
-    }
+    //
   },
   computed: {
     shippingPrice() {
@@ -111,9 +103,11 @@ export default {
     this.query.status = this.cartStatus
     this.getItems()
     this.listenEvent("update-cart-total", this.addItem)
+    this.listenEvent(this.event, this.removeItem)
   },
   beforeDestroy() {
     this.unlistenEvent("update-cart-total", this.addItem)
+    this.unlistenEvent(this.event, this.removeItem)
   },
 }
 </script>
