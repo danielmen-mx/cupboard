@@ -106,7 +106,12 @@ export default {
       }
     },
     removeItem(id) {
-      this.items = this.items.filter(item => item.id !== id)
+      this.loading = true
+
+      setTimeout(() => {
+        this.items = this.items.filter(item => item.id !== id)
+        this.loading = false
+      }, 500);
     },
     itemFound(id) {
       return !!this.items.find(i => i.id === id);
