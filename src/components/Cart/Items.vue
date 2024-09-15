@@ -6,6 +6,7 @@
       <!-- nes test: testing github commits -->
       <div class="pa-2 rounded-t-lg elevation-1 shaddai-font font-size-sm">
         {{ translate("cart-products") }}
+        
       </div>
       <template
         v-for="item in items"
