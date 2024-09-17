@@ -71,6 +71,11 @@
     "november": "November",
     "december": "December"
   },
+  "cart-module": {
+    "cart-empty": "Your cart is empty",
+    "explore-cart": "Explore our products and add something to your cart",
+    "redirect-store": "Go to the store"
+  },
   "confirmations": {
     "you-sure": "Are you sure?",
     "remove": "Are you sure to remove this item?",

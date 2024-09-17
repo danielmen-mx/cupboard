@@ -72,6 +72,11 @@
     "november": "Noviembre",
     "december": "Diciembre"
   },
+  "cart-module": {
+    "cart-empty": "Tu carrito está vacío",
+    "explore-cart": "Explora nuestros productos y añade algo al carrito",
+    "redirect-store": "Ir a la tienda"
+  },
   "confirmations": {
     "you-sure": "¿Estás seguro?",
     "remove": "¿Estás seguro de eliminar este elemento?",
