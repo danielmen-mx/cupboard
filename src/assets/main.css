@@ -109,3 +109,44 @@
 .scroll-container-component::-webkit-scrollbar {
   display: none;
 }
+
+/** Use those classes when you need to center a component, is it important that you use two component or tags */
+.centered-container {
+  display: flex;
+  justify-content: center;  /* horizontal center */
+  align-items: center;      /* vertical center */
+  height: 100%;            /* Use the max of the high screen */
+}
+
+.centered-component {
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/** Use the next class .shiny-item to apply shinny effect to item */
+.shiny-text {
+  font-weight: bold;
+  color: black;
+  position: relative;
+  overflow: hidden;
+}
+
+.shiny-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  animation: shine 4s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -200%;
+  }
+  100% {
+    left: 200%;
+  }
+}
