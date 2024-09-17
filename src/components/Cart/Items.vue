@@ -1,7 +1,18 @@
 <template>
   <div v-if="loading">loading state</div>
   <template v-else>
-    <div v-if="items.length == 0">empty state</div>
+    <!-- Empty state -->
+    <v-row v-if="!items.length" class="centered-container">
+      <v-col class="text-center centered-component">
+        <v-icon size="x-large" color="grey-darken-1" icon="mdi-cart-outline"></v-icon>
+        <h2>{{ translate("cart-module.cart-empty") }}</h2>
+        <p class="my-3 pt-2">{{ translate("cart-module.explore-cart") }}.</p>
+        <v-btn color="success" class="shiny-text" @click="this.pushRoute('/store')">
+          {{ translate("cart-module.redirect-store") }}
+        </v-btn>
+      </v-col>
+    </v-row>
+    <!-- List Items -->
     <div v-else class="ma-1" >
       <!-- nes test: testing github commits -->
       <div class="pa-2 rounded-t-lg elevation-1 shaddai-font font-size-sm">
@@ -91,7 +102,9 @@ export default {
     }
   },
   methods: {
-    //
+    getStore() {
+
+    }
   },
   computed: {
     shippingPrice() {
@@ -102,7 +115,7 @@ export default {
     this.userId = this.$route.params.userId
     this.query.user_id = this.userId
     this.query.status = this.cartStatus
-    this.getItems()
+    // this.getItems()
     this.listenEvent("update-cart-total", this.addItem)
     this.listenEvent(this.event, this.removeItem)
   },
