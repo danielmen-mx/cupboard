@@ -1,5 +1,5 @@
 <template>
-  <div v-if="loading">loading state</div>
+  <CartItemsSkeleton v-if="loading" />
   <template v-else>
     <!-- Empty state -->
     <v-row v-if="!items.length" class="centered-container">
@@ -83,11 +83,12 @@ import CartService from '../../services/CartService';
 import translate from '../../plugins/locales';
 import Quantity from './Quantity.vue';
 import Actions from './Actions.vue';
+import CartItemsSkeleton from '../Common/Skeletons/CartItemsSkeleton.vue';
 
 export default {
   extends: Table,
   inject: ['strLimit', 'moneyFormat'],
-  components: { Quantity, Actions },
+  components: { Quantity, Actions, CartItemsSkeleton },
   data() {
     return {
       userId: null,
@@ -115,7 +116,8 @@ export default {
     this.userId = this.$route.params.userId
     this.query.user_id = this.userId
     this.query.status = this.cartStatus
-    // this.getItems()
+    this.getItems()
+    this.loading = true
     this.listenEvent("update-cart-total", this.addItem)
     this.listenEvent(this.event, this.removeItem)
   },
