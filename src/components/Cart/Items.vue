@@ -70,13 +70,11 @@
           </template>
         </v-hover>
       </template>
-      <v-card class="">
-        <CommonPagination :pagination_values="paginationProps" :per_page="query"/>
-      </v-card>
       <div class="pa-2 px-4 pr-6 rounded-b-lg elevation-1 d-flex justify-space-between">
         <span class="font-weight-medium">{{ translate("shipping-price") }}</span>
         <span class="text-light-green font-weight-bold">{{ moneyFormat(shippingPrice) }}</span>
       </div>
+      <CommonPagination :pagination_values="paginationProps" :per_page="query"/>
     </div>
   </template>
 </template>
