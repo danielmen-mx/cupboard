@@ -15,14 +15,10 @@ export default {
   }),
   computed: {
     backDisabled() {
-      if (this.properties.current_page == 1) return true
-
-      return false
+      return this.properties.current_page === 1;
     },
     forwardDisabled() {
-      if (this.properties.current_page === this.properties.last_page) return true
-
-      return false
+      return this.properties.current_page === this.properties.last_page;
     },
     itemsPerPageDisabled() {
       // TODO: avoid that the elements per page can be modified if the number of elements is greater than the rest of the elements to be displayed
@@ -54,12 +50,14 @@ export default {
       })
     },
     movePosition(operation) {
-      this.pageRequested = operation === '++' ? this.properties.current_page + 1 : this.properties.current_page - 1
+      this.pageRequested = operation === '++'
+        ? this.properties.current_page + 1
+        : this.properties.current_page - 1
     },
     setDinamicEvent () {
-      let currentPath = this.$route.name
-      if (!currentPath) return
-      this.event = 'update-' + currentPath + '-pagination-component'
+      this.event = this.$route.name 
+        ? `update-${this.$route.name}-pagination-component`
+        : '';
     }
   },
   mounted() {
