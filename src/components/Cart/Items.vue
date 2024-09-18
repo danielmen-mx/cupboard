@@ -70,6 +70,9 @@
           </template>
         </v-hover>
       </template>
+      <v-card class="">
+        <CommonPagination :pagination_values="paginationProps" :per_page="query"/>
+      </v-card>
       <div class="pa-2 px-4 pr-6 rounded-b-lg elevation-1 d-flex justify-space-between">
         <span class="font-weight-medium">{{ translate("shipping-price") }}</span>
         <span class="text-light-green font-weight-bold">{{ moneyFormat(shippingPrice) }}</span>
@@ -84,11 +87,12 @@ import translate from '../../plugins/locales';
 import Quantity from './Quantity.vue';
 import Actions from './Actions.vue';
 import CartItemsSkeleton from '../Common/Skeletons/CartItemsSkeleton.vue';
+import CommonPagination from '../Common/Paginations/Common.vue';
 
 export default {
   extends: Table,
   inject: ['strLimit', 'moneyFormat'],
-  components: { Quantity, Actions, CartItemsSkeleton },
+  components: { Quantity, Actions, CartItemsSkeleton, CommonPagination },
   data() {
     return {
       userId: null,
@@ -105,6 +109,13 @@ export default {
   methods: {
     getStore() {
 
+    },
+    updatePagination(properties) {
+      if (this.query.per_page === properties.per_page && this.query.page === properties.page) return
+      this.query = properties
+      this.query.user_id = this.userId
+      this.query.status = this.cartStatus
+      this.getItems()
     }
   },
   computed: {
@@ -117,12 +128,13 @@ export default {
     this.query.user_id = this.userId
     this.query.status = this.cartStatus
     this.getItems()
-    this.loading = true
     this.listenEvent("update-cart-total", this.addItem)
+    this.listenEvent('update-cart-pagination-component', this.updatePagination)
     this.listenEvent(this.event, this.removeItem)
   },
   beforeDestroy() {
     this.unlistenEvent("update-cart-total", this.addItem)
+    this.unlistenEvent('update-cart-pagination-component', this.updatePagination)
     this.unlistenEvent(this.event, this.removeItem)
   },
 }
