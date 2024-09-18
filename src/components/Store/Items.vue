@@ -73,7 +73,6 @@ export default {
   },
   methods: {
     redirect(id) {
-      let path 
       this.$router.push({ path: '/store/item/' + id })
     },
     updatePagination(properties) {
