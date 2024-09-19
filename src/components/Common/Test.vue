@@ -1,29 +1,28 @@
 <template>
-  <Item />
+  <v-btn @click="fireCarSidebarEvent()" color="primary">
+    Ver carrito
+  </v-btn>
 </template>
+
 <script>
-import Button from '../layouts/Button.vue'
-import Item from '../../components/Store/Item.vue'
-
 export default {
-  components: {
-    Button,
-    Item
-  },
-  data: () => ({
-    step: 1,
-    drawer: false,
-  }),
-  computed: {
-
+  data() {
+    return {
+      cartSidebar: false,
+      
+    };
   },
   methods: {
-
+    fireCarSidebarEvent() {
+      console.log("fire event")
+      this.fireEvent("open-cart-sidebar-test")
+    }
   },
-  mounted() {
-  },
-  beforeDestroy() {
-
-  },
-}
+};
 </script>
+
+<style scoped>
+.v-navigation-drawer {
+  background-color: white;
+}
+</style>
