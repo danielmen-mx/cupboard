@@ -4,6 +4,7 @@
       <Navigation />
       <NavigationDrawer />
       <v-main class="mt-16 pt-6">
+        <CartSidebar />
         <Dialog />
         <Settings />
         <Confirmation />
@@ -34,6 +35,7 @@ import Confirmation from '../components/Common/Confirmation.vue'
 import ChangePassword from '../components/Common/ChangePassword.vue'
 import Settings from '../components/layouts/Settings.vue'
 import responsiveLayout from '../components/Common/Responsives/layout.vue'
+import CartSidebar from '../components/layouts/CartSidebar.vue'
 
 export default {
   // extends: responsiveLayout,
@@ -41,6 +43,7 @@ export default {
     Navigation,
     NavigationDrawer,
     CustomDrawer,
+    CartSidebar,
     Background,
     Snackbar,
     Dialog,
