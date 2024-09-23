@@ -49,8 +49,8 @@
                 <div class="d-flex align-center justify-center ma-2">
                   <span class="text-subtitle-1">Price example</span>
                   <v-spacer></v-spacer>
-                  <div class="autocomplete-wrapper">
-                    <v-combobox density="compact" :items="[1,2,3,4,5]" class="no-border"></v-combobox>
+                  <div>
+                    <!-- <Quantity :item_parent="item"/> -->
                   </div>
                   <v-btn icon="mdi-trash-can" :ripple="false" flat></v-btn>
                 </div>
@@ -75,25 +75,27 @@
 </template>
 
 <script>
+import store from '../../store';
+import Quantity from '../Cart/Quantity.vue';
+import Table from '../Common/Table.vue';
+import CartService from '../../services/CartService';
+
 export default {
+  extends: Table,
+  components: {Quantity},
   inject: ['strLimit', 'moneyFormat'],
   data() {
     return {
       cartSidebar: false,
-      items: [
-        {
-          title: "Producto 1",
-          src: "https://via.placeholder.com/150",
-          quantity: 2,
-          price: 350
-        },
-        {
-          title: "Producto 2",
-          src: "https://via.placeholder.com/150",
-          quantity: 1,
-          price: 500
-        },
-      ],
+      userId: null,
+      preventSnackbar: true,
+      apiService: CartService,
+      cartStatus: "standby",
+      event: "update-sidebar-cart-table",
+      query: {
+        per_page: 10,
+        page: 1
+      },
     };
   },
   computed: {
@@ -102,15 +104,22 @@ export default {
     }
   },
   methods: {
-    removeItem(index) {
-      this.items.splice(index, 1);
-    },
     openCartSidebar() {
       this.cartSidebar = true
     }
   },
   mounted() {
-    this.listenEvent("open-cart-sidebar-test", this.openCartSidebar)
+    let user = store.getters['user']
+    if (!user) return
+
+    this.userId = user.id
+    this.query.user_id = this.userId
+    this.query.status = this.cartStatus
+    this.getItems()
+    this.listenEvent("open-sidebar-cart-test", this.openCartSidebar)
+  },
+  beforeDestroy() {
+    this.unlistenEvent("open-sidebar-cart-test", this.openCartSidebar)
   },
 };
 </script>
