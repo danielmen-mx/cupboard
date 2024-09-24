@@ -5,7 +5,7 @@
       density="compact"
       v-model="form.quantity"
       variant="solo"
-      class="centered-input"
+      class="centered-input no-outline"
       hide-details
       single-line
       readonly
@@ -66,5 +66,23 @@ export default {
 <style scoped>
 .centered-input::v-deep input {
   text-align: center;
+}
+
+.no-outline .v-input__control {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.no-outline input {
+  border: none !important;
+  outline: none !important;
+}
+
+.no-outline .v-fieldset {
+  border: none !important;
+}
+
+.no-outline .v-text-field__details {
+  display: none;
 }
 </style>
