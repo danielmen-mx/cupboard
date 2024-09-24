@@ -7,7 +7,7 @@
       width="400"
       app
     >
-    
+
       <v-card class="d-flex align-center" flat>
         <v-card-title>Carrito de compras</v-card-title>
         <v-spacer></v-spacer>
@@ -22,55 +22,65 @@
       </v-card>
 
       <v-divider></v-divider>
-
-      <v-card
-        class="mx-auto"
-        max-width="500"
-        flat
-      >
-        <v-container fluid>
-          <v-row dense>
-            <v-col
-              v-for="item in items"
-              :key="item.title"
-              cols="12"
-            >
-              <v-card>
-                <v-img
-                  src=""
-                  lazy-src="/logo/shadai-main.jpeg"
-                  class="align-end"
-                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                  height="100px"
-                  cover
+      <div v-if="!items"></div>
+      <div v-else>
+        <div v-if="!items.length"></div>
+        <div v-else>
+          <v-card
+            class="mx-auto"
+            max-width="500"
+            flat
+          >
+            <v-container fluid>
+              <v-row dense>
+                <v-col
+                  v-for="item in items"
+                  :key="item.id"
+                  cols="12"
                 >
-                  <v-card-title class="text-white" :text="item.title"></v-card-title>
-                </v-img>
+                  <v-card>
+                    <v-img
+                      :src="item.product.image"
+                      lazy-src="/logo/shadai-main.jpeg"
+                      class="align-end"
+                      gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                      height="100px"
+                      cover
+                    ><v-card-title class="text-white" :text="strLimit(item.product.name, 50)"></v-card-title>
+                    </v-img>
+                  
+                    <div class="d-flex align-center justify-center ma-2">
+                      <span class="text-subtitle-1">{{ moneyFormat(item.quantity * item.product.price) }}</span>
+                      <v-spacer></v-spacer>
+                      <div class="pa-2">
+                        <Quantity :item_parent="item"/>
+                      </div>
+                      <v-btn icon="mdi-trash-can" :ripple="false" flat></v-btn>
+                    </div>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card>
 
-                <div class="d-flex align-center justify-center ma-2">
-                  <span class="text-subtitle-1">Price example</span>
-                  <v-spacer></v-spacer>
-                  <div>
-                    <!-- <Quantity :item_parent="item"/> -->
-                  </div>
-                  <v-btn icon="mdi-trash-can" :ripple="false" flat></v-btn>
-                </div>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-card>
+          <v-card flat>
+            <v-card-text>
+              <div class="text-h6">MXN {{ moneyFormat(total) }}</div>
+            </v-card-text>
+            <!-- <v-icon
+              icon="mdi-truck"
+              size="small"
+              color="success"
+            ></v-icon>
+            <span class="ml-2">{{ moneyFormat(item.quantity == 0 ? 0 : item.product.shipping_price) }}</span> -->
 
-      <v-card flat>
-        <v-card-text>
-          <div class="text-h6">MXN {{ moneyFormat(total) }}</div>
-        </v-card-text>
-
-        <div class="d-flex flex-column align-center justify-center ma-2">
-          <v-btn color="success" class="mb-2" block>Proceder al pago</v-btn>
-          <v-btn block>Ir al carrito</v-btn>
+            <div class="d-flex flex-column align-center justify-center ma-2">
+              <v-btn color="success" class="mb-2" block>Proceder al pago</v-btn>
+              <v-btn block>Ir al carrito</v-btn>
+            </div>
+          </v-card>
         </div>
-      </v-card>
+      </div>
     </v-navigation-drawer>
   </div>
 </template>
@@ -101,7 +111,7 @@ export default {
   },
   computed: {
     total() {
-      return this.items.reduce((acc, item) => acc + item.quantity * item.price, 0);
+      return this.items.reduce((acc, item) => acc + item.quantity * item.product.price, 0);
     }
   },
   methods: {
@@ -112,15 +122,16 @@ export default {
   mounted() {
     let user = store.getters['user']
     if (!user) return
-
     this.userId = user.id
     this.query.user_id = this.userId
     this.query.status = this.cartStatus
     this.getItems()
     this.listenEvent("open-sidebar-cart-test", this.openCartSidebar)
+    this.listenEvent("update-cart-total", this.addItem)
   },
   beforeDestroy() {
     this.unlistenEvent("open-sidebar-cart-test", this.openCartSidebar)
+    this.unlistenEvent("update-cart-total", this.addItem)
   },
 };
 </script>
