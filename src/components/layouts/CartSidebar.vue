@@ -7,6 +7,7 @@
       width="400"
       app
     >
+    
       <v-card class="d-flex align-center" flat>
         <v-card-title>Carrito de compras</v-card-title>
         <v-spacer></v-spacer>
