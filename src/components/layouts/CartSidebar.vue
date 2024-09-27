@@ -34,11 +34,14 @@
             <v-container fluid>
               <v-row dense>
                 <v-col
-                  v-for="item in items"
-                  :key="item.id"
                   cols="12"
+                  class="scroll-container-component" style="max-height: 66.5vh;"
                 >
-                  <v-card>
+                  <v-card
+                    v-for="item in items"
+                    :key="item.id"
+                    class="mb-2"
+                  >
                     <v-img
                       :src="item.product.image"
                       lazy-src="/logo/shadai-main.jpeg"
@@ -55,7 +58,7 @@
                       <div class="pa-2">
                         <Quantity :item_parent="item"/>
                       </div>
-                      <v-btn icon="mdi-trash-can" :ripple="false" flat></v-btn>
+                      <RemoveCartItem :parent_item_form="item" />
                     </div>
                   </v-card>
                 </v-col>
@@ -65,18 +68,18 @@
 
           <v-card flat>
             <v-card-text>
-              <div class="text-h6">MXN {{ moneyFormat(total) }}</div>
+              <div class="text-h5"><strong class="text-green">MXN</strong> {{ moneyFormat(total) }}</div>
+              <v-icon
+                icon="mdi-truck"
+                size="large"
+                color="success"
+              ></v-icon>
+              <span class="ml-2 text-h6">{{ moneyFormat(shippingTotal) }}</span>
             </v-card-text>
-            <!-- <v-icon
-              icon="mdi-truck"
-              size="small"
-              color="success"
-            ></v-icon>
-            <span class="ml-2">{{ moneyFormat(item.quantity == 0 ? 0 : item.product.shipping_price) }}</span> -->
 
             <div class="d-flex flex-column align-center justify-center ma-2">
-              <v-btn color="success" class="mb-2" block>Proceder al pago</v-btn>
-              <v-btn block>Ir al carrito</v-btn>
+              <v-btn color="success" class="mb-2" block @click="checkout()">{{ translate("checkout") }}</v-btn>
+              <v-btn block @click="goToCart()">{{ translate("go-cart") }}</v-btn>
             </div>
           </v-card>
         </div>
@@ -90,10 +93,13 @@ import store from '../../store';
 import Quantity from '../Cart/Quantity.vue';
 import Table from '../Common/Table.vue';
 import CartService from '../../services/CartService';
+import Actions from '../Cart/Common/Actions.vue';
+import RemoveCartItem from '../Cart/RemoveCartSidebarItem.vue';
 
 export default {
   extends: Table,
-  components: {Quantity},
+  // mixins: [Actions],
+  components: {Quantity, RemoveCartItem},
   inject: ['strLimit', 'moneyFormat'],
   data() {
     return {
@@ -104,19 +110,30 @@ export default {
       cartStatus: "standby",
       event: "update-sidebar-cart-table",
       query: {
-        per_page: 10,
+        per_page: 100,
         page: 1
-      },
+      }
     };
   },
   computed: {
     total() {
       return this.items.reduce((acc, item) => acc + item.quantity * item.product.price, 0);
+    },
+    shippingTotal() {
+      return this.items.reduce((acc, item) => acc + item.quantity * item.product.shipping_price, 0);
     }
   },
   methods: {
     openCartSidebar() {
       this.cartSidebar = true
+    },
+    goToCart() {
+      let userId = store.getters['user'].id
+      let route = "/cart/" + userId
+      return this.$router.push(route)
+    },
+    checkout() {
+      console.log("Cooming soon...")
     }
   },
   mounted() {
@@ -128,10 +145,12 @@ export default {
     this.getItems()
     this.listenEvent("open-sidebar-cart-test", this.openCartSidebar)
     this.listenEvent("update-cart-total", this.addItem)
+    this.listenEvent("update-cart-table", this.removeItem)
   },
   beforeDestroy() {
     this.unlistenEvent("open-sidebar-cart-test", this.openCartSidebar)
     this.unlistenEvent("update-cart-total", this.addItem)
+    this.unlistenEvent("update-cart-table", this.removeItem)
   },
 };
 </script>
