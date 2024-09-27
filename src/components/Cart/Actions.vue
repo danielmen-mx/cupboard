@@ -4,11 +4,10 @@
   <v-btn variant="text" size="small" class="ml-2 ma-2 pa-2" color="blue-darken-4" @click="">Buy now</v-btn>
 </template>
 <script>
-import Form from '../Common/Form.vue';
-import CartService from '../../services/CartService';
+import Actions from './Common/Actions.vue';
 
 export default {
-  extends: Form,
+  extends: Actions,
   props: {
     parent_item_form: {
       type: Object,
@@ -19,17 +18,6 @@ export default {
     return {
       form: {},
       itemId: null,
-      apiService: CartService,
-      preventSnackbar: true
-    }
-  },
-  methods: {
-    updateState(newState) {
-      this.form.status = newState
-      this.submit()
-    },
-    successCallBack(resp) {
-      this.fireEvent("update-cart-table", resp.id)
     }
   },
   mounted() {
