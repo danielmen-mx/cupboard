@@ -47,10 +47,10 @@
             <div class="d-flex font-size-md font-weight-black flex-row-reverse text-right py-2 pr-2 text-blue-darken-4">
               MXN {{ moneyFormat(totalAmount) }}
             </div>
-            <section class="d-flex flex-column my-2">
+            <section>
               <ItemActions
-                :item_parent="item"
-                :quantity_parent="parseInt(this.unitsToBePurchased.replace(/[^0-9]/g, ''), 10)"
+                :parent_item="item"
+                :parent_quantity="unitsToBePurchased"
               />
             </section>
           </v-card>
