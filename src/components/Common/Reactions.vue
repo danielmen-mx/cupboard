@@ -16,7 +16,7 @@ export default {
       form: {},
       itemId: null,
       heartColor: 'grey',
-      heartClass: 'me-1',
+      heartClass: 'ma-2',
       apiService: ReactionService,
       loading: true,
       preventSnackbar: true,
