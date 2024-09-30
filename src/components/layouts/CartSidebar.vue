@@ -76,7 +76,6 @@
               ></v-icon>
               <span class="ml-2 text-h6">{{ moneyFormat(shippingTotal) }}</span>
             </v-card-text>
-
             <div class="d-flex flex-column align-center justify-center ma-2">
               <v-btn color="success" class="mb-2" block @click="checkout()">{{ translate("checkout") }}</v-btn>
               <v-btn block @click="goToCart()">{{ translate("go-cart") }}</v-btn>
@@ -94,7 +93,7 @@ import Quantity from '../Cart/Quantity.vue';
 import Table from '../Common/Table.vue';
 import CartService from '../../services/CartService';
 import Actions from '../Cart/Common/Actions.vue';
-import RemoveCartItem from '../Cart/RemoveCartSidebarItem.vue';
+import RemoveCartItem from '../Cart/RemoveCartSidebarItemButton.vue';
 
 export default {
   extends: Table,
@@ -126,6 +125,7 @@ export default {
   methods: {
     openCartSidebar() {
       this.cartSidebar = true
+      this.getItems()
     },
     goToCart() {
       let userId = store.getters['user'].id
@@ -143,12 +143,12 @@ export default {
     this.query.user_id = this.userId
     this.query.status = this.cartStatus
     this.getItems()
-    this.listenEvent("open-sidebar-cart-test", this.openCartSidebar)
+    this.listenEvent("open-sidebar-cart", this.openCartSidebar)
     this.listenEvent("update-cart-total", this.addItem)
     this.listenEvent("update-cart-table", this.removeItem)
   },
   beforeDestroy() {
-    this.unlistenEvent("open-sidebar-cart-test", this.openCartSidebar)
+    this.unlistenEvent("open-sidebar-cart", this.openCartSidebar)
     this.unlistenEvent("update-cart-total", this.addItem)
     this.unlistenEvent("update-cart-table", this.removeItem)
   },
