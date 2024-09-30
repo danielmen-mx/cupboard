@@ -3,7 +3,7 @@
   <div v-else>
     <v-avatar
       color="white"
-      size="30"
+      size="35"
     >
       <v-icon :class="heartClass" :icon="heartIcon" :color="heartColor" @click="validateLogin()"></v-icon>
     </v-avatar>
