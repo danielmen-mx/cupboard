@@ -1,6 +1,6 @@
 <template>
   <div v-if="loading"></div>
-  <div v-else>
+  <div v-else class="d-flex flex-column my-2">
     <v-btn 
       class="my-2 mt-auto"
       color="light-green text-white"
@@ -9,37 +9,46 @@
       class="my-2 mt-auto"
       color="blue-darken-1"
       variant="tonal"
+      @click="submit"
     >{{ translate("add-cart") }}</v-btn>
   </div>
 </template>
 <script>
 import CartService from '../../../services/CartService';
-import Form from '../../Common/Form.vue';
+import Actions from '../Common/Actions.vue';
 
 export default {
-  extends: Form,
+  extends: Actions,
   inject: ['moneyFormat'],
   props: {
     parent_item: {
       type: Object,
       required: true
     },
-    quantity_parent: {
-      type: Number
+    parent_quantity: {
+      type: String
     }
   },
   data() {
     return {
       apiService: CartService,
       preventSnackbar: true,
-      itemPrice: 0.00,
       form: {}
     }
   },
   mounted() {
     if (!this.parent_item) return
-    this.itemPrice = this.parent_item.price
+    this.quantityRequired = parseInt(this.parent_quantity.replace(/[^0-9]/g, ''), 10)
     this.setData()
   },
+  watch: {
+    'parent_quantity': {
+      handler: function (newVal) {
+        this.form.quantity = parseInt(newVal.replace(/[^0-9]/g, ''), 10)
+      },
+      deep: true,
+      immediate: true
+    }
+  }
 }
 </script>
