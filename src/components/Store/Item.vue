@@ -5,7 +5,7 @@
     <div v-else class="d-flex">
       <v-row dense>
         <v-col cols="8">
-          <v-card height="71.8vh">
+          <v-card height="51vh">
             <v-img
               :src="item.image"
               lazy-src="/logo/shadai-main.jpeg"
@@ -20,7 +20,7 @@
           </v-card>
         </v-col>
         <v-col cols="4">
-          <v-card height="85.8vh" class="text-h6 px-2 d-flex flex-column justify-space-between" overflow>
+          <v-card height="64.5vh" class="text-h6 px-2 d-flex flex-column justify-space-between" overflow>
             <div>
               <div class="d-flex justify-space-between">
                 <span class="align-self-center text-caption text-decoration-underline">
@@ -44,19 +44,14 @@
               </div>
             </div>
             <v-spacer></v-spacer>
-            <div class="d-flex text-h4 font-weight-black flex-row-reverse py-2 pr-2 text-blue-darken-4">
-              {{ moneyFormat(totalAmount) }}
+            <div class="d-flex font-size-md font-weight-black flex-row-reverse text-right py-2 pr-2 text-blue-darken-4">
+              MXN {{ moneyFormat(totalAmount) }}
             </div>
             <section class="d-flex flex-column my-2">
-              <v-btn 
-                class="my-2 mt-auto"
-                color="light-green"
-              >{{ translate("buy-now") }}</v-btn>
-              <v-btn
-                class="my-2 mt-auto"
-                color="blue-darken-1"
-                variant="tonal"
-              >{{ translate("add-cart") }}</v-btn>
+              <ItemActions
+                :item_parent="item"
+                :quantity_parent="parseInt(this.unitsToBePurchased.replace(/[^0-9]/g, ''), 10)"
+              />
             </section>
           </v-card>
         </v-col>
@@ -73,11 +68,12 @@ import ProductService from '../../services/ProductService';
 import { moneyFormat } from '../../utils/helpers'
 import Ratings from '../Common/Ratings.vue';
 import Table from '../Common/Table.vue';
-import Actions from './Actions.vue';
+import Actions from './Reactions.vue';
+import ItemActions from './Actions/Item.vue';
 
 export default {
   extends: Table,
-  components: { StoreShowItemSkeleton, Ratings, Actions, ItemNotFound },
+  components: { StoreShowItemSkeleton, Ratings, Actions, ItemNotFound, ItemActions },
   mixins: [moneyFormat],
   inject: ['removeHtmlTags', 'strLimit'],
   data() {
