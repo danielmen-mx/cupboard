@@ -1,7 +1,6 @@
 <template>
   <CartItemsSkeleton v-if="loading" />
   <template v-else>
-    <!-- Empty state -->
     <v-row v-if="!items.length" class="centered-container">
       <v-col class="text-center centered-component">
         <v-icon size="x-large" color="grey-darken-1" icon="mdi-cart-outline"></v-icon>
@@ -12,12 +11,9 @@
         </v-btn>
       </v-col>
     </v-row>
-    <!-- List Items -->
     <div v-else class="ma-1" >
-      <!-- nes test: testing github commits -->
       <div class="pa-2 rounded-t-lg elevation-1 shaddai-font font-size-sm">
         {{ translate("cart-products") }}
-        
       </div>
       <template
         v-for="item in items"
