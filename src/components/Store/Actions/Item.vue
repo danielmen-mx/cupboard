@@ -44,7 +44,9 @@ export default {
   watch: {
     'parent_quantity': {
       handler: function (newVal) {
-        this.form.quantity = parseInt(newVal.replace(/[^0-9]/g, ''), 10)
+        newQty = parseInt(newVal.replace(/[^0-9]/g, ''), 10)
+        this.quantityRequired = newQty
+        this.form.quantity = newQty
       },
       deep: true,
       immediate: true
