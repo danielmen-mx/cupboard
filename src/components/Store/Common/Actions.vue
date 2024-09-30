@@ -20,6 +20,7 @@ export default {
     },
     successCallBack(resp) {
       this.fireEvent("open-sidebar-cart")
+      this.setData()
     }
   },
   mounted() {
