@@ -85,12 +85,6 @@ export default {
       if (this.query.per_page === properties.per_page && this.query.page === properties.page) return
       this.query = properties
       this.getItems()
-    },
-    addCart() {
-      console.log("Work in progress")
-    },
-    buyNow() {
-      console.log("Cooming soon...")
     }
   },
   mounted() {
