@@ -273,8 +273,8 @@ export default {
 
         this.$nextTick(() => {
           this.closeDrawer()
-          this.successSnackbar(resp.data.message)
-          this.fireEvent(this.event)
+          this.successSnackbar(resp.message)
+          this.fireEvent(this.event, resp.data)
         })
       } catch (error) {
         console.log(error)
