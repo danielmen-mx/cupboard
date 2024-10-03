@@ -62,6 +62,7 @@ export default {
         this.formComplete = false
         this.form = {}
         this.successCallBack(resp.data)
+        // console.log(resp) // test purposes
       } catch (error) {
         console.log(error)
       }
