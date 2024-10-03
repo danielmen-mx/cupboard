@@ -124,11 +124,13 @@ export default {
     this.getItems()
     this.listenEvent("update-cart-total", this.addItem)
     this.listenEvent('update-cart-pagination-component', this.updatePagination)
+    this.listenEvent('update-items-cart-table', this.getItems)
     this.listenEvent(this.event, this.removeItem)
   },
   beforeDestroy() {
     this.unlistenEvent("update-cart-total", this.addItem)
     this.unlistenEvent('update-cart-pagination-component', this.updatePagination)
+    this.unlistenEvent('update-items-cart-table', this.getItems)
     this.unlistenEvent(this.event, this.removeItem)
   },
 }
