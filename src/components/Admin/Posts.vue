@@ -89,7 +89,7 @@
                           <v-list-item-title class="cursor-pointer pb-2" @click="editItem(item)">
                             {{ translate("edit") }}
                           </v-list-item-title>
-                          <v-list-item-title class="cursor-pointer pt-2" @click.stop="requestItemRemoval(item.id, apiService, event)">
+                          <v-list-item-title class="cursor-pointer pt-2" @click.stop="requestItemRemoval(item.id, apiService, 'remove-item-posts-table')">
                             {{ translate("delete") }}
                           </v-list-item-title>
                         </v-list-item>
@@ -180,11 +180,13 @@ export default {
   },
   mounted() {
     this.getItems()
-    this.listenEvent(this.event, this.removeItem)
+    this.listenEvent(this.event, this.addItem)
+    this.listenEvent('remove-item-posts-table', this.removeItem)
     this.listenEvent('updatePaginationTable', this.updatePagination)
   },
   beforeDestroy() {
-    this.unlistenEvent(this.event, this.removeItem)
+    this.unlistenEvent(this.event, this.addItem)
+    this.unlistenEvent('remove-item-posts-table', this.removeItem)
     this.unlistenEvent('updatePaginationTable', this.updatePagination)
   },
 }
