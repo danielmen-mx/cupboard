@@ -19,8 +19,9 @@ export default {
       this.form.quantity = this.quantityRequired
     },
     successCallBack(resp) {
-      this.fireEvent("open-sidebar-cart")
       this.setData()
+      this.fireEvent("update-items-cart-table", resp)
+      this.fireEvent("open-sidebar-cart")
     }
   },
   mounted() {
