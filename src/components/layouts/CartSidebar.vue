@@ -13,7 +13,7 @@
         <v-spacer></v-spacer>
         <v-btn
           icon
-          @click="cartSidebar = false"
+          @click="closeCartSidebar()"
           size="x-small"
           flat
         >
@@ -125,6 +125,14 @@ export default {
   methods: {
     openCartSidebar() {
       this.cartSidebar = true
+      this.updateCartsTable()
+    },
+    closeCartSidebar() {
+      this.cartSidebar = false
+      this.updateCartsTable()
+    },
+    updateCartsTable() {
+      this.items = null
       this.getItems()
     },
     goToCart() {
@@ -145,12 +153,12 @@ export default {
     this.getItems()
     this.listenEvent("open-sidebar-cart", this.openCartSidebar)
     this.listenEvent("update-cart-total", this.addItem)
-    this.listenEvent("update-cart-table", this.removeItem)
+    this.listenEvent("update-items-cart-table", this.updateCartsTable)
   },
   beforeDestroy() {
     this.unlistenEvent("open-sidebar-cart", this.openCartSidebar)
     this.unlistenEvent("update-cart-total", this.addItem)
-    this.unlistenEvent("update-cart-table", this.removeItem)
+    this.unlistenEvent("update-items-cart-table", this.updateCartsTable)
   },
 };
 </script>
