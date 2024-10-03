@@ -255,7 +255,7 @@ export default {
     },
     async submit() {
       if (!this.validateStepOne() || !this.validateStepTwo()) return
-      console.log(this.form)
+      // console.log(this.form)
 
       try {
         this.loading = true
@@ -271,10 +271,13 @@ export default {
 
         this.loading = false
 
+        console.log(resp.data.message)
+        console.log(resp.data)
+
         this.$nextTick(() => {
           this.closeDrawer()
-          this.successSnackbar(resp.data.message)
-          this.fireEvent(this.event)
+          this.successSnackbar(resp.message)
+          this.fireEvent(this.event, resp.data)
         })
       } catch (error) {
         console.log(error)
