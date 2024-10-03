@@ -19,7 +19,7 @@ export default {
       this.submit()
     },
     successCallBack(resp) {
-      this.fireEvent("update-cart-table", resp.id)
+      this.fireEvent("update-items-cart-table", resp.id)
     }
   }
 }
