@@ -65,15 +65,12 @@
               size="large"
               type="submit"
               variant="elevated"
-            >
-              {{ translate("login.create") }}
-            </v-btn>
+              :class="formComplete ? 'shiny-text' : ''"
+            >{{ translate("login.create") }}</v-btn>
             <p
               class="cursor-pointer text-light-green mt-2 text-decoration-underline text-center"
               @click="closeForm()"
-            >
-              {{ translate("login.account-created") }}
-            </p>
+            >{{ translate("login.account-created") }}</p>
           </div>
         </v-form>
       </v-card>

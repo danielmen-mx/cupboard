@@ -39,22 +39,17 @@
       size="large"
       type="submit"
       variant="elevated"
-    >
-      {{ translate("login.sign-in") }}
-    </v-btn>
+      :class="formComplete ? 'shiny-text' : ''"
+    >{{ translate("login.sign-in") }}</v-btn>
     <div :class="loginClass">
       <p
         class="cursor-pointer text-grey mt-2 text-decoration-underline"
         @click="redirect('/')"
-      >
-        {{ translate("nav.home") }}
-      </p>
+      >{{ translate("nav.home") }}</p>
       <p
         class="cursor-pointer text-grey mt-2 text-decoration-underline"
         @click="redirect('/login/register')"
-      >
-        {{ translate("login.account-create") }}
-      </p>
+      >{{ translate("login.account-create") }}</p>
     </div>
   </v-form>
 </template>
