@@ -14,7 +14,6 @@ export default {
   },
   methods: {
     fireCarSidebarEvent() {
-      console.log("fire event")
       this.fireEvent("open-sidebar-cart-test")
     }
   },

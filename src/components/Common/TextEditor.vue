@@ -25,9 +25,7 @@ export default {
   },
   methods: {
     setContent() {
-      console.log(this.description)
       this.form_description = this.description
-      console.log(this.model_value)
     }
   },
   mounted() {

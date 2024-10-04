@@ -270,10 +270,6 @@ export default {
         }
 
         this.loading = false
-
-        console.log(resp.data.message)
-        console.log(resp.data)
-
         this.$nextTick(() => {
           this.closeDrawer()
           this.successSnackbar(resp.message)
