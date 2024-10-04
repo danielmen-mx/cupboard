@@ -9,6 +9,7 @@
         <v-btn
           color="light-green"
           @click="create()"
+          class="shiny-text text-white"
         >
           {{ translate("admin.posts.create") }}
         </v-btn>

@@ -1,7 +1,7 @@
 <template>  
-  <v-btn variant="text" size="small" class="mr-2 ma-2 pa-2" color="blue-darken-4" @click="updateState('cancelled')">Remove</v-btn>
-  <v-btn variant="text" size="small" class="mx-2 ma-2 pa-2" color="blue-darken-4" @click="updateState('deferred')">Save for later</v-btn>
-  <v-btn variant="text" size="small" class="ml-2 ma-2 pa-2" color="blue-darken-4" @click="">Buy now</v-btn>
+  <v-btn variant="text" size="small" class="mr-2 ma-2 pa-1" color="blue-darken-4" @click="updateState('cancelled')">Remove</v-btn>
+  <v-btn variant="text" size="small" class="mx-2 ma-2 pa-1" color="blue-darken-4" @click="updateState('deferred')">Save for later</v-btn>
+  <v-btn size="small" class="ml-2 ma-2 pa-1 shiny-text" color="success" @click="comingSoon()">Buy now</v-btn>
 </template>
 <script>
 import Actions from './Common/Actions.vue';
@@ -18,6 +18,11 @@ export default {
     return {
       form: {},
       itemId: null,
+    }
+  },
+  methods: {
+    comingSoon() {
+      console.log("Coooming Sooooon.....")
     }
   },
   mounted() {

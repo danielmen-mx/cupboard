@@ -8,6 +8,7 @@
         <v-btn
           color="light-green"
           @click="openDrawer()"
+          class="shiny-text text-white"
         >
           {{ translate("admin.products.create") }}
         </v-btn>

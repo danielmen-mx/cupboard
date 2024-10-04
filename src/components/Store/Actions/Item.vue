@@ -2,7 +2,7 @@
   <div v-if="loading"></div>
   <div v-else class="d-flex flex-column my-2">
     <v-btn 
-      class="my-2 mt-auto"
+      class="my-2 mt-auto shiny-text"
       color="light-green text-white"
     >{{ translate("buy-now") }}</v-btn>
     <v-btn

@@ -204,9 +204,9 @@
               :loading="loading"
               :disabled="loading || validatingUsername || validatingEmail || validatedEmail === false || validatedUsername === false"
               density="comfortable"
-              variant="tonal"
               color="success"
               type="submit"
+              class="shiny-text text-white ma-1"
             >{{ translate("update") }}</v-btn>
           </div>
         </v-responsive>
