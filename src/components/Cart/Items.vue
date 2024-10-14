@@ -35,7 +35,8 @@
                   <v-img
                     :src="item.product.image"
                     lazy-src="/logo/shadai-main.jpeg"
-                    class="fill-height"
+                    class="fill-height cursor-pointer"
+                    @click="redirect(item.product.id)"
                     cover
                   ></v-img>
                 </v-avatar>
@@ -101,8 +102,8 @@ export default {
     }
   },
   methods: {
-    getStore() {
-
+    redirect(id) {
+      this.$router.push({ path: '/store/item/' + id });
     },
     updatePagination(properties) {
       if (this.query.per_page === properties.per_page && this.query.page === properties.page) return
