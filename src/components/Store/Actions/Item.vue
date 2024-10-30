@@ -4,6 +4,7 @@
     <v-btn 
       class="my-2 mt-auto shiny-text"
       color="light-green text-white"
+      @click="buyNow(productId)"
     >{{ translate("buy-now") }}</v-btn>
     <v-btn
       class="my-2 mt-auto"
@@ -33,12 +34,15 @@ export default {
     return {
       apiService: CartService,
       preventSnackbar: true,
-      form: {}
+      form: {},
+      productId: null
     }
   },
   mounted() {
     if (!this.parent_item) return
+    console.log(this.parent_item)
     this.quantityRequired = parseInt(this.parent_quantity.replace(/[^0-9]/g, ''), 10)
+    this.productId = this.parent_item.id
     this.setData()
   },
   watch: {
