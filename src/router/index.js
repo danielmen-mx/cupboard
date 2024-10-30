@@ -72,6 +72,12 @@ const routes = [
         meta: { requiresAuth: true }
       },
       {
+        path: '/cart/checkout/:cartId',
+        name: 'checkout',
+        component: () => import('../pages/Checkout.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
         path: '/review',
         name: 'review',
         component: () => import('../pages/Review.vue'),
