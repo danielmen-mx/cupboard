@@ -9,13 +9,12 @@
             class="d-flex justify-center"
           >
             <v-card-title
-              class="align-self-center"
+              class="align-self-center shiny-text"
             >{{ translate("store") }}</v-card-title>
           </v-card>
         </v-col>
         <v-col cols="9" class="d-flex align-center">
           <v-card
-            color="secondary"
             height="8vh"
             width="100%"
           >
@@ -24,16 +23,11 @@
         </v-col>
       </v-row>
     </div>
-
     <v-divider></v-divider>
-
     <div class="d-flex mt-2">
       <v-row dense>
         <v-col cols="3">
-          <v-card
-            color="secondary"
-            height="72vh"
-          >
+          <v-card height="72vh" >
             <v-card-title>Filters</v-card-title>
           </v-card>
         </v-col>
