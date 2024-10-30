@@ -6,7 +6,7 @@
       class="mx-2 text-white"
       color="light-green"
       density="comfortable"
-      @click=""
+      @click="buyNow(productId)"
     >{{ translate("buy-now") }} {{ moneyFormat(itemPrice) }}</v-btn>
     <v-btn
       :loading="loading"
@@ -35,11 +35,13 @@ export default {
       apiService: CartService,
       preventSnackbar: true,
       itemPrice: 0.00,
+      productId: null,
       form: {}
     }
   },
   mounted() {
     if (!this.parent_item) return
+    this.productId = this.parent_item.id
     this.itemPrice = this.parent_item.price
     this.setData()
   },
