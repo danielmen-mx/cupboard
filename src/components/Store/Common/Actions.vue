@@ -7,7 +7,7 @@ export default {
   extends: Form,
   data() {
     return {
-      quantityRequired: 1
+      quantityRequired: 1,
     }
   },
   methods: {
@@ -17,6 +17,9 @@ export default {
       this.form.product_id = this.parent_item.id
       this.form.status = "standby"
       this.form.quantity = this.quantityRequired
+    },
+    buyNow(id) {
+      this.$router.push({ path: `/cart/checkout/${id}` });
     },
     successCallBack(resp) {
       this.setData()

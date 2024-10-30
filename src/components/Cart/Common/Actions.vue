@@ -14,6 +14,9 @@ export default {
     }
   },
   methods: {
+    buyNow(id) {
+      this.$router.push({ path: `/cart/checkout/${id}` });
+    },
     updateState(newState) {
       this.form.status = newState
       this.submit()
