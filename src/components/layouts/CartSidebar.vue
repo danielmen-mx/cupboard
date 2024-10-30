@@ -77,8 +77,8 @@
               <span class="ml-2 text-h6">{{ moneyFormat(shippingTotal) }}</span>
             </v-card-text>
             <div class="d-flex flex-column align-center justify-center ma-2">
-              <v-btn color="success" class="mb-2" block @click="checkout()">{{ translate("checkout") }}</v-btn>
-              <v-btn block @click="goToCart()">{{ translate("go-cart") }}</v-btn>
+              <v-btn color="success" class="mb-2 shiny-text" block @click="checkout()">{{ translate("checkout") }}</v-btn>
+              <v-btn color="grey-lighten-3" block @click="goToCart()">{{ translate("go-cart") }}</v-btn>
             </div>
           </v-card>
         </div>
@@ -141,7 +141,7 @@ export default {
       return this.$router.push(route)
     },
     checkout() {
-      console.log("Cooming soon...")
+      console.log("buy all the current cart selected as standby")
     }
   },
   mounted() {
