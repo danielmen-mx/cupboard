@@ -141,7 +141,8 @@ export default {
       return this.$router.push(route)
     },
     checkout() {
-      console.log("buy all the current cart selected as standby")
+      let userIdentifier = `identifier=${this.userId}`
+      this.$router.push({ path: `/cart/checkout/${userIdentifier}` });
     }
   },
   mounted() {
