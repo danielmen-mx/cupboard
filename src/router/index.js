@@ -72,7 +72,7 @@ const routes = [
         meta: { requiresAuth: true }
       },
       {
-        path: '/cart/checkout/:cartId',
+        path: '/cart/checkout/:modelId',
         name: 'checkout',
         component: () => import('../pages/Checkout.vue'),
         meta: { requiresAuth: true }
