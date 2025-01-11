@@ -1,23 +1,29 @@
 <template>
-  Here's the checkout component my man
+  <div class="d-flex">
+    <ItemsPreview />
+    <Gateway />
+  </div>
 </template>
 <script>
+import Gateway from '../components/Checkout/PaymentGateway.vue';
+import ItemsPreview from '../components/Checkout/ItemsPreview.vue';
+
 export default {
+  components: {
+    Gateway,
+    ItemsPreview,
+  },
   data() {
     return {
       modelId: null,
+      modelType: null,
     }
   },
   mounted() {
-    // TODO: check it up Sprint Cart Checkout && Single Item Checkout to finish module
-    // you receive an Id from $route, this id is knowed as modelId,
-    // the modelId represent user id or item (product) id
-    // add a way to identify wich one is received with the string "identifier"
-    // if the string "identifier" exists, the modelId is a user id
-    // use this to call the API wich responds with the current record, a complete cart, or a single item
-    // when you get this stop && take a rest, continue thinking about next steps
-    console.log(this.$route.params)
-    this.modelId = this.$route.params.id
+    const { modelId: identifier } = this.$route.params;
+    const [prefix, id] = identifier.split('identifier=');
+    this.modelType = id ? 'user' : 'item';
+    this.modelId = id || identifier;
   },
 }
 </script>
