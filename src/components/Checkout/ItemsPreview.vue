@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" class="mt-1" no-gutters>
     <v-col cols="12" >
-      <h2 class="mx-3 mb-2 text-gradient shaddai-font">Check your items in the cart</h2>
+      <h2 class="mx-3 mb-2 orange-text-gradient shaddai-font">Check your items in the cart</h2>
       <v-divider class="mx-3"></v-divider>
       <v-sheet
         class="scroll-container-component pa-2"
@@ -116,10 +116,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.text-gradient {
-  background: linear-gradient(to right, #bb750c, rgba(209, 121, 20, 0.089)); 
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-</style>
