@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       apiService: CartService,
-      preventSnackbar: true,
+      preventSnackbar: false,
       itemPrice: 0.00,
       productId: null,
       form: {}
