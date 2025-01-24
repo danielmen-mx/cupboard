@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row align="center" justify="center" class="mt-1">
+    <v-row align="center" justify="center" class="mt-3">
       <v-col cols="12" md="6" lg="10">
         <v-card elevation="3">
           <v-card-title class="text-h5 text-center my-2">
