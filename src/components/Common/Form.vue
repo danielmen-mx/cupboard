@@ -65,6 +65,7 @@ export default {
         // console.log(resp) // test purposes
       } catch (error) {
         console.log(error)
+        if (error.exception) this.errorSnackbar(error.exception)
       }
 
       this.loading = false
