@@ -70,7 +70,7 @@ export default {
       apiService: ProductService,
       items: [],
       configuration: {},
-      preventSnackbar: true,
+      preventSnackbar: false,
       query: {
         per_page: 10,
         page: 1
