@@ -15,6 +15,7 @@ import language from './plugins/locales'
 import moment from 'moment'
 import EventsMixins from './mixins/EventsMixins'
 import TranslationsMixins from './mixins/TranslationsMixins'
+import globalSkeleton from './plugins/global-skeleton'
 
 // Event handling
 import mitt from 'mitt'
@@ -45,6 +46,7 @@ app
   .component('QuillEditor', QuillEditor)
   .use(language)
   .use(store)
+  .use(globalSkeleton)
   .use(router)
   .use(vuetify)
   .mount('#app')
