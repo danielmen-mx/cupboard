@@ -13,6 +13,7 @@ export default {
   methods: {
     setData() {
       let user = store.getters['user']
+      if (!user) return
       this.form.user_id = user.id
       this.form.product_id = this.parent_item.id
       this.form.status = "standby"
@@ -20,6 +21,11 @@ export default {
     },
     buyNow(id) {
       this.$router.push({ path: `/cart/checkout/${id}` });
+    },
+    validateUserLogged() {
+      let user = store.getters['user']
+      if (!user) return this.$router.push({ path: '/login' })
+      this.submit
     },
     successCallBack(resp) {
       this.setData()

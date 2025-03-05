@@ -13,7 +13,7 @@
       color="blue-darken-1"
       variant="tonal"
       density="comfortable"
-      @click="submit"
+      @click="validateUserLogged"
     >{{ translate("add-cart") }}</v-btn>
   </div>
 </template>
