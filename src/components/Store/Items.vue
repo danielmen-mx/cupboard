@@ -32,7 +32,7 @@
                       </v-card-item>
                       <v-card-text>{{ removeHtmlTags(item.description) }}</v-card-text>
                     </div>
-                    <div>
+                    <div class="pb-2">
                       <ItemsActions :parent_item="item" />
                     </div>
                   </v-col>
@@ -70,7 +70,7 @@ export default {
       apiService: ProductService,
       items: [],
       configuration: {},
-      preventSnackbar: false,
+      preventSnackbar: true,
       query: {
         per_page: 10,
         page: 1
