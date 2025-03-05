@@ -1,7 +1,13 @@
 <template>
-  <div class="d-flex">
-    <ItemsPreview />
-    <Gateway />
+  <div>
+    <v-row>
+      <v-col>
+        <ItemsPreview />
+      </v-col>
+      <v-col>
+        <Gateway />
+      </v-col>
+    </v-row>
   </div>
 </template>
 <script>
