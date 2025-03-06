@@ -8,13 +8,13 @@ export default {
   data() {
     return {
       quantityRequired: 1,
+      userLogged: null
     }
   },
   methods: {
     setData() {
-      let user = store.getters['user']
-      if (!user) return
-      this.form.user_id = user.id
+      if (!this.user) return
+      this.form.user_id = this.user.id
       this.form.product_id = this.parent_item.id
       this.form.status = "standby"
       this.form.quantity = this.quantityRequired
@@ -23,9 +23,8 @@ export default {
       this.$router.push({ path: `/cart/checkout/${id}` });
     },
     validateUserLogged() {
-      let user = store.getters['user']
-      if (!user) return this.$router.push({ path: '/login' })
-      this.submit
+      if (!this.user) return this.$router.push({ path: '/login' })
+      this.submit()
     },
     successCallBack(resp) {
       this.setData()
@@ -34,7 +33,7 @@ export default {
     }
   },
   mounted() {
-
+    this.user = store.getters['user']
   }  
 }
 </script>
