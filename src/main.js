@@ -16,6 +16,7 @@ import moment from 'moment'
 import EventsMixins from './mixins/EventsMixins'
 import TranslationsMixins from './mixins/TranslationsMixins'
 import globalSkeleton from './plugins/global-skeleton'
+import "vuetify/styles"
 
 // Event handling
 import mitt from 'mitt'
