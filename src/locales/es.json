@@ -77,6 +77,9 @@
     "explore-cart": "Explora nuestros productos y añade algo al carrito",
     "redirect-store": "Ir a la tienda"
   },
+  "checkout-module": {
+    "items-in-the-cart": "Compruebe sus artículos en el carrito"
+  },
   "confirmations": {
     "you-sure": "¿Estás seguro?",
     "remove": "¿Estás seguro de eliminar este elemento?",

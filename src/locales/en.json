@@ -76,6 +76,9 @@
     "explore-cart": "Explore our products and add something to your cart",
     "redirect-store": "Go to the store"
   },
+  "checkout-module": {
+    "items-in-the-cart": "Check your items in the cart"
+  },
   "confirmations": {
     "you-sure": "Are you sure?",
     "remove": "Are you sure to remove this item?",
