@@ -55,6 +55,24 @@
         "description": "Add the description of the product",
         "asset": "Add image"
       }
+    },
+    "users": {
+      "add": "Add new user",
+      "edit": "Edit user",
+      "create": "Create user",
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "table_headers": {
+        "name": "Name",
+        "email": "Email",
+        "password": "Password"
+      },
+      "guides": {
+        "name": "Write the name of the user",
+        "email": "Write the email of the user",
+        "password": "Write the password of the user"
+      }
     }
   },
   "calendar": {
@@ -253,6 +271,7 @@
   "try-again": "Try again",
   "update": "Update",
   "units": "Units",
+  "users": "Users",
   "user_settings": "User Settings",
   "404": "We don't found the page you're looking for!"
 }

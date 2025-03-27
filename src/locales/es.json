@@ -56,6 +56,24 @@
         "description": "Escribe la descripción del producto",
         "asset": "Agregar imagen"
       }
+    },
+    "users": {
+      "add": "Añadir nuevo usuario",
+      "edit": "Editar usuario",
+      "create": "Crear usuario",
+      "name": "Nombre",
+      "email": "Correo",
+      "password": "Contraseña",
+      "table_headers": {
+        "name": "Nombre",
+        "email": "Correo",
+        "password": "Contraseña"
+      },
+      "guides": {
+        "name": "Escribe el nombre del usuario",
+        "email": "Escribe el correo del usuario",
+        "password": "Escribe la contraseña del usuario"
+      }
     }
   },
   "calendar": {
@@ -254,6 +272,7 @@
   "try-again": "Inténtalo de nuevo",
   "update": "Actualizar",
   "units": "Unidades",
+  "users": "Usuarios",
   "user_settings": "Ajustes de Usuario",
   "404": "¡No encontramos la página que estás buscando!"
 }
