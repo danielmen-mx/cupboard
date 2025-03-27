@@ -31,6 +31,9 @@
         <v-window-item value="products">
           <Products />
         </v-window-item>
+        <v-window-item value="users">
+          <Users />
+        </v-window-item>
       </v-window>
     </v-card-text>
   </v-card>
@@ -41,6 +44,7 @@ import Header from '../components/Admin/Main.vue'
 import Settings from '@/components/Admin/Settings.vue'
 import Posts from '@/components/Admin/Posts.vue'
 import Products from '@/components/Admin/Products.vue'
+import Users from '@/components/Admin/Users.vue'
 
 export default {
   components: {
@@ -48,7 +52,8 @@ export default {
     Header,
     Settings,
     Posts,
-    Products
+    Products,
+    Users
   },
   data: () => ({
     tab: 'main',
@@ -69,6 +74,12 @@ export default {
         title: 'products',
         value: 'products',
         path: '/admin/products',
+        component: null
+      },
+      {
+        title: 'users',
+        value: 'users',
+        path: '/admin/users',
         component: null
       },
     ]
