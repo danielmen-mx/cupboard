@@ -108,13 +108,17 @@
     "add": "Añadir comentario"
   },
   "empty-states": {
-    "AdminPosts": {
-      "no-posts": "Aún no hay publicaciones",
-      "add-new": "Crea una publicación ahora"
-    },
-    "AdminProducts": {
-      "no-products": "Aún no hay productos",
-      "add-new": "Crea un producto ahora"
+    "admin": {
+      "no-items": {
+        "products": "Aún no hay productos",
+        "posts": "Aún no hay publicaciones",
+        "users": "Aún no hay usuarios"
+      },
+      "add-new": {
+        "products": "Crea un producto ahora",
+        "posts": "Crea una publicación ahora",
+        "users": "Crea un usuario ahora"
+      }
     },
     "Comments": {
       "no-comments": "Upss, parece que nadie ha comentado esta publicación",

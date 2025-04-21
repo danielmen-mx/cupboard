@@ -107,13 +107,17 @@
     "add": "Add comment"
   },
   "empty-states": {
-    "AdminPosts": {
-      "no-posts": "No posts yet",
-      "add-new": "Create a post now"
-    },
-    "AdminProducts": {
-      "no-products": "No products yet",
-      "add-new": "Create product now"
+    "admin": {
+      "no-items": {
+        "products": "No products yet",
+        "posts": "No posts yet",
+        "users": "No users yet"
+      },
+      "add-new": {
+        "products": "Create a product now",
+        "posts": "Create a post now",
+        "users": "Create a new user now"
+      }
     },
     "Comments": {
       "no-comments": "Oops, no one seems to have commented on this post",
