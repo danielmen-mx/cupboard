@@ -1,7 +1,7 @@
 <template>
   <AdminTableSkeleton v-if="loading" />
   <template v-else>
-    <AdminProductsEmptyState v-if="items.length < 1"/>
+    <AdminItemsTableEmptyState v-if="items.length < 1" itemType="products"/>
     <div v-else>
       <div class="d-flex justify-space-between mx-2 my-6">
         <span class="text-h5">{{ translate("products") }}</span>
@@ -102,7 +102,7 @@ import PostForm from '@/components/Admin/Posts/Form.vue'
 import { formatDate, slugify, countArray } from '../../utils/helpers'
 import { requestItemRemoval } from '../Common/Helpers/Actions'
 import Table from '@/components/Common/Table.vue'
-import AdminProductsEmptyState from '../Common/EmptyState/AdminProductsEmptyState.vue'
+import AdminItemsTableEmptyState from '../Common/EmptyState/AdminItemsTableEmptyState.vue'
 import AdminTableSkeleton from '../Common/Skeletons/AdminTableSkeleton.vue'
 import AdminPagination from '../Common/Paginations/Admin.vue'
 
@@ -112,7 +112,7 @@ export default {
   inject:['strLimit'],
   components: {
     PostForm,
-    AdminProductsEmptyState,
+    AdminItemsTableEmptyState,
     AdminTableSkeleton,
     AdminPagination
   },
