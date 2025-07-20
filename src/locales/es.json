@@ -65,8 +65,11 @@
       "email": "Correo",
       "password": "Contraseña",
       "table_headers": {
-        "name": "Nombre",
+        "username": "Usuario",
         "email": "Correo",
+        "firstname": "Nombre(s)",
+        "lastname": "Apellido(s)",
+        "language": "Idioma",
         "password": "Contraseña"
       },
       "guides": {

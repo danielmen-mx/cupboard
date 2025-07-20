@@ -64,8 +64,11 @@
       "email": "Email",
       "password": "Password",
       "table_headers": {
-        "name": "Name",
+        "username": "Username",
         "email": "Email",
+        "firstname": "First Name",
+        "lastname": "Last Name",
+        "language": "Language",
         "password": "Password"
       },
       "guides": {
