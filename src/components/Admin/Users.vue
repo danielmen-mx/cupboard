@@ -48,7 +48,11 @@
                     </v-tooltip>
                     <p v-else class="text-subtitle-1">{{ strLimit(item.username, 30) }}</p>
                   </td>
-                  
+                  <td>{{ item.email }}</td>
+                  <td>{{ item.first_name }}</td>
+                  <td>{{ item.last_name }}</td>
+                  <td class="text-center">{{ item.language }}</td>
+                  <td>🔒 Secret</td>
                   <td>{{ formatDate(item.created_at) }}</td>
                   <td>
                     <v-menu>
@@ -110,8 +114,12 @@ export default {
         page: 1
       },
       headers: [
-        "admin.users.table_headers.name",
-        
+        "admin.users.table_headers.username",
+        "admin.users.table_headers.email",
+        "admin.users.table_headers.firstname",
+        "admin.users.table_headers.lastname",
+        "admin.users.table_headers.language",
+        "admin.users.table_headers.password",
         "table.created_at",
         "table.options",
       ]
