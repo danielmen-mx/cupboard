@@ -37,18 +37,29 @@
                   :class="isHovering ? 'bg-grey-lighten-3' : undefined"
                 >
                   <td>
-                    <v-tooltip v-if="item.username.length > 30" location="bottom">
+                    <v-tooltip v-if="item.username.length > 25" location="bottom">
                       <template v-slot:activator="{ props }">
                         <p
                           class="text-subtitle-1"
                           v-bind="props"
-                        >{{ strLimit(item.username, 30) }}</p>
+                        >{{ strLimit(item.username, 25) }}</p>
                       </template>
                       <span>{{ item.username }}</span>
                     </v-tooltip>
-                    <p v-else class="text-subtitle-1">{{ strLimit(item.username, 30) }}</p>
+                    <p v-else class="text-subtitle-1">{{ strLimit(item.username, 25) }}</p>
                   </td>
-                  <td>{{ item.email }}</td>
+                  <td>
+                    <v-tooltip v-if="item.email.length > 25" location="bottom">
+                      <template v-slot:activator="{ props }">
+                        <p
+                          class="text-subtitle-1"
+                          v-bind="props"
+                        >{{ strLimit(item.email, 25) }}</p>
+                      </template>
+                      <span>{{ item.email }}</span>
+                    </v-tooltip>
+                    <p v-else class="text-subtitle-1">{{ strLimit(item.email, 25) }}</p>
+                  </td>
                   <td>{{ item.first_name }}</td>
                   <td>{{ item.last_name }}</td>
                   <td class="text-center">{{ item.language }}</td>
