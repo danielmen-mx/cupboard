@@ -68,7 +68,7 @@
 
           <v-card flat>
             <v-card-text>
-              <div class="text-h5"><strong class="text-green">MXN</strong> {{ moneyFormat(total) }}</div>
+              <div class="text-h5"><strong class="text-green">MXN</strong>{{ moneyFormat(total) }}</div>
               <v-icon
                 icon="mdi-truck"
                 size="large"
@@ -116,7 +116,10 @@ export default {
   },
   computed: {
     total() {
-      return this.items.reduce((acc, item) => acc + item.quantity * item.product.price, 0);
+      return this.items.reduce((acc, item) => {
+        let price = Number(String(item.product.price).replace(/,/g, ''));
+        return acc + item.quantity * price;
+      }, 0);
     },
     shippingTotal() {
       return this.items.reduce((acc, item) => acc + item.quantity * item.product.shipping_price, 0);
