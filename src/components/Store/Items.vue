@@ -28,7 +28,7 @@
                     <div>
                       <v-card-item>
                         <v-card-title>{{ item.name }}</v-card-title>
-                        <v-card-subtitle>MXN$ {{ item.price }}</v-card-subtitle>
+                        <v-card-subtitle>MXN$ {{ moneyFormat(item.price) }}</v-card-subtitle>
                       </v-card-item>
                       <v-card-text>{{ removeHtmlTags(item.description) }}</v-card-text>
                     </div>
