@@ -13,13 +13,14 @@ export function debounce(fn, delay) {
 export const moneyFormat = {
   methods: {
     moneyFormat(total) {
+      const numericTotal = Number(String(total).replace(/,/g, ''))
       var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
         minimumFractionDigits: 2,
       });
 
-      return formatter.format(total)
+      return formatter.format(numericTotal)
     }
   }
 }
