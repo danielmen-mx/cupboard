@@ -9,12 +9,14 @@
     >
       <Post v-if="this.admin === 'posts' && !loading" :item_parent="item" />
       <Product v-if="this.admin === 'products' && !loading" :item_parent="item" />
+      <User v-if="this.admin === 'users' && !loading" :item_parent="item" />
     </v-navigation-drawer>
   </v-row>
 </template>
 <script>
 import Post from '../Admin/Forms/Post.vue'
 import Product from '../Admin/Forms/Product.vue'
+import User from '../Admin/Forms/User.vue'
 import Table from '@/components/Common/Table.vue'
 import PostService from '@/services/PostService'
 import ProductService from '@/services/ProductService'
@@ -23,7 +25,8 @@ export default {
   extends: Table,
   components: {
     Post,
-    Product
+    Product,
+    User
   },
   data: () => ({
     drawer: false,
