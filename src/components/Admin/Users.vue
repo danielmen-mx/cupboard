@@ -119,7 +119,7 @@ export default {
       apiService: UserService,
       items: [],
       post: null,
-      event: 'updateProductAdminTable',
+      event: 'updateUserAdminTable',
       query: {
         per_page: 15,
         page: 1
