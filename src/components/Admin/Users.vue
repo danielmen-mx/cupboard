@@ -5,13 +5,7 @@
     <div v-else>
       <div class="d-flex justify-space-between mx-2 my-6">
         <span class="text-h5">{{ translate("users") }}</span>
-        <v-btn
-          color="light-green"
-          @click="openDrawer()"
-          class="shiny-text text-white"
-        >
-          {{ translate("admin.users.create") }}
-        </v-btn>
+        
       </div>
       <v-card
         variant="outlined"
@@ -146,20 +140,6 @@ export default {
     openDrawer(item = null) {
       this.$router.push({ path: '/admin/users/create' })
       setTimeout(() => { this.fireEvent('openDrawer', item) }, 100);
-    },
-    countTags(tags) {
-      let count = this.countArray(tags)
-
-      if (count == 1) return tags[0]
-      if (count > 1) return ` +${count} tags`
-
-      return false
-    },
-    getImageName(imageName, postName) {
-      if (!imageName) return
-
-      let split = imageName.split('/')
-      return split[split.length - 1]
     },
     updatePagination(properties) {
       if (this.query.per_page === properties.per_page && this.query.page === properties.page) return
