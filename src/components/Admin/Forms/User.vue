@@ -16,7 +16,59 @@
         ></v-btn>
       </v-card-actions>
     </template>
-    
+    <template>
+      <v-card class="p-6 rounded-2xl shadow-lg max-w-lg mx-auto">
+        <v-card-title class="text-xl font-bold">User Form</v-card-title>
+        <v-card-text>
+          <v-form>
+            <v-text-field
+              v-model="user.username"
+              label="Username"
+              variant="outlined"
+              density="comfortable"
+              required
+            />
+            <v-text-field
+              v-model="user.email"
+              label="Email"
+              type="email"
+              variant="outlined"
+              density="comfortable"
+              required
+            />
+            <v-text-field
+              v-model="user.firstName"
+              label="First Name"
+              variant="outlined"
+              density="comfortable"
+            />
+            <v-text-field
+              v-model="user.secondName"
+              label="Second Name"
+              variant="outlined"
+              density="comfortable"
+            />
+            <v-select
+              v-model="user.language"
+              :items="languages"
+              item-title="title"
+              item-value="value"
+              label="Language"
+              variant="outlined"
+              density="comfortable"
+            />
+            <v-switch
+              v-model="user.isAdmin"
+              label="Is Admin"
+              inset
+            />
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" class="rounded-xl" @click="submitForm">Save</v-btn>
+        </v-card-actions>
+      </v-card>
+    </template>
     <v-divider></v-divider>
     <v-card-actions>
       <v-btn
