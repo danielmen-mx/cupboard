@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto pa-2 ma-2 elevation-0">
+  <v-card v-if="this.user" class="mx-auto pa-2 ma-2 elevation-0">
     <template class="d-flex justify-space-between">
       <v-card-title class="text-h6 font-weight-regular justify-space-between">
         <span>User Information</span>
@@ -56,6 +56,8 @@
           />
           <v-switch
             v-model="form.is_admin"
+            :readonly="enableSwitch"
+            :disabled="canEdit"
             label="Is Admin"
             color="light-green"
             :true-value="1"
@@ -69,7 +71,7 @@
           :disabled="!enableSubmit"
           color="green"
           variant="flat"
-          @click.prevent="submit"
+          @click.prevent="validateSubmit()"
         >
           {{ translate("save") }}
         </v-btn>
@@ -80,6 +82,7 @@
 <script>
 import UserService from '@/services/UserService'
 import Form from '../../Common/Form.vue'
+import store from '@/store'
 import required from '../../Common/Form.vue'
 import TextEditor from '../../Common/TextEditor.vue'
 import { copyData, slugify } from '../../../utils/helpers'
@@ -100,13 +103,16 @@ export default {
     return {
       apiService: UserService,
       enableSubmit: false,
+      user: null,
+      itemBackup: null,
       form: {
         username: null,
         email: null,
         first_name: null,
         last_name: null,
         language: null,
-        is_admin: null
+        is_admin: null,
+        is_landlord: null
       },
       itemId: null,
       loading: false,
@@ -117,34 +123,51 @@ export default {
   methods: {
     closeDrawer() {
       this.itemId = null,
+      this.user = null
+      this.itemBackup = null
       this.form = {
         username: null,
         email: null,
         first_name: null,
         last_name: null,
         language: null,
-        is_admin: null
+        is_admin: null,
+        is_landlord: null
       }
 
       this.$nextTick(() => { this.$router.push({ path: "/admin/users" }) })
+    },
+    validateSubmit() {
+      this.form.username = null;
+      this.form.email = null;
+      this.form.is_landlord = null;
+      this.submit()
+    },
+  },
+  computed: {
+    enableSwitch() {
+      return this.user && this.user.is_landlord == 1 ? false : true;
+    },
+    canEdit() {
+      return this.form && this.form.is_landlord == 1 ? true : false;
     }
   },
   mounted() {
     if (!this.item_parent) return
-    let itemBackup = this.copyData(this.item_parent);
-    this.form = itemBackup;
-    this.itemId = itemBackup.id;
-    console.log(this.form.is_admin);
+    this.user = store.getters['user']
+    this.itemBackup = this.copyData(this.item_parent);
+    this.form = this.itemBackup;
+    this.itemId = this.itemBackup.id;
   },
   watch: {
-    // 'form.name': {
-    //   handler: function () {
-    //     if (this.validateStepOne()) return this.enableNextButton = true
-    //     return this.enableNextButton = false
-    //   },
-    //   deep: true,
-    //   immediate: true
-    // },
+    'form': {
+      handler: function () {
+        if (this.item_parent && this.item_parent.is_admin !== this.form.is_admin) return this.enableSubmit = true
+        return this.enableSubmit = false
+      },
+      deep: true,
+      immediate: true
+    },
   }
 }
 </script>
