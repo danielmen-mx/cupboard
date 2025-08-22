@@ -22,6 +22,31 @@ export const requestItemRemoval = {
   }
 }
 
+export const requestUserRemoval = {
+  methods: {
+    /**
+     * @param {String} landlordId
+     * @param {String} itemId
+     * @param {VueElement} apiService 
+     * @param {String} event 
+     * @param {Boolean} preventRemoveItem 
+     * @param {Boolean} preventSnackbar 
+     * @param {Boolean} preventReload 
+     */
+    requestUserRemoval(landlordId, itemId, apiService, event, preventRemoveItem = true, preventSnackbar = false, preventReload = false) {
+      this.fireEvent('confirmation-dialog', {
+        landlordId: landlordId,
+        id: itemId,
+        apiService: apiService,
+        event: event,
+        preventRemoveItem: preventRemoveItem,
+        preventSnackbar: preventSnackbar,
+        preventReload: preventReload,
+      })
+    }
+  }
+}
+
 export const changePasswordRequestDialog = {
   methods: {
     /**
