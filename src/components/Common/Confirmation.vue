@@ -40,6 +40,7 @@ export default {
       visible: false,
       apiService: null,
       itemId: null,
+      landlordId: null,
       event: null,
       preventRemoveItem: null,
       preventSnackbar: null,
@@ -48,6 +49,7 @@ export default {
   },
   methods: {
     handle(data) {
+      this.landlordId = data.landlordId
       this.itemId = data.id
       this.apiService = data.apiService
       this.event = data.event
@@ -57,8 +59,24 @@ export default {
       setTimeout(() => { this.visible = true }, 100);
     },
     submit() {
-      this.remove(this.itemId)
+      !this.landlordId ? this.remove(this.itemId) : this.submitRemove(this.landlordId, this.itemId);
       this.visible = false
+    },
+    async submitRemove(landlordId, id) {
+      if (this.breakRequest()) return
+
+      try {
+        if (!this.preventReload) this.loading = true
+
+        const resp = await this.apiService.removeUser(landlordId, id);
+
+        if (!this.preventRemoveItem) this.removeItem(id)
+        if (!this.preventSnackbar) this.successSnackbar(resp.message)
+        this.loading = false
+        this.successCallBack(id)
+      } catch (error) {
+        console.log(error)
+      }
     },
     successCallBack(resp) {
       this.fireEvent(this.event, resp)
