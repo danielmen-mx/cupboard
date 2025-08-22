@@ -96,7 +96,7 @@ export default {
   props: {
     item_parent: {
       type: Object,
-      required: false,
+      required: true,
     }
   },
   data() {
@@ -124,7 +124,7 @@ export default {
     closeDrawer() {
       this.itemId = null,
       this.user = null
-      this.itemBackup = null
+      this.itemBackup = null,
       this.form = {
         username: null,
         email: null,
@@ -141,7 +141,36 @@ export default {
       this.form.username = null;
       this.form.email = null;
       this.form.is_landlord = null;
-      this.submit()
+      this.submit();
+    },
+    async submit() {
+      if (!this.form) return
+
+      try {
+        this.loading = true
+        let resp = null
+
+        resp = await this.apiService.switchAdmin(this.itemId, this.form);
+
+        if (!this.preventSnackbar) {
+          this.successSnackbar(resp.message)
+        }
+
+        if (!this.preventUpdateItems) {
+          this.fireEvent(this.event, resp.data)
+        }
+
+        this.form = resp.data;
+        // this.item_parent = resp.data;
+        this.fireEvent(this.event, resp.data)
+        this.successCallBack(resp.data)
+        this.closeDrawer();
+      } catch (error) {
+        console.log(error)
+        if (error.exception) this.errorSnackbar(error.exception)
+      }
+
+      this.loading = false
     },
   },
   computed: {
@@ -157,7 +186,7 @@ export default {
     this.user = store.getters['user']
     this.itemBackup = this.copyData(this.item_parent);
     this.form = this.itemBackup;
-    this.itemId = this.itemBackup.id;
+    this.itemId = this.user.id;
   },
   watch: {
     'form': {
