@@ -31,28 +31,28 @@
                   :class="isHovering ? 'bg-grey-lighten-3' : undefined"
                 >
                   <td>
-                    <v-tooltip v-if="item.username.length > 25" location="bottom">
+                    <v-tooltip v-if="item.username.length > 15" location="bottom">
                       <template v-slot:activator="{ props }">
                         <p
                           class="text-subtitle-1"
                           v-bind="props"
-                        >{{ strLimit(item.username, 25) }}</p>
+                        >{{ strLimit(item.username, 15) }}</p>
                       </template>
                       <span>{{ item.username }}</span>
                     </v-tooltip>
-                    <p v-else class="text-subtitle-1">{{ strLimit(item.username, 25) }}</p>
+                    <p v-else class="text-subtitle-1">{{ strLimit(item.username, 15) }}</p>
                   </td>
                   <td>
-                    <v-tooltip v-if="item.email.length > 25" location="bottom">
+                    <v-tooltip v-if="item.email.length > 20" location="bottom">
                       <template v-slot:activator="{ props }">
                         <p
                           class="text-subtitle-1"
                           v-bind="props"
-                        >{{ strLimit(item.email, 25) }}</p>
+                        >{{ strLimit(item.email, 20) }}</p>
                       </template>
                       <span>{{ item.email }}</span>
                     </v-tooltip>
-                    <p v-else class="text-subtitle-1">{{ strLimit(item.email, 25) }}</p>
+                    <p v-else class="text-subtitle-1">{{ strLimit(item.email, 20) }}</p>
                   </td>
                   <td>{{ item.first_name }}</td>
                   <td>{{ item.last_name }}</td>
@@ -69,7 +69,7 @@
                           <v-list-item-title class="cursor-pointer pb-2" @click="editItem(item)">
                             {{ translate("edit") }}
                           </v-list-item-title>
-                          <v-list-item-title class="cursor-pointer pt-2" @click.stop="requestItemRemoval(item.id, apiService, 'remove-item-users-table')">
+                          <v-list-item-title class="cursor-pointer pt-2" @click.stop="requestItemRemoval(user.id, item.id, apiService, 'remove-item-users-table')">
                             {{ translate("delete") }}
                           </v-list-item-title>
                         </v-list-item>
@@ -96,6 +96,7 @@ import Table from '@/components/Common/Table.vue'
 import AdminItemsTableEmptyState from '../Common/EmptyState/AdminItemsTableEmptyState.vue'
 import AdminTableSkeleton from '../Common/Skeletons/AdminTableSkeleton.vue'
 import AdminPagination from '../Common/Paginations/Admin.vue'
+import store from '@/store'
 
 export default {
   extends: Table,
@@ -111,6 +112,7 @@ export default {
     return {
       loading: false,
       apiService: UserService,
+      user: null,
       items: [],
       post: null,
       event: 'updateUserAdminTable',
@@ -148,6 +150,7 @@ export default {
     }
   },
   mounted() {
+    this.user = store.getters['user']
     this.getItems()
     this.listenEvent(this.event, this.addItem)
     this.listenEvent('remove-item-users-table', this.removeItem)
