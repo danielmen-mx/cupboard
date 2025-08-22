@@ -21,5 +21,11 @@ export default {
   },
   changePassword(id, data) {
     return Api.put('/users/' + id + '/change-password', data)
+  },
+  switchAdmin(id, data) {
+    return Api.put('/users/' + id + '/switch-admin', data)
+  },
+  removeUser(id, idRequested) {
+    return Api.delete('/users/' + id + '/remove-user', idRequested)
   }
 }
