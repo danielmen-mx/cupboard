@@ -69,7 +69,7 @@
                           <v-list-item-title class="cursor-pointer pb-2" @click="editItem(item)">
                             {{ translate("edit") }}
                           </v-list-item-title>
-                          <v-list-item-title class="cursor-pointer pt-2" @click.stop="requestItemRemoval(user.id, item.id, apiService, 'remove-item-users-table')">
+                          <v-list-item-title class="cursor-pointer pt-2" @click.stop="requestUserRemoval(user.id, item.id, apiService, 'remove-item-users-table')">
                             {{ translate("delete") }}
                           </v-list-item-title>
                         </v-list-item>
@@ -91,7 +91,7 @@
 import UserService from '@/services/UserService'
 import PostForm from '@/components/Admin/Posts/Form.vue'
 import { formatDate, slugify, countArray } from '../../utils/helpers'
-import { requestItemRemoval } from '../Common/Helpers/Actions'
+import { requestUserRemoval } from '../Common/Helpers/Actions'
 import Table from '@/components/Common/Table.vue'
 import AdminItemsTableEmptyState from '../Common/EmptyState/AdminItemsTableEmptyState.vue'
 import AdminTableSkeleton from '../Common/Skeletons/AdminTableSkeleton.vue'
@@ -100,7 +100,7 @@ import store from '@/store'
 
 export default {
   extends: Table,
-  mixins: [formatDate, slugify, countArray, requestItemRemoval],
+  mixins: [formatDate, slugify, countArray, requestUserRemoval],
   inject:['strLimit'],
   components: {
     PostForm,
