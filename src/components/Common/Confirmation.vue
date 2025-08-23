@@ -59,6 +59,7 @@ export default {
       setTimeout(() => { this.visible = true }, 100);
     },
     submit() {
+      console.log(this.landlordId);
       !this.landlordId ? this.remove(this.itemId) : this.submitRemove(this.landlordId, this.itemId);
       this.visible = false
     },
@@ -68,7 +69,8 @@ export default {
       try {
         if (!this.preventReload) this.loading = true
 
-        const resp = await this.apiService.removeUser(landlordId, id);
+        const request = { id: id };
+        const resp = await this.apiService.removeUser(landlordId, request);
 
         if (!this.preventRemoveItem) this.removeItem(id)
         if (!this.preventSnackbar) this.successSnackbar(resp.message)
