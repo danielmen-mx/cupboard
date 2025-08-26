@@ -11,6 +11,7 @@
     </v-card>
     </div>
   </v-parallax>
+  <Recover />
   <Register />
 </template>
 <script>
@@ -18,11 +19,13 @@ import login from '@/components/Common/Responsives/login.vue'
 import Register from '../components/Login/Register.vue'
 import LoginForm from '../components/Login/Login.vue'
 import Snackbar from '@/components/layouts/Snackbar.vue'
+import Recover from '../components/Login/Recover.vue'
 
 export default {
     extends: login,
     components: {
       Register,
+      Recover,
       LoginForm,
       Snackbar
     },
