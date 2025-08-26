@@ -195,6 +195,9 @@
     "type-password": "Introduce tu contraseña",
     "password-confirmation": "Repita contraseña",
     "required": "Campos obligatorios",
+    "request-recover": "Solciitar recuperación de contraseña",
+    "recover-email": "Introduce tu correo",
+    "account-recover": "Recuperar contraseña",
     "account-create": "No tienes una cuenta?",
     "account-created": "Ya tengo una cuenta",
     "validations": {

@@ -194,6 +194,9 @@
     "type-password": "Enter your password",
     "password-confirmation": "Repeat password",
     "required": "Required fields",
+    "request-recover": "Request password recovery",
+    "recover-email": "Enter your email",
+    "account-recover": "Recover password",
     "account-create": "You don't have an account?",
     "account-created": "I already have an account",
     "validations": {
