@@ -41,6 +41,13 @@
       variant="elevated"
       :class="formComplete ? 'shiny-text' : ''"
     >{{ translate("login.sign-in") }}</v-btn>
+    <div>
+      <p
+        class="d-flex justify-center cursor-pointer text-grey mt-2 text-decoration-underline"
+        @click="redirect('/login/recover')"
+      >{{ translate("login.account-recover") }}</p>
+    </div>
+    <v-divider class="mt-2"></v-divider>
     <div :class="loginClass">
       <p
         class="cursor-pointer text-grey mt-2 text-decoration-underline"
