@@ -108,7 +108,13 @@ const routes = [
       {
         path: ':register',
         name: 'register',
-        component: () => import('../pages/Login.vue'),
+        component: () => import('../components/Login/Register.vue'),
+        props: true
+      },
+      {
+        path: ':recover',
+        name: 'recover',
+        component: () => import('../components/Login/Recover.vue'),
         props: true
       },
     ]

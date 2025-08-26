@@ -47,6 +47,7 @@ function routesNoAuth(route) {
   var routes = [
     'login',
     'register',
+    'recover',
     'forgot',
     'password',
     'home',
