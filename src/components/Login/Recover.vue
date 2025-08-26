@@ -6,18 +6,20 @@
       persistent
     >
       <v-card class="pa-4">
-        <template class="d-flex justify-space-between align-center mb-4">
-          <v-card-title class="text-h5 grey lighten-2 ml-3">
+        <div class="d-flex justify-space-between align-center mb-4 mx-2">
+          <v-card-title class="text-h5 grey lighten-2">
             {{ translate("login.account-recover") }}
           </v-card-title>
           <v-card-actions>
             <v-btn
-              @click="closeForm()"
-              icon="mdi-close-circle-outline"
-              class="pt-2"
+            @click="closeForm()"
+            icon="mdi-close-circle-outline"
+            class="ma-0 pa-0"
+            :ripple="false"
+            plain
             ></v-btn>
           </v-card-actions>
-        </template>
+        </div>
         <v-card-text>
           <v-form
             ref="form"
