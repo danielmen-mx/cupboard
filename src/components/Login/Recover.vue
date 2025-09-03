@@ -90,7 +90,7 @@ export default {
           this.fireEvent(this.event, resp.data)
         }
 
-        this.formComplete = false
+        this.dialog = false
         this.form = {}
         this.successCallBack(resp.data)
         // console.log(resp) // test purposes
