@@ -87,7 +87,10 @@ function routes(to, from, next) {
   let adminAuth = isAdmin();
 
   if (!userAuth && to.name != 'login') {
-    return router.replace({ name: "login" });
+    return router.replace({ 
+      name: "login",
+      query: { redirect: to.fullPath }
+     });
   }
 
   if (userAuth && to.name == 'login') {
