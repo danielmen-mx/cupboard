@@ -106,7 +106,8 @@ export default {
           this.successSnackbar(resp.message)
           this.formComplete = false
           this.loading = false
-          this.redirect('/')
+          const redirect = this.$route.query.redirect || '/';
+          this.$router.replace(redirect);
         })
       } catch (error) {
         console.log(error)
