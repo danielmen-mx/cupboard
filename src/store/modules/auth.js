@@ -36,7 +36,7 @@ export const mutations = {
   setName(state, { name }) {
     var user = state.user
     user.first_name = user.first_name
-    user.first_name = user.first_name
+    user.last_name = user.last_name
     user.fullname = name
     state.user = user
     localStorage.setItem("wud-admin-user", JSON.stringify(state.user))
