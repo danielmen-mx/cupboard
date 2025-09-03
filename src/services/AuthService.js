@@ -9,5 +9,8 @@ export default {
   },
   logout(data) {
     return Api.post('/logout', data)
+  },
+  forgotPassword(data) {
+    return Api.post('/forgot-password', data)
   }
 }
