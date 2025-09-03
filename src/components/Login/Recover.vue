@@ -54,6 +54,7 @@
 </template>
 <script>
 import Form from '../Common/Form.vue';
+import AuthService from '../../services/AuthService';
 
 export default {
   extends: Form,
@@ -61,8 +62,7 @@ export default {
     return {
       dialog: false,
       confirmation: '',
-      dialog: false,
-      apiService: null,
+      apiService: AuthService,
       form: { email: '' },
       event: 'recover-account'
     }
@@ -73,6 +73,33 @@ export default {
       this.dialog = false
       this.form = {}
       this.confirmation = ''
+    },
+    async submit() {
+      if (!this.form) return
+
+      try {
+        this.loading = true
+        let resp = null
+        resp = await this.apiService.forgotPassword(this.form)
+
+        if (!this.preventSnackbar) {
+          this.successSnackbar(resp.message)
+        }
+
+        if (!this.preventUpdateItems) {
+          this.fireEvent(this.event, resp.data)
+        }
+
+        this.formComplete = false
+        this.form = {}
+        this.successCallBack(resp.data)
+        // console.log(resp) // test purposes
+      } catch (error) {
+        console.log(error)
+        if (error.exception) this.errorSnackbar(error.exception)
+      }
+
+      this.loading = false
     },
   },
   mounted() {
