@@ -20,7 +20,7 @@ const Axios = axios.create(options)
 
 Axios.interceptors.request.use(
   function (config) {
-    const tokenStore = JSON.parse(localStorage.getItem("wu-user-token"))
+    const tokenStore = JSON.parse(localStorage.getItem("wud-user-token"))
 
     if (tokenStore) {
       config.headers.Accept = "application/json"
@@ -50,8 +50,8 @@ Axios.interceptors.response.use(
   function (error) {
     if (error.response) {
       if (error.response.data.message == 'Unauthenticated.') {
-        localStorage.removeItem("wu-user-token")
-        localStorage.removeItem("wu-admin-user")
+        localStorage.removeItem("wud-user-token")
+        localStorage.removeItem("wud-admin-user")
         window.location.replace('/login')
         return null
       }
