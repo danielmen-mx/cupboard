@@ -1,3 +1,4 @@
+import ResetPassword from '../components/Login/ResetPassword.vue'
 import Api from './api'
 
 export default {
@@ -12,5 +13,8 @@ export default {
   },
   forgotPassword(data) {
     return Api.post('/forgot-password', data)
+  },
+  resetPassword(data) {
+    return Api.post('/reset-password', data)
   }
 }
