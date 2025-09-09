@@ -197,13 +197,18 @@
     "request-recover": "Request password recovery",
     "recover-email": "Enter your email",
     "account-recover": "Recover password",
+    "account-reset": "Reset password",
     "account-create": "You don't have an account?",
     "account-created": "I already have an account",
+    "type-new-password": "Type your new password",
+    "confirm-password": "Confirm your new password",
     "validations": {
       "password": "Your passwords are not the same"
     }
   },
   "form": {
+    "submit": "Submit",
+    "cancel": "Cancel",
     "validations": {
       "require-field": "Required field",
       "bad-email": "Invalid mail",
