@@ -203,12 +203,14 @@
     "type-new-password": "Type your new password",
     "confirm-password": "Confirm your new password",
     "validations": {
-      "password": "Your passwords are not the same"
+      "password": "Your passwords are not the same",
+      "password-length": "Your password must be at least 4 characters long"
     }
   },
   "form": {
     "submit": "Submit",
     "cancel": "Cancel",
+    "required": "This field is required",
     "validations": {
       "require-field": "Required field",
       "bad-email": "Invalid mail",

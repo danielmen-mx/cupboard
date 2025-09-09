@@ -198,13 +198,20 @@
     "request-recover": "Solciitar recuperación de contraseña",
     "recover-email": "Introduce tu correo",
     "account-recover": "Recuperar contraseña",
+    "account-reset": "Restablecer contraseña",
     "account-create": "No tienes una cuenta?",
     "account-created": "Ya tengo una cuenta",
+    "type-new-password": "Escribe tu nueva contraseña",
+    "confirm-password": "Confirma tu nueva contraseña",
     "validations": {
-      "password": "Tus contraseñas no son las mismas"
+      "password": "Tus contraseñas no son las mismas",
+      "password-length": "Tu contraseña debe tener al menos 4 caracteres"
     }
   },
   "form": {
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "required": "Campo requerido",
     "validations": {
       "require-field": "Campo requerido",
       "bad-email": "Correo no válido",
