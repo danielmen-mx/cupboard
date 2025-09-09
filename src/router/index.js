@@ -118,6 +118,15 @@ const routes = [
         props: true
       },
     ]
+  },
+  {
+    path: '/reset-password',
+    name: 'reset-password',
+    component: () => import('../components/Login/ResetPassword.vue'),
+    props: route => ({
+      token: route.query.token,
+      email: route.query.email
+    })
   }
 
   // route level code-splitting

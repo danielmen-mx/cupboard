@@ -48,6 +48,7 @@ function routesNoAuth(route) {
     'login',
     'register',
     'recover',
+    'reset-password',
     'forgot',
     'password',
     'home',
