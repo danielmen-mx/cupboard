@@ -243,7 +243,7 @@ export default {
       switch (this.step) {
         case 1: return this.translate("basic_information")
         case 2: return this.translate("autor_information")
-        default: return 'Preview'
+        default: return this.translate('preview')
       }
     },
     stepForward() {
