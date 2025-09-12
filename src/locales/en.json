@@ -219,7 +219,16 @@
     }
   },
   "store-module": {
-    "throw-wrong": "Something went wrong"
+    "throw-wrong": "Something went wrong",
+    "cart": {
+      "add": "Add to cart",
+      "added": "Added to cart",
+      "remove": "Remove from cart",
+      "empty": "Your cart is empty",
+      "add-empty-state": "Add products to your cart",
+      "go-cart": "Go to cart",
+      "go-store": "Go to store"
+    }
   },
   "table": {
     "created_at": "Created at",
@@ -245,6 +254,7 @@
   "basic_information": "Basic information",
   "back": "Back",
   "buy-now": "Buy now",
+  "cart": "Cart",
   "cart-products": "Products in the cart",
   "cancel": "Cancel",
   "come-back": "Come back later",
@@ -260,6 +270,7 @@
   "es": "Spanish",
   "en": "English",
   "enter": "Enter",
+  "empty-cart": "Your cart is empty",
   "go-cart": "Go to the cart",
   "next": "Next",
   "new": "New",

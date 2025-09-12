@@ -220,7 +220,16 @@
     }
   },
   "store-module": {
-    "throw-wrong": "Algo salió mal"
+    "throw-wrong": "Algo salió mal",
+    "cart": {
+      "add": "Añadir al carrito",
+      "added": "Añadido al carrito",
+      "remove": "Eliminar del carrito",
+      "empty": "Tu carrito está vacío",
+      "add-empty-state": "Añade productos a tu carrito",
+      "go-cart": "Ir al carrito",
+      "go-store": "Ir a la tienda"
+    }
   },
   "table": {
     "created_at": "Creado el",
@@ -246,6 +255,7 @@
   "basic_information": "Información básica",
   "back": "Atrás",
   "buy-now": "Comprar ahora",
+  "cart": "Carrito",
   "cart-products": "Productos en el carrito",
   "cancel": "Cancelar",
   "come-back": "Vuelva más tarde",
