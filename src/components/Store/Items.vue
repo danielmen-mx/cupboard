@@ -31,7 +31,7 @@
                         <v-card-subtitle class="d-flex">
                           <span>MXN$ {{ moneyFormat(item.price) }}</span>
                           &nbsp;&nbsp;
-                          <span>Something</span>
+                          <span>{{ item.stock }} {{ translate("store-module.available-items").toLowerCase() }}</span>
                         </v-card-subtitle>
                       </v-card-item>
                       <v-card-text>{{ removeHtmlTags(item.description) }}</v-card-text>
