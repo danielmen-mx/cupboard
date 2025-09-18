@@ -228,7 +228,8 @@
       "add-empty-state": "Add products to your cart",
       "go-cart": "Go to cart",
       "go-store": "Go to store"
-    }
+    },
+    "available-items": "Available items"
   },
   "table": {
     "created_at": "Created at",
