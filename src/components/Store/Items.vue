@@ -28,10 +28,15 @@
                     <div>
                       <v-card-item>
                         <v-card-title>{{ item.name }}</v-card-title>
-                        <v-card-subtitle class="d-flex">
+                        <v-card-subtitle v-if="item.stock > 0" class="d-flex">
                           <span>MXN$ {{ moneyFormat(item.price) }}</span>
                           &nbsp;&nbsp;
                           <span>{{ item.stock }} {{ translate("store-module.available-items").toLowerCase() }}</span>
+                        </v-card-subtitle>
+                        <v-card-subtitle v-else class="d-flex">
+                          <span class="text-decoration-line-through">MXN$ {{ moneyFormat(item.price) }}</span>
+                          &nbsp;&nbsp;
+                          <span class="font-weight-black text-red">{{ translate("store-module.out-of-stock") }}</span>
                         </v-card-subtitle>
                       </v-card-item>
                       <v-card-text>{{ removeHtmlTags(item.description) }}</v-card-text>
