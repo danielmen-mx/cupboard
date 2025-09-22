@@ -230,7 +230,8 @@
       "go-cart": "Ir al carrito",
       "go-store": "Ir a la tienda"
     },
-    "available-items": "Piezas disponibles"
+    "available-items": "Piezas disponibles",
+    "out-of-stock": "Agotado"
   },
   "table": {
     "created_at": "Creado el",
