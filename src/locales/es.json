@@ -96,7 +96,12 @@
   "cart-module": {
     "cart-empty": "Tu carrito está vacío",
     "explore-cart": "Explora nuestros productos y añade algo al carrito",
-    "redirect-store": "Ir a la tienda"
+    "redirect-store": "Ir a la tienda",
+    "order-summary": "Resumen del pedido",
+    "subtotal": "Subtotal",
+    "tax": "Impuesto",
+    "total": "Total",
+    "checkout": "Proceder al pago"
   },
   "checkout-module": {
     "items-in-the-cart": "Compruebe sus artículos en el carrito"

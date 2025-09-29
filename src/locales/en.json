@@ -95,7 +95,12 @@
   "cart-module": {
     "cart-empty": "Your cart is empty",
     "explore-cart": "Explore our products and add something to your cart",
-    "redirect-store": "Go to the store"
+    "redirect-store": "Go to the store",
+    "order-summary": "Order Summary",
+    "subtotal": "Subtotal",
+    "tax": "Tax",
+    "total": "Total",
+    "checkout": "Checkout"
   },
   "checkout-module": {
     "items-in-the-cart": "Check your items in the cart"
