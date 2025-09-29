@@ -110,6 +110,10 @@
   display: none;
 }
 
+.full-height {
+  height: 100vh;
+}
+
 /** Use those classes when you need to center a component, is it important that you use two component or tags */
 .centered-container {
   display: flex;
