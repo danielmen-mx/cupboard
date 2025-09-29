@@ -12,61 +12,60 @@
       </v-col>
     </v-row>
     <div v-else class="ma-1" >
-      <div class="pa-2 rounded-t-lg elevation-1 shaddai-font font-size-sm">
+      <v-sheet class="pa-2 rounded-t-lg elevation-1 shaddai-font font-size-sm">
         {{ translate("cart-products") }}
-      </div>
-      <template
-        v-for="item in items"
-        :key="item.id"
-      >
-        <v-hover>
-          <template v-slot:default="{ isHovering, props }">
-            <v-card 
-              class="pa-2 rounded-0 elevation-1"
-              v-bind="props"
-              :color="isHovering ? 'amber' : undefined"
-            >
-              <template class="d-flex ">
-                <v-avatar
-                  class="mr-2"
-                  rounded="2"
-                  size="80"
-                >
-                  <v-img
-                    :src="item.product.image"
-                    lazy-src="/logo/shadai-main.jpeg"
-                    class="fill-height cursor-pointer"
-                    @click="redirect(item.product.id)"
-                    cover
-                  ></v-img>
-                </v-avatar>
-                <div>
-                  <span class="text-subtitle mt-2 ml-1">
-                    {{ strLimit(item.product.name, 50) }}
-                  </span>
-                  <div class="d-flex mx-1" height="100">
-                    <Actions :parent_item_form="item" />
+      </v-sheet>
+      <v-sheet class="scroll-container-component elevation-1 full-height" style="max-height: 60vh; overflow-y: auto;">
+        <template v-for="item in items" :key="item.id">
+          <v-hover>
+            <template v-slot:default="{ isHovering, props }">
+              <v-card 
+                class="pa-2 rounded-0 elevation-1"
+                v-bind="props"
+                :color="isHovering ? 'amber' : undefined"
+              >
+                <template class="d-flex ">
+                  <v-avatar
+                    class="mr-2"
+                    rounded="2"
+                    size="80"
+                  >
+                    <v-img
+                      :src="item.product.image"
+                      lazy-src="/logo/shadai-main.jpeg"
+                      class="fill-height cursor-pointer"
+                      @click="redirect(item.product.id)"
+                      cover
+                    ></v-img>
+                  </v-avatar>
+                  <div>
+                    <span class="text-subtitle mt-2 ml-1">
+                      {{ strLimit(item.product.name, 50) }}
+                    </span>
+                    <div class="d-flex mx-1" height="100">
+                      <Actions :parent_item_form="item" />
+                    </div>
                   </div>
-                </div>
-                <Quantity :item_parent="item" />
-                <div>
-                  <v-card-title>
-                    {{ moneyFormat(item.quantity * item.product.price) }}
-                  </v-card-title>
-                  <v-card-subtitle class="text-center mr-2">
-                    <v-icon
-                      icon="mdi-truck"
-                      size="small"
-                      color="success"
-                    ></v-icon>
-                    <span class="ml-2">{{ moneyFormat(item.quantity == 0 ? 0 : item.product.shipping_price) }}</span>
-                  </v-card-subtitle>
-                </div>
-              </template>
-            </v-card>
-          </template>
-        </v-hover>
-      </template>
+                  <Quantity :item_parent="item" />
+                  <div>
+                    <v-card-title>
+                      {{ moneyFormat(item.quantity * item.product.price) }}
+                    </v-card-title>
+                    <v-card-subtitle class="text-center mr-2">
+                      <v-icon
+                        icon="mdi-truck"
+                        size="small"
+                        color="success"
+                      ></v-icon>
+                      <span class="ml-2">{{ moneyFormat(item.quantity == 0 ? 0 : item.product.shipping_price) }}</span>
+                    </v-card-subtitle>
+                  </div>
+                </template>
+              </v-card>
+            </template>
+          </v-hover>
+        </template>
+      </v-sheet>
       <div class="pa-2 px-4 pr-6 rounded-b-lg elevation-1 d-flex justify-space-between">
         <span class="font-weight-medium">{{ translate("shipping-price") }}</span>
         <span class="text-light-green font-weight-bold">{{ moneyFormat(shippingPrice) }}</span>
